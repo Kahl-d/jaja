@@ -4,7 +4,8 @@ Issues and pull requests are welcome. This repo is the system only: anything tha
 an employer you targeted, a posting, a message, a score, your writing voice) belongs in your own data folder.
 
 Before a pull request:
-1. `python3 scripts/kernel/sync.py` if you changed a card, skill, lane or hook (commit the regenerated files).
+1. `python3 scripts/kernel/sync.py` if you changed a card, skill, lane or hook (commit the regenerated files), then
+   `python3 tools/gen-readme.py` and `python3 tools/gen-reference.py` to refresh the generated tables in the README and docs/REFERENCE.md.
 2. `python3 scripts/doctor.py` has no failures.
 3. `python3 -m pytest scripts/tests -m "not real_records and not workspace" -q` passes on the demo data.
 4. `python3 tools/leak_check.py --staged --no-denylist` prints no findings (the pre-commit hook from `./install.sh` does this).
