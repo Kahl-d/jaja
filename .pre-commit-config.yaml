@@ -1,0 +1,11 @@
+# pre-commit framework config (https://pre-commit.com). `./install.sh` installs the same guard as a plain git hook,
+# so you need only one of the two. Never put a deny-list in this repo.
+repos:
+  - repo: local
+    hooks:
+      - id: job-agency-leak-check
+        name: job-agency leak check (staged files)
+        entry: tools/pre-commit-leak.sh
+        language: script
+        pass_filenames: false
+        always_run: true

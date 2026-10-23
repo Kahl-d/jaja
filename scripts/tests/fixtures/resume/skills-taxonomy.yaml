@@ -1,0 +1,23 @@
+# Test fixture: skills taxonomy for the fictional Riley Moreno (shape mirrors
+# profile/skills-taxonomy.yaml: skills grouped by lens; each skill has a name, optional
+# aliases, and the evidence ids that prove it). A skill with no evidence is known but unproven.
+lenses:
+  applied-ml:
+    - {name: Python, evidence: [sk-python]}
+    - {name: SQL, evidence: [sk-sql]}
+    - {name: PyTorch, evidence: [sk-pytorch]}
+    - {name: scikit-learn, aliases: [sklearn], evidence: [sk-sklearn]}
+    - {name: XGBoost, evidence: [sk-xgboost]}
+    - {name: Transformers, aliases: [HF Transformers], evidence: [sk-hf]}
+    - {name: Retrieval-augmented generation, aliases: [RAG], evidence: [nw-rag-01]}
+    - {name: LLM evaluation, aliases: [LLM evals, evaluation harness], evidence: [nw-eval-01]}
+    - {name: Ray, evidence: [sk-ray]}
+    - {name: vLLM, evidence: []}
+  platform:
+    - {name: Kubernetes, aliases: [k8s], evidence: [nw-serve-01]}
+    - {name: FastAPI, evidence: [nw-serve-01]}
+    - {name: Docker, evidence: [nw-serve-01]}
+    - {name: AWS, aliases: [AWS Cloud], evidence: [sk-aws]}
+    - {name: Airflow, evidence: [ch-airflow-01]}
+    - {name: TypeScript, evidence: [sk-ts]}
+    - {name: LangGraph, evidence: [sk-langgraph]}

@@ -1,0 +1,44 @@
+{
+ "_captured": "synthetic fixture shaped like the Rippling ATS board list (board ripco)",
+ "jobs": [
+  {
+   "uuid": "job-5001",
+   "name": "Account Executive, Partner Channel (Austin)",
+   "department": {
+    "id": "Sales",
+    "label": "Sales"
+   },
+   "url": "https://ats.rippling.com/ripco/jobs/job-5001",
+   "workLocation": {
+    "label": "Austin, TX",
+    "id": "Austin, TX"
+   }
+  },
+  {
+   "uuid": "job-5002",
+   "name": "Applied AI Engineer, Agents",
+   "department": {
+    "id": "Engineering",
+    "label": "Engineering"
+   },
+   "url": "https://ats.rippling.com/ripco/jobs/job-5002",
+   "workLocation": {
+    "label": "San Francisco, CA",
+    "id": "San Francisco, CA"
+   }
+  },
+  {
+   "uuid": "job-5003",
+   "name": "Payroll Specialist",
+   "department": {
+    "id": "Engineering",
+    "label": "Engineering"
+   },
+   "url": "https://ats.rippling.com/ripco/jobs/job-5003",
+   "workLocation": {
+    "label": "San Francisco, CA",
+    "id": "San Francisco, CA"
+   }
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+# Template: templates/routine.yaml · Contract: schemas/routine.yaml
+# Interview (/agency:new-routine): what must be true after each run? where must it run
+# (cloud | actions | desktop) and why? which engine? schedule (local time cron)? which
+# skill/role/script does the work? which connectors does it truly need (readers only for
+# unattended runs)? what is the sentinel for "needs you"? budget? owner?
+name: <routine-slug>
+purpose: <one sentence>
+runs_on: <cloud | actions | desktop>
+engine: <claude | codex | script>
+schedule: "<cron, local time>"
+action: <skill:agency:<name> | role:<name> | script:<path>>
+inputs: []
+outputs: []
+connectors: []                   # never a send-capable connector on an unattended routine
+tier: <T0|T1|T2>
+notify: {"on": needs-you, via: push}   # sentinel outputs NO_ACTION / NEEDS_YOU; "on" is quoted because YAML 1.1 (pyyaml) reads a bare on as true
+budget: {max_runs_per_day: 1, max_tokens: 100000}
+enabled: false
+owner: <role-slug>
+last_reviewed: YYYY-MM-DD
+# Every run appends a receipt to the run-receipts folder, <name>/<date>.md; the watchdog alerts when an
+# enabled routine has no receipt for 2x its interval.

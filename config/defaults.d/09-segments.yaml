@@ -1,0 +1,4 @@
+# Company-size segments (scripts/segment_companies.py).
+policy:
+  segments:
+    known_names: {}     # company-name key -> {segment: big-tech|ai-lab|enterprise|growth|startup, reason: "public fact"}; exact names only

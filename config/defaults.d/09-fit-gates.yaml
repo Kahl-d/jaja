@@ -1,0 +1,16 @@
+# Hard-gate policy for scripts/fit_gates.py. Numbers are off by default; set yours in <data folder>/config/*.yaml.
+identity:
+  degrees_held: []              # degree kinds you hold: bachelor, master, phd; a JD with degree paths is read at the easiest path you meet
+policy:
+  fit_gates:
+    engineer_months: 0          # months of professional engineering experience you hold
+    cold_max_years: 0           # a JD asking up to this many years is applied to cold; more only through a person
+    reject_years: null          # a JD asking this many years or more fails (null = never)
+    degree_conferred: ""        # YYYY-MM of your newest conferred degree; used when profile/facts.yaml has none
+  location:
+    home_cities: []             # lower-case city/region names that count as your home region
+    home_cities_need_state: []  # home-region cities that share a name with a non-US place: counted only with a home-state word
+    home_state_words: []        # e.g. your state's abbreviation and full name, lower case
+  employer:
+    staffing_names: []          # regexes (lower case, matched against the company name) for staffing/recruiting firms that fail the gate
+    it_services_names: []       # regexes for IT-services consultancies that go to review

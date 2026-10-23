@@ -1,0 +1,282 @@
+[
+ {
+  "additionalPlain": "Equal opportunity employer. Offers are subject to a background check.",
+  "additional": "<div>Equal opportunity employer. Offers are subject to a background check.</div>",
+  "categories": {
+   "commitment": "Full-time",
+   "department": "Software",
+   "location": "Foster City, CA",
+   "team": "Autonomy Software",
+   "allLocations": [
+    "Foster City, CA"
+   ]
+  },
+  "createdAt": 1784782138184,
+  "descriptionPlain": "This role on the Offline Evaluation team develops and trains models that forecast how pedestrians and other robots move around our delivery fleet.",
+  "description": "<div>This role on the Offline Evaluation team develops and trains models that forecast how pedestrians and other robots move around our delivery fleet.</div>",
+  "id": "job-3001",
+  "lists": [
+   {
+    "text": "In this role, you will...",
+    "content": "<li>Improve on-call tooling so incidents are rarer and shorter.</li><li>Keep dashboards and runbooks for motion forecasting accurate and easy to follow.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li>"
+   },
+   {
+    "text": "Qualifications",
+    "content": "<li>Clear written communication and a preference for simple designs.</li><li>Comfort reading research papers and turning them into working code.</li><li>A record of owning a system from the first commit to steady operation.</li><li>Hands-on experience with PyTorch and large-scale data pipelines.</li>"
+   },
+   {
+    "text": "Bonus Qualifications",
+    "content": "<li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Open-source contributions in the motion forecasting area.</li>"
+   }
+  ],
+  "salaryRange": {
+   "currency": "USD",
+   "interval": "per-year-salary",
+   "min": 199000,
+   "max": 283000
+  },
+  "text": "Machine Learning Engineer - Motion Forecasting for Delivery Robots",
+  "country": "US",
+  "workplaceType": "hybrid",
+  "opening": "",
+  "openingPlain": "",
+  "descriptionBody": "<div>This role on the Offline Evaluation team develops and trains models that forecast how pedestrians and other robots move around our delivery fleet.</div>",
+  "descriptionBodyPlain": "This role on the Offline Evaluation team develops and trains models that forecast how pedestrians and other robots move around our delivery fleet.",
+  "hostedUrl": "https://jobs.lever.co/robotco/job-3001",
+  "applyUrl": "https://jobs.lever.co/robotco/job-3001/apply"
+ },
+ {
+  "additionalPlain": "Equal opportunity employer. Offers are subject to a background check.",
+  "additional": "<div>Equal opportunity employer. Offers are subject to a background check.</div>",
+  "categories": {
+   "commitment": "Full-time",
+   "department": "Software",
+   "location": "Foster City, CA",
+   "team": "Autonomy Software",
+   "allLocations": [
+    "Foster City, CA"
+   ]
+  },
+  "createdAt": 1765994317024,
+  "descriptionPlain": "This role on the Offline Evaluation team leads model development for forecasting the motion of pedestrians and other robots.",
+  "description": "<div>This role on the Offline Evaluation team leads model development for forecasting the motion of pedestrians and other robots.</div>",
+  "id": "job-3002",
+  "lists": [
+   {
+    "text": "In this role, you will...",
+    "content": "<li>Improve on-call tooling so incidents are rarer and shorter.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Keep dashboards and runbooks for motion forecasting accurate and easy to follow.</li>"
+   },
+   {
+    "text": "Qualifications",
+    "content": "<li>Comfort reading research papers and turning them into working code.</li><li>A record of owning a system from the first commit to steady operation.</li><li>Clear written communication and a preference for simple designs.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li>"
+   },
+   {
+    "text": "Bonus Qualifications",
+    "content": "<li>Experience with distributed training or large-scale data processing.</li><li>Open-source contributions in the motion forecasting area.</li>"
+   }
+  ],
+  "salaryRange": {
+   "currency": "USD",
+   "interval": "per-year-salary",
+   "min": 254000,
+   "max": 366000
+  },
+  "text": "Senior / Staff Machine Learning Engineer - Motion Forecasting for Delivery Robots",
+  "country": "US",
+  "workplaceType": "hybrid",
+  "opening": "",
+  "openingPlain": "",
+  "descriptionBody": "<div>This role on the Offline Evaluation team leads model development for forecasting the motion of pedestrians and other robots.</div>",
+  "descriptionBodyPlain": "This role on the Offline Evaluation team leads model development for forecasting the motion of pedestrians and other robots.",
+  "hostedUrl": "https://jobs.lever.co/robotco/job-3002",
+  "applyUrl": "https://jobs.lever.co/robotco/job-3002/apply"
+ },
+ {
+  "additionalPlain": "Equal opportunity employer. Offers are subject to a background check.",
+  "additional": "<div>Equal opportunity employer. Offers are subject to a background check.</div>",
+  "categories": {
+   "commitment": "Contract",
+   "department": "Robotco Internships",
+   "location": "Foster City, CA",
+   "team": "Data Science",
+   "allLocations": [
+    "Foster City, CA"
+   ]
+  },
+  "createdAt": 1786129481809,
+  "descriptionPlain": "Join the Data Science team for a fixed-term contract mining fleet footage and building vision-language models over it.",
+  "description": "<div>Join the Data Science team for a fixed-term contract mining fleet footage and building vision-language models over it.</div>",
+  "id": "job-3003",
+  "lists": [
+   {
+    "text": "Responsibilities",
+    "content": "<li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Keep dashboards and runbooks for data curation accurate and easy to follow.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Mentor newer engineers and share what you learn with the wider team.</li>"
+   },
+   {
+    "text": "Required Qualifications",
+    "content": "<li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Hands-on experience with Python and vision-language models.</li><li>Clear written communication and a preference for simple designs.</li><li>Comfort reading research papers and turning them into working code.</li>"
+   },
+   {
+    "text": "Bonus Qualifications",
+    "content": "<li>Experience with distributed training or large-scale data processing.</li><li>Open-source contributions in the data curation area.</li>"
+   },
+   {
+    "text": "Program Requirements",
+    "content": "<li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Hands-on experience with Python and vision-language models.</li><li>Clear written communication and a preference for simple designs.</li><li>Comfort reading research papers and turning them into working code.</li>"
+   }
+  ],
+  "text": "Contract Student Worker - Machine Learning Engineer - Data Curation & VLM (Full-time)",
+  "country": "US",
+  "workplaceType": "hybrid",
+  "opening": "",
+  "openingPlain": "",
+  "descriptionBody": "<div>Join the Data Science team for a fixed-term contract mining fleet footage and building vision-language models over it.</div>",
+  "descriptionBodyPlain": "Join the Data Science team for a fixed-term contract mining fleet footage and building vision-language models over it.",
+  "hostedUrl": "https://jobs.lever.co/robotco/job-3003",
+  "applyUrl": "https://jobs.lever.co/robotco/job-3003/apply"
+ },
+ {
+  "additionalPlain": "Equal opportunity employer. Offers are subject to a background check.",
+  "additional": "<div>Equal opportunity employer. Offers are subject to a background check.</div>",
+  "categories": {
+   "commitment": "Full-time",
+   "department": "Information Technology and Applications",
+   "location": "Foster City, CA",
+   "team": "IT Infrastructure",
+   "allLocations": [
+    "Foster City, CA"
+   ]
+  },
+  "createdAt": 1790015112723,
+  "descriptionPlain": "Lead the design of internal AI platforms used by the enterprise applications group.",
+  "description": "<div>Lead the design of internal AI platforms used by the enterprise applications group.</div>",
+  "id": "job-3004",
+  "lists": [
+   {
+    "text": "In this role, you will: ",
+    "content": "<li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Write short design documents and review code from the people you work with.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li>"
+   },
+   {
+    "text": "Qualifications:",
+    "content": "<li>Hands-on experience with Python, SQL and cloud data platforms.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Comfort reading research papers and turning them into working code.</li><li>Clear written communication and a preference for simple designs.</li>"
+   },
+   {
+    "text": "Bonus Qualifications: ",
+    "content": "<li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Open-source contributions in the enterprise AI platform area.</li>"
+   }
+  ],
+  "salaryRange": {
+   "min": 230000,
+   "max": 300000,
+   "currency": "USD",
+   "interval": "per-year-salary"
+  },
+  "salaryDescription": "<div><strong>Base Salary Range</strong></div>\n<div>Base salary range. The listed range applies only to base pay; equity and a sign-on bonus may be offered separately and pay varies with level and location.</div>",
+  "salaryDescriptionPlain": "Base Salary Range\nBase salary range. The listed range applies only to base pay; equity and a sign-on bonus may be offered separately and pay varies with level and location.\n",
+  "text": "Lead AI Engineer – Enterprise Data & AI Platforms",
+  "country": "US",
+  "workplaceType": "hybrid",
+  "opening": "",
+  "openingPlain": "",
+  "descriptionBody": "<div>Lead the design of internal AI platforms used by the enterprise applications group.</div>",
+  "descriptionBodyPlain": "Lead the design of internal AI platforms used by the enterprise applications group.",
+  "hostedUrl": "https://jobs.lever.co/robotco/job-3004",
+  "applyUrl": "https://jobs.lever.co/robotco/job-3004/apply"
+ },
+ {
+  "additionalPlain": "Equal opportunity employer. Offers are subject to a background check.",
+  "additional": "<div>Equal opportunity employer. Offers are subject to a background check.</div>",
+  "categories": {
+   "commitment": "Full-time",
+   "department": "Software",
+   "location": "Foster City, CA",
+   "team": "Autonomy Software",
+   "allLocations": [
+    "Foster City, CA"
+   ]
+  },
+  "createdAt": 1761587224348,
+  "descriptionPlain": "Lead the perception organisation: set direction, hire leaders and own delivery of the perception stack across robot generations.",
+  "description": "<div>Lead the perception organisation: set direction, hire leaders and own delivery of the perception stack across robot generations.</div>",
+  "id": "job-3005",
+  "lists": [
+   {
+    "text": "In this role, you will:",
+    "content": "<li>Work with research and product to move prototypes into reliable systems.</li><li>Design, build and operate perception services that run in production.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li>"
+   },
+   {
+    "text": "Qualifications",
+    "content": "<li>Comfort reading research papers and turning them into working code.</li><li>Clear written communication and a preference for simple designs.</li><li>Hands-on experience with computer vision and sensor fusion.</li><li>A record of owning a system from the first commit to steady operation.</li>"
+   },
+   {
+    "text": "Bonus Qualifications",
+    "content": "<li>Open-source contributions in the perception area.</li><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li>"
+   }
+  ],
+  "salaryRange": {
+   "currency": "USD",
+   "interval": "per-year-salary",
+   "min": 410000,
+   "max": 492000
+  },
+  "salaryDescription": "<div><strong>Base Salary Range</strong></div>\n<div>Base salary range. The listed range applies only to base pay; equity and a sign-on bonus may be offered separately and pay varies with level and location.</div>",
+  "salaryDescriptionPlain": "Base Salary Range\nBase salary range. The listed range applies only to base pay; equity and a sign-on bonus may be offered separately and pay varies with level and location.\n",
+  "text": "Director, Perception",
+  "country": "US",
+  "workplaceType": "hybrid",
+  "opening": "",
+  "openingPlain": "",
+  "descriptionBody": "<div>Lead the perception organisation: set direction, hire leaders and own delivery of the perception stack across robot generations.</div>",
+  "descriptionBodyPlain": "Lead the perception organisation: set direction, hire leaders and own delivery of the perception stack across robot generations.",
+  "hostedUrl": "https://jobs.lever.co/robotco/job-3005",
+  "applyUrl": "https://jobs.lever.co/robotco/job-3005/apply"
+ },
+ {
+  "additionalPlain": "Equal opportunity employer. Offers are subject to a background check.",
+  "additional": "<div>Equal opportunity employer. Offers are subject to a background check.</div>",
+  "categories": {
+   "commitment": "Full-time",
+   "department": "Software",
+   "location": "Foster City, CA",
+   "team": "Software Platforms and Product",
+   "allLocations": [
+    "Foster City, CA"
+   ]
+  },
+  "createdAt": 1777936261125,
+  "descriptionPlain": "Build and run system-level tests that decide whether a robot software release is safe to ship.",
+  "description": "<div>Build and run system-level tests that decide whether a robot software release is safe to ship.</div>",
+  "id": "job-3006",
+  "lists": [
+   {
+    "text": "In this role, you will: ",
+    "content": "<li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Improve on-call tooling so incidents are rarer and shorter.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Write short design documents and review code from the people you work with.</li>"
+   },
+   {
+    "text": "Qualifications: ",
+    "content": "<li>A record of owning a system from the first commit to steady operation.</li><li>Clear written communication and a preference for simple designs.</li><li>Hands-on experience with Python, C++ and simulation.</li><li>Comfort reading research papers and turning them into working code.</li>"
+   },
+   {
+    "text": "Bonus Qualifications: ",
+    "content": "<li>Experience with distributed training or large-scale data processing.</li><li>Open-source contributions in the system testing area.</li>"
+   }
+  ],
+  "salaryRange": {
+   "currency": "USD",
+   "interval": "per-year-salary",
+   "min": 144000,
+   "max": 193000
+  },
+  "salaryDescription": "<div><strong>Base Salary Range</strong></div>\n<div>Base salary range. The listed range applies only to base pay; equity and a sign-on bonus may be offered separately and pay varies with level and location.</div>",
+  "salaryDescriptionPlain": "Base Salary Range\nBase salary range. The listed range applies only to base pay; equity and a sign-on bonus may be offered separately and pay varies with level and location.\n",
+  "text": "Robot System Test Engineer",
+  "country": "US",
+  "workplaceType": "hybrid",
+  "opening": "",
+  "openingPlain": "",
+  "descriptionBody": "<div>Build and run system-level tests that decide whether a robot software release is safe to ship.</div>",
+  "descriptionBodyPlain": "Build and run system-level tests that decide whether a robot software release is safe to ship.",
+  "hostedUrl": "https://jobs.lever.co/robotco/job-3006",
+  "applyUrl": "https://jobs.lever.co/robotco/job-3006/apply"
+ }
+]

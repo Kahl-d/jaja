@@ -1,0 +1,75 @@
+# Test fixture: a FICTIONAL person. Every name, employer, school, number and URL
+# here is invented; example.com and 555-01xx are reserved for fiction.
+# Evidence convention (see resumes/templates/README.md): every rendered claim ends with a
+# trailing `<!-- ev:ID[,ID...] -->` comment; entries may carry an `evidence:` sidecar list for
+# their header facts; the top-level `sidecar:` block holds build metadata. All three are
+# stripped before rendering.
+sidecar:
+  lens: applied-ml
+  base_of: null
+  job: null
+cv:
+  name: Riley Moreno
+  phone: "+14155550100"
+  email: riley.moreno@example.com
+  social_networks:
+    - network: LinkedIn
+      username: riley-moreno-example
+  website: https://example.com/riley
+  sections:
+    Education:
+      - institution: Harborview State University
+        area: Computer Science
+        degree: M.S.
+        location: Seattle, WA
+        start_date: 2018-09
+        end_date: 2020-05
+        evidence: [hsu-degree]
+    Skills:
+      - label: Languages
+        details: "Python, SQL, TypeScript <!-- ev:sk-python,sk-sql,sk-ts -->"
+      - label: Machine Learning
+        details: "PyTorch, scikit-learn, XGBoost, PyTorch Lightning modules <!-- ev:sk-pytorch,sk-sklearn,sk-xgboost,sk-hf -->"
+      - label: LLM Systems
+        details: "Retrieval-augmented generation (RAG), LangGraph, evaluation harnesses, prompt engineering <!-- ev:nw-rag-01,sk-langgraph,nw-eval-01 -->"
+      - label: Infrastructure
+        details: "FastAPI, Terraform, Kubernetes, Airflow, PostgreSQL, AWS <!-- ev:nw-serve-01,ch-airflow-01,sk-aws -->"
+    Experience:
+      - company: Northwind Robotics
+        position: Machine Learning Engineer
+        location: San Francisco, CA
+        start_date: 2023-03
+        end_date: present
+        evidence: [nw-role]
+        highlights:
+          - "Built a retrieval-augmented support assistant over 1.2M maintenance logs with PyTorch embeddings and a pgvector index, cutting median lookup time from 9 to 4 minutes <!-- ev:nw-rag-01 -->"
+          - "Designed an evaluation harness of 600 golden questions with an LLM judge that gates every model release in CI <!-- ev:nw-eval-01 -->"
+          - "Moved batch inference from notebooks to a FastAPI service on Kubernetes serving 40 requests per second at 180 ms p95 latency <!-- ev:nw-serve-01 -->"
+      - company: Contoso Health
+        position: Data Scientist
+        location: Seattle, WA
+        start_date: 2020-06
+        end_date: 2023-02
+        evidence: [ch-role]
+        highlights:
+          - "Trained gradient-boosted readmission models on 3M claims records with scikit-learn and XGBoost, adopted by two hospital partners <!-- ev:ch-readmit-01 -->"
+          - "Wrote Airflow pipelines with data-quality checks that stopped malformed HL7 feeds before they reached reporting <!-- ev:ch-airflow-01 -->"
+    Projects:
+      - name: Tern
+        start_date: 2022-01
+        end_date: present
+        evidence: [tern-repo]
+        summary: "Open-source Python library that traces multi-step LLM agent runs into OpenTelemetry spans (https://example.com/tern) <!-- ev:tern-repo -->"
+        highlights:
+          - "Adopted by 3 internal teams to debug tool-calling failures in production agents <!-- ev:tern-adoption -->"
+    Publications:
+      - title: Label-Efficient Triage of Maintenance Logs
+        authors:
+          - Riley Moreno
+          - Sam Okafor
+        journal: Workshop on Applied NLP
+        date: 2022-07
+        url: https://example.com/papers/triage
+        evidence: [pub-triage]
+    Awards:
+      - "Best Applied Paper, Workshop on Applied NLP (2022) <!-- ev:pub-triage -->"

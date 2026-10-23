@@ -1,0 +1,4 @@
+policy:
+  search:
+    yc_location_pattern: "San Francisco|Bay Area|Palo Alto|Remote|America / Canada|United States"
+    yc_topic_pattern: "\\bai\\b|agent|llm|machine learning|generative|artificial intelligence"

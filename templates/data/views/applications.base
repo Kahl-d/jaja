@@ -1,0 +1,115 @@
+filters:
+  and:
+    - file.inFolder("{{DATA_REL}}/applications")
+    - file.basename == "application"
+formulas:
+  hub: link(file.folder + "/HUB.md", company)
+  days_to_next: if(next_action_at, (date(next_action_at) - today()).days, "")
+  days_since_inbound: if(last_inbound_at, (today() - date(last_inbound_at)).days, "")
+properties:
+  formula.hub:
+    displayName: Company
+  note.company:
+    displayName: Company
+  note.title:
+    displayName: Role
+  note.stage:
+    displayName: Stage
+  note.next_action:
+    displayName: Next action
+  formula.days_to_next:
+    displayName: Days to next
+  note.round:
+    displayName: Round
+  note.next_action_at:
+    displayName: Due
+  note.applied_at:
+    displayName: Applied
+  note.applied_via:
+    displayName: Via
+  note.last_inbound_at:
+    displayName: Last reply
+  note.prospects:
+    displayName: People
+  note.sponsorship_confirmed:
+    displayName: Sponsorship
+  note.wage_level:
+    displayName: Wage level
+  note.outcome:
+    displayName: Outcome
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Active pipeline
+    filters:
+      and:
+        - stage != "rejected"
+        - stage != "ghosted"
+        - stage != "withdrawn"
+        - stage != "accepted"
+    order:
+      - formula.hub
+      - title
+      - stage
+      - next_action
+      - next_action_at
+      - formula.days_to_next
+      - round
+      - applied_at
+      - applied_via
+      - last_inbound_at
+      - prospects
+    sort:
+      - property: next_action_at
+        direction: ASC
+  - type: table
+    name: By stage
+    groupBy:
+      property: stage
+      direction: ASC
+    order:
+      - company
+      - title
+      - applied_at
+      - applied_via
+      - next_action_at
+  - type: table
+    name: Interviews and offers
+    filters:
+      or:
+        - stage == "screen"
+        - stage == "oa"
+        - stage == "interviewing"
+        - stage == "final"
+        - stage == "offer"
+    order:
+      - formula.hub
+      - title
+      - stage
+      - round
+      - next_action_at
+      - sponsorship_confirmed
+      - wage_level
+      - formula.days_since_inbound
+    sort:
+      - property: next_action_at
+        direction: ASC
+  - type: table
+    name: Closed
+    filters:
+      or:
+        - stage == "rejected"
+        - stage == "ghosted"
+        - stage == "withdrawn"
+        - stage == "accepted"
+    order:
+      - company
+      - title
+      - stage
+      - outcome
+      - applied_at
+      - updated
+    sort:
+      - property: updated
+        direction: DESC

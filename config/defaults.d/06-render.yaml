@@ -1,0 +1,4 @@
+# Neutral defaults for the resume renderer (scripts/render_resume.py).
+style:
+  # Heading order of a resume (the eight standard ATS headings). null = the conventional order built into the code.
+  resume_section_order: null

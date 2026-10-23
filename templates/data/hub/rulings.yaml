@@ -1,0 +1,15 @@
+# The rulings registry: your own words, recorded once, one entry per ruling. Copy this file to <your data folder>/hub/rulings.yaml.
+# The SessionStart hook (hooks/lane_rules.py) and the SubagentStart hook (hooks/role_rules.py) print the standing rulings
+# whose scope names the session's lane or the subagent's role; scripts/kernel/rulings_digest.py shows the words of any id.
+# lint.py checks the ids (R-12, R-12a), the dates and the status.
+#
+#   - id: R-1
+#     date: 2026-01-15
+#     quote: "your exact words"                 # verbatim; null when only a reading exists
+#     source: where you said it                 # a chat, a file and line
+#     reading: "what it means for the agents"   # marked as a reading, never as your words
+#     topic: sending
+#     scope: {lanes: [all], roles: [all], paths: []}
+#     status: standing                          # standing | history | superseded | withdrawn | expired
+#     enforced_by: none                         # none | hook | script | reviewer
+rulings: []

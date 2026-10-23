@@ -1,0 +1,7 @@
+job-agency
+Copyright (c) 2026. All rights reserved. See LICENSE.
+
+Third-party software this project uses or talks to keeps its own license and terms: Python and PyYAML, the Model
+Context Protocol SDK, Claude Code, and the services named in docs/SETUP-CONNECTORS.md. Platform names (Google,
+LinkedIn, Greenhouse, Lever, Ashby, Workday and others) belong to their owners and appear only to describe how the
+agency reads or works with them.

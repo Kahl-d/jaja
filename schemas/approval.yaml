@@ -1,0 +1,31 @@
+# Frontmatter contract for work/approvals/A-YYYY-NNNN.md.
+# The "## Exact content" section = the exact content to be sent/posted. Rules stated once in
+# work/approvals/README.md: Expiry (expires = created + 7 days; expired once today is after it)
+# and Content hash (sha256 of the stripped Exact content section; scripts/kernel/approvals.py).
+type: approval
+glob: "work/approvals/*.md"
+required: [id, action, requested_by, status]
+fields:
+  - type               # node type: approval (js_comms_util.write_approval writes it; the template carries it)
+  - id
+  - action
+  - requested_by       # role
+  - ticket             # task id
+  - target             # recipient / URL
+  - draft_ref          # gmail draft id / file
+  - diff
+  - risk
+  - status
+  - decided_at
+  - decided_via
+  - decided_quote      # the owner's exact words, written by approvals.py decide
+  - decided_session    # the session they were said in
+  - approved_items     # the item ids those words cover (one approval per batch)
+  - content_hash       # sha256:<hex>, written by the requester; the sender re-checks it
+  - created
+  - expires            # created + 7 days
+enums:
+  action: [send-email, post-linkedin, edit-linkedin-profile, edit-portal-profile, submit-form, publish, purchase, other]   # edit-linkedin-profile: outbox channel linkedin-profile-edit; edit-portal-profile: portal-profile; publish includes github-publish
+  status: [pending, approved, rejected, expired, withdrawn]   # withdrawn: the requester retracted it before a decision
+  decided_via: [desktop, phone, chat]
+dates: [decided_at, created, expires]

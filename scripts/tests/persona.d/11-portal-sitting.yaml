@@ -1,0 +1,9 @@
+# Synthetic persona values for the portal-sitting tests.
+policy:
+  portal_sitting:
+    order: [indeed-connector, ziprecruiter-connector, linkedin, gmail, yc, matchmaker, examplesearch]
+    default_lens: ai-engineer
+    authorization_ruling: R-1
+    salary_ruling: R-3
+    plan_file: hub/plans/portals-plan.md
+    census_file: hub/plans/portal-census.md

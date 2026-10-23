@@ -1,0 +1,13 @@
+# Minimal platform registry for job_alerts tests (the real one is targets/platforms.yaml).
+platforms:
+  - {id: linkedin, name: LinkedIn, alert_senders: [jobalerts-noreply@linkedin.com, jobs-listings@linkedin.com, jobs-noreply@linkedin.com]}
+  - {id: glassdoor, name: Glassdoor, alert_senders: [glassdoor.com]}
+  - {id: ziprecruiter, name: ZipRecruiter, alert_senders: [ziprecruiter.com]}
+  - {id: wttj, name: Welcome to the Jungle, alert_senders: [welcometothejungle.com, otta.com]}
+  - {id: hiringcafe, name: HiringCafe, alert_senders: [hiring.cafe, hiringcafe.com]}
+  - {id: yc, name: Y Combinator Work at a Startup, alert_senders: [workatastartup.com, ycombinator.com]}
+  - {id: builtin, name: Built In, alert_senders: [builtin.com, builtinsf.com]}
+  - {id: himalayas, name: Himalayas, alert_senders: [himalayas.app]}
+  - {id: wellfound, name: Wellfound, alert_senders: [wellfound.com, angel.co]}
+  - {id: jobright, name: Jobright, alert_senders: [jobright.ai]}
+  - {id: company-ats, name: Company careers sites and ATS boards, alert_senders: []}

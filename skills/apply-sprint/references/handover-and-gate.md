@@ -1,0 +1,12 @@
+# Apply sprint: steps 8 and 9 (handover and the gate on the integrated tree)
+
+The skill links here and binds it as if inline.
+
+8. **Handover:** each lane posts `HANDOVER` in `hub/lanes/<SCOPE>.md` with the per-application table and a FINAL
+   VERDICT of signed claims: COMPLETE, TRUTHFUL (every evidence id resolves), GATED (ATS pass and editor signature on
+   the final hash; base-compare verdict for any variant), FRESH (posting live within 24 h, dossier 30 days or newer),
+   VISA-CLEAR (`legal/checks/COMPANY.md`), RE-REVIEWED WHOLE, NOT COVERED (said plainly).
+9. **Gate on the integrated tree** (the Recruiter): per lane `python3 classify.py --repo ~/tmp/js-<scope> --base
+   main...HEAD` shows `UNASSIGNED: 0` and only that scope; re-run each page's ATS check and compare hashes with
+   `review.md`; `python3 scripts/kernel/lint.py`. A claim you cannot reproduce goes
+   back to the lane.

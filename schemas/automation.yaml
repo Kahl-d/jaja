@@ -1,0 +1,18 @@
+# Contract for automations/<name>.yaml . Whole file is the record.
+type: automation
+glob: "automations/*.yaml"
+required: [name, trigger, action, tier, enabled]
+fields:
+  - name
+  - trigger            # {event: SessionEnd | SessionStart | PreToolUse | FileChanged(path) | inbox:new(type) | routine:done(name) | webhook}
+  - condition
+  - action             # skill:<id> | role:<name> | script:<path>
+  - tier
+  - enabled
+  - owner
+  - last_reviewed
+enums:
+  tier: [T0, T1, T2, T3, T4]
+dates: [last_reviewed]
+patterns:
+  action: "^(skill|role|script):.+$"

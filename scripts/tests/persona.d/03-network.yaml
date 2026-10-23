@@ -1,0 +1,3 @@
+identity:
+  schools:
+    - {name: "EXSU", pattern: "\\bEXSU\\b|Example State University"}

@@ -1,0 +1,92 @@
+# Obsidian Bases view: every outbound draft (outbox/O-YYYY-NNNN.md). Drafts are filed and moved by
+# `python3 scripts/outbox.py` (draft, batch, apply-decisions, mark-sent); the owner decides in the
+# approval file under work/approvals/, never here. Nothing in this view sends anything.
+filters:
+  and:
+    - file.inFolder("outbox")
+    - file.ext == "md"
+    - file.basename != "README"
+properties:
+  file.name:
+    displayName: Draft
+  note.prospect:
+    displayName: Person
+  note.channel:
+    displayName: Channel
+  note.kind:
+    displayName: Kind
+  note.status:
+    displayName: Status
+  note.approval:
+    displayName: Approval
+  note.id:
+    displayName: Draft
+  note.to:
+    displayName: To
+  note.subject:
+    displayName: Subject
+  note.created:
+    displayName: Created
+  note.sent_at:
+    displayName: Sent
+views:
+  - type: table
+    name: Waiting on you
+    filters:
+      or:
+        - status == "drafted"
+        - status == "pending"
+    order:
+      - file.name
+      - prospect
+      - to
+      - channel
+      - subject
+      - approval
+      - kind
+      - status
+      - created
+    sort:
+      - property: created
+        direction: ASC
+  - type: table
+    name: Approved not sent
+    filters:
+      and:
+        - status == "approved"
+    order:
+      - id
+      - prospect
+      - to
+      - channel
+      - subject
+      - approval
+      - created
+  - type: table
+    name: Sent
+    filters:
+      and:
+        - status == "sent"
+    order:
+      - id
+      - prospect
+      - to
+      - channel
+      - subject
+      - sent_at
+    sort:
+      - property: sent_at
+        direction: DESC
+  - type: table
+    name: All drafts
+    order:
+      - id
+      - prospect
+      - to
+      - channel
+      - kind
+      - status
+      - created
+    sort:
+      - property: created
+        direction: DESC

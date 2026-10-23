@@ -1,0 +1,4 @@
+# Gmail harvest (scripts/gmail_pull.py).
+policy:
+  mail:
+    backlog_start: ""     # YYYY-MM-DD: where a first harvest starts; empty = 90 days back

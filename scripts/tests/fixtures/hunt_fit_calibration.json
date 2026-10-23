@@ -1,0 +1,97 @@
+{
+ "source": "synthetic records shaped like fit-scorer outcomes; fictional companies; used by test_hunt_score*.py",
+ "skip": [
+  {
+   "id": "acme-1001",
+   "company": "Acme Retail",
+   "company_slug": "acme",
+   "title": "Applied Scientist, Ads Forecasting, Insights and Guidance",
+   "fit_score": 3.2,
+   "fit_verdict": "skip",
+   "jd": "Apply machine learning to forecasting and planning problems. Python, SQL and Spark. Basic qualifications: 3+ years of experience in applied research. Preferred qualifications: a Master's degree and 4+ years of experience building models. Team: Ads Forecasting."
+  },
+  {
+   "id": "acme-1002",
+   "company": "Acme Retail",
+   "company_slug": "acme",
+   "title": "Machine Learning Engineer, Video Ads CX",
+   "fit_score": 3.4,
+   "fit_verdict": "skip",
+   "jd": "Apply machine learning to forecasting and planning problems. Python, SQL and Spark. Basic qualifications: 3+ years of experience in applied research. Preferred qualifications: a Master's degree and 4+ years of experience building models. Team: Video Ads."
+  },
+  {
+   "id": "acme-1003",
+   "company": "Acme Retail",
+   "company_slug": "acme",
+   "title": "Applied Scientist, Generative AI and Synthetic Data",
+   "fit_score": 2.7,
+   "fit_verdict": "skip",
+   "jd": "Apply machine learning to forecasting and planning problems. Python, SQL and Spark. Basic qualifications: 3+ years of experience in applied research. Preferred qualifications: a Master's degree and 4+ years of experience building models. Team: Synthetic data."
+  },
+  {
+   "id": "acme-1004",
+   "company": "Acme Retail",
+   "company_slug": "acme",
+   "title": "Applied Scientist, Execution Planning Science & Engineering",
+   "fit_score": 3.0,
+   "fit_verdict": "skip",
+   "jd": "Apply machine learning to forecasting and planning problems. Python, SQL and Spark. Basic qualifications: 3+ years of experience in applied research. Preferred qualifications: a Master's degree and 4+ years of experience building models. Team: Planning."
+  },
+  {
+   "id": "globex-1001",
+   "company": "Globex Lab",
+   "company_slug": "globex",
+   "title": "Research Engineer / Performance Engineer, RL Distributed Systems",
+   "fit_score": 2.6,
+   "fit_verdict": "skip",
+   "jd": "Scale reinforcement learning training across thousands of accelerators. Distributed systems, performance profiling, Python and C++. 5+ years of experience."
+  },
+  {
+   "id": "globex-1002",
+   "company": "Globex Lab",
+   "company_slug": "globex",
+   "title": "Research Engineer / Research Scientist, RL Frontiers",
+   "fit_score": 2.9,
+   "fit_verdict": "skip",
+   "jd": "Push the frontier of reinforcement learning for large models. Research experience, publications, Python and PyTorch."
+  }
+ ],
+ "kept": [
+  {
+   "id": "initech-1001",
+   "company": "Initech",
+   "company_slug": "initech",
+   "title": "Value Acceleration Engineer MTS",
+   "fit_score": 4.3,
+   "fit_verdict": "apply",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. Customer-facing; Python."
+  },
+  {
+   "id": "umbrella-1001",
+   "company": "Umbrella AI",
+   "company_slug": "umbrella",
+   "title": "Founding Forward Deployed Engineer",
+   "fit_score": 3.7,
+   "fit_verdict": "maybe",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. Early-stage startup; seed-stage; on-site."
+  },
+  {
+   "id": "hooli-1001",
+   "company": "Hooli Recruiting",
+   "company_slug": "hooli",
+   "title": "Founding Engineer (AI fintech, client unnamed)",
+   "fit_score": 3.6,
+   "fit_verdict": "maybe",
+   "jd": "Founding AI engineer for a fintech startup: LLM agents, evaluation, Python."
+  },
+  {
+   "id": "vandelay-1001",
+   "company": "Vandelay",
+   "company_slug": "vandelay",
+   "title": "AI deployment engineer (West)",
+   "fit_score": 3.5,
+   "fit_verdict": "maybe",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. Based in the western region."
+  }
+ ]
+}

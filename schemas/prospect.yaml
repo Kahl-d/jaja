@@ -1,0 +1,63 @@
+# Frontmatter contract for prospects/<person-slug>.md in the data folder.
+# The CRM record for every recruiter, founder, hiring manager, referrer.
+# The body holds an append-only "## Timeline". Touches live in touches/YYYY-MM.jsonl.
+type: prospect
+glob: "prospects/*.md"
+required: [id, name, source, status, priority, warmth, created, updated]
+fields:
+  - type                # node type (prospect); set by the writing script (graph_links.py), always first
+  - id                  # person slug, stable
+  - name
+  - headline
+  - company
+  - company_slug
+  - company_slug_source # dossier (companies/<slug>.md), watchlist (targets/companies.yaml) or derived; set by
+                        # prospects.py through scripts/company_index.py
+  - company_type
+  - role
+  - seniority
+  - location
+  - emails              # list
+  - linkedin_url
+  - x_handle            # X (Twitter) handle without the @, lowercase (scripts/x_api.py)
+  - source
+  - first_contact_at
+  - last_inbound_at
+  - last_outbound_at
+  - inbound_count
+  - outbound_count
+  - role_hint           # what they reached out about
+  - comp_hint
+  - remote_hint
+  - sponsorship_hint
+  - warmth              # 0 cold .. 3 hot
+  - fit_score           # 1.0-5.0 for the opportunity they represent
+  - priority
+  - status
+  - next_touch_at
+  - follow_ups_sent
+  - max_follow_ups
+  - thread_ids          # gmail thread ids
+  - linkedin_threads    # conversation ids from the export
+  - applications        # application slugs
+  - tags
+  - do_not_contact_reason
+  - req_ids             # list: the exact requisition ids a referrer needs (some employers cap how many a referrer may be given)
+  - referral_window_ends # date: the last day of a referral invite (some employers set a window, e.g. 30 days); prospects.py due lists it
+  - hiring_post_url     # the hiring post (X, LinkedIn, HN) that surfaced this person
+  - last_reply_at       # their last answer after one of ours; stamped by prospects.py ingest, read by outbox.py M9
+  - introduced_by       # prospect id of the person who made the introduction ; build_graph edge "introduced"
+  - asked_by            # prospect id of the person who asked the owner to talk to this person ; edge "asked"
+  - created
+  - updated
+  - links               # graph edges: list of path-qualified [[...]] wikilinks, written only by code
+                        # (its company dossier; scripts/graph_links.py), never by hand
+enums:
+  company_type: [bigtech, ai-lab, startup, scaleup, enterprise, agency, recruiting-firm, university, nonprofit, other, unknown]
+  role: [recruiter, sourcer, founder, hiring-manager, engineer, executive, investor, alumni, other, unknown]
+  source: [gmail-backlog, linkedin-export, linkedin-live, referral, event, outbound, inbound-new]
+  priority: [P0, P1, P2, P3]
+  status: [new, triaged, drafted, replied, in_conversation, interviewing, dormant, closed, do_not_contact]
+  sponsorship_hint: ["yes", "no", unknown, cap_exempt]
+dates: [first_contact_at, last_inbound_at, last_outbound_at, last_reply_at, next_touch_at, referral_window_ends, created, updated]
+wikilink_lists: [links]   # lint: each must be a list of [[...]] strings (schema-links)

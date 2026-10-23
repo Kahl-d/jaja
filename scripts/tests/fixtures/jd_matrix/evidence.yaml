@@ -1,0 +1,35 @@
+# Fixture evidence for jd_matrix tests (fictional-shaped; same shape as profile/evidence.yaml).
+schema_version: 1
+count: 10
+evidence:
+  ev-fx-001:
+    source: fixture/harness.md
+    note: Agent harness built on the Claude Agent SDK with permission callbacks.
+  ev-fx-002:
+    source: fixture/sdk.md
+    note: Claude Agent SDK tool definitions in Python.
+  ev-fx-003:
+    source: fixture/hooks.md
+    note: Agent harness hooks and gating.
+  ev-fx-004:
+    source: fixture/evals.md
+    note: Golden task sets and an LLM judge for agent evaluation.
+  ev-fx-005:
+    source: fixture/sql.md
+    note: SQL pipelines over Postgres.
+  ev-fx-006:
+    source: fixture/watcher.md
+    note: Browser automation through the Chrome DevTools Protocol.
+  ev-fx-007:
+    source: fixture/react.md
+    note: React workbench.
+  ev-fx-008:
+    source: fixture/py1.md
+    note: Python script one.
+  ev-fx-009:
+    source: fixture/py2.md
+    note: Python script two.
+  ev-fx-010:
+    source: fixture/py3.md
+    note: Python script three.
+    tags: [python, agent harness]

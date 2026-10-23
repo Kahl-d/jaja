@@ -1,0 +1,19 @@
+# Synthetic persona values for the profile-route tests.
+policy:
+  profile_route:
+    lens_to_profile:
+      software-engineer: software-engineer
+      forward-deployed: forward-deployed
+      agent-harness: agents-harness
+      ai-engineer: ai-engineer
+      evaluation: evals
+      founding-engineer: founding-fullstack
+      full-stack-ai: founding-fullstack
+      product-engineer: founding-fullstack
+      research-engineer: ml-research
+      applied-ml-and-nlp: ml-research
+      voice-and-realtime-agents: voice-realtime
+      ml-infra: ml-infra
+      inference-and-serving: ml-infra
+identity:
+  resume_pdf_name: "AlexExample_Resume.pdf"

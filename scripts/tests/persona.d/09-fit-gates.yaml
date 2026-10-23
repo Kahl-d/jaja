@@ -1,0 +1,20 @@
+# Synthetic persona values for the fit-gate tests.
+identity:
+  degrees_held: ["master", "bachelor"]
+policy:
+  fit_gates:
+    engineer_months: 29
+    cold_max_years: 3
+    reject_years: 8
+    degree_conferred: "2026-05"
+  location:
+    home_cities: ["san francisco", "south san francisco", "south sf", "oakland", "berkeley", "emeryville", "san jose",
+                  "santa clara", "sunnyvale", "mountain view", "palo alto", "redwood city", "san mateo", "foster city",
+                  "cupertino", "milpitas", "los gatos", "los altos", "pleasanton", "walnut creek", "sausalito",
+                  "bay area", "silicon valley", "sf"]
+    home_cities_need_state: ["dublin", "newark", "richmond", "concord", "fremont", "hayward", "alameda", "union city",
+                             "belmont", "san carlos", "campbell", "saratoga", "livermore", "danville", "albany"]
+    home_state_words: ["ca", "california"]
+  employer:
+    staffing_names: ["^globex hiring partners\\b", "^example search\\b"]
+    it_services_names: ["^initech services\\b", "^example consulting\\b"]

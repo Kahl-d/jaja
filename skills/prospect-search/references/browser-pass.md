@@ -1,0 +1,12 @@
+# prospect-search: Procedure step 3 (browser pass, Mode B)
+
+Detail for the skill's step 3; the skill links here.
+
+3. **Browser pass (Mode B)**, only if no rung 2 to 5 path exists and the owner is present: a capped number of searches a
+   session, one session a day. Suggest search terms in chat (`<company> <team or school terms>`); the owner runs the LinkedIn
+   search personally and names the people worth opening (one named person, never a list). Mode B also reads, with
+   the owner, who engaged with the owner's own proof posts (rung 7). Then load the Claude in Chrome tools (`tabs_context_mcp`,
+   `navigate`, `get_page_text`, `find`) and open each named profile. Before each profile:
+   `python3 scripts/browser_research.py view --person "<Name>" --url <profile URL> --named-by owner` (exit 3: stop);
+   before each click: `python3 scripts/browser_research.py click-check "<label>"` (exit 2: do not click). Never
+   scroll-harvest, export or record the people the owner did not pick.

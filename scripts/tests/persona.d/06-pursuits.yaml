@@ -1,0 +1,5 @@
+identity:
+  owner_token: "owner"
+  owner_speaker: "Alex"
+policy:
+  ruling_id_pattern: "R-\\d+"

@@ -1,0 +1,139 @@
+{
+ "took": 5,
+ "timed_out": false,
+ "hits": {
+  "total": {
+   "value": 4,
+   "relation": "eq"
+  },
+  "max_score": 10.0,
+  "hits": [
+   {
+    "_index": "edgar_file",
+    "_id": "0009000003-26-000001:primary_doc.xml",
+    "_score": 10.0,
+    "_source": {
+     "ciks": [
+      "0009000003"
+     ],
+     "display_names": [
+      "Meadowlark AI, Inc.  (CIK 0009000003)"
+     ],
+     "form": "D",
+     "root_forms": [
+      "D"
+     ],
+     "file_type": "D",
+     "file_date": "2026-09-22",
+     "adsh": "0009000003-26-000001",
+     "biz_locations": [
+      "Seattle, WA"
+     ],
+     "biz_states": [
+      "WA"
+     ],
+     "items": [
+      "06B"
+     ],
+     "sics": [],
+     "period_ending": null
+    }
+   },
+   {
+    "_index": "edgar_file",
+    "_id": "0009000004-26-000001:primary_doc.xml",
+    "_score": 10.0,
+    "_source": {
+     "ciks": [
+      "0009000004"
+     ],
+     "display_names": [
+      "Acme AI Fund I, L.P.  (CIK 0009000004)"
+     ],
+     "form": "D",
+     "root_forms": [
+      "D"
+     ],
+     "file_type": "D",
+     "file_date": "2026-09-21",
+     "adsh": "0009000004-26-000001",
+     "biz_locations": [
+      "San Francisco, CA"
+     ],
+     "biz_states": [
+      "CA"
+     ],
+     "items": [
+      "06B",
+      "3C",
+      "3C.7"
+     ],
+     "sics": [],
+     "period_ending": null
+    }
+   },
+   {
+    "_index": "edgar_file",
+    "_id": "0009000005-26-000001:primary_doc.xml",
+    "_score": 10.0,
+    "_source": {
+     "ciks": [
+      "0009000005"
+     ],
+     "display_names": [
+      "Zeta AI Opportunities LLC  (CIK 0009000005)"
+     ],
+     "form": "D",
+     "root_forms": [
+      "D"
+     ],
+     "file_type": "D",
+     "file_date": "2026-09-19",
+     "adsh": "0009000005-26-000001",
+     "biz_locations": [
+      "Austin, TX"
+     ],
+     "biz_states": [
+      "TX"
+     ],
+     "items": [
+      "06B"
+     ],
+     "sics": [],
+     "period_ending": null
+    }
+   },
+   {
+    "_index": "edgar_file",
+    "_id": "0009000001-26-000001:primary_doc.xml",
+    "_score": 10.0,
+    "_source": {
+     "ciks": [
+      "0009000001"
+     ],
+     "display_names": [
+      "Quillstone Systems AI, Inc.  (CIK 0009000001)"
+     ],
+     "form": "D",
+     "root_forms": [
+      "D"
+     ],
+     "file_type": "D",
+     "file_date": "2026-09-20",
+     "adsh": "0009000001-26-000001",
+     "biz_locations": [
+      "San Francisco, CA"
+     ],
+     "biz_states": [
+      "CA"
+     ],
+     "items": [
+      "06B"
+     ],
+     "sics": [],
+     "period_ending": null
+    }
+   }
+  ]
+ }
+}

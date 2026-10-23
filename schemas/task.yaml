@@ -1,0 +1,48 @@
+# Frontmatter contract for work/tasks/T-YYYY-NNNN-slug.md .
+# Validated by scripts/kernel/lint.py: required keys, enums, date fields, patterns and the rules below.
+# Written through scripts/tasks.py (new / set / done), which validates with the same checks.
+type: task
+glob: "work/tasks/*.md"
+required: [id, title, type, status, owner, priority, created, updated]
+fields:
+  - id                 # immutable, T-YYYY-NNNN
+  - title
+  - type
+  - status
+  - owner              # owner | role:<name>
+  - priority
+  - tier               # the action's autonomy tier (the autonomy policy); T3 = outward, needs an approval
+  - domain
+  - project            # "[[slug]]"
+  - scheduled          # start
+  - due                # soft target; roles may move
+  - hard_deadline      # legal/external; roles never move
+  - window_opens
+  - derived_from       # provenance of the deadline
+  - blocked_by
+  - recurrence         # RRULE; one file per obligation, never per occurrence
+  - recurrence_anchor
+  - complete_instances
+  - waiting_on         # type: waiting
+  - thread             # gmail thread id for follow-ups
+  - follow_up
+  - follow_up_every
+  - max_nudges
+  - remind             # ["-P14D", "-P7D", "-P1D"] relative to hard_deadline else due
+  - reminder_refs      # written by the sweep only
+  - evidence           # required for done
+  - created
+  - updated
+enums:
+  type: [task, reminder, waiting, recurring, approval]
+  status: [open, in-progress, waiting, needs-human, blocked, done, cancelled]
+  priority: [P0, P1, P2, P3]
+  recurrence_anchor: [scheduled, completion]
+  tier: [T0, T1, T2, T3, T4]
+patterns:
+  id: '^T-\d{4}-\d{4}$'
+  owner: '^(owner|role:[a-z0-9][a-z0-9-]*)$'
+dates: [scheduled, due, hard_deadline, window_opens, follow_up, created, updated]
+rules:
+  - "status: done requires a non-empty evidence field"
+  - "hard_deadline requires a non-empty derived_from (every deadline carries its provenance)"

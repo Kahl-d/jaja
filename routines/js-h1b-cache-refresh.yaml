@@ -1,0 +1,27 @@
+# Routine spec (schema: schemas/routine.yaml). Deterministic, so it fits GitHub Actions or a local schedule. The run does, in order:
+#   1. python3 scripts/h1b_lookup.py download        (the USCIS H-1B employer data hub, last 3 fiscal years)
+#   2. python3 scripts/h1b_lookup.py enrich          (refresh jobs/*.md fields)
+#   3. python3 scripts/fetch_ats.py --dry-run         (re-verify every board in targets/companies.yaml; failures
+#      are listed in the receipt for job-scout)
+# dol.gov may refuse scripted LCA downloads: in the first run after a quarter closes, the receipt ends with a request
+# for the owner to save the LCA xlsx in a browser; job-scout then runs `h1b_lookup.py download --lca-xlsx <file>`.
+# Receipt: logs/runs/js-h1b-cache-refresh/<date>.md. Paused by default; it spends no tokens, so the owner may enable it freely.
+name: js-h1b-cache-refresh
+purpose: "Monthly, refresh the USCIS H-1B cache, re-enrich job records and re-verify every board token in the watchlist; ask the owner for the quarterly DOL LCA file when a new quarter is out."
+runs_on: desktop
+engine: script
+schedule: "0 5 1 * *"
+action: script:scripts/h1b_lookup.py download
+inputs:
+  - https://www.uscis.gov/tools/reports-and-studies/h-1b-employer-data-hub
+  - targets/companies.yaml
+outputs:
+  - legal/evidence/h1b/
+  - jobs/*.md
+  - logs/runs/js-h1b-cache-refresh/<date>.md
+connectors: []
+tier: T1
+notify: {"on": needs-owner, via: push}      # a failed download, failing boards, or the quarterly LCA file
+budget: {max_runs_per_day: 1, max_tokens: 0}      # script only
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: job-scout

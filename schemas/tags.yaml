@@ -1,0 +1,109 @@
+# The controlled tag vocabulary for every tagged page and record. Tags say what a page is ABOUT. What a page IS
+# lives in `type:` (the node type: semantic, entity, episodic, journal, project, job, prospect, ...), and what it
+# is connected to lives in its [[links]]; so type names and one-off project names are not tags.
+#
+# scripts/kernel/lint.py reads this file: a `tags:` value outside it is a `tag-unknown` finding. Allowed =
+# domain/<slug> for the domains below + the topics + project/<slug> for a real project + the record tags below.
+#
+# enforcement: warning  -> tag-unknown is printed and counted, and lint still exits 0.
+# enforcement: error    -> tag-unknown joins the failing findings (lint exits 1, the nightly sweep goes red).
+enforcement: error
+
+# domain/<slug>: the division a page belongs to. Add your own divisions here.
+domains: [career]
+
+# project/<slug>: the page is about one project. <slug> must be a project folder (domains/*/projects/<slug>/),
+# a build card (builds/<slug>.md) or a project page, or be listed in `projects:` below. Lint checks it exists.
+project_prefix: project/
+projects: [job-search]          # a generic example: the project the agency runs
+
+# Topic tags, one line of meaning each. Add the themes your own pages recur on.
+topics:
+  agents: AI agents and agent systems; multi-agent design, roles, subagents, agent harnesses
+  tooling: engines and developer tools; Claude Code, Codex, MCP, connectors, hooks, plugins, skills, scripts
+  security: secrets, credentials, privacy, access scopes and their hygiene
+  github: repos, branches, PRs, releases, org and repo settings, git conventions
+  engineering: engineering lessons; invariants, failure modes, data integrity, QA, build and deploy traps
+  web: web and frontend work; JavaScript, frameworks, hosting
+  design: visual and product design; branding, naming, layout, interface rules
+  job-search: the job hunt; openings, applications, ATS, alerts, platforms, recruiters
+  resume: resumes, cover letters, the profile they draw on, PDF and ATS rendering
+  immigration: work authorization, visa clocks and the forms around them
+  research: desk research; a studied landscape, comparison or report with sources
+  profile: about the owner; identity, goals, preferences, operating manual, voice
+  decision: a recorded decision with its reasoning and what it rules out
+  planning: plans, roadmaps, day and week planning, milestones
+  review: reviews and audits; weekly reviews, inventories, contradiction sweeps
+  setup: setting something up; onboarding, project setup, restructures, migrations
+
+# Tags that scripts and roles write on records (jobs, prospects). Machine flags, kept here so lint knows them.
+# The record tag writers (prospects.py set --tag, the job-search MCP prospect_set add_tags) refuse any tag
+# this file does not allow (js_common.check_tags, which reads it through lint.load_tag_vocabulary).
+records:
+  sponsorship-ask: job; the JD is silent on sponsorship, ask before applying (job-scout)
+  relocation-ask: job; onsite outside the owner's stated locations, ask the owner about moving (job-scout)
+  jd-missing: job; an alert or manual record with no JD captured yet (job_alerts.py, jobs_manual.py)
+  ghost-risk: job; signals of a ghost or evergreen posting (job-scout)
+  injection-suspect: job; the JD carries text that tries to instruct an agent (job-scout)
+  sponsor-likely: job; evidence the employer sponsors (job-scout)
+  no-sponsor: job; the JD rules sponsorship out (job-scout)
+  role-filled: job; the role is filled or closed per the employer (job-scout)
+  possible-duplicate: job or prospect; may duplicate another record (dedup.py, prospects.py)
+  df-adjacent: job or prospect; tied to the owner's current employer, so handle with discretion (confidentiality rule)
+  needs-review: prospect; mail the classifier could not settle (prospects.py)
+  referrer: prospect; introduced the owner to someone (prospects.py)
+  introduced: prospect; was introduced to the owner by a referrer (prospects.py)
+  sponsorship-badge: job; the alert card showed a sponsorship badge (job_alerts.py)
+  suspected-scam: prospect; mail classified as a likely scam, never a pipeline step (prospects.py)
+  offer: prospect; mail from them carried an offer (prospects.py)
+  rejected: prospect; mail from them carried a rejection (prospects.py)
+  contract: prospect; the role they wrote about is a contract role (prospects.py)
+  merged: prospect; folded into another record, see merged_into (prospects.py merge_into)
+  agency: prospect; an agency or recruiting-firm recruiter (prospect-triage)
+  invitation-pending: prospect; a LinkedIn invitation the owner never accepted (inbox-harvester)
+
+# The librarian's normalization map: old tag -> the tags that replace it ([] = drop: a type name, a one-off, or
+# covered by type:/links). Not read by lint; the rename is done by the librarian, page by page.
+merge:
+  episodic: []
+  journal: []
+  daily: []
+  session: []
+  project: []
+  tool: []
+  agent: [agents]
+  ai-agents: [agents]
+  multi-agent: [agents]
+  subagents: [agents]
+  roles: [agents]
+  claude: [tooling]
+  mcp: [tooling]
+  connectors: [tooling]
+  integrations: [tooling]
+  scripts: [tooling]
+  skills: [tooling]
+  secrets: [security]
+  privacy: [security]
+  git: [github]
+  repos: [github]
+  qa: [engineering]
+  build: [engineering]
+  deploy: [engineering]
+  frontend: [web]
+  javascript: [web]
+  applications: [job-search]
+  ats: [job-search, resume]
+  job-alerts: [job-search]
+  platforms: [job-search]
+  career: [domain/career]
+  resumes: [resume]
+  pdf: [resume]
+  visa: [immigration]
+  identity: [profile]
+  preferences: [profile]
+  goals: [profile]
+  plan: [planning]
+  architecture: [decision]
+  onboarding: [setup]
+  quickstart: [setup]
+  landscape: [research]

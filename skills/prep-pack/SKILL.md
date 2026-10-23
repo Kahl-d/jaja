@@ -1,0 +1,74 @@
+---
+name: prep-pack
+description: "Use when an application reaches screen, oa, interviewing or final, when an interview invite lands, or when the owner asks to prepare for a specific interview round."
+---
+
+# Prep pack for one round
+
+Owner: prep-coach (rubrics in `agents/prep-coach.md`). Tier: T1. Due 24 h before the round, 48 h
+before a final. Today is !`date +%F`. Runs by hand in any session (the prep lane, the Recruiter's,
+a plain chat); no lane needs to be open.
+
+## Inputs
+`prep/packs/_TEMPLATE.md` (the shape), `prep/questions.yaml` (the cited question bank),
+`prep/stories/*.md` (STAR stories with evidence ids and "Do not say" lists),
+`applications/SLUG/application.md` (round, time, format, interviewers), `jd.md`, `fit.md`, the
+submitted variant in `resumes/variants/SLUG/`, `companies/<company>.md`, `profile/PROFILE.md`,
+earlier debriefs in `prep/debriefs/` for the company, the legal-visa answer scripts in `legal/`,
+standing rulings in `hub/rulings.yaml`.
+
+## Procedure
+1. Work from the user's data folder; first
+   `python3 scripts/prep_focus.py SLUG` (read only): the focus, the story to tell, up to ten bank questions
+   for that focus and the Reader model's wants; exit 1 means no application record (ask the Recruiter, stop).
+   Then `mkdir -p prep/packs/SLUG`; `cp prep/packs/_TEMPLATE.md prep/packs/SLUG/<round>.md`. SLUG is the
+   `applications/` folder name. Steps 4 and 5 start from its output; a "none" is written "Unknown - to confirm".
+2. Missing round type, time or format: ask through the Recruiter and stop.
+3. Dossier freshness: a final round with news older than 72 h: request a company-researcher refresh.
+4. Pull the questions from the bank, by the round's clusters and the company's loop:
+   ```bash
+   python3 - <<'PY'
+   import yaml; d = yaml.safe_load(open("prep/questions.yaml"))
+   CO, CL = "acme-corp", {"behavioral", "llm-agent-system-design"}   # set per round
+   for q in d["questions"]:
+       if CO in q.get("company_loops", []) or q["cluster"] in CL:
+           print(q["id"], q["cluster"], q.get("difficulty", ""), q["q"][:110])
+   PY
+   ```
+   Company-loop rows first, then `provenance: reported`, then representative. Meet the minimums per cluster
+   that the pack template and the card's gate state for a technical round (coding, system design tied to the
+   owner's work, ML fundamentals, behavioral). A question the company asks that the bank lacks goes into
+   `prep/questions.yaml` with its source url and read date (never a question without a source).
+5. Pick 3 to 5 stories from `prep/stories/` (no two from the same subsystem). Copy each story's
+   one line and its ceiling into section 4; a number said aloud must be in that story's
+   "Numbers you may say". No story yet for a needed topic: write it from `profile/corpus/` with
+   ev ids on every line, in the stories' shape, before the pack.
+6. Fill the rest of the template: logistics in the owner's time zone, what the round tests (sourced),
+   demo (demo-safe artifact only), questions to ask (each tied to a dossier line), talk track
+   (the legal-visa script; salary only from the owner's private config and standing policy), weak spots
+   from `fit.md` with honest answers, day-before checklist.
+7. Gate the pack (the template's last section): every bank id resolves; every story id exists;
+   `python3 scripts/check_holds.py prep/packs/SLUG/<round>.md` exits 0; the pack passes the style checks in the
+   user's style config (`<data>/config/style.yaml`, keys `style.*`); no internal-only material; no
+   fact from an open conflict.
+8. Tell the owner (through the Recruiter) the pack path, the top three things to rehearse, and offer a
+   mock the day before. After the round, the debrief goes to `prep/debriefs/SLUG-<round>.md` and
+   new questions back into the bank.
+
+## Output
+`prep/packs/SLUG/<round>.md`; reply with the round, the pack path, the gate output and the top
+three things to rehearse.
+
+## Stop conditions
+Unknown round details; a demo with no demo-safe artifact (write the gap, flag the Recruiter);
+anything that would need another employer's confidential material; never during a live round
+(no live-interview help, and no help where the employer's candidate rules forbid it).
+
+## Worked example
+Recruiter screen on a date the invite gives, Acme Corp, Product Engineer. Clusters: behavioral
+first. Bank: a "walk me through a project end to end" row and a "why this company" row; the Acme
+loop rows (`company_loops: [acme-corp]`, for example an LLM chat-system design question) prepare the
+later rounds. Stories: a product end-to-end story for the project walk-through, an agent-harness
+story for the technical follow-up, an evaluation story for "how do you know it works". Talk track:
+the legal-visa script for authorization; salary from the private config. Gate: check_holds exits 0,
+style checks pass.

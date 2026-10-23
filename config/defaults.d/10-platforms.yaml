@@ -1,0 +1,5 @@
+# Neutral defaults for the platform registry readers (scripts/portal_registry.py, scripts/sitting_order.py).
+policy:
+  platforms:
+    not_boards_extra: []          # platform ids that are not job boards (added to the built-in ATS and portfolio ids)
+    sitting_kinds: {}             # {sheet id: kind} for portal sheets whose platform entry carries no presence.kind

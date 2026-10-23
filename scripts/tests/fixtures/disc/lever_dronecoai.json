@@ -1,0 +1,161 @@
+[
+ {
+  "additionalPlain": "Full-time regular employee offer package: pay within range listed plus bonus, equity and benefits.",
+  "additional": "<div>Full-time regular employee offer package: pay within range listed plus bonus, equity and benefits.</div>",
+  "categories": {
+   "commitment": "Full Time Employee",
+   "department": "Swarmlink Solutions Division",
+   "location": "United States",
+   "team": "System Design",
+   "allLocations": [
+    "United States",
+    "San Diego, California",
+    "Washington, D.C.",
+    "Boston, Massachusetts",
+    "San Mateo, California",
+    "Dallas, Texas"
+   ]
+  },
+  "createdAt": 1778026238539,
+  "descriptionPlain": "We are seeking a systems engineer to join the Swarmlink Solutions team and design the software that coordinates many aircraft.",
+  "description": "<div>We are seeking a systems engineer to join the Swarmlink Solutions team and design the software that coordinates many aircraft.</div>",
+  "id": "job-4001",
+  "lists": [
+   {
+    "text": "What you'll do:",
+    "content": "<li>Write short design documents and review code from the people you work with.</li><li>Mentor newer engineers and share what you learn with the wider team.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Work with research and product to move prototypes into reliable systems.</li>"
+   },
+   {
+    "text": "Required qualifications:",
+    "content": "<li>Hands-on experience with C++, Python and embedded Linux.</li><li>A record of owning a system from the first commit to steady operation.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Clear written communication and a preference for simple designs.</li>"
+   },
+   {
+    "text": "Preferred qualifications:",
+    "content": "<li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Experience with distributed training or large-scale data processing.</li>"
+   }
+  ],
+  "salaryRange": {
+   "min": 110000,
+   "max": 170000,
+   "currency": "USD",
+   "interval": "per-year-salary"
+  },
+  "text": "Senior Engineer, Software Systems (R1103)",
+  "country": "US",
+  "workplaceType": "onsite",
+  "opening": "<div>Droneco ai builds autonomy software for small aircraft. Our teams work on perception, planning and the tools that keep a fleet flying.</div>",
+  "openingPlain": "Droneco ai builds autonomy software for small aircraft. Our teams work on perception, planning and the tools that keep a fleet flying.",
+  "descriptionBody": "<div>We are seeking a systems engineer to join the Swarmlink Solutions team and design the software that coordinates many aircraft.</div>",
+  "descriptionBodyPlain": "We are seeking a systems engineer to join the Swarmlink Solutions team and design the software that coordinates many aircraft.",
+  "hostedUrl": "https://jobs.lever.co/dronecoai/job-4001",
+  "applyUrl": "https://jobs.lever.co/dronecoai/job-4001/apply"
+ },
+ {
+  "additionalPlain": "Full-time regular employee offer package: pay within range listed plus bonus, equity and benefits.",
+  "additional": "<div>Full-time regular employee offer package: pay within range listed plus bonus, equity and benefits.</div>",
+  "categories": {
+   "commitment": "Full Time Employee",
+   "department": "Swarmlink Enterprise Division",
+   "location": "San Diego, California",
+   "team": "Engineering",
+   "allLocations": [
+    "San Diego, California"
+   ]
+  },
+  "createdAt": 1778742972652,
+  "descriptionPlain": "Lead the ML operations platform for training, evaluating and deploying onboard models.",
+  "description": "<div>Lead the ML operations platform for training, evaluating and deploying onboard models.</div>",
+  "id": "job-4002",
+  "lists": [
+   {
+    "text": "What you'll do:",
+    "content": "<li>Write short design documents and review code from the people you work with.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Design, build and operate ML operations services that run in production.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li>"
+   },
+   {
+    "text": "Key Outcomes:",
+    "content": "<li>Write short design documents and review code from the people you work with.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Design, build and operate ML operations services that run in production.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li>"
+   },
+   {
+    "text": "Required qualifications:",
+    "content": "<li>Comfort reading research papers and turning them into working code.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Clear written communication and a preference for simple designs.</li><li>Hands-on experience with Python, Kubernetes and model registries.</li>"
+   },
+   {
+    "text": "Preferred qualifications:",
+    "content": "<li>Open-source contributions in the ML operations area.</li><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li>"
+   },
+   {
+    "text": "Why Join Us",
+    "content": "<li>Open-source contributions in the ML operations area.</li><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li>"
+   }
+  ],
+  "salaryRange": {
+   "min": 233000,
+   "max": 350000,
+   "currency": "USD",
+   "interval": "per-year-salary"
+  },
+  "text": "Senior Staff Engineer, ML Ops (R1141)",
+  "country": "US",
+  "workplaceType": "onsite",
+  "opening": "<div>Droneco ai builds autonomy software for small aircraft. Our teams work on perception, planning and the tools that keep a fleet flying.</div>",
+  "openingPlain": "Droneco ai builds autonomy software for small aircraft. Our teams work on perception, planning and the tools that keep a fleet flying.",
+  "descriptionBody": "<div>Lead the ML operations platform for training, evaluating and deploying onboard models.</div>",
+  "descriptionBodyPlain": "Lead the ML operations platform for training, evaluating and deploying onboard models.",
+  "hostedUrl": "https://jobs.lever.co/dronecoai/job-4002",
+  "applyUrl": "https://jobs.lever.co/dronecoai/job-4002/apply"
+ },
+ {
+  "additionalPlain": "Full-time regular employee offer package: pay within range listed plus bonus, equity and benefits.",
+  "additional": "<div>Full-time regular employee offer package: pay within range listed plus bonus, equity and benefits.</div>",
+  "categories": {
+   "commitment": "Full Time Employee",
+   "department": "Swarmlink Enterprise Division",
+   "location": "San Mateo, California",
+   "team": "Engineering",
+   "allLocations": [
+    "San Mateo, California"
+   ]
+  },
+  "createdAt": 1788190713321,
+  "descriptionPlain": "Lead the ML operations platform for training, evaluating and deploying onboard models.",
+  "description": "<div>Lead the ML operations platform for training, evaluating and deploying onboard models.</div>",
+  "id": "job-4003",
+  "lists": [
+   {
+    "text": "What you'll do:",
+    "content": "<li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Design, build and operate ML operations services that run in production.</li><li>Keep dashboards and runbooks for ML operations accurate and easy to follow.</li>"
+   },
+   {
+    "text": "Key Outcomes:",
+    "content": "<li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Design, build and operate ML operations services that run in production.</li><li>Keep dashboards and runbooks for ML operations accurate and easy to follow.</li>"
+   },
+   {
+    "text": "Required qualifications:",
+    "content": "<li>Clear written communication and a preference for simple designs.</li><li>Hands-on experience with Python, Kubernetes and model registries.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Comfort reading research papers and turning them into working code.</li>"
+   },
+   {
+    "text": "Preferred qualifications:",
+    "content": "<li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Experience with distributed training or large-scale data processing.</li>"
+   },
+   {
+    "text": "Why Join Us",
+    "content": "<li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Experience with distributed training or large-scale data processing.</li>"
+   }
+  ],
+  "salaryRange": {
+   "min": 280000,
+   "max": 420000,
+   "currency": "USD",
+   "interval": "per-year-salary"
+  },
+  "text": "Senior Staff Engineer, ML Ops (R1141)",
+  "country": "US",
+  "workplaceType": "onsite",
+  "opening": "<div>Droneco ai builds autonomy software for small aircraft. Our teams work on perception, planning and the tools that keep a fleet flying.</div>",
+  "openingPlain": "Droneco ai builds autonomy software for small aircraft. Our teams work on perception, planning and the tools that keep a fleet flying.",
+  "descriptionBody": "<div>Lead the ML operations platform for training, evaluating and deploying onboard models.</div>",
+  "descriptionBodyPlain": "Lead the ML operations platform for training, evaluating and deploying onboard models.",
+  "hostedUrl": "https://jobs.lever.co/dronecoai/job-4003",
+  "applyUrl": "https://jobs.lever.co/dronecoai/job-4003/apply"
+ }
+]

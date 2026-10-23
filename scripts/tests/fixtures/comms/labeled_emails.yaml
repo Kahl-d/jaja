@@ -1,0 +1,1322 @@
+# Labeled synthetic inbox for the communications/CRM scripts (mail_classify F1, gmail_pull
+# extraction, prospects ingest). Every person, company domain and message here is invented;
+# ATS / scheduling / assessment vendor domains are the real sender domains those vendors use.
+#
+# Fields: id, label (expected), at (ISO with offset), from, subject, body.
+# Optional: to, cc, reply_to, headers{}, gmail_labels[], thread (fixture id whose thread this
+# joins), in_reply_to (fixture id), html (add a text/html alternative), html_only,
+# calendar{start,end,tz,summary,organizer}, attachments[filename].
+#
+# Label semantics (the contract the classifier is scored against):
+#   recruiter_outreach       recruiter / sourcer / talent person (in-house or agency) reaching out
+#   founder_outreach         a founder / co-founder writing personally about joining or a role
+#   hiring_manager_outreach  an engineering manager / head of / director / VP about their own team
+#   referral_intro           an introduction to someone, or an offer / confirmation of a referral
+#   ats_confirmation         automated "we received your application"
+#   ats_assessment           online assessment, coding test or take-home
+#   interview_invite         invitation to interview or to the next round (asks to schedule)
+#   interview_scheduling     logistics: calendar invites, confirmations, reschedules
+#   rejection | offer | job_alert | newsletter | networking | other
+#   suspected_scam           asks for identity documents, bank or payment details, a fee or an
+#                            equipment purchase, or offers a job with no interview process; wins over offer
+
+- id: rec-inhouse-01
+  label: recruiter_outreach
+  at: "2026-08-28T10:04:11-07:00"
+  from: "Maya Chen <maya.chen@heliosystems.test>"
+  subject: "Senior ML Engineer (LLM Platform) at Helio Systems"
+  body: |
+    Hi Alex,
+
+    I came across your profile and your work at Example Corp on agent orchestration caught my eye.
+    We're hiring a Senior ML Engineer for our LLM Platform team: you'd own the evaluation and
+    serving layer for our retrieval and agent products. The role is hybrid in San Francisco
+    (2 days a week) with a base range of $190k - $230k plus equity.
+
+    We sponsor H-1B transfers and support STEM OPT extensions, in case that's relevant.
+
+    Would you be open to a 20-minute chat this week?
+
+    Best,
+    Maya Chen
+    Technical Recruiter | Helio Systems
+
+- id: rec-agency-02
+  label: recruiter_outreach
+  at: "2026-04-14T08:31:00-04:00"
+  from: "Jordan Blake <jordan.blake@apexmatch-talent.test>"
+  subject: "Applied AI Engineer - Series B AI infra - Palo Alto"
+  body: |
+    Hello Alex,
+
+    My client, a Series B AI infrastructure startup in Palo Alto, is looking for an Applied AI
+    Engineer to help build their inference platform. This is a 6-month contract-to-hire, W2 or C2C,
+    onsite 4 days a week.
+
+    If interested, please send over your updated resume and the best number to reach you.
+
+    Thanks,
+    Jordan Blake
+    Senior Recruitment Consultant | ApexMatch Talent Partners
+    555-0100
+
+- id: rec-gem-03
+  label: recruiter_outreach
+  at: "2026-05-06T09:12:45-07:00"
+  from: "Alicia Gomez <alicia@quantaflow.test>"
+  subject: "Agent evals at Quantaflow?"
+  headers:
+    List-Unsubscribe: "<https://unsubscribe-gem.example.test/u/9f2c1a>, <mailto:unsubscribe@gem.test?subject=9f2c1a>"
+  body: |
+    Hi Alex,
+
+    I lead technical recruiting at Quantaflow. We're a 40-person team building workflow automation
+    for finance teams, and we're looking for an AI Engineer to own our agent evaluation stack.
+
+    Given your background with multi-agent systems, I think you'd be a great fit. The role is
+    remote in the US and the range is $170k - $210k.
+
+    Open to a quick call next week?
+
+    Alicia Gomez
+    Lead Technical Recruiter, Quantaflow
+
+    If you'd prefer not to hear from me, just let me know.
+
+- id: rec-linkedin-inmail-04
+  label: recruiter_outreach
+  at: "2026-06-03T14:22:10-07:00"
+  from: "Derek Osei via LinkedIn <inmail-hit-reply@linkedin.com>"
+  subject: "Senior AI Engineer opportunity at Northwind Robotics"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=abc>"
+  body: |
+    Derek Osei
+    Technical Sourcer at Northwind Robotics
+    https://www.linkedin.com/comm/in/derek-osei-4b1a2c?midToken=AQH1
+
+    Hi Alex, I'm reaching out because your experience building LLM agents stood out to me.
+    We're hiring for a Senior AI Engineer role on our autonomy software team, onsite in San Jose.
+    Would you be interested in learning more?
+
+    Reply
+
+    You are receiving InMail notification emails.
+    Unsubscribe | Help
+    © 2026 LinkedIn Corporation, 1000 West Maude Avenue, Sunnyvale, CA 94085.
+
+- id: rec-followup-05
+  label: recruiter_outreach
+  at: "2026-03-16T11:05:00-07:00"
+  from: "Sam Rivera <sam.rivera@latticebio.test>"
+  subject: "Re: ML Engineer role at Lattice Bio"
+  body: |
+    Hi Alex, just bumping this in case it got buried. The ML Engineer role on our protein
+    design team is still open and I think your background would be a strong match.
+
+    Let me know if you'd like to chat!
+
+    Sam Rivera
+    Talent Acquisition Partner, Lattice Bio
+
+    On Mon, Mar 9, 2026 at 9:12 AM Sam Rivera <sam.rivera@latticebio.test> wrote:
+    > Hi Alex,
+    > I'm hiring for an ML Engineer on our protein design team in South San Francisco.
+    > Would you be open to a conversation?
+
+- id: rec-gmail-06
+  label: recruiter_outreach
+  at: "2026-07-21T16:40:00-07:00"
+  from: "Nina Petrova <nina.petrova.recruits@gmail.com>"
+  subject: "Founding ML Engineer - stealth AI startup (ex-OpenAI founders)"
+  body: |
+    Hi Alex,
+
+    I'm an independent recruiter working with a stealth AI startup founded by two former research
+    leads. They're hiring a Founding ML Engineer to build their training and eval infrastructure.
+    Comp is $200-260k base plus 1% equity, remote-friendly in the US.
+
+    Would you be open to hearing more? Happy to share details on a call.
+
+    Nina Petrova | Tech Recruiter
+
+- id: rec-sponsor-no-07
+  label: recruiter_outreach
+  at: "2026-02-18T13:15:00-05:00"
+  from: "Chris Tan <ctan@finvault.test>"
+  subject: "Machine Learning Engineer - FinVault (NYC)"
+  body: |
+    Hi Alex,
+
+    I'm with the Talent Acquisition team at FinVault. We have an opening for a Machine Learning
+    Engineer working on our fraud models. Please note this role is onsite in New York and we are
+    unable to sponsor visas for this position.
+
+    If that works for you, I'd love to connect.
+
+    Chris Tan
+    Talent Acquisition, FinVault
+
+- id: rec-bigco-08
+  label: recruiter_outreach
+  at: "2026-09-10T09:30:00-07:00"
+  from: "Rachel Kim <rkim@orbitcloud.test>"
+  subject: "Software Engineer, GenAI at Orbit Cloud"
+  body: |
+    Hi Alex,
+
+    I'm on the AI Platform recruiting team at Orbit Cloud. We're growing our GenAI Applied
+    Engineering org and I'd love to share details about a Software Engineer, GenAI role (L5).
+
+    Are you available for an intro call next Tuesday or Wednesday?
+
+    Thanks,
+    Rachel Kim
+    Senior Technical Recruiter | Orbit Cloud
+
+- id: rec-short-09
+  label: recruiter_outreach
+  at: "2026-02-27T07:55:00-06:00"
+  from: "Tom Hughes <tom@brightpathstaffing.test>"
+  subject: "Remote Python role"
+  body: |
+    Hey Alex, are you open to new opportunities? I have a Backend Engineer (Python) role at a
+    fintech client, fully remote, $150k. Let me know!
+
+    - Tom, Recruiter @ BrightPath Staffing
+
+- id: rec-talentpartner-10
+  label: recruiter_outreach
+  at: "2026-08-05T12:02:00-07:00"
+  from: "Rebecca Stone <rebecca@cortexlabs.test>"
+  subject: "Research Engineer, Agents - Cortex Labs"
+  body: |
+    Hi Alex,
+
+    I'm a Talent Partner at Cortex Labs. We're building frontier reasoning models and our Agents
+    team is hiring Research Engineers. Your post about memory architectures for agents was great.
+
+    Interested in chatting? We do sponsor visas.
+
+    Rebecca
+
+- id: fdr-yc-01
+  label: founder_outreach
+  at: "2026-06-18T19:20:00-07:00"
+  from: "Ava Sinclair <ava@tessellate.test>"
+  subject: "Founding engineer at Tessellate?"
+  body: |
+    Hi Alex,
+
+    I'm the co-founder and CEO of Tessellate (YC S25). We're building agents that write and repair
+    data pipelines, and we just raised a $4M seed round.
+
+    I saw your work at Example Corp on agent orchestration and would love to talk about you joining
+    as a founding engineer. Coffee in SF next week?
+
+    Ava
+
+- id: fdr-stealth-02
+  label: founder_outreach
+  at: "2026-03-24T10:10:00-07:00"
+  from: "Marcus Webb <marcus@webbstealth.test>"
+  subject: "Building something new in AI agents"
+  body: |
+    Hi Alex,
+
+    I'm a second-time founder (my last company was acquired in 2024) and I'm building something
+    new in the AI agents space. We're still in stealth, well funded, and I'm looking for our first
+    engineering hire.
+
+    Would you be open to a call this week or next?
+
+    Marcus Webb
+    Founder
+
+- id: fdr-linkedin-03
+  label: founder_outreach
+  at: "2026-07-02T08:45:00-07:00"
+  from: "Leila Haddad via LinkedIn <messages-noreply@linkedin.com>"
+  subject: "Leila Haddad sent you a message"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=def>"
+  body: |
+    Leila Haddad
+    Co-founder & CTO at Brightloop
+    https://www.linkedin.com/comm/in/leila-haddad-7a1b2c?midToken=AQE2
+
+    Hey Alex! Loved your post on MCP servers. We're a 6-person team building voice agents for
+    clinics (Series A). We're looking for our next senior AI engineer and I'd love to tell you
+    more. Open to chat?
+
+    View message
+
+    This email was intended for Alex Example.
+    Unsubscribe | Help
+
+- id: fdr-calendly-04
+  label: founder_outreach
+  at: "2026-05-12T15:00:00-07:00"
+  from: "Omar Farouk <omar@ledgerleaf.test>"
+  subject: "LedgerLeaf - founding AI engineer"
+  body: |
+    Alex,
+
+    I'm the founder of LedgerLeaf. We're a seed-stage team building AI bookkeeping agents for small
+    businesses. I found you through your GitHub (the agent memory repo) and was impressed.
+
+    We're hiring our founding AI engineer. Here's my Calendly if you'd like to chat:
+    https://calendly.com/omar-ledgerleaf/30min
+
+    Omar Farouk
+    Founder & CEO, LedgerLeaf
+
+- id: fdr-cto-05
+  label: founder_outreach
+  at: "2026-04-02T17:25:00-07:00"
+  from: "Grace Liu <grace@emberforge.test>"
+  subject: "Emberforge - would love your take"
+  body: |
+    Hi Alex,
+
+    I'm the CTO and co-founder at Emberforge. We're pre-seed and building developer tools for LLM
+    evals. We offer competitive equity and a remote-first culture.
+
+    Would you be interested in a founding engineer role? Even a 15-minute call would be great.
+
+    Grace
+
+- id: fdr-followup-06
+  label: founder_outreach
+  at: "2026-07-20T09:05:00-07:00"
+  from: "Ava Sinclair <ava@tessellate.test>"
+  subject: "Re: Founding engineer at Tessellate?"
+  thread: fdr-yc-01
+  in_reply_to: fdr-yc-01
+  body: |
+    Hi Alex, following up on my note from last month. The founding engineer spot is still open
+    and we'd love to have you. Happy to work around your schedule.
+
+    Ava (co-founder & CEO, Tessellate)
+
+- id: fdr-seriesA-07
+  label: founder_outreach
+  at: "2026-08-19T11:45:00-07:00"
+  from: "Dev Patel <dev@quillstack.test>"
+  subject: "AI copilots for legal - Quillstack"
+  body: |
+    Hi Alex,
+
+    I'm one of the founders of Quillstack (Series A, 25 people). We're building AI copilots for
+    legal teams and are hiring ML engineers. Your background with RAG and agents is exactly what we
+    need, and we sponsor H-1B.
+
+    Want to grab a virtual coffee?
+
+    Dev Patel
+    Co-founder, Quillstack
+
+- id: hm-em-01
+  label: hiring_manager_outreach
+  at: "2026-09-02T10:30:00-07:00"
+  from: "Priya Nair <priya.nair@stratoscale.test>"
+  subject: "Applied ML at Stratoscale"
+  body: |
+    Hi Alex,
+
+    I'm an Engineering Manager on the Applied ML team at Stratoscale. I lead a team of 6 building
+    our LLM-powered search. I'm hiring a Senior ML Engineer and your work on agent memory looked
+    really relevant.
+
+    Would you be up for a chat with me directly?
+
+    Priya Nair
+    Engineering Manager, Applied ML | Stratoscale
+
+- id: hm-headofai-02
+  label: hiring_manager_outreach
+  at: "2026-05-27T13:10:00-07:00"
+  from: "Tomasz Nowak <tomasz@verdant.test>"
+  subject: "Clinical documentation agents at Verdant"
+  body: |
+    Hello Alex,
+
+    I'm the Head of AI at Verdant Health. My team is hiring an AI Engineer to build clinical
+    documentation agents. I came across your profile via the SF AI Engineers meetup list and your
+    background looks like a strong match.
+
+    Do you have time for a call in the next couple of weeks?
+
+    Tomasz Nowak
+    Head of AI, Verdant Health
+
+- id: hm-director-03
+  label: hiring_manager_outreach
+  at: "2026-03-11T09:00:00-07:00"
+  from: "Elena Rossi <erossi@pinnacle-analytics.test>"
+  subject: "ML platform team at Pinnacle Analytics"
+  body: |
+    Hi Alex,
+
+    Director of Machine Learning at Pinnacle Analytics here. We're expanding the ML platform org
+    and I have headcount for two ML engineers on my team.
+
+    Would you be open to talking?
+
+    Elena Rossi
+    Director of Machine Learning
+
+- id: hm-techlead-04
+  label: hiring_manager_outreach
+  at: "2026-06-24T16:20:00-07:00"
+  from: "Ben Carter <ben@mosaicrobotics.test>"
+  subject: "Perception team at Mosaic Robotics"
+  body: |
+    Hey Alex,
+
+    I'm the tech lead for the perception team at Mosaic Robotics. We're hiring for my team
+    (Software Engineer, ML Infrastructure) and I'd love to tell you about what we're building.
+    Our recruiter can follow up with details, but I wanted to reach out personally first.
+
+    Ben Carter
+    Tech Lead, Perception
+
+- id: hm-vp-05
+  label: hiring_manager_outreach
+  at: "2026-09-15T08:05:00-07:00"
+  from: "Sofia Mendes <sofia@zephyr-ai.test>"
+  subject: "Agent infrastructure at Zephyr AI"
+  body: |
+    Hi Alex,
+
+    I run engineering at Zephyr AI (VP Engineering). We're hiring an agent infrastructure engineer
+    to join my org, and your background building multi-agent systems stood out.
+
+    Would you have 20 minutes to talk?
+
+    Sofia Mendes
+    VP Engineering, Zephyr AI
+
+- id: ref-intro-01
+  label: referral_intro
+  at: "2026-08-26T18:00:00-07:00"
+  from: "Kevin Zhao <kevin.zhao.sf@gmail.com>"
+  to: "Alex Example <alex@example.test>, Hannah Lee <hannah@parallaxai.test>"
+  subject: "Intro: Alex <> Hannah (Parallax AI)"
+  body: |
+    Hannah, meet Alex. He's been building multi-agent systems at Example Corp and is exploring
+    what's next.
+
+    Alex, meet Hannah, who leads engineering hiring at Parallax AI.
+
+    I'll let you two take it from here!
+
+    Kevin
+
+- id: ref-bcc-02
+  label: referral_intro
+  at: "2026-08-27T09:15:00-07:00"
+  from: "Hannah Lee <hannah@parallaxai.test>"
+  subject: "Re: Intro: Alex <> Hannah (Parallax AI)"
+  thread: ref-intro-01
+  in_reply_to: ref-intro-01
+  body: |
+    Thanks Kevin (moving you to bcc)!
+
+    Alex, great to meet you. Would you have time Thursday or Friday for a 30-minute call about
+    our Applied AI Engineer role?
+
+    Hannah Lee
+    Head of Engineering, Parallax AI
+
+- id: ref-offer-refer-03
+  label: referral_intro
+  at: "2026-09-12T20:10:00-07:00"
+  from: "Arjun Mehta <arjun.mehta.dev@gmail.com>"
+  subject: "Orbit Cloud GenAI roles"
+  body: |
+    Hey Alex!
+
+    Heard you might be looking. My team at Orbit Cloud is hiring for GenAI roles and I'd be happy
+    to refer you. Send me your resume and the job link and I'll submit the referral this week.
+
+    Arjun
+
+- id: ref-submitted-04
+  label: referral_intro
+  at: "2026-09-01T12:30:00-07:00"
+  from: "Lucy Park <lucy.park@heliosystems.test>"
+  subject: "Referral submitted"
+  body: |
+    Hi Alex,
+
+    I've submitted your referral for the Senior ML Engineer role (req 4821). You should get an email
+    from our recruiting team soon. Good luck!
+
+    Lucy
+
+- id: ref-connect-05
+  label: referral_intro
+  at: "2026-04-21T14:00:00-07:00"
+  from: "Dana Whitfield <dwhitfield@example-university.test>"
+  to: "Alex Example <alex@example.test>, Raj Iyer <raj@cortexlabs.test>"
+  subject: "Connecting you two"
+  body: |
+    Alex, I'd like to connect you with Raj Iyer, a former student of mine who now runs the
+    applied research team at Cortex Labs. Raj, Alex was one of the strongest students in my
+    graduate NLP seminar. I've cc'd you both, so I'll let you take it from here.
+
+    Dana Whitfield
+    Professor, Computer Science, Example University
+
+- id: ats-gh-01
+  label: ats_confirmation
+  at: "2026-08-30T21:04:00-07:00"
+  from: "Helio Systems <no-reply@us.greenhouse-mail.io>"
+  subject: "Thank you for applying to Helio Systems"
+  html: true
+  body: |
+    Hi Alex,
+
+    Thanks for your interest in Helio Systems! We have received your application for the Senior
+    Machine Learning Engineer position. Our team will review your application and reach out if
+    there's a fit.
+
+    Best,
+    Helio Systems Recruiting
+
+    Powered by Greenhouse
+
+- id: ats-lever-02
+  label: ats_confirmation
+  at: "2026-08-21T10:11:00-07:00"
+  from: "Quillstack <no-reply@hire.lever.co>"
+  subject: "Thank you for your application to Quillstack"
+  body: |
+    Hi Alex,
+
+    Thank you for applying to the ML Engineer role at Quillstack. We've received your application
+    and our team is reviewing it. If your experience is a match, we'll reach out about next steps.
+
+    The Quillstack Team
+
+- id: ats-ashby-03
+  label: ats_confirmation
+  at: "2026-07-08T15:32:00-07:00"
+  from: "Brightloop Hiring Team <no-reply@ashbyhq.com>"
+  subject: "Thanks for applying to Brightloop!"
+  body: |
+    Hi Alex,
+
+    Thanks for applying for the Senior AI Engineer role at Brightloop. We'll review your
+    application and be in touch if your background matches what we're looking for.
+
+    Brightloop Hiring Team
+
+- id: ats-workday-04
+  label: ats_confirmation
+  at: "2026-09-13T07:48:00-07:00"
+  from: "Orbit Cloud <orbitcloud@myworkday.com>"
+  subject: "Thank you for applying for Software Engineer, GenAI (R-104233)"
+  html_only: true
+  body: |
+    Dear Alex Example,
+
+    Thank you for your interest in Orbit Cloud. Your application for the position of Software
+    Engineer, GenAI (R-104233) has been received.
+
+    You can check the status of your application at any time in your Candidate Home account.
+
+    Orbit Cloud Talent Acquisition
+
+- id: ats-smartr-05
+  label: ats_confirmation
+  at: "2026-03-14T06:20:00-07:00"
+  from: "Pinnacle Analytics <noreply@smartrecruiters.com>"
+  subject: "Your application for Machine Learning Engineer"
+  body: |
+    Hello Alex,
+
+    We successfully received your application for Machine Learning Engineer at Pinnacle Analytics.
+    Our recruiting team is reviewing applications and will contact you if your profile matches.
+
+    Pinnacle Analytics Recruiting
+
+- id: ats-icims-06
+  label: ats_confirmation
+  at: "2026-02-20T11:00:00-05:00"
+  from: "FinVault Careers <donotreply@icims.com>"
+  subject: "FinVault - Application Received"
+  body: |
+    Dear Alex,
+
+    Thank you for submitting your application for Machine Learning Engineer. This email confirms
+    receipt of your application.
+
+    FinVault Talent Acquisition
+
+- id: ats-company-domain-07
+  label: ats_confirmation
+  at: "2026-09-04T16:02:00-07:00"
+  from: "Stratoscale Recruiting <recruiting@stratoscale.test>"
+  subject: "Application received: Senior ML Engineer"
+  body: |
+    Hi Alex,
+
+    We've received your application for Senior ML Engineer. We review every application carefully,
+    and someone from our team will be in touch if there's a match.
+
+    In the meantime, check out our engineering blog.
+
+    Stratoscale Recruiting
+
+- id: oa-hackerrank-01
+  label: ats_assessment
+  at: "2026-09-06T10:00:00-07:00"
+  from: "HackerRank <support@hackerrankforwork.com>"
+  subject: "Helio Systems invited you to take a HackerRank test"
+  body: |
+    Hi Alex,
+
+    Helio Systems has invited you to complete the Senior ML Engineer Coding Assessment.
+    Duration: 90 minutes. Please complete the test by Sep 20, 2026.
+
+    Start test: https://www.hackerrank.com/tests/abc123/login
+
+    Good luck!
+    HackerRank
+
+- id: oa-codesignal-02
+  label: ats_assessment
+  at: "2026-08-25T13:30:00-07:00"
+  from: "CodeSignal <noreply@codesignal.com>"
+  subject: "Complete your General Coding Assessment for Quillstack"
+  body: |
+    Hi Alex,
+
+    Quillstack has invited you to take the General Coding Assessment (GCA). The assessment takes
+    70 minutes and the link expires in 7 days.
+
+    Take the assessment: https://app.codesignal.com/test/xyz
+
+    CodeSignal
+
+- id: oa-takehome-03
+  label: ats_assessment
+  at: "2026-07-15T17:00:00-07:00"
+  from: "Jess Wong <jess@brightloop.test>"
+  subject: "Brightloop take-home assignment"
+  body: |
+    Hi Alex,
+
+    Thanks again for chatting with the team. As a next step, we'd like you to complete a take-home
+    project: build a small evaluation harness for a voice agent. Please submit within 5 days via
+    the link below. Estimated time: 3-4 hours.
+
+    Jess Wong
+    Recruiting Coordinator, Brightloop
+
+- id: oa-codility-04
+  label: ats_assessment
+  at: "2026-03-20T09:45:00-07:00"
+  from: "Codility <no-reply@codility.com>"
+  subject: "Pinnacle Analytics: your Codility test"
+  body: |
+    Hello Alex,
+
+    You have been invited by Pinnacle Analytics to solve a test. The test will take 120 minutes.
+    You can start whenever you are ready, before the deadline.
+
+    Codility
+
+- id: oa-greenhouse-05
+  label: ats_assessment
+  at: "2026-09-08T11:20:00-07:00"
+  from: "Stratoscale <no-reply@us.greenhouse-mail.io>"
+  subject: "Next step: online assessment for Senior ML Engineer"
+  body: |
+    Hi Alex,
+
+    As the next step in our process, please complete the online assessment linked below within
+    3 days. The assessment includes two coding exercises and one short written question.
+
+    Stratoscale Recruiting
+
+- id: int-inv-01
+  label: interview_invite
+  at: "2026-07-24T10:40:00-07:00"
+  from: "Brightloop Hiring Team <no-reply@ashbyhq.com>"
+  subject: "Schedule your interview with Brightloop"
+  body: |
+    Hi Alex,
+
+    We'd like to invite you to a technical interview for the Senior AI Engineer role. Please select
+    a time that works for you using the link below.
+
+    Schedule interview
+
+    Brightloop Hiring Team
+
+- id: int-inv-02
+  label: interview_invite
+  at: "2026-09-18T15:15:00-07:00"
+  from: "Maya Chen <maya.chen@heliosystems.test>"
+  subject: "Next steps - Helio Systems"
+  body: |
+    Hi Alex,
+
+    Great news: the hiring team reviewed your assessment and would like to move you forward to the
+    virtual onsite. The loop is four interviews (coding, ML system design, behavioral and a project
+    deep dive). Could you share your availability for the week of Sep 29?
+
+    Maya Chen
+    Technical Recruiter | Helio Systems
+
+- id: int-inv-03
+  label: interview_invite
+  at: "2026-09-16T09:50:00-07:00"
+  from: "Rachel Kim <rkim@orbitcloud.test>"
+  subject: "Orbit Cloud - phone screen"
+  body: |
+    Hi Alex,
+
+    Thanks for applying! I'd like to set up a 30-minute phone screen to learn more about your
+    background and walk you through the role. Please let me know a few times that work next week.
+
+    Rachel Kim
+    Senior Technical Recruiter | Orbit Cloud
+
+- id: int-inv-04
+  label: interview_invite
+  at: "2026-08-28T12:00:00-07:00"
+  from: "Quillstack <no-reply@us.greenhouse-mail.io>"
+  subject: "Invitation to interview with Quillstack"
+  body: |
+    Hi Alex,
+
+    We were impressed by your background and would like to invite you to interview for the ML
+    Engineer position. Please use the link below to select your interview times.
+
+    Quillstack Recruiting
+
+- id: int-inv-05
+  label: interview_invite
+  at: "2026-09-19T17:30:00-07:00"
+  from: "Priya Nair <priya.nair@stratoscale.test>"
+  subject: "Re: Senior ML Engineer - next round"
+  body: |
+    Hi Alex,
+
+    Thanks for the great conversation last week. We'd like to invite you to the final round with
+    the team. Our coordinator will reach out with times.
+
+    Priya
+
+- id: sch-gcal-01
+  label: interview_scheduling
+  at: "2026-09-22T11:02:00-07:00"
+  from: "Google Calendar <calendar-notification@google.com>"
+  reply_to: "maya.chen@heliosystems.test"
+  subject: "Invitation: Technical Interview - Alex Example / Helio Systems @ Tue Sep 30, 2026 10am - 11am (PDT) (alex@example.test)"
+  calendar:
+    start: "2026-09-30T10:00:00"
+    end: "2026-09-30T11:00:00"
+    tz: "America/Los_Angeles"
+    summary: "Technical Interview - Alex Example / Helio Systems"
+    organizer: "maya.chen@heliosystems.test"
+  body: |
+    Technical Interview - Alex Example / Helio Systems
+    Tuesday Sep 30, 2026 10am - 11am (Pacific Time - Los Angeles)
+
+    Google Meet joining info
+    Video call link: https://meet.google.com/abc-defg-hij
+
+    Organizer: maya.chen@heliosystems.test
+
+    Invitation from Google Calendar
+
+- id: sch-goodtime-02
+  label: interview_scheduling
+  at: "2026-09-20T08:00:00-07:00"
+  from: "Orbit Cloud Interview Scheduling <scheduling@goodtime.io>"
+  subject: "Interview Confirmation: Orbit Cloud - Software Engineer, GenAI"
+  body: |
+    Hi Alex,
+
+    Your interview has been scheduled.
+
+    Date: Thursday, October 2, 2026
+    Time: 1:00 PM - 1:45 PM PDT
+    Interviewer: Rachel Kim
+    Zoom link: https://zoom.us/j/555000111
+
+    If you need to reschedule, please reply to this email.
+
+- id: sch-resched-03
+  label: interview_scheduling
+  at: "2026-09-23T10:25:00-07:00"
+  from: "Maya Chen <maya.chen@heliosystems.test>"
+  subject: "Reschedule: Technical Interview"
+  body: |
+    Hi Alex,
+
+    Unfortunately our interviewer had a conflict come up, so we need to move your technical
+    interview. Would Wednesday Oct 1 at 2pm PT work instead? Apologies for the shuffle!
+
+    Maya
+
+- id: sch-calendly-04
+  label: interview_scheduling
+  at: "2026-06-01T09:00:00-07:00"
+  from: "Calendly <notifications@calendly.com>"
+  subject: "Confirmed: 30 Minute Meeting with Omar Farouk on Friday, June 5, 2026"
+  body: |
+    Hi Alex,
+
+    A new event has been scheduled.
+
+    Event: 30 Minute Meeting with Omar Farouk
+    Date & time: 10:00am - 10:30am (Pacific Time - US & Canada), Friday, June 5, 2026
+    Location: Google Meet
+
+    Need to make changes? Reschedule or cancel.
+
+- id: sch-updated-05
+  label: interview_scheduling
+  at: "2026-07-30T14:00:00-07:00"
+  from: "Google Calendar <calendar-notification@google.com>"
+  subject: "Updated invitation: Onsite Loop - Brightloop @ Wed Aug 5, 2026 9am - 1pm (PDT) (alex@example.test)"
+  calendar:
+    start: "2026-08-05T09:00:00"
+    end: "2026-08-05T13:00:00"
+    tz: "America/Los_Angeles"
+    summary: "Onsite Loop - Brightloop"
+    organizer: "jess@brightloop.test"
+  body: |
+    This event has been changed.
+
+    Onsite Loop - Brightloop
+    Wednesday Aug 5, 2026 9am - 1pm (Pacific Time - Los Angeles)
+
+    Invitation from Google Calendar
+
+- id: rej-gh-01
+  label: rejection
+  at: "2026-06-10T16:45:00-07:00"
+  from: "Parallax AI <no-reply@us.greenhouse-mail.io>"
+  subject: "Update on your application to Parallax AI"
+  body: |
+    Hi Alex,
+
+    Thank you for your interest in the Applied AI Engineer role. After careful consideration, we
+    have decided not to move forward with your candidacy at this time.
+
+    We'll keep your resume on file and wish you the best in your search.
+
+    Parallax AI Recruiting
+
+- id: rej-lever-02
+  label: rejection
+  at: "2026-04-02T09:30:00-07:00"
+  from: "Lattice Bio <no-reply@hire.lever.co>"
+  subject: "Your application to Lattice Bio"
+  body: |
+    Hi Alex,
+
+    Thank you for applying to Lattice Bio. Unfortunately, we have decided to pursue other
+    candidates whose experience more closely matches our needs for this role.
+
+    Best of luck,
+    Lattice Bio
+
+- id: rej-workday-03
+  label: rejection
+  at: "2026-03-05T12:00:00-05:00"
+  from: "FinVault <finvault@myworkday.com>"
+  subject: "Regarding your application for Machine Learning Engineer"
+  body: |
+    Dear Alex Example,
+
+    Thank you for your interest in FinVault. We regret to inform you that you were not selected for
+    this position. We encourage you to apply for future roles.
+
+    FinVault Talent Acquisition
+
+- id: rej-after-int-04
+  label: rejection
+  at: "2026-05-19T15:20:00-07:00"
+  from: "Carlos Ruiz <carlos@tidewater.test>"
+  subject: "Tidewater AI - interview feedback"
+  body: |
+    Hi Alex,
+
+    Thank you so much for the time you spent with our team this week. The team enjoyed meeting you,
+    but we've decided to move forward with another candidate for this role.
+
+    I'd love to stay in touch for future openings.
+
+    Carlos Ruiz
+    Recruiter, Tidewater AI
+
+- id: rej-filled-05
+  label: rejection
+  at: "2026-06-29T10:00:00-07:00"
+  from: "Verdant Health Talent <talent@verdant.test>"
+  subject: "Senior AI Engineer position update"
+  body: |
+    Hi Alex,
+
+    Thank you for applying. We wanted to let you know that the position has been filled. We
+    encourage you to apply to future openings that match your skills.
+
+    Verdant Health Talent Team
+
+- id: rej-unable-06
+  label: rejection
+  at: "2026-04-09T08:10:00-07:00"
+  from: "Pinnacle Analytics <noreply@smartrecruiters.com>"
+  subject: "Your application status"
+  body: |
+    Hello Alex,
+
+    We appreciate your interest in Pinnacle Analytics. While your background is impressive, we are
+    unable to offer you a position at this time.
+
+    Pinnacle Analytics Recruiting
+
+- id: off-letter-01
+  label: offer
+  at: "2026-09-21T13:00:00-07:00"
+  from: "Nadia Brooks <nadia.brooks@kestreldynamics.test>"
+  subject: "Your offer from Kestrel Dynamics"
+  attachments: ["Alex_Example_Offer_Letter.pdf"]
+  body: |
+    Hi Alex,
+
+    Congratulations! On behalf of Kestrel Dynamics, I'm delighted to extend an offer for the
+    position of Machine Learning Engineer II. Attached is your offer letter with details on base
+    salary, equity and benefits.
+
+    Please review it and let us know by Friday if you have any questions.
+
+    Nadia Brooks
+    Recruiting Lead, Kestrel Dynamics
+
+- id: off-docusign-02
+  label: offer
+  at: "2026-09-22T09:10:00-07:00"
+  from: "Kestrel Dynamics via DocuSign <dse_na2@docusign.net>"
+  subject: "Please DocuSign: Alex Example - Offer Letter - Kestrel Dynamics"
+  body: |
+    Nadia Brooks sent you a document to review and sign.
+
+    REVIEW DOCUMENT
+
+    Please review your offer letter and sign at your earliest convenience.
+
+    Do Not Share This Email
+
+- id: off-verbal-03
+  label: offer
+  at: "2026-09-23T16:40:00-07:00"
+  from: "Carmen Diaz <carmen@lumenlabs.test>"
+  subject: "Great news from Lumen Labs"
+  body: |
+    Hi Alex,
+
+    I'm thrilled to let you know the team would like to make you an offer! I'd love to set up a
+    call today to walk you through the compensation package before we send the formal offer letter.
+
+    Carmen Diaz
+    Head of Talent, Lumen Labs
+
+- id: off-i9-04
+  label: offer
+  at: "2026-09-18T11:15:00-07:00"
+  from: "Renee Park <renee.park@corvidlabs.test>"
+  subject: "Offer: Machine Learning Engineer at Corvid Labs"
+  attachments: ["Corvid_Labs_Offer_Letter.pdf"]
+  body: |
+    Hi Alex,
+
+    Thank you for spending the day with the team on Tuesday. We're delighted to extend you an
+    offer for the Machine Learning Engineer role. Your offer letter is attached, including base,
+    equity and a $600 home-office stipend you can use to purchase equipment after you start.
+
+    If you accept, on your first day please bring your I-9 documents, such as your passport or
+    EAD card, and we'll help you set up direct deposit in Workday.
+
+    Renee Park
+    Recruiting Manager, Corvid Labs
+
+- id: off-deadline-05
+  label: offer
+  at: "2026-09-19T15:30:00-07:00"
+  from: "Tomas Reyes <tomas@quillmetrics.test>"
+  subject: "Your Quill Metrics offer"
+  body: |
+    Hi Alex,
+
+    Following your final round with Dana and the platform team, I'm happy to share that we'd
+    like to make you an offer for the Applied AI Engineer position. The written offer is
+    attached; the offer is valid through October 5. Happy to walk through the compensation
+    package on a call whenever suits you.
+
+    Tomas Reyes
+    Head of Talent, Quill Metrics
+
+- id: scam-iddocs-01
+  label: suspected_scam
+  at: "2026-09-16T08:12:00-07:00"
+  from: "HR Onboarding <hr.onboarding.nexaflow@gmail.com>"
+  subject: "Offer of Employment - Remote AI Engineer"
+  body: |
+    Dear Alex,
+
+    After reviewing your resume, the hiring committee has selected you for the Remote AI
+    Engineer position. We are pleased to extend you an offer of employment with a salary of
+    $145,000.
+
+    To complete your onboarding, please send a photo of your driver's license (front and back)
+    and your Social Security number to this email today.
+
+    Regards,
+    Talent Team, NexaFlow Technologies
+
+- id: scam-equipment-02
+  label: suspected_scam
+  at: "2026-09-17T10:40:00-07:00"
+  from: "Jordan Blake <jordan.blake.recruit@gmail.com>"
+  subject: "Congratulations on your new role"
+  body: |
+    Hi Alex,
+
+    Congratulations! You have been hired as a Machine Learning Engineer at Veltrix Data without
+    an interview, based on the strength of your profile. Your formal offer letter follows.
+
+    Before your start date you will need to purchase a MacBook Pro and software licenses from our
+    approved vendor. We will mail you a check to cover the cost, and there is a one-time $95
+    onboarding fee for your background check.
+
+    Jordan Blake
+    Hiring Coordinator, Veltrix Data
+
+- id: scam-bank-03
+  label: suspected_scam
+  at: "2026-09-18T19:05:00-07:00"
+  from: "Dr. Allen Moore <allen.moore.hr@gmail.com>"
+  subject: "Job offer - Data Scientist (remote)"
+  body: |
+    Hello Alex,
+
+    Following your interview on Telegram chat with our manager, we are excited to offer you the
+    Data Scientist position at Orbis Analytics. The offer letter is attached.
+
+    For payroll setup, please reply with your bank name, account number and routing number,
+    so we can send your first payment and the equipment funds.
+
+    Dr. Allen Moore
+    HR Director, Orbis Analytics
+
+- id: ja-linkedin-01
+  label: job_alert
+  at: "2026-08-01T06:00:00-07:00"
+  from: "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+  subject: "\"machine learning engineer\": 30+ opportunities in San Francisco Bay Area"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=ghi>"
+  gmail_labels: ["INBOX", "CATEGORY_UPDATES"]
+  body: |
+    Your job alert for machine learning engineer in San Francisco Bay Area
+    30+ new jobs match your preferences.
+
+    Machine Learning Engineer
+    Quillstack · San Francisco, CA (Hybrid)
+    Actively recruiting
+    Apply with resume & profile
+
+    Senior ML Engineer
+    Helio Systems · San Francisco, CA
+    Be an early applicant
+
+    See all jobs
+
+    Unsubscribe | Help
+
+- id: ja-indeed-02
+  label: job_alert
+  at: "2026-05-03T05:30:00-07:00"
+  from: "Indeed <alert@indeed.com>"
+  subject: "15 new AI Engineer jobs in San Jose, CA"
+  headers:
+    List-Unsubscribe: "<https://www.indeed.com/unsubscribe?t=123>"
+  body: |
+    AI Engineer
+    Northwind Robotics - San Jose, CA
+    $180,000 - $220,000 a year
+    Easily apply
+    We offer great benefits, a 401k match and flexible hours.
+
+    ML Engineer
+    Mosaic Robotics - San Jose, CA
+    Responsive employer
+
+    See more jobs
+
+- id: ja-glassdoor-03
+  label: job_alert
+  at: "2026-06-12T07:00:00-07:00"
+  from: "Glassdoor Jobs <noreply@glassdoor.com>"
+  subject: "Machine Learning Engineer at Helio Systems and 12 more jobs for you"
+  headers:
+    List-Unsubscribe: "<https://www.glassdoor.com/unsubscribe?t=456>"
+  body: |
+    Jobs picked for you
+
+    Machine Learning Engineer - Helio Systems - 4.2 stars
+    San Francisco, CA - Easy Apply
+
+    AI Engineer - Verdant Health - 3.9 stars
+    Remote
+
+    View all jobs
+
+- id: ja-wellfound-04
+  label: job_alert
+  at: "2026-04-18T08:15:00-07:00"
+  from: "Wellfound <hello@hi.wellfound.com>"
+  subject: "New startup jobs matching your profile"
+  headers:
+    List-Unsubscribe: "<https://wellfound.com/unsubscribe?u=789>"
+  body: |
+    New jobs matching your profile
+
+    Founding AI Engineer at Emberforge
+    $150k - $190k · 0.5% - 1.5% · Remote
+
+    ML Engineer at LedgerLeaf
+    $160k - $200k · Remote (US)
+
+    View job
+
+- id: ja-builtin-05
+  label: job_alert
+  at: "2026-07-06T06:30:00-07:00"
+  from: "Built In San Francisco <jobs@builtinsf.com>"
+  subject: "Your weekly job matches: 8 AI/ML roles"
+  headers:
+    List-Unsubscribe: "<https://builtin.com/unsubscribe?x=1>"
+  body: |
+    Your weekly job matches
+
+    8 new AI/ML roles in San Francisco that match your saved search.
+
+    Senior Machine Learning Engineer - Stratoscale
+    Applied Scientist - Pinnacle Analytics
+
+    See all matches
+
+- id: nl-substack-01
+  label: newsletter
+  at: "2026-05-15T05:00:00-07:00"
+  from: "The Gradient Descent Weekly <gradientweekly@substack.com>"
+  subject: "The agent engineering stack in 2026"
+  headers:
+    List-Id: "<gradientweekly.substack.com>"
+    List-Unsubscribe: "<https://gradientweekly.substack.com/action/disable_email>"
+  body: |
+    In this issue: the agent engineering stack in 2026, interview tips from hiring managers at AI
+    labs, and how to prepare for your interview loop without burning out.
+
+    Read in app
+
+    Unsubscribe
+
+- id: nl-tldr-02
+  label: newsletter
+  at: "2026-06-22T06:10:00-07:00"
+  from: "Byte Brief AI <hello@bytebrief.test>"
+  subject: "Agents everywhere, new eval benchmarks, and a $2B seed"
+  headers:
+    List-Unsubscribe: "<https://bytebrief.example.test/unsubscribe>"
+  body: |
+    Headlines and launches
+
+    A new open benchmark for agent evals, a $2B seed round for a reasoning lab, and a new
+    open-weights coding model.
+
+    Sponsor: Quantaflow is hiring AI engineers.
+
+    Unsubscribe | View in browser
+
+- id: nl-product-03
+  label: newsletter
+  at: "2026-03-30T09:00:00-07:00"
+  from: "Hostly <news@hostly.test>"
+  subject: "What's new in Hostly: edge functions GA"
+  headers:
+    List-Unsubscribe: "<https://hostly.example.test/unsubscribe>"
+  body: |
+    Edge functions are now generally available, plus faster builds and a new logs explorer.
+
+    Read the changelog
+
+    You're receiving this because you signed up for Hostly. Unsubscribe.
+
+- id: nl-events-04
+  label: newsletter
+  at: "2026-09-17T12:00:00-07:00"
+  from: "SF AI Engineers <info@meetup.com>"
+  subject: "New event: Agents in production - Oct 8 at 6:30 PM"
+  headers:
+    List-Unsubscribe: "<https://www.meetup.com/unsubscribe>"
+  body: |
+    SF AI Engineers posted a new event.
+
+    Agents in production
+    Wednesday, October 8, 2026 at 6:30 PM
+
+    RSVP
+
+    Unsubscribe from similar emails.
+
+- id: nl-digest-05
+  label: newsletter
+  at: "2026-07-11T07:00:00-07:00"
+  from: "Medium Daily Digest <noreply@medium.com>"
+  subject: "How I landed an offer at an AI lab"
+  headers:
+    List-Unsubscribe: "<https://medium.com/unsubscribe>"
+  body: |
+    Today's highlights
+
+    How I landed an offer at an AI lab after 40 rejections
+    What I learned from my interview loop
+
+    Unsubscribe
+
+- id: net-coffee-01
+  label: networking
+  at: "2026-06-26T19:30:00-07:00"
+  from: "Rohan Gupta <rohan.gupta.ml@gmail.com>"
+  subject: "Coffee chat?"
+  body: |
+    Hi Alex,
+
+    We met briefly at the AI Engineer Summit afterparty. I'm an ML engineer at a fintech and would
+    love to grab coffee and swap notes on agent evals sometime. Are you free next week?
+
+    Rohan
+
+- id: net-alumni-02
+  label: networking
+  at: "2026-04-07T13:00:00-07:00"
+  from: "Mei Tanaka <mtanaka@mail.example-university.test>"
+  subject: "Example University alum saying hi"
+  body: |
+    Hi Alex!
+
+    I'm a current MS student at Example University in the Data Science program and saw you're an alum. Would you
+    be open to a 20-minute chat about your path into AI engineering?
+
+    Thanks,
+    Mei
+
+- id: net-meetup-03
+  label: networking
+  at: "2026-08-14T22:00:00-07:00"
+  from: "Luis Ortega <luis@ortega.test>"
+  subject: "Great meeting you at the agent tooling meetup"
+  body: |
+    Great meeting you last night! As promised, here's the link to the eval harness I mentioned.
+    Let's keep in touch, maybe we can pair on something.
+
+    Luis
+
+- id: net-linkedin-invite-04
+  label: networking
+  at: "2026-05-29T10:00:00-07:00"
+  from: "Aisha Bello via LinkedIn <invitations@linkedin.com>"
+  subject: "Aisha Bello wants to connect"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=jkl>"
+  body: |
+    Aisha Bello
+    Software Engineer at Stratoscale
+    https://www.linkedin.com/comm/in/aisha-bello-3c9d?midToken=AQF3
+
+    Hi Alex, I enjoyed your talk at the SF agents meetup. Would love to connect!
+
+    Accept
+    View profile
+
+    Unsubscribe | Help
+
+- id: oth-github-01
+  label: other
+  at: "2026-07-03T11:11:00-07:00"
+  from: "Chris Doe <notifications@github.com>"
+  subject: "[alex-example/agent-memory] Fix flaky test in retriever (PR #42)"
+  headers:
+    List-Id: "alex-example/agent-memory <agent-memory.alex-example.github.com>"
+    List-Unsubscribe: "<https://github.com/notifications/unsubscribe/abc>"
+  body: |
+    @chrisdoe requested your review on this pull request.
+
+    Fix flaky test in retriever
+
+    You are receiving this because your review was requested.
+    Reply to this email directly or view it on GitHub.
+
+- id: oth-bank-02
+  label: other
+  at: "2026-04-28T04:00:00-07:00"
+  from: "Harbor Bank <alerts@harborbank.test>"
+  subject: "Your statement is ready"
+  body: |
+    Your monthly statement for the account ending in 1234 is ready to view online.
+
+    Harbor Bank
+
+- id: oth-linkedin-views-03
+  label: other
+  at: "2026-08-10T09:00:00-07:00"
+  from: "LinkedIn <notifications-noreply@linkedin.com>"
+  subject: "You appeared in 12 searches this week"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=mno>"
+  body: |
+    You appeared in 12 searches this week.
+    See who's looking at your profile.
+
+    Unsubscribe | Help
+
+- id: oth-security-04
+  label: other
+  at: "2026-02-12T22:14:00-08:00"
+  from: "Google <no-reply@accounts.google.com>"
+  subject: "Security alert"
+  body: |
+    A new sign-in on Mac
+
+    We noticed a new sign-in to your Google Account on a Mac device. If this was you, you don't
+    need to do anything.
+
+- id: oth-receipt-05
+  label: other
+  at: "2026-05-05T21:40:00-07:00"
+  from: "Ridewell <receipts@ridewell.test>"
+  subject: "Your Tuesday evening trip with Ridewell"
+  body: |
+    Thanks for riding, Alex.
+
+    Total: $23.45
+    Trip: Mission District to SoMa
+
+- id: oth-personal-06
+  label: other
+  at: "2026-03-08T18:05:00-08:00"
+  from: "Sara Rivera <sara.rivera.home@gmail.com>"
+  subject: "Dinner Sunday?"
+  body: |
+    Hey! Mom wants to know if you're coming Sunday. Also bring the charger you borrowed lol

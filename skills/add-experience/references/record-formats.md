@@ -1,0 +1,21 @@
+# add-experience: Procedure steps 6 to 9 (corpus, facts, index and status, conflicts)
+
+The skill links here for the record formats.
+
+6. **Corpus.** New: `mkdir -p profile/corpus/X`, then `README.md` to the contract in `profile/README.md`
+   (frontmatter, sections in order, bullet bank `<PREFIX>-NN [<lenses>] <bullet> (<evidence ids>)`). Update: new
+   bullets continue the numbering; a changed fact keeps the old version in "Open questions" or a conflict.
+   Counts measured at run time are written "as of D".
+7. **Facts.** Experience, teaching, education, award or talk: its `facts.yaml` entry with `title_render` and, while
+   PROFILE.md does not render it, `profile_pending: "D I-NNN: title_render proposed; PROFILE.md not yet written"`.
+   A project gets no facts entry. Every dated item: a `timeline.items` line and its id in each month's `active` list
+   (`corpus_audit.py` names a missed month). A current employer's end date lives in the clock file; rendered surfaces
+   keep "Present" until the owner rules otherwise; a facts.yaml end date waits for that ruling.
+8. **Index and status.** A `profile/projects-index.md` row per new corpus file, copied from its frontmatter:
+   `| kind | id | title | start to end | status | discretion | lenses | \`corpus/X/README.md\` |`; the folder's row in
+   `profile/CORPUS-STATUS.md`; new skills with evidence in `profile/skills-taxonomy.yaml`.
+9. **Conflicts.** Two sources disagree: the entry keeps the conservative value plus `conflict: C<next>`, and
+   `conflicts:` gets `{id, topic, versions: [{claim, where, evidence}], proposed_ruling, status: awaiting-owner}`.
+   The owner rules in the session: `status: ruled` and
+   `ruled: {by: owner, "on": D, basis: "add-experience session (profile/_inbox/intake/D-X.md)", ruling: "<owner's words>"}`.
+   A ruling relayed by the Recruiter names the relay in `basis`.

@@ -1,0 +1,10 @@
+# Send preflight (scripts/send_preflight.py): the checks every outgoing message passes before it goes.
+identity:
+  signature_urls: []            # links that belong in your signature block (profile URL, site, mailto:); HTML mail may carry these
+policy:
+  send:
+    own_addresses: []           # extra addresses that are yours (a send to one of them is blocked); identity.emails counts too
+    email_word_warn: 250        # a mail longer than this many words gets a warning
+style:
+  send:
+    plain_text: false           # true: markdown, emoji, images and inline styles in a message are blocked (plain sentences only)

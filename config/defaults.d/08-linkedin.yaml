@@ -1,0 +1,37 @@
+# The LinkedIn source document (scripts/build_linkedin_md.py): its sections are config, so your narrative stays in your data folder.
+policy:
+  linkedin_doc:
+    decision_date: ""            # the date printed where a section says {TODAY} (empty: the run date)
+    skills_keep: 0               # skills kept from the live profile (for the "add" count)
+    skills_remove: 0             # skills removed from the live profile
+    headlines: []                # rows [headline, where, outcome] for a {headlines: true} section
+    experience: []               # entries {title, file, meta, before, evidence, status} for an {experience: true} section
+    changelog_default: ["| date | section | change | source |", "|---|---|---|---|"]
+    sections:                    # ordered items; see the module docstring of scripts/build_linkedin_md.py
+      - lines:
+          - "---"
+          - "title: LINKEDIN.md, the one source for your LinkedIn"
+          - "generated: '{RUN}'"
+          - "---"
+          - ""
+          - "# LinkedIn: the one source"
+          - ""
+          - "Edit the approved texts, rebuild this file, then apply each change on LinkedIn yourself."
+          - ""
+          - "## About"
+          - ""
+      - block: about.txt
+      - lines: ["", "## Experience", ""]
+      - experience: true
+      - lines: ["## Education", ""]
+      - block: education.txt
+      - lines: ["", "## Projects", ""]
+      - block: projects.txt
+      - lines: ["", "## Publications", ""]
+      - block: publications.txt
+      - lines: ["", "## Honors and awards", ""]
+      - block: honors.txt
+      - lines: ["", "## Skills ({N_SKILLS} approved)", "", "| # | skill | evidence | families |", "|---|---|---|---|"]
+      - skills_table: true
+      - lines: ["", "## Changelog (append-only; newest last)", ""]
+      - changelog: true

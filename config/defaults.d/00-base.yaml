@@ -1,0 +1,16 @@
+# Neutral defaults. Every key your scripts read has a safe, non-personal value here. Copy a key into
+# <your data folder>/config/*.yaml to change it. Other defaults.d fragments add the keys their scripts read.
+identity:
+  name: ""
+  emails: []
+  signature_names: []
+  linkedin_url: ""
+  resume_file_pattern: ""
+style:
+  no_em_dash: false
+  banned_words: []
+  greeting: ""
+  signoffs: []
+policy:
+  years_gate: null
+  salary: null

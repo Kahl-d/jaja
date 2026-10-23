@@ -1,0 +1,25 @@
+# Hunt triage score (scripts/hunt_score.py). Word lists are regex fragments joined as whole-word alternations,
+# case-insensitive. Empty lists keep the role-fit rules neutral.
+policy:
+  hunt:
+    ai_title: []            # title words that are on-role
+    hard_off: []            # title words that are off-role whatever else the title says
+    soft_off: []            # words that lower an on-role title and sink an otherwise unknown one
+    generic_title: []       # titles too generic to judge without the JD
+    title_core: []          # core words that keep a research or infra title at full marks
+    research_infra: []      # research, scientist or infra words that cap a title without a core word
+    core: []                # core strengths that fit history never outweighs
+    fde_title: []           # forward-deployed style titles whose role fit is read from the JD's duties
+    ai_in_title: []         # on-role words that make an fde_title count without reading the JD
+    jd_core: []             # plain lowercase JD phrases that name the core (research and infra titles)
+    jd_ai_terms: []         # plain lowercase JD phrases that mark on-role work (generic and fde titles)
+    seniority:
+      top: 0.9              # score for a Staff, Principal, Lead, Director or Head title
+      senior: 0.9           # score for a Senior title
+      other: 0.9            # score for every other title
+      years: []             # rows of [years asked at least, score cap]; empty = years asked never cap
+    location_part:          # location score of a gate pass, by place
+      bay: 1.0
+      remote-us: 1.0
+      california: 1.0
+      us: 1.0

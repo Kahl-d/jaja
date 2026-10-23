@@ -1,0 +1,24 @@
+# Synthetic persona: an AI-engineer candidate. Hunt triage word lists for the tests.
+policy:
+  hunt:
+    ai_title: ['ai', 'ml', 'machine learning', 'llm', 'genai', 'generative', 'agents?', 'agentic', 'nlp', 'applied scien\w*', 'research engineer', 'forward deployed', 'deployed engineer', 'evals?', 'evaluation', 'data scien\w*', 'member of technical staff', 'mts']
+    hard_off: ['devops', 'sre', 'site reliability', 'silicon', 'bring ?up', 'firmware', 'asic', 'fpga', 'rtl', 'physical design', 'accelerators?', 'kernels?', 'embedded', 'consumer devices', 'systems? software', 'design methodology', 'network engineer', 'it engineer', 'data center', 'mechanical', 'electrical', 'recruit\w*', 'account executive', 'sales', 'product manager', 'program manager', 'designer', 'ai trainer', 'ai tutor', 'annotator', 'rater', 'prompt writer']
+    soft_off: ['hardware', 'security', 'infrastructure', 'mobile', 'ios', 'android', 'frontend', 'front end', 'data engineer', 'analyst']
+    generic_title: ['software engineer', 'founding engineer', 'full ?stack', 'backend', 'back end', 'product engineer', 'platform engineer', 'engineer']
+    title_core: ['agents?', 'agentic', 'evals?', 'evaluations?', 'applied ai', 'forward deployed', 'deployed engineer', 'founding', 'llm', 'ai engineer', 'ai\s*/\s*ml engineer', 'ai products?', 'nlp']
+    research_infra: ['research', 'scientist', 'infra\w*', 'sandbox\w*', 'distributed systems?', 'performance', 'shared services', 'kernels?', 'pre-?training', 'post-?training', 'interpretability']
+    core: ['evals?', 'evaluations?', 'agents?', 'agentic', 'nlp', 'language', 'llm', 'applied ai', 'forward deployed', 'deployed engineer', 'founding']
+    fde_title: ['forward[- ]deployed', 'deployed engineer']
+    ai_in_title: ['ai', 'ml', 'llm', 'genai', 'agents?', 'agentic', 'machine learning', 'nlp']
+    jd_core: ['agent', 'eval harness', 'evaluation harness', 'evals', 'applied ai', 'forward deployed', 'customer', 'llm application', 'tool use', 'deploy']
+    jd_ai_terms: ['llm', 'large language model', 'machine learning', 'deep learning', 'nlp', 'natural language', 'agent', 'generative ai', 'genai', 'rag', 'retrieval', 'embedding', 'evaluation', 'evals', 'fine-tun', 'transformer', 'pytorch', 'prompt', 'neural', 'ai model', 'model training', 'reinforcement learning', 'knowledge graph', 'ontolog']
+    seniority:
+      top: 0.2
+      senior: 0.6
+      other: 0.9
+      years: [[6, 0.25], [4, 0.6]]
+    location_part:
+      bay: 1.0
+      remote-us: 1.0
+      california: 0.9
+      us: 0.8

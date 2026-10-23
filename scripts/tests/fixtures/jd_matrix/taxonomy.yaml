@@ -1,0 +1,13 @@
+# Fixture skills taxonomy for jd_matrix tests (fictional-shaped; same shape as profile/skills-taxonomy.yaml).
+schema_version: 1
+groups:
+  llm_and_agents:
+    - {skill: Claude Agent SDK (Python), level: expert, evidence: [ev-fx-001, ev-fx-002], aliases: [agent frameworks, LLM APIs]}
+    - {skill: "Agent harness engineering (modes, permission callbacks, hooks, gating)", level: expert, evidence: [ev-fx-001, ev-fx-003], aliases: [agent harness, AI agents]}
+    - {skill: "Agent evaluation (golden task sets, LLM-as-judge, rubric gates)", level: strong, evidence: [ev-fx-004], aliases: [evals, quality harnesses]}
+  languages:
+    - {skill: "SQL (Postgres, SQLite, DuckDB)", level: strong, evidence: [ev-fx-005]}
+    - {skill: Python, level: expert, evidence: [ev-fx-001, ev-fx-002, ev-fx-003, ev-fx-004, ev-fx-005, ev-fx-006, ev-fx-007, ev-fx-008, ev-fx-009, ev-fx-010]}
+  web:
+    - {skill: Browser automation (Chrome DevTools Protocol), level: strong, evidence: [ev-fx-006], aliases: [browser automation]}
+    - {skill: React, level: strong, evidence: [ev-fx-007], aliases: [web frontend]}

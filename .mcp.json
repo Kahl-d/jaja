@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "job-search": {
+      "command": "sh",
+      "args": ["-c", "exec uv run --directory \"${CLAUDE_PLUGIN_ROOT:-$PWD}/mcp\" job-search-mcp"]
+    }
+  }
+}

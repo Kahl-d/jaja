@@ -1,0 +1,6 @@
+style:
+  resume_slop_words: ["delve", "delves", "delving", "showcasing", "showcase", "showcases", "showcased", "comprehensive",
+                      "leverage", "leveraged", "leverages", "leveraging", "insights", "spearhead", "spearheaded",
+                      "synergy", "passionate", "dynamic", "proven track record"]
+policy:
+  nda_terms: ["zephyr"]

@@ -1,0 +1,197 @@
+{
+ "status": 200,
+ "error": {
+  "message": "",
+  "body": ""
+ },
+ "data": {
+  "positions": [
+   {
+    "id": 900001,
+    "displayJobId": "5001",
+    "name": "Machine Learning & Generative AI Engineer, up to Staff",
+    "locations": [
+     "Hsinchu City, Taiwan"
+    ],
+    "standardizedLocations": [
+     "Hsinchu, Hsinchu City, TW"
+    ],
+    "postedTs": 1783641600,
+    "solrScore": null,
+    "stars": 0,
+    "department": "Hardware Engineering",
+    "creationTs": 1783641600,
+    "isHot": 0,
+    "workLocationOption": "onsite",
+    "locationFlexibility": null,
+    "atsJobId": "5001",
+    "positionUrl": "/careers/job/900001"
+   },
+   {
+    "id": 900002,
+    "displayJobId": "5002",
+    "name": "Engineer, Machine Learning Tools",
+    "locations": [
+     "Hyderabad, Telangāna, India"
+    ],
+    "standardizedLocations": [
+     "Hyderabad, TS, IN"
+    ],
+    "postedTs": 1785801600,
+    "solrScore": null,
+    "stars": 0,
+    "department": "Software Engineering",
+    "creationTs": 1782345600,
+    "isHot": 0,
+    "workLocationOption": "onsite",
+    "locationFlexibility": null,
+    "atsJobId": "5002",
+    "positionUrl": "/careers/job/900002"
+   },
+   {
+    "id": 900003,
+    "displayJobId": "5003",
+    "name": "Sr. Engineer, AI Software/Machine Learning Engineering (C++)",
+    "locations": [
+     "Markham, Ontario, Canada"
+    ],
+    "standardizedLocations": [
+     "Markham, ON, CA"
+    ],
+    "postedTs": 1789603200,
+    "solrScore": null,
+    "stars": 0,
+    "department": "Machine Learning Engineering",
+    "creationTs": 1776297600,
+    "isHot": 0,
+    "workLocationOption": "onsite",
+    "locationFlexibility": "flexible_within_country",
+    "atsJobId": "5003",
+    "positionUrl": "/careers/job/900003"
+   },
+   {
+    "id": 900004,
+    "displayJobId": "5004",
+    "name": "Staff Machine Learning Engineer – Vehicle Security",
+    "locations": [
+     "San Diego, California, United States of America"
+    ],
+    "standardizedLocations": [
+     "San Diego, CA, US"
+    ],
+    "postedTs": 1789603200,
+    "solrScore": null,
+    "stars": 0,
+    "department": "Machine Learning Engineering",
+    "creationTs": 1787011200,
+    "isHot": 0,
+    "workLocationOption": "onsite",
+    "locationFlexibility": null,
+    "atsJobId": "5004",
+    "positionUrl": "/careers/job/900004"
+   },
+   {
+    "id": 900005,
+    "displayJobId": "5005",
+    "name": "Machine Learning Engineer, Frameworks & Performance (New Grad to Principal level)",
+    "locations": [
+     "Markham, Ontario, Canada",
+     "Canada - Remote, Canada"
+    ],
+    "standardizedLocations": [
+     "Markham, ON, CA",
+     "CA"
+    ],
+    "postedTs": 1790294400,
+    "solrScore": null,
+    "stars": 0,
+    "department": "Machine Learning Engineering",
+    "creationTs": 1787184000,
+    "isHot": 0,
+    "workLocationOption": "onsite",
+    "locationFlexibility": null,
+    "atsJobId": "5005",
+    "positionUrl": "/careers/job/900005"
+   },
+   {
+    "id": 900006,
+    "displayJobId": "5006",
+    "name": "Machine Learning Systems Engineer",
+    "locations": [
+     "Hyderabad, Telangāna, India"
+    ],
+    "standardizedLocations": [
+     "Hyderabad, TS, IN"
+    ],
+    "postedTs": 1778630400,
+    "solrScore": null,
+    "stars": 0,
+    "department": "Software Engineering",
+    "creationTs": 1765670400,
+    "isHot": 0,
+    "workLocationOption": "onsite",
+    "locationFlexibility": null,
+    "atsJobId": "5006",
+    "positionUrl": "/careers/job/900006"
+   }
+  ],
+  "filterDef": {
+   "facets": {
+    "locations": [
+     [
+      "Current Location",
+      999998
+     ],
+     [
+      "San Diego, CA, United States",
+      60
+     ],
+     [
+      "Bengaluru, KA, India",
+      31
+     ],
+     [
+      "Hsinchu City, Taiwan",
+      12
+     ]
+    ]
+   },
+   "smartFilters": [],
+   "allFilters": [
+    {
+     "type": "multi_select_facet_search",
+     "filterName": "job_family",
+     "title": "Department",
+     "options": [
+      {
+       "label": "Software Engineering",
+       "value": "software engineering"
+      },
+      {
+       "label": "Machine Learning Engineering",
+       "value": "machine learning engineering"
+      }
+     ],
+     "tooltip": null,
+     "extraData": {},
+     "displayCount": 40,
+     "translateOptions": true,
+     "allowFreeText": false
+    }
+   ]
+  },
+  "count": 48,
+  "sortBy": "relevance",
+  "appliedFilters": {},
+  "debug": {},
+  "savedSearchMetadata": {
+   "savedSearchParamsHash": null,
+   "isSavedSearchActive": false
+  },
+  "resultsMetaData": {
+   "usedFuzzSearch": false,
+   "mocTitle": null
+  }
+ },
+ "metadata": null
+}

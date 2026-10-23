@@ -1,0 +1,4 @@
+# Neutral defaults for the morning cards' location order (scripts/cards.py).
+policy:
+  location:
+    preferred: []                 # best first: [{name: "Home metro", kinds: [<fit_gates location kinds>], pattern: "regex on the location text"}]

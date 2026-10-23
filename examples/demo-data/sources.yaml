@@ -1,0 +1,158 @@
+# Discovery source registry for the job-search department (design §1, §4, §7).
+# Read by scripts/pipeline.py: `enabled: false` switches a source off. The pipeline rewrites only the
+# last_run and yield_30d values in place, so comments and notes here survive every run.
+#   kind       ats-json | forum-thread | aggregator-api | email-alert | signal-api
+#              (email-alert: job-alert mail parsed from the classified Gmail harvest by scripts/job_alerts.py,
+#              stage `alerts`; one entry per record `source` value. The platforms behind every source, with
+#              terms, access and yields, are in targets/platforms.yaml, owned by platform-scout.)
+#              (signal-api: hiring signals, not postings; the `funding` entry is scripts/funding_signals.py,
+#              pipeline stage `funding`, and runs only with `enabled: true`: a missing entry is off too.
+#              Its own keys: window_days, forms, keywords, max_pages, max_details, and an optional contact
+#              (default: profile/facts.yaml identity.emails.job_search_primary). yield_30d stays null.)
+#   cadence    how often the js-scout routine polls it (daily 06:00; hn monthly)
+#   yield_30d  postings from this source first seen in the last 30 days that passed the hard gates
+#              (scripts/fit_gates.py pass or review); null until the first run
+#   probation  true = unproven; review the yield at the monthly target review before keeping it
+#   queries    optional, adzuna and himalayas only: the search terms the source asks for (himalayas: texts;
+#              adzuna: texts or {what, where}); absent = the adapter's built-in list. Narrowing them is the
+#              API-platform version of tightening an alert's filters (platform-scout asks, job-scout edits)
+sources:
+  - id: greenhouse
+    kind: ats-json
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    passed_gates: 0
+    probation: true
+    notes: "Keyless Job Board API (boards-api.greenhouse.io, content=true); boards from targets/companies.yaml"
+  - id: lever
+    kind: ats-json
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    passed_gates: 0
+    probation: true
+    notes: "Keyless Postings API (api.lever.co/v0/postings/<site>?mode=json); no requisition field, ids hash the URL"
+  - id: ashby
+    kind: ats-json
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    passed_gates: 0
+    probation: true
+    notes: "Keyless Posting API with includeCompensation=true; workplaceType is authoritative (isRemote is true for hybrid)"
+  - id: workday
+    kind: ats-json
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    passed_gates: 0
+    probation: true
+    notes: "CXS JSON POST, 20 postings per page, at most 20 pages, total only on page 1; one detail call per title match; set search_text in companies.yaml for big tenants"
+  - id: hn
+    kind: forum-thread
+    enabled: true
+    cadence: monthly
+    yield_30d: null
+    last_run: null
+    passed_gates: 0
+    probation: true
+    notes: "Ask HN: Who is hiring? via the official HN Firebase API; AI/ML posts only; state/hn_state.json keeps the month"
+  - id: adzuna
+    kind: aggregator-api
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "Needs ADZUNA_APP_ID and ADZUNA_APP_KEY (free tier, about 250 calls a day); skipped cleanly while they are absent"
+  - id: himalayas
+    kind: aggregator-api
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    passed_gates: 0
+    probation: true
+    notes: "Keyless Himalayas API (himalayas.app/jobs/api/search), remote-only, full-time; terms: credit Himalayas and link back, never resubmit its jobs; data refreshes every 24 h, so one run a day (scripts/himalayas.py)"
+  - id: aidevjobs
+    kind: aggregator-api
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "AI Dev Jobs public API (aidevboard.com/api/v1/jobs), AI/ML roles, full-time only (scripts/aidevjobs.py); open public reads within hourly throttles, link back, no reselling as a dataset. The board's newest posting was 2026-09-14 on 2026-10-01 (the feed lags); platform_watch rechecks monthly and proposes retirement if still stale on 2026-10-31 (SETUP ruling, CS31)"
+  - id: linkedin-alert
+    kind: email-alert
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "LinkedIn job-alert emails (jobalerts-noreply@linkedin.com) from the classified harvest (scripts/job_alerts.py). Never scrape LinkedIn (AGENTS.md rule 3)"
+  - id: glassdoor-alert
+    kind: email-alert
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "Glassdoor job-alert emails (Glassdoor runs on Indeed accounts and terms); no API; never scrape"
+  - id: ziprecruiter-alert
+    kind: email-alert
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "ZipRecruiter job-alert emails; its API is partner-only; the site sits behind bot management; never scrape"
+  - id: wttj-alert
+    kind: email-alert
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "Welcome to the Jungle (formerly Otta) daily alert emails; welcometothejungle.com and app.otta.com links"
+  - id: hiringcafe-alert
+    kind: email-alert
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "Saved-search digests; cards usually link directly to the employer's ATS page; no API"
+  - id: yc-alert
+    kind: email-alert
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "Y Combinator Work at a Startup mail with job links (no documented alert product; founder messages are outreach for mail-triage, not alerts)"
+  - id: email-alert
+    kind: email-alert
+    enabled: true
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    notes: "Generic parser for the other mapped platforms' alert emails (Wellfound, Built In, Indeed, Dice, Jobright, TrueUp, Levels.fyi, Handshake, portfolio boards); record field `platform` names which"
+  - id: funding
+    kind: signal-api
+    enabled: false
+    cadence: daily
+    yield_30d: null
+    last_run: null
+    probation: true
+    window_days: 30
+    forms: [D]
+    keywords: []                  # your search terms
+    max_pages: 2
+    max_details: 150
+    notes: "SEC EDGAR Form D raises (scripts/funding_signals.py): efts full-text search for targets/companies.yaml names and AI/ML keywords, then each filing's Form D XML for the amount; official endpoints, User-Agent with the job-search address, 8 requests a second; responses cached in state/cache/edgar/ (gitignored); writes state/signals/funding-<date>.md and .json, never job records. On since 2026-09-30"

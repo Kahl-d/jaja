@@ -1,0 +1,18 @@
+# Neutral defaults for scripts/prospects.py (the people CRM). Every list is empty or generic until you fill it in.
+policy:
+  prospects:
+    bigtech_companies: []        # employer names (lower case) that classify a sender as "bigtech"
+    ai_lab_companies: []         # employer names (lower case) that classify a sender as an "ai-lab"
+    specific_refs: []            # words (your employers, schools, projects) that make a message read as personal
+    title_words: []              # words before "engineer/scientist/..." that make a title a role hint (empty = software, backend, ...)
+    lead_fields: []              # "head of <field>" fields recognised as lead roles (empty = engineering)
+    fit_keywords:
+      high: []                   # role-hint words that score a top target (fit 4.5)
+      mid: []                    # role-hint words that score a target (fit 3.5)
+      low: []                    # role-hint words that score outside your targets (fit 1.5)
+    avoid_title_regex: ""        # a role-hint pattern that lowers fit by 1.0 (for example a level you are not seeking)
+  location:
+    hint_places: []              # places (in match order) recognised as a location hint; empty = a short generic list
+    home_area: []                # lower-case places where working does not lower fit (empty = location never lowers fit)
+  sponsorship:
+    weight: 0.0                  # fit points taken off for a plain "no sponsorship" (0 = ignore)

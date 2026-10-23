@@ -1,0 +1,7 @@
+# Synthetic persona values for prep_focus tests (fictional).
+policy:
+  prep:
+    focus_topics:
+      evaluation: [evals, system-design, agents, llmops]
+      ml-infra: [llmops, system-design, coding]
+    default_topics: [agents, system-design, evals]

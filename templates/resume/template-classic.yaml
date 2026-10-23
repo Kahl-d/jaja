@@ -1,0 +1,179 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
+#
+# ATS-safe RenderCV settings for every base and variant resume (RenderCV 2.8, Typst engine).
+# scripts/render_resume.py merges the `design`, `locale` and `settings` blocks below with the
+# resume's `cv:` block; a resume file cannot override them. Keys were checked against the
+# installed RenderCV 2.8 pydantic models (rendercv/schema/models/{design,locale,settings}) and
+# scripts/tests/test_render_resume.py re-validates this file against them on every run.
+#
+# Theme choice: `engineeringresumes`, not `classic`. Every key we do not set falls back to the
+# theme's default, and engineeringresumes' defaults are already the ATS-safe ones: black text,
+# no contact icons, URLs displayed instead of usernames, no footer, full-width rule headings and
+# no "2 years 3 months" time spans. `classic` defaults to blue text, icons, a page footer with
+# a dash, a "Last updated" note and time spans, so a future RenderCV key we forget to pin would
+# leak one of those into the PDF. We still pin nearly everything explicitly below.
+#
+# Layout conventions (all ATS-safe):
+#   - Date ranges read `Aug 2023 - May 2026`: three-letter months, a plain hyphen with spaces,
+#     no en-dash or em-dash. The whole range sits in a Typst box so it never breaks across lines.
+#   - Experience: line 1 is the title and dates, line 2 the company and location, then bullets.
+#     Education: one line per degree, degree first. Skills: labeled lines (`Label: items`).
+#   - Section order is the resume's own key order; the default order is Education, Skills,
+#     Experience, Projects, Publications, Awards (style.resume_section_order overrides it;
+#     render_resume.py warns on other orders).
+#   - Headings stay the canonical single words (Experience, Education, Skills, Projects,
+#     Publications, Awards), never letter-spaced: CSS-letter-spaced headings
+#     extract as "E D U C AT I O N" in pdftotext and PDFKit, so an ATS cannot find the section.
+#
+# Measured layout rules (pdftotext vs pypdf vs macOS PDFKit on the test fixture):
+#   - Dates sit inline at the end of the entry's first line ("Engineer | Jan 2023 - Mar 2025").
+#     A right-aligned date column, or a big inline gap, made PDFKit detach dates from their
+#     entries and group them under the next section; the inline form gave identical text from
+#     all three extractors. So the date/location column is empty and zero width: one column.
+#   - `alignment: left` turns off justification AND hyphenation in RenderCV's Typst template,
+#     so keywords are never split across lines ("observ-ability"). render_resume.py also wraps
+#     hyphenated compounds in a Typst box so a line never breaks at their hyphen (pdftotext
+#     otherwise rejoins "retrieval-" + "augmented" as "retrievalaugmented").
+#   - Body font is sans-serif (Source Sans 3, bundled with RenderCV and embedded in the PDF),
+#     10.5pt: iCIMS is reported to misparse serif fonts under 11pt.
+#   - No em-dashes and no "--" anywhere in template text (Typst renders "--" as an en-dash and
+#     "---" as an em-dash).
+#
+# Densities (opt-in, `render_resume.py render --density one-page`; the default stays `house`, the design
+# below). A density overlays ONLY the keys it lists onto `design`; render_resume.py refuses any other key,
+# so the ATS rules above (inline dates, one column, left alignment, canonical headings with no letter
+# spacing, the sans body font, the dash-free templates) hold in every density. Measured: the default design fits 45 rendered lines on page one, `one-page` fits 52.
+densities:
+  one-page:
+    page:
+      top_margin: 0.34in
+      bottom_margin: 0.34in
+      left_margin: 0.5in
+      right_margin: 0.5in
+    typography:
+      line_spacing: 0.36em
+      font_size:
+        body: 10pt
+design:
+  theme: engineeringresumes
+  page:
+    size: us-letter
+    top_margin: 0.5in
+    bottom_margin: 0.5in
+    left_margin: 0.6in
+    right_margin: 0.6in
+    show_footer: false
+    show_top_note: false
+  colors:
+    body: rgb(0, 0, 0)
+    name: rgb(0, 0, 0)
+    headline: rgb(0, 0, 0)
+    connections: rgb(0, 0, 0)
+    section_titles: rgb(0, 0, 0)
+    links: rgb(0, 0, 0)
+    footer: rgb(0, 0, 0)
+    top_note: rgb(0, 0, 0)
+  typography:
+    line_spacing: 0.6em
+    alignment: left
+    date_and_location_column_alignment: right
+    font_family: Source Sans 3
+    font_size:
+      body: 10.5pt
+      name: 20pt
+      headline: 10.5pt
+      connections: 10pt
+      section_titles: 1.25em
+    small_caps:
+      name: false
+      headline: false
+      connections: false
+      section_titles: false
+    bold:
+      name: true
+      headline: false
+      connections: false
+      section_titles: true
+  links:
+    underline: false
+    show_external_link_icon: false
+  header:
+    alignment: center
+    space_below_name: 0.2cm
+    space_below_headline: 0.2cm
+    space_below_connections: 0.5cm
+    connections:
+      phone_number_format: international
+      hyperlink: true
+      show_icons: false
+      display_urls_instead_of_usernames: true
+      separator: "|"
+      space_between_connections: 0.3cm
+  section_titles:
+    type: with_full_line
+    line_thickness: 0.5pt
+    space_above: 0.44cm
+    space_below: 0.09cm
+  sections:
+    allow_page_break: true
+    space_between_regular_entries: 0.20cm
+    space_between_text_based_entries: 0.05cm
+    show_time_spans_in: []
+  entries:
+    # Single column: the date/location column is empty and takes no width (see header).
+    date_and_location_width: 0cm
+    side_space: 0cm
+    space_between_columns: 0cm
+    allow_page_break: false
+    short_second_row: false
+    degree_width: 1cm
+    summary:
+      space_above: 0.03cm
+      space_left: 0cm
+    highlights:
+      bullet: "•"
+      nested_bullet: "•"
+      space_left: 0cm
+      space_above: 0.04cm
+      space_between_items: 0.12cm
+      space_between_bullet_and_text: 0.4em
+  templates:
+    # Hidden (show_footer/show_top_note are false) but kept dash-free anyway.
+    footer: NAME, page PAGE_NUMBER of TOTAL_PAGES
+    top_note: ""
+    single_date: MONTH_ABBREVIATION YEAR
+    date_range: START_DATE - END_DATE
+    time_span: HOW_MANY_YEARS YEARS HOW_MANY_MONTHS MONTHS
+    one_line_entry:
+      main_column: "**LABEL:** DETAILS"
+    education_entry:
+      main_column: "#text(size: 10.6pt, weight: \"bold\", [DEGREE_WITH_AREA])#h(1fr)#box[DATE]\nINSTITUTION, LOCATION\nSUMMARY\nHIGHLIGHTS"
+      degree_column: null
+      date_and_location_column: ""
+    normal_entry:
+      main_column: "#text(size: 10.6pt, weight: \"bold\", [NAME])#h(1fr)#box[DATE]\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: ""
+    experience_entry:
+      main_column: "#text(size: 10.6pt, weight: \"bold\", [POSITION])#h(1fr)#box[DATE]\nCOMPANY, LOCATION\nSUMMARY\nHIGHLIGHTS"
+      date_and_location_column: ""
+    publication_entry:
+      main_column: "**TITLE** | #box[DATE]\nAUTHORS\nURL (JOURNAL)\nSUMMARY"
+      date_and_location_column: ""
+locale:
+  language: english
+  last_updated: Last updated in
+  month: month
+  months: months
+  year: year
+  years: years
+  present: Present
+  phrases:
+    degree_with_area: DEGREE in AREA
+  # Three-letter abbreviations for every month (RenderCV's English default uses June, July
+  # and Sept, which breaks the one-format rule `Aug 2023 - May 2026`).
+  month_abbreviations: [Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+  month_names: [January, February, March, April, May, June, July, August, September, October, November, December]
+settings:
+  current_date: today
+  bold_keywords: []
+  pdf_title: NAME, Resume

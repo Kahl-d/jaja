@@ -1,0 +1,9 @@
+identity:
+  signature_urls: ["https://www.linkedin.com/in/alex-example", "https://github.com/alex-example", "mailto:alex@example.test"]
+policy:
+  send:
+    own_addresses: ["alex.home@example.test"]
+    email_word_warn: 230
+style:
+  send:
+    plain_text: true

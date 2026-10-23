@@ -1,0 +1,66 @@
+# facts.yaml - the truth sheet for the demo candidate (fictional). Every value cites evidence ids in evidence.yaml.
+schema_version: 1
+updated: 2026-10-12
+status_legend:
+  confirmed: the candidate confirmed it in a recorded session
+  needs-confirmation: supported by a source but not yet ruled
+  internal-only: true, but never rendered outside private files
+
+identity:
+  full_name: Sam Rivera
+  name_on_resumes: {canonical: Sam Rivera, seen: ["Sam Rivera"], status: confirmed, evidence: [ev-sam-001]}
+  emails:
+    job_search_primary: {address: sam.rivera@example.test, status: confirmed, evidence: [ev-sam-001]}
+  location: {value: "Austin, TX", status: confirmed, evidence: [ev-sam-001]}
+  links:
+    linkedin: {value: "linkedin.example.test/in/sam-rivera", status: confirmed, evidence: [ev-sam-001]}
+    github: {value: "github.example.test/sam-rivera", status: confirmed, evidence: [ev-sam-001]}
+  work_authorization: {value: "US citizen", status: confirmed, evidence: [ev-sam-001]}
+
+education:
+  - id: edu-hsu-ms
+    degree: "M.S."
+    major: Computer Science
+    school: Lakeview State University
+    location: Austin, TX
+    start: 2019-08
+    conferred: 2021-05-15
+    resume_dates: "Aug 2019 - May 2021"
+    status: confirmed
+    evidence: [ev-sam-002]
+
+employment:
+  - id: emp-brightline
+    employer: Brightline Systems
+    title: Machine Learning Engineer
+    title_render: Machine Learning Engineer
+    location: Austin, TX
+    start: 2023-02
+    end: present
+    status: confirmed
+    evidence: [ev-sam-003]
+  - id: emp-kestrel
+    employer: Kestrel Labs
+    title: Data Scientist
+    title_render: Data Scientist
+    location: Austin, TX
+    start: 2021-06
+    end: 2023-01
+    status: confirmed
+    evidence: [ev-sam-004]
+
+projects_index:
+  - id: proj-tern
+    name: Tern
+    summary: "Open-source Python library that traces multi-step LLM agent runs into spans"
+    status: confirmed
+    evidence: [ev-sam-005]
+
+skills:
+  languages: [Python, SQL, TypeScript]
+  frameworks: [PyTorch, FastAPI]
+
+rules:
+  - "Every resume line cites an evidence id; no id, no claim."
+
+conflicts: []

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="dash-token" content="{{TOKEN}}">
+  <meta name="dash-vault" content="">
+  <meta name="dash-data-rel" content="">
+  <title>Job Agency</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/ui.css">
+  <link rel="stylesheet" href="/cockpit.css">
+  <link rel="stylesheet" href="/portals.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="side">
+      <div class="brand">Job agency</div>
+      <nav class="tabs" role="tablist" id="tabs" aria-orientation="vertical"></nav>
+      <div class="side-foot"><span class="meta" id="updated"></span></div>
+    </aside>
+    <div class="page">
+      <header class="top">
+        <div class="bar-row">
+          <h1 id="title">Home</h1>
+          <span class="clock" id="clock">Loading the clock</span>
+          <span class="spacer"></span>
+          <button class="btn" id="refresh" title="Reload postings and rebuild every view">Refresh</button>
+          <button class="btn quiet" id="theme" title="Switch light or dark">Theme</button>
+        </div>
+        <div class="mode" id="mode"></div>
+      </header>
+      <main id="main"><div class="loading">Reading the agency's files. The first load reads every posting and takes a few seconds.</div></main>
+    </div>
+  </div>
+  <div id="tip" role="tooltip"></div>
+  <dialog class="confirm" id="confirm"></dialog>
+  <script src="/ui.js"></script>
+  <script src="/cockpit.js"></script>
+  <script src="/portals.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

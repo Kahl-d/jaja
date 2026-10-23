@@ -1,0 +1,92 @@
+{
+ "source": "synthetic records shaped like triage cases; fictional company; used by test_hunt_score.py",
+ "off_role": [
+  {
+   "id": "example-off1",
+   "company": "Example Corp",
+   "company_slug": "example-corp",
+   "title": "Software Engineer, DevOps",
+   "posted_at": "2026-09-28T18:26:42Z",
+   "jd": "About the team: we build AI-native hardware and system-level solutions. You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. You will own the platform work for this team."
+  },
+  {
+   "id": "example-off2",
+   "company": "Example Corp",
+   "company_slug": "example-corp",
+   "title": "Systems Software Engineer, Silicon Bringup",
+   "posted_at": "2026-09-28T18:26:42Z",
+   "jd": "About the team: we build AI-native hardware and system-level solutions. You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. You will own the platform work for this team."
+  },
+  {
+   "id": "example-off3",
+   "company": "Example Corp",
+   "company_slug": "example-corp",
+   "title": "Software Engineer, Silicon Design Methodology",
+   "posted_at": "2026-09-28T18:26:42Z",
+   "jd": "About the team: we build AI-native hardware and system-level solutions. You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. You will own the platform work for this team."
+  },
+  {
+   "id": "example-off4",
+   "company": "Example Corp",
+   "company_slug": "example-corp",
+   "title": "System Software Engineer, Consumer Devices",
+   "posted_at": "2026-09-28T18:26:42Z",
+   "jd": "About the team: we build AI-native hardware and system-level solutions. You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. You will own the platform work for this team."
+  },
+  {
+   "id": "example-off5",
+   "company": "Example Corp",
+   "company_slug": "example-corp",
+   "title": "Software Engineer, AI accelerator Runtime",
+   "posted_at": "2026-09-28T18:26:42Z",
+   "jd": "About the team: we build AI-native hardware and system-level solutions. You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. You will own the platform work for this team."
+  }
+ ],
+ "known_good": [
+  {
+   "id": "acme-good1",
+   "application": "acme-senior-applied-ai-engineer-202609",
+   "company": "Acme Labs",
+   "company_slug": "acme-labs",
+   "title": "Senior Applied AI Engineer (1001)",
+   "posted_at": "2026-09-29",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. Experience with FastAPI. 3+ years of experience."
+  },
+  {
+   "id": "acme-good2",
+   "application": "acme-founding-engineer-202609",
+   "company": "Acme Labs",
+   "company_slug": "acme-labs",
+   "title": "Founding Engineer",
+   "posted_at": "2026-09-10",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. Seed-stage startup, small team."
+  },
+  {
+   "id": "acme-good3",
+   "application": "acme-senior-ai-engineer-202609",
+   "company": "Acme Labs",
+   "company_slug": "acme-labs",
+   "title": "Senior AI Engineer",
+   "posted_at": "2026-09-30",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. "
+  },
+  {
+   "id": "acme-good4",
+   "application": "acme-ai-engineer-ontologies-202609",
+   "company": "Acme Labs",
+   "company_slug": "acme-labs",
+   "title": "AI Engineer, Ontologies and Knowledge Graphs",
+   "posted_at": "2026-09-16",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. Knowledge graph and ontology work."
+  },
+  {
+   "id": "acme-good5",
+   "application": "acme-lead-software-engineer-ai-202609",
+   "company": "Acme Labs",
+   "company_slug": "acme-labs",
+   "title": "Lead Software Engineer: AI for Hardware Verification",
+   "posted_at": "2026-09-28",
+   "jd": "You will build LLM agents with tool use and own the evals for them. Python, RAG, evaluation harnesses, prompt design and PyTorch. You will work with customers to deploy applied AI into production. Verification of hardware designs with AI."
+  }
+ ]
+}

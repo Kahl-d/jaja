@@ -1,0 +1,21 @@
+# targets/x-watch.yaml: what scripts/x_api.py watch searches on X (official API, recent search: the last 7 days).
+# Owner: job-scout. X stays off until you buy API credits and set the key (see docs).
+#
+# Cost: a post read is $0.005 and its author $0.010, so one search of 10 results is at most $0.15. Keep the whole
+# run (the people query plus these searches) at or under $0.45: `python3 scripts/x_api.py watch --dry-run` prints
+# worst_usd_per_run (no call). 10 is the API minimum for max_results.
+#
+# Quality rules the searches follow:
+#   - first-person hiring phrases ("we're hiring", "I'm hiring", "my team is hiring", "join us"), plain and curly quotes;
+#     never a bare `hiring`, which matches commentary ("banks are hiring");
+#   - drop retweets, quotes and replies (-is:retweet -is:quote -is:reply) and keep English (lang:en);
+#   - leave out places you cannot work in, and "work permit" (edit the -Place list to your own);
+#   - x_api.py watch_plan adds `-from:<handle>` for every account on targets/x-deny.yaml while a query stays within
+#     X's 512 characters; scripts/posts.py drops what still gets through.
+# The people query runs first (the curated people are the focus): `people:` here plus every active X handle in
+# targets/people-watch.yaml. The searches below must be the same text as the `daily` rows of targets/post-queries.yaml.
+max_results: 10
+queries:
+  - {q: '("we''re hiring" OR "we’re hiring" OR "we are hiring" OR "I''m hiring" OR "my team is hiring" OR "join my team" OR "join our team" OR "join us") "example role title" -is:retweet -is:quote -is:reply lang:en -India -Paris -London -Berlin -Europe -EU -UK -Canada -Toronto -Bangalore -"work permit"', why: "the core title, first person, your country"}
+people:
+  - example_handle          # replace with the X handles of people whose hiring posts you want first

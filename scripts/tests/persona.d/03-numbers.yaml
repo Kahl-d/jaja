@@ -1,0 +1,5 @@
+policy:
+  numbers_ledger:
+    path: "profile/corpus/numbers-ledger.md"
+    employer_pattern: "acme\\s*studio"
+    blocked_source_ids: ["C64", "C65"]

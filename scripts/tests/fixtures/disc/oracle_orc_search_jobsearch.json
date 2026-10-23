@@ -1,0 +1,301 @@
+{
+ "items": [
+  {
+   "SearchId": 1,
+   "Keyword": "machine learning",
+   "CorrectedKeyword": null,
+   "UseExactKeywordFlag": false,
+   "SuggestedKeyword": null,
+   "ExecuteSpellCheckFlag": true,
+   "Location": null,
+   "LocationId": null,
+   "Radius": 0,
+   "RadiusUnit": "MI",
+   "SelectedTitlesFacet": null,
+   "SelectedCategoriesFacet": null,
+   "SelectedPostingDatesFacet": null,
+   "SelectedLocationsFacet": null,
+   "LastSelectedFacet": null,
+   "Facets": "TITLES;LOCATIONS;LOCATION_LEVEL1;LOCATION_LEVEL2;LOCATION_LEVEL3;CATEGORIES;POSTING_DATES;WORK_LOCATIONS;FLEX_FIELDS;ORGANIZATIONS;WORKPLACE_TYPES",
+   "Offset": 0,
+   "Limit": 3,
+   "SortBy": "POSTING_DATES_DESC",
+   "TotalJobsCount": 86,
+   "Latitude": null,
+   "Longitude": null,
+   "SiteNumber": "jobsearch",
+   "JobFamilyId": null,
+   "PostingStartDate": null,
+   "PostingEndDate": null,
+   "SelectedWorkLocationsFacet": null,
+   "RequisitionId": null,
+   "CandidateNumber": null,
+   "WorkLocationZipCode": null,
+   "WorkLocationCountryCode": null,
+   "SelectedFlexFieldsFacets": null,
+   "OrganizationId": null,
+   "SelectedOrganizationsFacet": null,
+   "UserTargetFacetName": null,
+   "UserTargetFacetInputTerm": null,
+   "HotJobFlag": null,
+   "WorkplaceType": null,
+   "SelectedWorkplaceTypesFacet": null,
+   "BotQRShortCode": null,
+   "requisitionList": [
+    {
+     "Id": "100301",
+     "Title": "February 2027 - Undergrad Software Engineer - Orbit Cloud Infrastructure - Nashville, TN",
+     "PostedDate": "2026-09-30",
+     "PostingEndDate": null,
+     "Language": "US",
+     "PrimaryLocationCountry": "US",
+     "GeographyId": 5001,
+     "HotJobFlag": false,
+     "WorkplaceTypeCode": null,
+     "JobFamily": null,
+     "JobFunction": null,
+     "WorkerType": null,
+     "ContractType": null,
+     "ManagerLevel": null,
+     "JobSchedule": null,
+     "JobShift": null,
+     "JobType": null,
+     "StudyLevel": null,
+     "DomesticTravelRequired": null,
+     "InternationalTravelRequired": null,
+     "WorkDurationYears": null,
+     "WorkDurationMonths": null,
+     "WorkHours": null,
+     "WorkDays": null,
+     "LegalEmployer": null,
+     "BusinessUnit": null,
+     "Department": null,
+     "Organization": null,
+     "BusinessUnitId": 6001,
+     "LegalEmployerId": 6002,
+     "OrganizationId": 6003,
+     "MediaThumbURL": null,
+     "ShortDescriptionStr": "Orbitco is hiring an undergraduate software engineer to build cloud infrastructure services in a six-month programme.",
+     "PrimaryLocation": "Nashville, TN, United States",
+     "Distance": 0.0,
+     "TrendingFlag": true,
+     "BeFirstToApplyFlag": false,
+     "Relevancy": 21.5,
+     "WorkplaceType": "",
+     "ExternalQualificationsStr": null,
+     "ExternalResponsibilitiesStr": null,
+     "secondaryLocations": []
+    },
+    {
+     "Id": "100302",
+     "Title": "AI & Emerging Technology Strategist – Orbit Cloud Applications",
+     "PostedDate": "2026-09-30",
+     "PostingEndDate": null,
+     "Language": "US",
+     "PrimaryLocationCountry": "US",
+     "GeographyId": 5002,
+     "HotJobFlag": false,
+     "WorkplaceTypeCode": null,
+     "JobFamily": null,
+     "JobFunction": null,
+     "WorkerType": null,
+     "ContractType": null,
+     "ManagerLevel": null,
+     "JobSchedule": null,
+     "JobShift": null,
+     "JobType": null,
+     "StudyLevel": null,
+     "DomesticTravelRequired": null,
+     "InternationalTravelRequired": null,
+     "WorkDurationYears": null,
+     "WorkDurationMonths": null,
+     "WorkHours": null,
+     "WorkDays": null,
+     "LegalEmployer": null,
+     "BusinessUnit": null,
+     "Department": null,
+     "Organization": null,
+     "BusinessUnitId": 6001,
+     "LegalEmployerId": 6002,
+     "OrganizationId": 6003,
+     "MediaThumbURL": null,
+     "ShortDescriptionStr": "Orbitco is seeking an AI & Emerging Technology Strategist to lead strategy work with executive clients and help shape the AI, analytics and applications offerings.\n\nThis is a high-impact, client-facing role.",
+     "PrimaryLocation": "United States",
+     "Distance": 0.0,
+     "TrendingFlag": false,
+     "BeFirstToApplyFlag": false,
+     "Relevancy": 22.5,
+     "WorkplaceType": "",
+     "ExternalQualificationsStr": null,
+     "ExternalResponsibilitiesStr": null,
+     "secondaryLocations": []
+    },
+    {
+     "Id": "100303",
+     "Title": "Principal Cloud Architect – HPC/GPU & AI Platform Solutions",
+     "PostedDate": "2026-09-29",
+     "PostingEndDate": null,
+     "Language": "US",
+     "PrimaryLocationCountry": "RO",
+     "GeographyId": 5003,
+     "HotJobFlag": false,
+     "WorkplaceTypeCode": null,
+     "JobFamily": null,
+     "JobFunction": null,
+     "WorkerType": null,
+     "ContractType": null,
+     "ManagerLevel": null,
+     "JobSchedule": null,
+     "JobShift": null,
+     "JobType": null,
+     "StudyLevel": null,
+     "DomesticTravelRequired": null,
+     "InternationalTravelRequired": null,
+     "WorkDurationYears": null,
+     "WorkDurationMonths": null,
+     "WorkHours": null,
+     "WorkDays": null,
+     "LegalEmployer": null,
+     "BusinessUnit": null,
+     "Department": null,
+     "Organization": null,
+     "BusinessUnitId": 6001,
+     "LegalEmployerId": 6002,
+     "OrganizationId": 6003,
+     "MediaThumbURL": null,
+     "ShortDescriptionStr": "Orbitco is seeking a Principal Cloud Architect to design GPU and AI platform solutions for large customers.",
+     "PrimaryLocation": "Romania",
+     "Distance": 0.0,
+     "TrendingFlag": false,
+     "BeFirstToApplyFlag": true,
+     "Relevancy": 23.5,
+     "WorkplaceType": "",
+     "ExternalQualificationsStr": null,
+     "ExternalResponsibilitiesStr": null,
+     "secondaryLocations": []
+    }
+   ],
+   "categoriesFacet": [
+    {
+     "Id": 7001,
+     "Name": "Product and Research",
+     "TotalCount": 5
+    },
+    {
+     "Id": 7002,
+     "Name": "Marketing",
+     "TotalCount": 2
+    }
+   ],
+   "locationsFacet": [
+    {
+     "Id": 5002,
+     "Name": "United States",
+     "TotalCount": 5
+    },
+    {
+     "Id": 5001,
+     "Name": "Nashville, TN, United States",
+     "TotalCount": 1
+    }
+   ],
+   "postingDatesFacet": [
+    {
+     "Id": 7,
+     "Name": "Less than 7 days",
+     "TotalCount": 3
+    },
+    {
+     "Id": 30,
+     "Name": "Less than 30 days",
+     "TotalCount": 5
+    }
+   ],
+   "titlesFacet": [
+    {
+     "Id": "SWE",
+     "Name": "Software Engineering",
+     "TotalCount": 3
+    },
+    {
+     "Id": "DASCI",
+     "Name": "Data and Applied Science",
+     "TotalCount": 2
+    }
+   ],
+   "workLocationsFacet": [],
+   "flexFieldsFacet": [
+    {
+     "Name": "AttributeChar29",
+     "Label": "Role"
+    },
+    {
+     "Name": "AttributeChar4",
+     "Label": "Job Type"
+    },
+    {
+     "Name": "AttributeChar13",
+     "Label": "Experience Level"
+    },
+    {
+     "Name": "AttributeChar15",
+     "Label": "Line of Business"
+    },
+    {
+     "Name": "AttributeChar6",
+     "Label": "Years"
+    },
+    {
+     "Name": "AttributeChar12",
+     "Label": "Applicants"
+    },
+    {
+     "Name": "AttributeChar16",
+     "Label": "Tag"
+    },
+    {
+     "Name": "AttributeChar14",
+     "Label": "Tag2"
+    }
+   ],
+   "organizationsFacet": [
+    {
+     "Id": 6003,
+     "Name": "All Lines of Business",
+     "TotalCount": 86
+    }
+   ],
+   "workplaceTypesFacet": [
+    {
+     "Id": "ORA_ON_SITE",
+     "Name": "On-site",
+     "TotalCount": 86
+    }
+   ]
+  }
+ ],
+ "count": 1,
+ "hasMore": false,
+ "limit": 200,
+ "offset": 0,
+ "links": [
+  {
+   "rel": "self",
+   "href": "https://orbitco.fa.us2.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions",
+   "name": "recruitingCEJobRequisitions",
+   "kind": "collection"
+  },
+  {
+   "rel": "action",
+   "href": "https://orbitco.fa.us2.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions/action/getRequisitionsLocationCoordinates",
+   "name": "getRequisitionsLocationCoordinates",
+   "kind": "other"
+  },
+  {
+   "rel": "action",
+   "href": "https://orbitco.fa.us2.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitions/action/getRequisitionDetailsForMap",
+   "name": "getRequisitionDetailsForMap",
+   "kind": "other"
+  }
+ ]
+}

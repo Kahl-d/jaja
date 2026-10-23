@@ -1,0 +1,65 @@
+{
+ "jobPostingInfo": {
+  "id": "wd-jr1001",
+  "title": "Applied Machine Learning Engineer, Chip Verification - New College Grad 2026",
+  "jobDescription": "<p><span>Our work at CHIPCO is about making computing faster and easier to build for. As a member of the Applied ML team you will own chip verification work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</span></p><p><b>What you will be doing:</b></p><ul><li>Design, build and operate chip verification services that run in production.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Mentor newer engineers and share what you learn with the wider team.</li><li>Keep dashboards and runbooks for chip verification accurate and easy to follow.</li></ul><p><b>What we need to see:</b></p><ul><li>A record of owning a system from the first commit to steady operation.</li><li>Clear written communication and a preference for simple designs.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Comfort reading research papers and turning them into working code.</li></ul><p><b>Ways to stand out:</b></p><ul><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Open-source contributions in the chip verification area.</li></ul><p>CHIPCO is an equal opportunity employer. Base salary ranges depend on level and location.</p>",
+  "location": "US, CA, Santa Clara",
+  "additionalLocations": [
+   "US, CA, Remote"
+  ],
+  "postedOn": "Posted 30+ Days Ago",
+  "startDate": "2026-04-27",
+  "timeType": "Full time",
+  "jobReqId": "JR1001",
+  "jobPostingId": "Applied-Machine-Learning-Engineer--Chip-Verification---New-College-Grad-2026_JR1001",
+  "jobPostingSiteId": "CHIPCOExternalCareerSite",
+  "country": {
+   "descriptor": "United States of America",
+   "id": "country-us"
+  },
+  "canApply": true,
+  "posted": true,
+  "includeResumeParsing": true,
+  "jobRequisitionLocation": {
+   "descriptor": "US, CA, Santa Clara",
+   "country": {
+    "descriptor": "United States of America",
+    "id": "country-us",
+    "alpha2Code": "US"
+   }
+  },
+  "externalUrl": "https://chipco.wd5.myworkdayjobs.com/CHIPCOExternalCareerSite/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer--Chip-Verification---New-College-Grad-2026_JR1001",
+  "questionnaireId": "questionnaire-jr1001"
+ },
+ "hiringOrganization": {
+  "name": "CHIPCO USA",
+  "url": ""
+ },
+ "similarJobs": [
+  {
+   "title": "Senior Compiler Engineer - AI",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "US, CA, Santa Clara",
+   "postedOn": "Posted 2 Days Ago",
+   "startDate": "2026-09-22"
+  },
+  {
+   "title": "Applied AI Engineer - Layout Design",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "3 Locations",
+   "postedOn": "Posted 26 Days Ago",
+   "startDate": "2026-08-29"
+  },
+  {
+   "title": "Senior Machine Learning Engineer, Perception - Robot Navigation",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "2 Locations",
+   "postedOn": "Posted 3 Days Ago",
+   "startDate": "2026-09-21"
+  }
+ ],
+ "userAuthenticated": false
+}

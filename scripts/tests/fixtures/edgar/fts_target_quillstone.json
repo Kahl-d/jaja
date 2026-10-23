@@ -1,0 +1,108 @@
+{
+ "took": 5,
+ "timed_out": false,
+ "hits": {
+  "total": {
+   "value": 3,
+   "relation": "eq"
+  },
+  "max_score": 10.0,
+  "hits": [
+   {
+    "_index": "edgar_file",
+    "_id": "0009000001-26-000001:primary_doc.xml",
+    "_score": 10.0,
+    "_source": {
+     "ciks": [
+      "0009000001"
+     ],
+     "display_names": [
+      "Quillstone Systems AI, Inc.  (CIK 0009000001)"
+     ],
+     "form": "D",
+     "root_forms": [
+      "D"
+     ],
+     "file_type": "D",
+     "file_date": "2026-09-20",
+     "adsh": "0009000001-26-000001",
+     "biz_locations": [
+      "San Francisco, CA"
+     ],
+     "biz_states": [
+      "CA"
+     ],
+     "items": [
+      "06B"
+     ],
+     "sics": [],
+     "period_ending": null
+    }
+   },
+   {
+    "_index": "edgar_file",
+    "_id": "0009000002-26-000001:primary_doc.xml",
+    "_score": 10.0,
+    "_source": {
+     "ciks": [
+      "0009000002"
+     ],
+     "display_names": [
+      "QSV Quillstone-01, a Series of QSV Holdings LLC  (CIK 0009000002)"
+     ],
+     "form": "D",
+     "root_forms": [
+      "D"
+     ],
+     "file_type": "D",
+     "file_date": "2026-09-18",
+     "adsh": "0009000002-26-000001",
+     "biz_locations": [
+      "New York, NY"
+     ],
+     "biz_states": [
+      "NY"
+     ],
+     "items": [
+      "06B",
+      "3C",
+      "3C.1"
+     ],
+     "sics": [],
+     "period_ending": null
+    }
+   },
+   {
+    "_index": "edgar_file",
+    "_id": "0009000001-26-000002:primary_doc.xml",
+    "_score": 10.0,
+    "_source": {
+     "ciks": [
+      "0009000001"
+     ],
+     "display_names": [
+      "Quillstone Systems AI, Inc.  (CIK 0009000001)"
+     ],
+     "form": "D/A",
+     "root_forms": [
+      "D"
+     ],
+     "file_type": "D/A",
+     "file_date": "2026-09-21",
+     "adsh": "0009000001-26-000002",
+     "biz_locations": [
+      "San Francisco, CA"
+     ],
+     "biz_states": [
+      "CA"
+     ],
+     "items": [
+      "06B"
+     ],
+     "sics": [],
+     "period_ending": null
+    }
+   }
+  ]
+ }
+}

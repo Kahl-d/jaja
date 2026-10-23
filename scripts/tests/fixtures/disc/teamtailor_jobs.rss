@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- synthetic fixture shaped like a Teamtailor jobs.rss feed -->
+<rss version="2.0" xmlns:tt="https://teamtailor.com/locations">
+  <channel>
+    <title>Teamco</title>
+    <description>Current job openings</description>
+    <link>https://career.teamco.example.test/jobs</link>
+    <item>
+      <title>UK Account Executive - SMB</title>
+      <description>&lt;h4&gt;Let's build the future together!&lt;/h4&gt;&lt;p&gt;Teamco makes recruiting software used by many companies. Working here means joining a fast-moving international team with real responsibility.&lt;/p&gt;</description>
+      <pubDate>Fri, 24 Jul 2026 09:05:16 +0200</pubDate>
+      <link>https://career.teamco.example.test/jobs/700001-uk-account-executive-smb</link>
+      <remoteStatus>hybrid</remoteStatus>
+      <guid>tt-guid-700001</guid>
+      <tt:locations>
+        <tt:location>
+          <tt:name>London</tt:name>
+          <tt:address>1 Example Street</tt:address>
+          <tt:zip>AB1 2CD</tt:zip>
+          <tt:city>London</tt:city>
+          <tt:country>United Kingdom</tt:country>
+        </tt:location>
+      </tt:locations>
+      <tt:department>Sales</tt:department>
+      <tt:role>Account Executive</tt:role>
+      <tt:division/>
+    </item>
+    <item>
+      <title>Founding AI Engineer</title>
+      <description>&lt;p&gt;Build LLM agents and evals in Python.&lt;/p&gt;&lt;p&gt;Salary $165,000 - $205,000.&lt;/p&gt;</description>
+      <pubDate>Tue, 29 Sep 2026 18:00:00 +0200</pubDate>
+      <link>https://career.teamco.example.test/jobs/700002-founding-ai-engineer</link>
+      <remoteStatus>fully</remoteStatus>
+      <guid>tt-guid-700002</guid>
+      <tt:locations>
+        <tt:location>
+          <tt:name>San Francisco</tt:name>
+          <tt:city>San Francisco</tt:city>
+          <tt:country>United States</tt:country>
+        </tt:location>
+      </tt:locations>
+      <tt:department>Engineering</tt:department>
+      <tt:role>AI Engineer</tt:role>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,11 @@
+# scout-jobs: Procedure steps 6 and 7 (liveness, board tokens)
+
+Detail for the skill's steps 6 and 7; the skill links here.
+
+6. **Liveness:** each `queued` job due for tailoring: its ATS record, or WebFetch of the employer's own `apply_url`
+   (never a job-board page); a JavaScript careers page:
+   `python3 scripts/web_snapshot.py scrape <url> --out research/targets/evidence/<company>-<id>-<date>.md --wait-for 3000`.
+   Gone: `status: closed` with the fetch result quoted; tell tracker-ops when an application exists.
+7. **Board tokens:** prove a vendor and token with
+   `python3 scripts/fetch_ats.py --board <vendor>:<token>:"<Company>" --dry-run` before writing it (`verified <date>`
+   comment, or `unverified`, `board_token: null` and the reason).

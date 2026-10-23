@@ -1,0 +1,23 @@
+---
+name: role-package
+description: "Use when a role is chosen and needs to be understood before any resume is written: the role-analyst picks the lens, decodes the JD into a ranked coverage matrix and writes Role Package v2. Run by hand from any session, or by the research or resume lane."
+context: fork
+agent: role-analyst
+background: false
+---
+
+# Role package (Role Package v2)
+
+Today is !`date +%F`. Arguments: `$ARGUMENTS` = `<slug> [jd path] [posted title]`.
+
+You are the role-analyst. Follow your card's procedure (steps 1 to 9) for this one role and write:
+- `research/targets/<slug>.md` with these sections, in order, at most 12 KB:
+  `## 1 Title and lens` · `## 2 The team's problem` · `## 3 Literal filters` · `## 4 Company signal` ·
+  `## 5 Vocabulary (JD term | record term | true of the work | ev- id)` · `## 6 Reader model` (reader, wants in their words with URL and date, fears, proof they trust, their words, the answer table) ·
+  `## 7 Angle and lead bullet` · `## 8 Questions for the owner (at most 5)` · `## Sources` · last line `check: <counts>`.
+- `research/targets/<slug>.matrix.yaml` from `python3 scripts/jd_matrix.py build`.
+
+Before returning: `python3 scripts/reader_model.py check research/targets/<slug>.md` exits 0.
+No send kits, salary answers, outreach drafts or resume text in the package: those belong to other steps.
+The JD path defaults to `applications/<slug>/jd.md`, else the matching `jobs/*.md`. Return the package path, the lens,
+the angle line and the questions.

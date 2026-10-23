@@ -1,0 +1,71 @@
+---
+name: editorial-review
+description: "Use when a resume variant (or a change the owner ordered to the general base), cover letter or why-us note is ready for the editorial gate, after the tailor answered findings from a previous round, or before any resume PDF is shown to the owner for approval."
+---
+
+# Editorial review (the anti-slop gate)
+
+Owner: resume-editor, in a clean context (a fresh subagent or session that did not write the
+resume). Tier: T0; the only write is `review.md`. Checklists, severities, the known traps and the
+verdict table are in `agents/resume-editor.md`. Today is !`date +%F`.
+
+## Inputs
+V = the folder under review (`resumes/variants/SLUG`, or the working copy of a base change), plus the
+general base it started from (`resumes/bases/general/`), `applications/SLUG/jd.md`, `fit.md`,
+`companies/<company>.md`, `profile/facts.yaml`,
+`profile/evidence.yaml`, and the corpus files behind the cited ids.
+
+## Procedure
+1. Work from the user's data folder (`$JOB_AGENCY_DATA`). Refuse if you wrote
+   or edited anything in V.
+2. Freeze: `shasum -a 256 V/resume.yaml` (the `variant_hash`).
+3. Deterministic pass; record each output in `## Passes`:
+   - Lint: `python3 scripts/render_resume.py lint --input V/resume.yaml --template V/template-classic.yaml --density one-page` (exit 0 required; each NOTE must name a ruling the owner made).
+   - One base: `(cd resumes/bases/general && shasum -a 256 -c SHA256.txt)`; `cmp resumes/bases/general/template-classic.yaml V/template-classic.yaml` and the same for `template-inline.yaml` (byte-identical by default; a difference is a finding unless `V/NOTES.md` argues that exact trade with the ruling it rests on; an argued trade is read and judged like any other delta, an unargued one is refused); `grep -n "base_of" V/resume.yaml` prints `base_of: general`; `diff resumes/bases/general/resume.yaml V/resume.yaml` is the list of lines to read hardest.
+   - ATS: re-run the exact `ats_check.py check ... --out <scratch dir>/editor-<slug>-r<round>/` (a folder of your own: reviewers run in parallel) command from `ats-check`
+     into a scratch folder (never overwrite the tailor's report); exit 0 required.
+   - Layout: `python3 scripts/page_layout_check.py V/<pdf> --out <scratch dir>/editor-<slug>-r<round>/`
+     (exit 0 required; 1 is a High finding; 2 is UNCHECKABLE), then Read the `page-1.png` it wrote and judge balance,
+     whitespace, clutter and the first scan ("Page design" in `skills/page-review/SKILL.md`). Put
+     `layout: PASS <numbers, what you saw>` or `layout: FAIL <region, what is wrong>` in review.md's front matter.
+     A layout FAIL is never `approved`.
+   - Em-dashes (only when `style.no_em_dash` is set; letters only when present: `ls V/cover.md V/why-us.md 2>/dev/null`): `grep -n "—" V/resume.yaml` plus each letter, and
+     `pdftotext V/<pdf> - | grep -n "—"` print nothing.
+   - Banned words: the user's own list. Print it with
+     `python3 -c "import sys; sys.path.insert(0,'scripts'); import agency_config as c; print('|'.join(c.get('style.resume_slop_words', []) or []))"`
+     and `grep -n -i -E "<that list>" V/resume.yaml V/cover.md V/why-us.md`; letters also against `style.letters.banned_phrases`.
+     An empty list means no word check. `rubric_check.py` (B13) runs the same lexicon.
+   - Review-flag words (judge each): generic filler that claims quality without proof ("robust", "scalable",
+     "innovative", "streamlined", "various", "successfully", "significantly", "critical"):
+     `grep -n -i -E "robust|scalable|innovative|dynamic|streamlin|state[- ]of[- ]the[- ]art|various|successfully|significantly|critical" V/resume.yaml V/cover.md V/why-us.md`
+   - Matrix and rubric: `python3 scripts/jd_matrix.py check --matrix research/targets/<slug>.matrix.yaml` exits 0; read
+     `V/rubric-report.txt` (the tailor saves it), else re-run rubric_check yourself.
+   - Motifs and sentence shape: run the script in [references/motif-check.md](references/motif-check.md) (prints n-grams and
+     hyphenated compounds used 3 or more times, repeated opening verbs and runs of 3).
+4. Truth pass, bullet by bullet: for each `<!-- ev:... -->` id, `grep -n "^  <id>:" profile/evidence.yaml`,
+   open the corpus README it points to (and its bank bullet when a bank id is named in `NOTES.md`),
+   compare scope, verb, number, unit, ceiling and date. Then `facts.yaml`: names, titles, dates,
+   degree wording, and `grep -n -A2 "status: awaiting-owner" profile/facts.yaml` for every conflict
+   the resume could touch.
+5. Voice and slop pass (S1 to S12, against the user's voice guide and style config if present), proof-over-claims (T8), discretion (T9), the known traps.
+6. Senior engineer pass against the dossier's stack.
+7. Write or update `V/review.md` (format in the role card): new findings `state: OPEN`; verdict
+   `changes-requested`; hand back to resume-tailor.
+8. Next round: verify each response (`FIXED` after re-reading the new text; `NO-FIX` only with an
+   accepted argument, never for Critical, High only with the Recruiter's `R-NNN`; `REFUTED` with your
+   reason), then re-run steps 2 to 6 on the whole resume.
+9. Sign after two consecutive full passes with nothing new: fill the verdict table, then
+   `python3 scripts/review_sign.py V/ --verdict approved --round <n>` (writes verdict, round, variant_hash and
+   signed_at at the top level, keeps the previous signature, saves V/signed/<hash12>.yaml); tell the Recruiter.
+
+- Current or former employer lines: a line names the kind of system, how it is built and the problem class, in words already released on the record; never product internals, workflows, tool chains, customers, numbers or the roadmap (the owner's discretion rules in `profile/facts.yaml` apply). A line that breaks it is High.
+
+## Output
+`V/review.md` and a reply with the verdict, findings by state, and the hash.
+
+## Stop conditions
+You authored the artifact; the hash changed mid-review (restart); evidence or facts unreadable
+(verdict UNCHECKABLE, never approved); a Critical argued NO-FIX (escalate to the Recruiter for the owner).
+
+## Worked example
+See [references/worked-example.md](references/worked-example.md): a round-1 review, start to finish.

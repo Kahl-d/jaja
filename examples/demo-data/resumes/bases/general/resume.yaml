@@ -1,0 +1,51 @@
+# Demo base resume (fictional candidate). Every claim ends with an evidence comment.
+sidecar:
+  lens: applied-ml
+  base_of: null
+  job: null
+cv:
+  name: Sam Rivera
+  phone: "+15125550100"
+  email: sam.rivera@example.test
+  social_networks:
+    - network: LinkedIn
+      username: sam-rivera
+  website: https://sam.example.test
+  sections:
+    Education:
+      - institution: Lakeview State University
+        area: Computer Science
+        degree: M.S.
+        location: Austin, TX
+        start_date: 2019-08
+        end_date: 2021-05
+        evidence: [ev-sam-002]
+    Skills:
+      - label: Languages
+        details: "Python, SQL, TypeScript <!-- ev:ev-sam-003,ev-sam-004,ev-sam-005 -->"
+      - label: LLM Systems
+        details: "Retrieval-augmented generation (RAG), evaluation harnesses, agent tracing <!-- ev:ev-sam-007,ev-sam-006,ev-sam-005 -->"
+    Experience:
+      - company: Brightline Systems
+        position: Machine Learning Engineer
+        location: Austin, TX
+        start_date: 2023-02
+        end_date: present
+        evidence: [ev-sam-003]
+        highlights:
+          - "Built a retrieval-augmented support assistant over maintenance logs, cutting median lookup time from 9 to 4 minutes <!-- ev:ev-sam-007 -->"
+          - "Designed an evaluation harness of 600 golden questions with an LLM judge that gates every model release in CI, so a prompt or retriever change that lowers answer quality is caught and blocked before it reaches the support team and its agents <!-- ev:ev-sam-006 -->"
+      - company: Kestrel Labs
+        position: Data Scientist
+        location: Austin, TX
+        start_date: 2021-06
+        end_date: 2023-01
+        evidence: [ev-sam-004]
+        highlights:
+          - "Trained gradient-boosted demand models on 3M order records and shipped them behind a scheduled batch job <!-- ev:ev-sam-004 -->"
+    Projects:
+      - name: Tern
+        start_date: 2022-01
+        end_date: present
+        evidence: [ev-sam-005]
+        summary: "Open-source Python library that traces multi-step LLM agent runs into spans (https://github.example.test/sam-rivera/tern) <!-- ev:ev-sam-005 -->"

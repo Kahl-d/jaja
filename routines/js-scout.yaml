@@ -1,0 +1,28 @@
+# Routine spec (schema: schemas/routine.yaml). Paths are relative to the data folder. Secrets: ADZUNA_APP_ID and
+# ADZUNA_APP_KEY as routine environment secrets (adzuna.py skips cleanly without them). Every run appends a receipt to
+# logs/runs/js-scout/<date>.md. Paused by default: the owner names the sources first.
+name: js-scout
+purpose: "Each morning refresh the outbound job feed (ATS boards, Adzuna, the HN thread on days 1 to 5), dedup, enrich with H-1B data, apply the hard gates, judge the review-gated edge cases and hand the survivors to fit-scorer."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: low
+schedule: "0 6 * * *"
+action: skill:scout-jobs
+inputs:
+  - targets/companies.yaml
+  - targets/roles.md
+  - sources.yaml
+  - jobs/
+  - legal/evidence/h1b/
+outputs:
+  - jobs/*.md
+  - sources.yaml
+  - DASHBOARD.md
+  - logs/runs/js-scout/<date>.md
+connectors: []                 # public ATS endpoints and APIs only; no account connector
+tier: T1
+notify: {"on": needs-owner, via: push}      # a dream-tier sponsorship ambiguity or a relocation question
+budget: {max_runs_per_day: 2, max_tokens: 150000}
+enabled: false                 # paused by default: the owner names the sources first
+owner: job-scout

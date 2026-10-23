@@ -1,0 +1,75 @@
+{
+ "status": 200,
+ "error": {
+  "message": "",
+  "body": ""
+ },
+ "data": {
+  "id": 900001,
+  "displayJobId": "5001",
+  "name": "Machine Learning & Generative AI Engineer, up to Staff",
+  "locations": [
+   "Hsinchu City, Taiwan"
+  ],
+  "standardizedLocations": [
+   "Hsinchu, Hsinchu City, TW"
+  ],
+  "postedTs": 1783641600,
+  "stars": 0,
+  "department": "Hardware Engineering",
+  "creationTs": 1783641600,
+  "jobDescription": "<h2><br><b>Company:</b></h2>Wirelessco Semiconductor Limited<p style=\"text-align:inherit\"></p><h2><b>Job Area:</b></h2>Engineering Group &gt; Hardware Engineering<p></p><p><u><b>General Summary:</b></u></p><p><b>Job Overview:</b></p><p>Do you want to apply machine learning and generative AI to real engineering problems? Join the Product Development and Test Engineering machine learning team and build production AI that improves engineering productivity, manufacturing efficiency and test optimisation.</p><p>You will work on:</p><ul><li>Large language models</li><li>AI agents and agentic workflows</li><li>Retrieval-augmented generation</li><li>Predictive analytics</li></ul><p><b>Responsibilities:</b></p><ul><li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Write short design documents and review code from the people you work with.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Mentor newer engineers and share what you learn with the wider team.</li></ul><p><b>Minimum Qualifications:</b></p><ul><li>Clear written communication and a preference for simple designs.</li><li>Comfort reading research papers and turning them into working code.</li><li>A record of owning a system from the first commit to steady operation.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li></ul><p><b>Preferred Qualifications:</b></p><ul><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Open-source contributions in the applied machine learning for engineering productivity area.</li></ul><p>Pay range: $140,000 - $210,000 per year, depending on level and location.</p>",
+  "location": "Hsinchu City, Taiwan",
+  "isHot": 0,
+  "workLocationOption": "onsite",
+  "locationFlexibility": null,
+  "atsJobId": "5001",
+  "positionUrl": "/careers/job/900001",
+  "publicUrl": "https://careers.wirelessco.example.test/careers/job/900001",
+  "jdHighlight": [],
+  "positionExtraDetails": {
+   "videos": [
+    {
+     "url": "https://video.example.test/embed/intro",
+     "title": "Life at Wirelessco",
+     "description": "A short tour of the teams."
+    }
+   ],
+   "blogs": [
+    {
+     "url": "https://www.wirelessco.example.test/news/engineering-blog",
+     "title": "How our engineers work",
+     "description": "A short note on how teams collaborate.",
+     "image": "https://img.example.test/blog.png"
+    }
+   ],
+   "perks": [
+    {
+     "title": "Health",
+     "description": "Medical, dental and vision coverage for employees and their dependents.",
+     "image": "https://img.example.test/perk-health.png",
+     "imageAlt": "Heart icon",
+     "icon": "fas fa-user-md",
+     "isFavicon": true
+    }
+   ],
+   "pymww": {
+    "people": [],
+    "count": 0
+   },
+   "customContent": [
+    {
+     "body": "<p>Wirelessco is an equal opportunity employer.</p>",
+     "title": "Equal opportunity"
+    }
+   ]
+  },
+  "positionUserActions": {
+   "isSaved": false,
+   "applyAction": {
+    "status": "log_in"
+   }
+  }
+ },
+ "metadata": null
+}

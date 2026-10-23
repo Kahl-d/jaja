@@ -1,0 +1,7 @@
+# The day's network plan (scripts/network_plan.py). Schools to recognise come from identity.schools (03-network).
+policy:
+  network:
+    topics: {}                   # {slug: {title: "Shown name", keywords: ["lower-case", "words"]}}: subjects a post must be about to deserve a comment; the slug names profile/answers/<slug>.md
+    view_section: "Why this field"             # heading in an answer bank holding your view on the subject
+    story_section: "A project you are proud of" # heading holding your story, appended to a LinkedIn comment
+    fallback_topic: ""           # a topic slug whose answer bank is used when the matched topic has none ("" = none)

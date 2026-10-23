@@ -1,0 +1,209 @@
+"""Tests for the agent eval harness (deterministic grading path; no model calls)."""
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+import evals  # noqa: E402
+
+
+def _sandbox(tmp_path: Path) -> Path:
+    sb = tmp_path / "case-1" / "sandbox"
+    (sb / "prospects").mkdir(parents=True)
+    (sb / "prospects" / "jane-doe.md").write_text(
+        "---\nid: jane-doe\nname: Jane Doe\npriority: P0\nstatus: drafted\nwarmth: 3\n---\n\n## Timeline\n- x\n")
+    (sb / "outbox").mkdir()
+    (sb / "outbox" / "d1.md").write_text("---\nid: d1\n---\nHi Jane, thanks for reaching out about the agent role.\n")
+    return sb
+
+
+def test_checks_pass_and_fail(tmp_path):
+    sb = _sandbox(tmp_path)
+    reply = "States: drafted 1. Needs the owner: approve A-2026-0001. Next: follow-ups."
+    cases = [
+        ({"kind": "file_exists", "path": "prospects/jane-doe.md"}, True),
+        ({"kind": "file_exists", "path": "prospects/nobody.md"}, False),
+        ({"kind": "frontmatter", "path": "prospects/jane-doe.md", "field": "priority", "equals": "P0"}, True),
+        ({"kind": "frontmatter", "path": "prospects/jane-doe.md", "field": "status", "one_of": ["replied", "drafted"]}, True),
+        ({"kind": "frontmatter", "path": "prospects/jane-doe.md", "field": "warmth", "min": 2, "max": 3}, True),
+        ({"kind": "contains", "path": "outbox/*.md", "text": "agent role"}, True),
+        ({"kind": "not_contains", "path": "outbox/*.md", "text": "I hope this message finds you well"}, True),
+        ({"kind": "regex", "path": "outbox/d1.md", "pattern": r"^Hi Jane"}, True),
+        ({"kind": "glob_count", "pattern": "outbox/*.md", "min": 1, "max": 1}, True),
+        ({"kind": "reply_contains", "text": "needs the owner"}, True),
+        ({"kind": "reply_not_contains", "text": "sent the email"}, True),
+    ]
+    for chk, expected in cases:
+        ok, note = evals.run_check(sb, reply, chk)
+        assert ok is expected, (chk, note)
+
+
+def test_grade_case_weights_and_judge(tmp_path):
+    sb = _sandbox(tmp_path)
+    cdir = sb.parent
+    (cdir / "reply.txt").write_text("FINAL REPLY: needs the owner")
+    case = {"id": "case-1", "checks": [
+        {"kind": "file_exists", "path": "prospects/jane-doe.md", "weight": 1},
+        {"kind": "file_exists", "path": "missing.md", "weight": 1}],
+        "rubric": [{"criterion": "good", "weight": 2}], "task": "t"}
+    no_judge = evals.grade_case("messenger", case, cdir, None, 0.5)
+    assert no_judge["score"] == 0.25 and no_judge["passed"] is False
+    judged = evals.grade_case("messenger", case, cdir, {"scores": [{"i": 0, "score": 1.0, "why": "ok"}]}, 0.7)
+    assert judged["score"] == 0.75 and judged["passed"] is True
+
+
+def test_judge_prompt_mentions_changed_files(tmp_path):
+    sb = _sandbox(tmp_path)
+    cdir = sb.parent
+    (cdir / "manifest.json").write_text(json.dumps({}))
+    txt = evals.judge_prompt({"task": "do it", "rubric": [{"criterion": "c", "weight": 1}]}, sb, "reply")
+    assert "prospects/jane-doe.md" in txt and '"scores"' in txt
+
+
+def test_read_reply_falls_back_to_sandbox(tmp_path):
+    cdir = tmp_path / "case"
+    (cdir / "sandbox").mkdir(parents=True)
+    assert evals.read_reply(cdir) == ""
+    (cdir / "sandbox" / "reply.txt").write_text("from sandbox", encoding="utf-8")
+    assert evals.read_reply(cdir) == "from sandbox"
+    (cdir / "reply.txt").write_text("from case", encoding="utf-8")
+    assert evals.read_reply(cdir) == "from case"
+
+
+def test_write_result_serializes_yaml_dates(tmp_path, monkeypatch):
+    import datetime as _dt
+    monkeypatch.setattr(evals, "EVALS", tmp_path)
+    res = {"case": "c1", "score": 1.0, "threshold": 0.8, "passed": True, "graded_at": "2026-09-25T00:00:00",
+           "checks": [{"kind": "frontmatter", "equals": _dt.date(2026, 9, 28)}]}
+    path = evals.write_result("role", res)
+    assert "2026-09-28" in path.read_text(encoding="utf-8")
+
+
+def test_prepare_builds_a_sandbox_that_is_its_own_code_data_and_runtime_root(tmp_path):
+    import subprocess
+    case = {"id": "c1", "task": "do it", "fixtures": []}
+    cdir = evals.prepare_case("researcher", case, tmp_path, tmp_path / "out")
+    sb = cdir / "sandbox"
+    for rel in ("scripts/kernel/lint.py", "scripts/kernel/watchdog.py", "scripts/agency_paths.py", "schemas/task.yaml",
+                "templates/approval.md", "agents/researcher.md", "config/defaults.d/00-base.yaml"):
+        assert (sb / rel).is_file(), rel
+    assert not (sb / "scripts" / "kernel" / "tests").exists() and not (sb / "scripts" / "tests").exists()
+    assert not list((sb / "scripts").rglob("*.pyc"))
+    for d in ("work/inbox", "work/tasks", "work/approvals", "logs/runs", "state"):
+        assert (sb / d).is_dir(), d
+    assert (sb / ".eval-sandbox").read_text(encoding="utf-8").endswith("scripts")
+    assert (sb / ".claude" / "agents" / "researcher.md").is_file()               # adapters generated by the sandbox's sync
+    prompt = (cdir / "prompt.md").read_text(encoding="utf-8")
+    assert "scripts/<name>.py" in prompt and "# Researcher" in prompt and "do it" in prompt
+    where = subprocess.run([sys.executable, "-I", "-c", "import sys; sys.path.insert(0, 'scripts'); import agency_paths as a; "
+                            "print(a.CODE_ROOT, a.DATA_ROOT, a.RUNTIME_ROOT)"], cwd=sb, capture_output=True, text=True,
+                           env={"PATH": "/usr/bin:/bin", "JOB_AGENCY_DATA": "/nonexistent-real-data"})
+    assert where.returncode == 0, where.stderr
+    assert set(where.stdout.split()) == {str(sb.resolve())}                      # never the real data folder
+    lint = subprocess.run([sys.executable, "scripts/kernel/lint.py"], cwd=sb, capture_output=True, text=True,
+                          env={"PATH": "/usr/bin:/bin", "PYTHONDONTWRITEBYTECODE": "1"})
+    assert lint.returncode == 0, lint.stdout + lint.stderr                      # the sandbox starts lint-clean
+
+
+def test_prepare_fixtures_win_over_copied_files(tmp_path):
+    fx = tmp_path / "fx" / "schemas"
+    fx.mkdir(parents=True)
+    (fx / "tags.yaml").write_text("enforcement: off\n", encoding="utf-8")
+    case = {"id": "c1", "task": "t", "fixtures": [{"from": "fx", "to": "."}]}
+    sb = evals.prepare_case("researcher", case, tmp_path, tmp_path / "out") / "sandbox"
+    assert (sb / "schemas" / "tags.yaml").read_text(encoding="utf-8") == "enforcement: off\n"
+    assert (sb / "schemas" / "task.yaml").is_file()
+
+
+def test_judge_prompt_keeps_long_replies_and_marks_cuts(tmp_path):
+    sb = tmp_path / "case" / "sandbox"
+    sb.mkdir(parents=True)
+    case = {"id": "c", "task": "t", "rubric": [{"criterion": "x", "weight": 1}]}
+    short = "S" * 9000
+    assert short in evals.judge_prompt(case, sb, short)
+    long = "L" * 25000
+    jp = evals.judge_prompt(case, sb, long)
+    assert "chars cut; read reply.txt" in jp and "L" * 20000 in jp
+
+
+def test_snapshot_ignores_python_caches(tmp_path):
+    sb = tmp_path / "sandbox"
+    (sb / "scripts" / "__pycache__").mkdir(parents=True)
+    (sb / "scripts" / "__pycache__" / "x.cpython-312.pyc").write_bytes(b"\0")
+    (sb / "notes.md").write_text("n", encoding="utf-8")
+    assert list(evals._snapshot(sb)) == ["notes.md"]
+
+
+def test_results_record_the_card_version_tested(tmp_path, monkeypatch):
+    fake = tmp_path / "repo"
+    (fake / "agents").mkdir(parents=True)
+    card = fake / "agents" / "role.md"
+    card.write_text("---\nname: role\nversion: 0.1.2\n---\n# Role\n", encoding="utf-8")
+    monkeypatch.setattr(evals, "ROOT", fake)
+    case = {"id": "c1", "task": "do it", "fixtures": [], "checks": []}
+    cdir = evals.prepare_case("role", case, tmp_path, tmp_path / "out")
+    res = evals.grade_case("role", case, cdir, None, 0.8)
+    assert res["card_version"] == "0.1.2" and res["card_changed_since_run"] is False
+    card.write_text("---\nname: role\nversion: 0.1.3\n---\n# Role\n", encoding="utf-8")
+    res = evals.grade_case("role", case, cdir, None, 0.8)
+    assert res["card_version"] == "0.1.2" and res["card_changed_since_run"] is True
+
+
+# The model policy is measured, so a run names its model and effort, passes them to
+# the claude CLI, and the result records them. No model is called here.
+def _fake_run(monkeypatch, seen):
+    class P:
+        returncode, stdout, stderr = 0, "done", ""
+    monkeypatch.setattr(evals.subprocess, "run", lambda cmd, **kw: seen.append(cmd) or P())
+
+
+def _case_dir(tmp_path, monkeypatch=None):
+    if monkeypatch is not None:
+        monkeypatch.setattr(evals, "ROOT", tmp_path / "repo")
+    cdir = tmp_path / "c1"
+    (cdir / "sandbox").mkdir(parents=True)
+    (cdir / "prompt.md").write_text("do it", encoding="utf-8")
+    return cdir
+
+
+def test_run_passes_model_and_effort_to_the_cli_and_records_them(tmp_path, monkeypatch):
+    seen = []
+    _fake_run(monkeypatch, seen)
+    cdir = _case_dir(tmp_path)
+    evals.run_claude_cli("role", cdir, model="sonnet", effort="high")
+    cmd = seen[0]
+    assert cmd[cmd.index("--model") + 1] == "sonnet" and cmd[cmd.index("--effort") + 1] == "high"
+    assert cmd[-1] == "do it"                                       # the prompt stays the last argument
+    assert json.loads((cdir / "engine.json").read_text()) == {"engine": "claude-cli", "model": "sonnet", "effort": "high"}
+
+
+def test_run_without_them_passes_no_flag_and_records_the_default(tmp_path, monkeypatch):
+    seen = []
+    _fake_run(monkeypatch, seen)
+    cdir = _case_dir(tmp_path)
+    evals.run_claude_cli("role", cdir)
+    assert "--model" not in seen[0] and "--effort" not in seen[0]
+    assert json.loads((cdir / "engine.json").read_text()) == {"engine": "claude-cli", "model": "default",
+                                                              "effort": "default"}
+
+
+def test_the_graded_result_and_history_row_carry_model_and_effort(tmp_path, monkeypatch):
+    cdir = _case_dir(tmp_path, monkeypatch)
+    (cdir / "engine.json").write_text(json.dumps({"engine": "claude-cli", "model": "opus", "effort": "low"}))
+    res = evals.grade_case("role", {"id": "c1", "checks": []}, cdir, None, 0.5)
+    assert (res["model"], res["effort"]) == ("opus", "low")
+    monkeypatch.setattr(evals, "EVALS", tmp_path / "evals")
+    evals.write_result("role", res)
+    assert "model opus · effort low" in (tmp_path / "evals" / "role" / "results.md").read_text()
+
+
+def test_a_result_without_engine_json_says_unrecorded(tmp_path, monkeypatch):
+    cdir = _case_dir(tmp_path, monkeypatch)
+    res = evals.grade_case("role", {"id": "c1", "checks": []}, cdir, None, 0.5)
+    assert (res["model"], res["effort"]) == ("unrecorded", "unrecorded")
+
+
+def test_the_cli_refuses_an_unknown_effort(capsys):
+    import pytest
+    with pytest.raises(SystemExit):
+        evals.main(["run", "--role", "x", "--effort", "extreme"])

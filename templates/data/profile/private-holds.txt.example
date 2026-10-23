@@ -1,0 +1,7 @@
+# profile/private-holds.txt: held strings too private to print in a tracked file.
+# Copy this file to private-holds.txt (gitignored) and put one held string per line.
+# Blank lines and lines starting with # are ignored. scripts/profile_titles.py load_holds
+# reads it beside PROFILE-HOLDS.md, so check_holds.py, check_evidence.py, render_resume.py
+# lint, apply_pack.py and the MCP store all catch these strings. A missing file changes nothing.
+# PROFILE-HOLDS.md describes each held item in words and never prints the value.
+# Writer: the owner, or the role they name; never copy a value from here into any other file.

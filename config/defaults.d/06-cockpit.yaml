@@ -1,0 +1,5 @@
+# Neutral defaults for the cockpit (dashboard/cockpit.py).
+policy:
+  cockpit:
+    open_prefix: ""            # put in front of every record path the cockpit offers to open (empty: the data folder is the vault root)
+    connector_setup_doc: ""    # a document explaining how to renew connector tokens, shown beside expiring tokens (empty: none)

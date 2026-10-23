@@ -1,0 +1,33 @@
+# Contract for routines/<name>.yaml . Whole file is the record.
+type: routine
+glob: "routines/*.yaml"
+required: [name, purpose, runs_on, engine, schedule, action, tier, enabled, owner]
+fields:
+  - name
+  - purpose
+  - runs_on
+  - engine
+  - schedule           # cron, local time
+  - action             # skill:<id> | role:<name> | script:<path>
+  - inputs
+  - outputs
+  - connectors
+  - tier
+  - notify             # {on, via}
+  - budget             # {max_runs_per_day, max_tokens}
+  - enabled
+  - enabled_by         # the ticket or approval id that switched a model routine on (model routines are paused by default)
+  - model              # haiku | sonnet | opus | fable (model policy v2); a script routine has none
+  - effort             # low | medium | high | max
+  - owner
+  - last_reviewed
+  - installed          # when the scheduled task was last (re)installed, local "YYYY-MM-DDTHH:MM"; restarts the watchdog's clock
+enums:
+  runs_on: [cloud, actions, desktop]
+  engine: [claude, codex, script]
+  tier: [T0, T1, T2, T3, T4]
+  model: [haiku, sonnet, opus, fable]
+  effort: [low, medium, high, max]
+dates: [last_reviewed]
+patterns:
+  action: "^(skill|role|script):.+$"

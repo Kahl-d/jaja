@@ -1,0 +1,14 @@
+{
+ "by": "fabrikam_jobs",
+ "id": 2006,
+ "kids": [
+  3303,
+  3304,
+  3305,
+  3306
+ ],
+ "parent": 2001,
+ "text": "FieldWorks <a href=\"https:&#x2F;&#x2F;fieldworks.example.test\" rel=\"nofollow\">https:&#x2F;&#x2F;fieldworks.example.test</a> | Senior SWE, AI Automation Engr, Senior PM | REMOTE (US+INTL for eng, US for product &amp; automations)<p>FieldWorks builds an AI-powered back office for small trade businesses. We pair office managers with AI agents that take over paperwork end to end, and we are expanding product and engineering.<p>- Senior Software Engineer, AI Full Stack: ship AI-native React experiences and the Node services behind them. <a href=\"https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0001\" rel=\"nofollow\">https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0001</a><p>- Senior Software Engineer, Voice AI &amp; Data Infrastructure: own real-time voice agents and data pipelines <a href=\"https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0002\" rel=\"nofollow\">https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0002</a><p>- AI Automation Engineer: turn small-business workflows into automations. <a href=\"https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0003\" rel=\"nofollow\">https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0003</a><p>- Senior Product Manager, AI Agents: own the agents at the core of the product, including the evals that prove they work. <a href=\"https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0004\" rel=\"nofollow\">https:&#x2F;&#x2F;fieldworks.example.test&#x2F;careers?job=role-0004</a><p>All roles require working hours that overlap with 11am-3pm ET.",
+ "time": 1788279798,
+ "type": "comment"
+}

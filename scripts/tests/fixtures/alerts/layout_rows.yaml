@@ -1,0 +1,267 @@
+# SYNTHETIC classified harvest rows reproducing common job-alert layouts: the structure (line order, separators,
+# badges, link shapes, which links carry an HTML card) follows the boards' mail; every company, title, token, id, place pairing and name here is
+# invented. No real message text. `label` becomes classification.label.
+
+# ZipRecruiter daily digest (alerts@): plain text only, `links` empty. Each job opens with a title link, the
+# card text follows it, and a button closes it: "View Details" repeats the title link, "1-Click Apply" is a
+# different token. Every link in the mail (logo, buttons, app badges, footer) is an opaque km/ekm token. The
+# real digests run past the 20,000-character harvest cap, so the body ends inside a card (body_truncated).
+- id: zr-digest-01
+  label: job_alert
+  internal_date: "2026-09-24T08:00:00Z"
+  from: "ZipRecruiter <alerts@ziprecruiter.com>"
+  from_email: alerts@ziprecruiter.com
+  subject: "Quillstack has a Applied AI Engineer opening"
+  links: []
+  links_truncated: false
+  body: |
+    <https://www.ziprecruiter.com/km/AAZZlogoToken0001?tsid=100000001>
+
+    Hi Jordan,
+     Here are today's jobs recommended for you:
+     Applied AI Engineer - Agent Platform  <https://www.ziprecruiter.com/ekm/AAZZjobTokenAAA1>
+
+    Quillstack • San Jose, CA • On-site +1
+
+    $80 - $110/hr
+
+     View Details  <https://www.ziprecruiter.com/ekm/AAZZjobTokenAAA1>
+     Machine Learning Engineer, Level 3  <https://www.ziprecruiter.com/km/AAZZjobTokenBBB2?auth_token=zz1&contact_id=zz2&expires=1760000000&tsid=100000001>
+
+    Helio Systems LLC • San Francisco, CA
+
+    $155K - $207K / yr
+    Estimated Pay
+     View Details  <https://www.ziprecruiter.com/km/AAZZjobTokenBBB2?auth_token=zz1&contact_id=zz2&expires=1760000000&tsid=100000001>
+     Research Scientist, Applied ML  <https://www.ziprecruiter.com/km/AAZZjobTokenCCC3?tsid=100000001>New
+
+    Northwind Robotics, Inc. • Newark, CA • In-person
+
+    $60 - $75/hr
+    Medical, Vision, Dental, PTO
+    Be Seen First
+     1-Click Apply  <https://www.ziprecruiter.com/km/AAZZapplyTokenCCC4?tsid=100000001>
+
+    Are these jobs in the right area?
+    Set your preferred city to improve future recommendations.
+     Edit  <https://www.ziprecruiter.com/km/AAZZeditToken0005?tsid=100000001>
+     Data Engineer  <https://www.ziprecruiter.com/ekm/AAZZjobTokenDDD5>
+
+    Ledgerleaf • Remote
+
+     View Details  <https://www.ziprecruiter.com/ekm/AAZZjobTokenDDD5>
+     Senior Data Scientist  <https://www.ziprecruiter.com/ekm/AAZZjobTokenFFF6>
+
+    Pars
+  body_truncated: true
+
+# ZipRecruiter single-job mail from a named advisor (phil@ in the real mail): HTML read into `links`; only the
+# title link carries a card; the logo, "View More Jobs", app badges and footer links are the same km/ekm tokens.
+- id: zr-single-01
+  label: job_alert
+  internal_date: "2026-09-24T08:30:00Z"
+  from: "Casey at ZipRecruiter <casey@ziprecruiter.com>"
+  from_email: casey@ziprecruiter.com
+  subject: "Jordan, I think this job might be right for you!"
+  links_truncated: false
+  links:
+    - {href: "https://www.ziprecruiter.com/km/AAZZlogoToken0101?tsid=111000999", text: ""}
+    - href: "https://www.ziprecruiter.com/ekm/AAZZjobTokenEEE1"
+      text: "Senior Machine Learning Engineer - Ranking"
+      card: "Senior Machine Learning Engineer - Ranking\nOrbit Analytics Group\nBerkeley, CA\nFull-Time\nNew\nView Details"
+    - {href: "https://www.ziprecruiter.com/ekm/AAZZjobTokenEEE1", text: "View Details"}
+    - {href: "https://www.ziprecruiter.com/km/AAZZmoreToken0102?tsid=111000999", text: "View More Jobs", card: "View More Jobs"}
+    - {href: "https://www.ziprecruiter.com/ekm/AAZZappToken0103", text: ""}
+    - {href: "https://www.ziprecruiter.com/ekm/AAZZappToken0104", text: ""}
+    - {href: "https://clearbit.com", text: "Logos provided by Clearbit"}
+    - {href: "https://www.ziprecruiter.com/ekm/AAZZprivacyTok105", text: "Privacy Policy", card: "Privacy Policy"}
+    - {href: "https://www.ziprecruiter.com/ekm/AAZZunsubTokn106", text: "Unsubscribe", card: "Unsubscribe"}
+  body: |
+    <https://www.ziprecruiter.com/km/AAZZlogoToken0101?tsid=111000999>
+
+     Hi Jordan,
+
+     Here's a NEW job at Orbit Analytics Group. I wanted to get it in front of you ASAP to help you get a jumpstart on the competition. If you like what you see, go ahead and view the details!
+
+     Senior Machine Learning Engineer - Ranking
+     <https://www.ziprecruiter.com/ekm/AAZZjobTokenEEE1>
+     * Orbit Analytics Group
+     * Berkeley, CA
+     *
+    Full-Time
+
+     * New
+
+     View Details  <https://www.ziprecruiter.com/ekm/AAZZjobTokenEEE1>
+
+     View More Jobs  <https://www.ziprecruiter.com/km/AAZZmoreToken0102?tsid=111000999>
+
+     Casey
+     Your Career Advisor
+
+# Jobright daily matches: HTML read into `links`; the company block link carries the card (company, industry
+# and stage, match score, title, pay, place, referrals, age and badge, button); title and button repeat the link.
+- id: jr-01
+  label: job_alert
+  internal_date: "2026-09-24T09:00:00Z"
+  from: "Jobright <noreply@jobright.ai>"
+  from_email: noreply@jobright.ai
+  subject: "Quillstack is hiring for “Applied AI Engineer” like you"
+  links_truncated: false
+  links:
+    - href: "https://jobright.ai/jobs/info/6a01b2c3d4e5f60718293a4b?utm_source=9999&imp_id=9000001"
+      text: "Quillstack\nArtificial Intelligence (AI) · Early Stage"
+      card: "Quillstack\nArtificial Intelligence (AI) · Early Stage\n98%\nApplied AI Engineer\n$150K/yr - $210K/yr\nSan Francisco Bay Area\n5+ referrals\n18 hours ago · Be an early applicant\nAPPLY NOW"
+    - {href: "https://jobright.ai/jobs/info/6a01b2c3d4e5f60718293a4b?utm_source=9999&imp_id=9000001", text: "Applied AI Engineer"}
+    - {href: "https://jobright.ai/jobs/info/6a01b2c3d4e5f60718293a4b?utm_source=9999&imp_id=9000001", text: "APPLY NOW"}
+    - href: "https://jobright.ai/jobs/info/6a01b2c3d4e5f60718293a4c?utm_source=9999&imp_id=9000001"
+      text: "Berkeley Lattice Institute\nSoftware · Late Stage"
+      card: "Berkeley Lattice Institute\nSoftware · Late Stage\n96%\nData Platform Engineer\nOakland, CA\n1+ referrals\n5 hours ago · Be an early applicant\nAPPLY NOW"
+    - {href: "https://jobright.ai/jobs/info/6a01b2c3d4e5f60718293a4c?utm_source=9999&imp_id=9000001", text: "Data Platform Engineer"}
+    - href: "https://jobright.ai/jobs/info/6a01b2c3d4e5f60718293a4d?utm_source=9999&imp_id=9000001"
+      text: "Tessellate Solutions, Inc.\nInformation Technology · Public Company"
+      card: "Tessellate Solutions, Inc.\nInformation Technology · Public Company\n94%\nApplied ML (Agents)\n$74K/yr - $116K/yr\nPalo Alto, CA\n7+ referrals\n4 hours ago · Be an early applicant\nAPPLY NOW"
+    - {href: "https://jobright.ai/?utm_source=9999&utm_medium=email", text: "View More Opportunities"}
+    - {href: "https://jobright.ai/?retarget=jobalert", text: "Update Job Alert Preference"}
+  body: |
+    Explore this today's top matches, curated to align with your preferences, experiences, and skill sets.
+    Quillstack
+    Artificial Intelligence (AI) · Early Stage
+    98%
+    Applied AI Engineer
+    $150K/yr - $210K/yr
+    San Francisco Bay Area
+    5+ referrals
+    18 hours ago · Be an early applicant
+    APPLY NOW
+    View More Opportunities
+    Happy Job Hunting,
+    The Jobright.ai Team
+    Update Job Alert Preference|Unsubscribe
+
+# Wellfound "New jobs" digest (hello@hi.wellfound.com): HTML links carry no card, so the body is read. Links are
+# wellfound.com/jobs?job_listing_slug=<id>-<slug>; each card is title, "Company / N Employees", a pipe row
+# (pay, place, experience, type), badges, an optional wrapped "Our Take" paragraph, then "Learn More" + link.
+- id: wf-01
+  label: job_alert
+  internal_date: "2026-09-24T10:00:00Z"
+  from: "Wellfound <hello@hi.wellfound.com>"
+  from_email: hello@hi.wellfound.com
+  subject: "New jobs: Founding ML Engineer at Parsec Labs and 2 more jobs"
+  links_truncated: false
+  links:
+    - {href: "https://angel.co", text: ""}
+    - {href: "https://wellfound.com/jobs?job_listing_slug=3100001-founding-ml-engineer", text: "Learn More"}
+    - {href: "https://wellfound.com/jobs?job_listing_slug=3100002-research-operations-lead", text: "Learn More"}
+    - {href: "https://wellfound.com/jobs?job_listing_slug=3100003-staff-software-engineer", text: "Learn More"}
+    - {href: "https://wellfound.com/profile/edit/preferences", text: "Edit preferences"}
+  body: |
+    <https://angel.co>
+
+    Hi Jordan! I've found 3 new jobs that might interest you!
+
+     Ready to Interview  Open to offers  Closed to Offers
+
+    Founding ML Engineer, Agents
+
+    Parsec Labs / 11-50 Employees
+
+     | San Francisco | years of exp | Full-time
+
+    Actively Hiring B2B Scale Stage +6
+
+    Our Take
+
+    Parsec Labs builds agent tooling for finance teams in San Francisco and the
+    Founding ML Engineer role focuses on retrieval, evaluation and deployment of
+    language model systems, combining early-stage ownership with a small senior
+    team and direct customer contact.
+
+    Learn More
+    <https://wellfound.com/jobs?job_listing_slug=3100001-founding-ml-engineer>
+
+    Research Operations Lead
+
+    Mosaic Robotics / 51-200 Employees
+
+     $140–170k | In office, New York City | 3 years of exp | Full-time
+
+    Actively Hiring Top 5% of responders Responds within a few days +
+
+    Learn More
+    <https://wellfound.com/jobs?job_listing_slug=3100002-research-operations-lead>
+
+    Staff Software Engineer
+
+    Verdant Health / 201-500 Employees
+
+     $200–225k | Remote only, United States | 8 years of exp | Full-time
+
+    Actively Hiring Growing fast
+
+    Our Take
+
+    Verdant Health, backed by $40M in Series B funding, is building
+    AI-driven care coordination tools for clinics across the United States.
+
+    Learn More
+    <https://wellfound.com/jobs?job_listing_slug=3100003-staff-software-engineer>
+
+    Edit preferences <https://wellfound.com/profile/edit/preferences>
+
+# LinkedIn alert read from `links`: the card joins company and place on one line ("Company · Place (Mode)");
+# titles carry " - " qualifiers, pay, or no role word; an applied job carries "Applied on <date>"; a
+# recommendation digest opens a group with "<keywords> jobs in <place>" and closes it with "See all jobs".
+- id: li-cards-01
+  label: job_alert
+  internal_date: "2026-09-24T11:00:00Z"
+  from: "LinkedIn Job Alerts <jobalerts-noreply@linkedin.com>"
+  from_email: jobalerts-noreply@linkedin.com
+  subject: "\"applied ai engineer\": Quillstack - Data Scientist - Supply Chain and more"
+  links_truncated: false
+  links:
+    - href: "https://www.linkedin.com/comm/jobs/view/4100000001/?trackingId=zz1"
+      text: "Data Scientist - Supply Chain"
+      card: "Data Scientist - Supply Chain\nQuillstack · Bellevue, WA (On-site)\n$145K-$200K / year"
+    - href: "https://www.linkedin.com/comm/jobs/view/4100000002/?trackingId=zz2"
+      text: "AI Engineer - $58.00 - $70.50 per hour"
+      card: "AI Engineer - $58.00 - $70.50 per hour\nLedgerleaf Recruiting · United States (Remote)\n$58-$71 / hour"
+    - href: "https://www.linkedin.com/comm/jobs/view/4100000003/?trackingId=zz3"
+      text: "Lead, Applied AI Engineering"
+      card: "Lead, Applied AI Engineering\nHelio Systems · San Jose, CA (Hybrid)"
+    - href: "https://www.linkedin.com/comm/jobs/view/4100000004/?trackingId=zz4"
+      text: "AI Engineer"
+      card: "AI Engineer\nNorthwind Consultants, Inc. · Palo Alto, CA (On-site)\n$110K-$150K / year"
+    - href: "https://www.linkedin.com/comm/jobs/view/4100000005/?trackingId=zz5"
+      text: "Machine Learning Engineer, Agents"
+      card: "Machine Learning Engineer, Agents\nOrbit Analytics · San Francisco, CA (Hybrid)\nApplied on February 7, 2026"
+    - href: "https://www.linkedin.com/comm/jobs/view/4100000006/?trackingId=zz6"
+      text: "Software Development Engineer, Agents"
+      card: "software engineer jobs in United States\nSoftware Development Engineer, Agents\nParsec Labs · United States (Remote)\nSee all jobs\nEdit alert"
+    - {href: "https://www.linkedin.com/comm/jobs/alerts", text: "Manage your job alerts"}
+  body: |
+    Your job alert for applied ai engineer in United States
+    New jobs match your preferences.
+
+# Glassdoor HTML-only alert: company first (rating attached), then title, place, pay, badges, age. Some company
+# names read like places; some titles carry no role word.
+- id: gd-cards-01
+  label: job_alert
+  internal_date: "2026-09-24T12:00:00Z"
+  from: "Glassdoor Jobs <noreply@glassdoor.com>"
+  from_email: noreply@glassdoor.com
+  subject: "Applied AI Engineer at Mosaic Robotics and 2 more jobs in San Francisco, CA for you"
+  links_truncated: false
+  links:
+    - href: "https://www.glassdoor.com/partner/jobListing.htm?pos=101&jobListingId=1009000000001&jrtk=5"
+      text: "Applied AI Engineer"
+      card: "Mosaic Robotics 4.1 ★\nApplied AI Engineer\nSan Francisco, CA\n$171K - $242K (Glassdoor est.)\nBest Place to Work\n11h"
+    - href: "https://www.glassdoor.com/partner/jobListing.htm?pos=102&jobListingId=1009000000002&jrtk=5"
+      text: "Seismic Data Software Engineer"
+      card: "Berkeley Lattice Institute 4.4 ★\nSeismic Data Software Engineer\nBerkeley, CA\n$107K - $140K (Employer est.)\n7h"
+    - href: "https://www.glassdoor.com/partner/jobListing.htm?pos=103&jobListingId=1009000000003&jrtk=5"
+      text: "Research Operations, Agents"
+      card: "Quillstack\nResearch Operations, Agents\nSan Francisco, CA\n$210K - $310K (Employer est.)\nBest-Led Company\nEasy Apply\nJust posted"
+  body: |
+    Job alert: Applied AI Engineer
+    Your job listings for September 24, 2026

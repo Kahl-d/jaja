@@ -1,0 +1,11 @@
+policy:
+  network:
+    topics:
+      evaluation: {title: "Evaluation", keywords: ["eval", "benchmark", "judge", "grading", "golden set", "regression"]}
+      agent-harness: {title: "Agent harness", keywords: ["agent", "harness", "tool use", "tool-use", "sandbox", "permission"]}
+      tool-use-and-integrations: {title: "Tool use", keywords: ["mcp", "tool call", "function call", "integration"]}
+      voice-and-realtime-agents: {title: "Voice agents", keywords: ["voice", "speech", "real-time", "realtime", "latency"]}
+      prompt-engineering: {title: "Prompt engineering", keywords: ["prompt"]}
+    view_section: "Why AI and agents"
+    story_section: "A project you are proud of"
+    fallback_topic: "agent-harness"

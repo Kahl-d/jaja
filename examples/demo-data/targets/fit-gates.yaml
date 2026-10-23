@@ -1,0 +1,4 @@
+# fit_gates.py: the allowances every run starts with (read by fit_gates.load_config; scripts/fit_gates.py --allow adds more,
+# --no-default-allow ignores this file). Values: staff, principal, new-grad, intern, manager, lead, contract, fellowship, years.
+# An allowed kind is no longer a fail; the gate adds a note instead. Empty = every kind is a fail.
+allow_default: []

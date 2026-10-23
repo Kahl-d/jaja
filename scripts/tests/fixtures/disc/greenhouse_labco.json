@@ -1,0 +1,446 @@
+{
+ "jobs": [
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100101",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200101,
+   "location": {
+    "name": "San Francisco, CA | New York City, NY"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "On-Site",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100101,
+   "updated_at": "2026-09-04T11:26:23-04:00",
+   "requisition_id": "480101",
+   "title": "Applied AI, Solutions Research Engineer ",
+   "company_name": "Labco",
+   "first_published": "2026-09-04T11:26:23-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Applied AI, Solutions Research Engineer&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Applied AI Research Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Applied AI Research Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Applied AI Research Team team you will own customer-facing model evaluation work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Work with research and product to move prototypes into reliable systems.&lt;/li&gt;&lt;li&gt;Write short design documents and review code from the people you work with.&lt;/li&gt;&lt;li&gt;Improve on-call tooling so incidents are rarer and shorter.&lt;/li&gt;&lt;li&gt;Build evaluation harnesses that track quality, latency and cost release over release.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Hands-on experience with Python, evaluation tooling and LLM APIs.&lt;/li&gt;&lt;li&gt;Comfort reading research papers and turning them into working code.&lt;/li&gt;&lt;li&gt;3+ years of professional software engineering experience in Python or a similar language.&lt;/li&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Open-source contributions in the customer-facing model evaluation area.&lt;/li&gt;&lt;li&gt;Prior work on evaluation, red-teaming or reliability for learned systems.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;$300,000&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;$400,000 USD&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8100,
+     "name": "Applied AI",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8200,
+     "name": "San Francisco, CA",
+     "location": "San Francisco, California, United States",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100102",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200102,
+   "location": {
+    "name": "London, UK"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "On-Site",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100102,
+   "updated_at": "2026-09-23T05:01:26-04:00",
+   "requisition_id": "480102",
+   "title": "Applied AI Engineer, Growth Customers",
+   "company_name": "Labco",
+   "first_published": "2026-09-23T05:01:26-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Applied AI Engineer, Growth Customers&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Applied AI Startups Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Applied AI Startups Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Applied AI Startups Team team you will own applied AI delivery for growth-stage customers work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Design, build and operate applied AI delivery for growth-stage customers services that run in production.&lt;/li&gt;&lt;li&gt;Mentor newer engineers and share what you learn with the wider team.&lt;/li&gt;&lt;li&gt;Work with research and product to move prototypes into reliable systems.&lt;/li&gt;&lt;li&gt;Build evaluation harnesses that track quality, latency and cost release over release.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Clear written communication and a preference for simple designs.&lt;/li&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;li&gt;Hands-on experience with Python, TypeScript and LLM APIs.&lt;/li&gt;&lt;li&gt;3+ years of professional software engineering experience in Python or a similar language.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Prior work on evaluation, red-teaming or reliability for learned systems.&lt;/li&gt;&lt;li&gt;Open-source contributions in the applied AI delivery for growth-stage customers area.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;£225,000&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;£255,000 GBP&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8101,
+     "name": "Applied AI",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8203,
+     "name": "London, UK",
+     "location": "London, England, United Kingdom",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100103",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200103,
+   "location": {
+    "name": "Remote-Friendly (Travel-Required) | San Francisco, CA | Seattle, WA | New York City, NY"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "Remote",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100103,
+   "updated_at": "2026-08-21T12:49:48-04:00",
+   "requisition_id": "PIP-2001",
+   "title": "Research Engineer, Simulations",
+   "company_name": "Labco",
+   "first_published": "2026-01-09T11:41:32-05:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Research Engineer, Simulations&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Simulations Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Simulations Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Simulations Team team you will own simulation environments for model training work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Keep dashboards and runbooks for simulation environments for model training accurate and easy to follow.&lt;/li&gt;&lt;li&gt;Mentor newer engineers and share what you learn with the wider team.&lt;/li&gt;&lt;li&gt;Improve on-call tooling so incidents are rarer and shorter.&lt;/li&gt;&lt;li&gt;Write short design documents and review code from the people you work with.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Hands-on experience with Python, distributed systems and reinforcement learning.&lt;/li&gt;&lt;li&gt;3+ years of professional software engineering experience in Python or a similar language.&lt;/li&gt;&lt;li&gt;Comfort reading research papers and turning them into working code.&lt;/li&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Open-source contributions in the simulation environments for model training area.&lt;/li&gt;&lt;li&gt;Experience with distributed training or large-scale data processing.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;$500,000&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;$850,000 USD&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8102,
+     "name": "AI Research & Engineering",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8206,
+     "name": "Remote-Friendly US (Travel Required)",
+     "location": null,
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100108",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200108,
+   "location": {
+    "name": "New York City, NY; San Francisco, CA | New York City, NY"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "On-Site",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100108,
+   "updated_at": "2026-08-21T21:32:54-04:00",
+   "requisition_id": "7002",
+   "title": "Account Executive, Digital Natives",
+   "company_name": "Labco",
+   "first_published": "2024-12-20T13:53:38-05:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Account Executive, Digital Natives&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Sales Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Sales Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Sales Team team you will own enterprise sales work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Mentor newer engineers and share what you learn with the wider team.&lt;/li&gt;&lt;li&gt;Write short design documents and review code from the people you work with.&lt;/li&gt;&lt;li&gt;Turn open product questions into measurable experiments and ship the ones that win.&lt;/li&gt;&lt;li&gt;Keep dashboards and runbooks for enterprise sales accurate and easy to follow.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Clear written communication and a preference for simple designs.&lt;/li&gt;&lt;li&gt;3+ years of professional software engineering experience in Python or a similar language.&lt;/li&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;li&gt;Hands-on experience with CRM tooling.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Open-source contributions in the enterprise sales area.&lt;/li&gt;&lt;li&gt;Experience with distributed training or large-scale data processing.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;$222,800&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;$290,000 USD&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8103,
+     "name": "Sales",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8209,
+     "name": "New York City, NY",
+     "location": "New York, New York, United States",
+     "child_ids": [],
+     "parent_id": null
+    },
+    {
+     "id": 8210,
+     "name": "San Francisco, CA",
+     "location": "San Francisco, California, United States",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100104",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200104,
+   "location": {
+    "name": "San Francisco, CA"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "On-Site",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100104,
+   "updated_at": "2026-09-09T15:19:17-04:00",
+   "requisition_id": "7001",
+   "title": "Staff+ Software Engineer, LLM Serving Path",
+   "company_name": "Labco",
+   "first_published": "2026-09-09T15:19:17-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Staff+ Software Engineer, LLM Serving Path&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Trust and Safety Engineering Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Trust and Safety Engineering Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Trust and Safety Engineering Team team you will own model serving infrastructure work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Design, build and operate model serving infrastructure services that run in production.&lt;/li&gt;&lt;li&gt;Improve on-call tooling so incidents are rarer and shorter.&lt;/li&gt;&lt;li&gt;Keep dashboards and runbooks for model serving infrastructure accurate and easy to follow.&lt;/li&gt;&lt;li&gt;Work with research and product to move prototypes into reliable systems.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;3+ years of professional software engineering experience in Python or a similar language.&lt;/li&gt;&lt;li&gt;Hands-on experience with Python, Rust and GPU inference stacks.&lt;/li&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;li&gt;Clear written communication and a preference for simple designs.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Open-source contributions in the model serving infrastructure area.&lt;/li&gt;&lt;li&gt;Experience with distributed training or large-scale data processing.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;$320,000&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;$485,000 USD&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8104,
+     "name": "Safeguards (Trust & Safety)",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8212,
+     "name": "San Francisco, CA",
+     "location": "San Francisco, California, United States",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100105",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200105,
+   "location": {
+    "name": "San Francisco, CA"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "On-Site",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100105,
+   "updated_at": "2026-09-09T15:17:24-04:00",
+   "requisition_id": "7001",
+   "title": "Staff+ Software Engineer, LLM Decoding Path",
+   "company_name": "Labco",
+   "first_published": "2026-09-09T15:17:24-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Staff+ Software Engineer, LLM Decoding Path&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Trust and Safety Engineering Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Trust and Safety Engineering Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Trust and Safety Engineering Team team you will own model decoding infrastructure work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Mentor newer engineers and share what you learn with the wider team.&lt;/li&gt;&lt;li&gt;Keep dashboards and runbooks for model decoding infrastructure accurate and easy to follow.&lt;/li&gt;&lt;li&gt;Improve on-call tooling so incidents are rarer and shorter.&lt;/li&gt;&lt;li&gt;Debug failures end to end, from data pipelines to model behaviour.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Hands-on experience with Python, Rust and GPU inference stacks.&lt;/li&gt;&lt;li&gt;Comfort reading research papers and turning them into working code.&lt;/li&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;li&gt;3+ years of professional software engineering experience in Python or a similar language.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Prior work on evaluation, red-teaming or reliability for learned systems.&lt;/li&gt;&lt;li&gt;Experience with distributed training or large-scale data processing.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;$320,000&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;$485,000 USD&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8105,
+     "name": "Safeguards (Trust & Safety)",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8215,
+     "name": "San Francisco, CA",
+     "location": "San Francisco, California, United States",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100106",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200106,
+   "location": {
+    "name": "New York City, NY; San Francisco, CA; Seattle, WA"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "On-Site",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100106,
+   "updated_at": "2026-08-21T12:50:32-04:00",
+   "requisition_id": "PIP-2002",
+   "title": "Forward Deployed Engineer",
+   "company_name": "Labco",
+   "first_published": "2026-08-12T16:21:16-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Forward Deployed Engineer&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Applied AI Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Applied AI Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Applied AI Team team you will own forward deployed engineering work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Build evaluation harnesses that track quality, latency and cost release over release.&lt;/li&gt;&lt;li&gt;Mentor newer engineers and share what you learn with the wider team.&lt;/li&gt;&lt;li&gt;Work with research and product to move prototypes into reliable systems.&lt;/li&gt;&lt;li&gt;Write short design documents and review code from the people you work with.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;3+ years of professional software engineering experience in Python or a similar language.&lt;/li&gt;&lt;li&gt;Clear written communication and a preference for simple designs.&lt;/li&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;li&gt;Comfort reading research papers and turning them into working code.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Prior work on evaluation, red-teaming or reliability for learned systems.&lt;/li&gt;&lt;li&gt;Experience with distributed training or large-scale data processing.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;$280,000&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;$320,000 USD&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8106,
+     "name": "Applied AI",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8218,
+     "name": "San Francisco, CA",
+     "location": "San Francisco, California, United States",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  },
+  {
+   "absolute_url": "https://job-boards.greenhouse.io/labco/jobs/100107",
+   "data_compliance": [
+    {
+     "type": "gdpr",
+     "requires_consent": false,
+     "requires_processing_consent": false,
+     "requires_retention_consent": false,
+     "retention_period": null,
+     "demographic_data_consent_applies": false
+    }
+   ],
+   "internal_job_id": 200107,
+   "location": {
+    "name": "San Francisco, CA | New York City, NY"
+   },
+   "metadata": [
+    {
+     "id": 9001,
+     "name": "Location Type",
+     "value": "On-Site",
+     "value_type": "single_select"
+    }
+   ],
+   "id": 100107,
+   "updated_at": "2026-08-21T12:50:10-04:00",
+   "requisition_id": "480103",
+   "title": "Technical Program Manager, Cloud Serving",
+   "company_name": "Labco",
+   "first_published": "2026-04-28T05:26:08-04:00",
+   "language": "en",
+   "application_deadline": null,
+   "content": "&lt;div class=&quot;content-intro&quot;&gt;&lt;h2&gt;&lt;strong&gt;About Labco&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;Labco builds AI systems that people can rely on. Our staff are researchers, engineers and operators who work together on useful products.&lt;/p&gt;&lt;/div&gt;&lt;h1&gt;Technical Program Manager, Cloud Serving&lt;/h1&gt;\n&lt;p&gt;&lt;strong&gt;Technical Program Management Team&lt;/strong&gt;&lt;/p&gt;\n&lt;h3&gt;About the team&lt;/h3&gt;\n&lt;p&gt;Labco builds AI systems and the products around them. The Technical Program Management Team team is small, works in the open inside the company, and ships every week.&lt;/p&gt;\n&lt;h3&gt;About the role&lt;/h3&gt;\n&lt;p&gt;As a member of the Technical Program Management Team team you will own cloud capacity programs work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.&lt;/p&gt;\n&lt;h3&gt;Responsibilities&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Build evaluation harnesses that track quality, latency and cost release over release.&lt;/li&gt;&lt;li&gt;Design, build and operate cloud capacity programs services that run in production.&lt;/li&gt;&lt;li&gt;Debug failures end to end, from data pipelines to model behaviour.&lt;/li&gt;&lt;li&gt;Keep dashboards and runbooks for cloud capacity programs accurate and easy to follow.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Qualifications&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;A record of owning a system from the first commit to steady operation.&lt;/li&gt;&lt;li&gt;Hands-on experience with program tooling.&lt;/li&gt;&lt;li&gt;Clear written communication and a preference for simple designs.&lt;/li&gt;&lt;li&gt;Comfort reading research papers and turning them into working code.&lt;/li&gt;&lt;/ul&gt;\n&lt;h3&gt;Nice to have&lt;/h3&gt;\n&lt;ul&gt;&lt;li&gt;Experience with distributed training or large-scale data processing.&lt;/li&gt;&lt;li&gt;Prior work on evaluation, red-teaming or reliability for learned systems.&lt;/li&gt;&lt;/ul&gt;\n&lt;p&gt;&amp;nbsp;&lt;/p&gt;&lt;div class=&quot;content-pay-transparency&quot;&gt;&lt;div class=&quot;pay-input&quot;&gt;&lt;div class=&quot;description&quot;&gt;&lt;p&gt;The annual compensation range for this role is listed below.&amp;nbsp;&lt;/p&gt;\n&lt;p&gt;For sales roles, the range provided is the on-target earnings range, covering the commission target and the annual base salary.&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;title&quot;&gt;Annual Salary:&lt;/div&gt;&lt;div class=&quot;pay-range&quot;&gt;&lt;span&gt;$290,000&lt;/span&gt;&lt;span class=&quot;divider&quot;&gt;&amp;mdash;&lt;/span&gt;&lt;span&gt;$435,000 USD&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;content-conclusion&quot;&gt;&lt;h2&gt;&lt;strong&gt;Logistics&lt;/strong&gt;&lt;/h2&gt;\n&lt;p&gt;&lt;strong&gt;Minimum education: &lt;/strong&gt;Bachelor’s degree or equivalent experience&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Location-based hybrid policy:&lt;/strong&gt; Staff are expected in an office at least 25% of the time; some roles need more.&lt;/p&gt;\n&lt;p&gt;&lt;strong&gt;Visa sponsorship:&amp;nbsp;&lt;/strong&gt;We do sponsor visas! However, we cannot sponsor visas for every role and every candidate. If we offer you a role, we will make every reasonable effort and work with an immigration lawyer to try.&lt;/p&gt;&lt;/div&gt;",
+   "departments": [
+    {
+     "id": 8107,
+     "name": "Technical Program Management",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "offices": [
+    {
+     "id": 8221,
+     "name": "San Francisco, CA",
+     "location": "San Francisco, California, United States",
+     "child_ids": [],
+     "parent_id": null
+    }
+   ],
+   "ai_disclaimer": null,
+   "include_ai_disclaimer": null,
+   "ai_opt_out_request_url": null
+  }
+ ],
+ "meta": {
+  "total": 8
+ }
+}

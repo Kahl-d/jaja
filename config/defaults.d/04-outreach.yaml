@@ -1,0 +1,47 @@
+# Neutral defaults for the batch-04 scripts (outbox, graph_links, stage_batch, dash_api, agency_status, check_dossier, people_watch).
+# Lists of phrases are empty and the dash rules are off until your own config sets them.
+identity:
+  vault_prefix: ''
+style:
+  banned_phrases: []
+  no_en_dash: false
+  ai_tell_words: []
+  ai_tell_density: 3
+  pitch_phrases: []
+policy:
+  outreach:
+    confidential_patterns: []
+    job_ask_patterns: []
+    comments_per_day: 10
+    linkedin_ask_chars: 400
+    linkedin_max_chars: 600
+    first_email_words:
+    - 60
+    - 120
+    touch_cap: 3
+    identical_days: 30
+  nda:
+    always_terms: []
+  tiers:
+    dream_fit: 4.5
+    focused_fit: 4.0
+  focus:
+    draft_marker: draft for the owner
+  dossier:
+    angle_section: why this company for you
+  browser:
+    people_watch_daily_views: 20
+  linkedin_batch:
+    live_ref: ''
+    common_checks: []
+    apply_list:
+      title: LinkedIn apply list (the owner applies; nothing is applied by any agent)
+      owner: presence lane
+      approval: pending
+      approval_suffix: ''
+      preamble:
+      - Apply every change below in order, in one sitting.
+      after:
+      - '- Tell the orchestrator, or paste the profile back, and every field is checked against LINKEDIN.md.'
+      - '- Each item is recorded with `outbox.py mark-sent`.'
+    items: []

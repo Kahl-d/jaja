@@ -1,0 +1,7 @@
+type: prep
+title: Prep lane
+roster: [prep-coach]
+skills: [prep-pack, mock-interview, debrief]
+scope: ["prep/**", "hub/lanes/PREP.md"]
+gates: [check_holds.py, "bank ids resolve in prep/questions.yaml"]
+stops: ["a live interview round (never help during one)", "a story or answer with no record behind it (ask the owner)", "internal-only material in a pack", "anything outward"]

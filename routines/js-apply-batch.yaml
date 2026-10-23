@@ -1,0 +1,17 @@
+# Routine spec (schema: schemas/routine.yaml). RETIRED, kept for its history.
+# Mass applications run in the apply lane and are submitted on the owner's batch yes in session
+# (docs/AGENCY-CHARTER.md section 7); an unattended routine cannot do that. It never submitted anything.
+name: js-apply-batch
+purpose: "Retired (charter section 7: the apply lane does this work after the owner's batch yes). Was: on weekdays build the day's apply sheet: the top READY rows of the generated hub/NEXT-UP.md go through apply_batch.py --next-up 5 at the focused tier (packs built and linted, the reader-model check, the PDF that ships); the owner applies to each himself. Nothing is submitted or sent."
+runs_on: desktop
+engine: script
+schedule: "15 8 * * 1-5"
+action: "script:scripts/apply_batch.py --next-up 5"
+inputs:
+outputs:
+connectors: []
+tier: T1
+notify: {"on": needs-owner, via: home}
+budget: {max_runs_per_day: 2, max_tokens: 0}
+enabled: false                 # retired; see the header
+owner: recruiter

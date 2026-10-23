@@ -1,0 +1,6 @@
+# Neutral defaults for the pursuit record (scripts/pursuits.py).
+identity:
+  owner_token: "owner"        # the owner's token in waiting_on (waiting_on: <token>)
+  owner_speaker: "Owner"      # the owner's name as the speaker of a quoted decision
+policy:
+  ruling_id_pattern: "[A-Z]{1,4}-\\d+"   # shape of a ruling id a decision may cite

@@ -1,0 +1,31 @@
+# Routine spec (schema: schemas/routine.yaml). Sunday afternoon so the weekly review reads the report.
+# The skill runs tracker-ops for this report. Receipt: logs/runs/js-weekly-metrics/<date>.md. Paused by default.
+name: js-weekly-metrics
+purpose: "On Sundays regenerate the dashboard and write the weekly funnel report: interviews booked this week against the weekly floor first (scripts/interviews.py; targets/goals.yaml, no ceiling), then the outbound and backlog funnels, apply latency, response rates by source and tailoring depth, ghost rate and work-authorization clocks as context; a role-taxonomy line and a card-audit line (role_taxonomy.py, card_audit.py); the finding line from python3 scripts/finding_metrics.py --write (coverage of roles learned of outside our boards, the missing employers, board vs alert lead time, freshness at action; state/reports/finding-<date>.md and .json); three insights ranked by their effect on interviews; proposals for the Recruiter."
+runs_on: desktop
+engine: claude
+model: haiku
+effort: low
+schedule: "0 16 * * 0"
+action: skill:job-dashboard
+inputs:
+  - targets/goals.yaml
+  - applications/
+  - jobs/
+  - prospects/
+  - touches/
+  - legal/timers.md
+  - logs/runs/js-scout/
+outputs:
+  - state/reports/funnel-<date>.md
+  - state/recruiter/role-taxonomy-<date>.md    # role_taxonomy.py --write
+  - state/reports/finding-<date>.md            # finding_metrics.py --write
+  - state/reports/finding-<date>.json
+  - DASHBOARD.md
+  - logs/runs/js-weekly-metrics/<date>.md
+connectors: []
+tier: T1
+notify: {"on": needs-owner, via: push}      # an insight that needs a decision (for example a change to a goals.yaml floor)
+budget: {max_runs_per_day: 1, max_tokens: 150000}
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: tracker-ops

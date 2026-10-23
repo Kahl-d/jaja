@@ -1,0 +1,4 @@
+policy:
+  cockpit:
+    open_prefix: "agency-data/"
+    connector_setup_doc: "CONNECTORS.md"

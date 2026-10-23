@@ -1,0 +1,26 @@
+# Messages Alex sent (Gmail SENT) in fixture threads, for prospect-ingest tests.
+- id: out-maya-01
+  at: "2026-08-29T09:00:00-07:00"
+  from: "Alex Example <alex@example.test>"
+  to: "Maya Chen <maya.chen@heliosystems.test>"
+  subject: "Re: Senior ML Engineer (LLM Platform) at Helio Systems"
+  thread: rec-inhouse-01
+  in_reply_to: rec-inhouse-01
+  gmail_labels: ["SENT"]
+  body: |
+    Hi Maya, thanks for reaching out. I'd be glad to chat; Thursday afternoon works for me.
+
+    Alex
+
+- id: out-hannah-01
+  at: "2026-08-27T12:00:00-07:00"
+  from: "Alex Example <alex@example.test>"
+  to: "Hannah Lee <hannah@parallaxai.test>"
+  subject: "Re: Intro: Alex <> Hannah (Parallax AI)"
+  thread: ref-intro-01
+  in_reply_to: ref-bcc-02
+  gmail_labels: ["SENT"]
+  body: |
+    Hi Hannah, great to meet you. Friday at 11 works well.
+
+    Alex

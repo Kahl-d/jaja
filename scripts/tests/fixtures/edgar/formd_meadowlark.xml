@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<edgarSubmission>
+    <schemaVersion>X0708</schemaVersion>
+    <submissionType>D</submissionType>
+    <primaryIssuer>
+        <entityName>Meadowlark AI, Inc.</entityName>
+        <issuerAddress>
+            <city>SEATTLE</city>
+            <stateOrCountry>WA</stateOrCountry>
+        </issuerAddress>
+        <entityType>Corporation</entityType>
+    </primaryIssuer>
+    <offeringData>
+        <industryGroup>
+            <industryGroupType>Other Technology</industryGroupType>
+        </industryGroup>
+        <typeOfFiling>
+            <newOrAmendment>
+                <isAmendment>false</isAmendment>
+            </newOrAmendment>
+        </typeOfFiling>
+        <offeringSalesAmounts>
+            <totalOfferingAmount>Indefinite</totalOfferingAmount>
+            <totalAmountSold>1200000</totalAmountSold>
+        </offeringSalesAmounts>
+    </offeringData>
+</edgarSubmission>

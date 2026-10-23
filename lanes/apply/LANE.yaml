@@ -1,0 +1,7 @@
+type: apply
+title: Apply lane
+roster: [apply-assist, tracker-ops, messenger, legal-visa]
+skills: [apply-assist, track-application, follow-up-sweep, draft-reply, calendar-hold, visa-check, job-dashboard]
+scope: ["applications/*/apply-pack.md", "state/accounts.yaml", "state/apply-batches/**", "outbox/**", "hub/lanes/APPLY.md", "playbooks/portals/**"]
+gates: [apply_pack.py lint, apply_batch.py, tracker.py project --dry-run, outbox.py lint, check_holds.py]
+stops: ["Submit of any row the owner's batch yes in this session does not name (charter section 7); send, post, connect or pay (an approved approval file)", "a password, CAPTCHA, credential or account creation", "an answer with no record behind it (ask the owner through the Recruiter)", "a variant the editor has not signed", "already applied (application.md stage, confirmation mail, the portal's applied list)"]

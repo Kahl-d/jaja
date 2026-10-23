@@ -1,0 +1,7 @@
+policy:
+  linkedin_doc:
+    decision_date: "2026-01-01"
+    headlines:
+      - ["AI Engineer \\| Agents \\| Evals", "draft A", "chosen"]
+    experience:
+      - {title: "Example Corp: Engineer", file: "experience-example.txt", meta: "Example Corp · Engineer", before: "not on the profile", evidence: "ev-001", status: "proposed"}

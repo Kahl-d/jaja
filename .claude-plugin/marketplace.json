@@ -1,0 +1,20 @@
+{
+  "name": "job-agency",
+  "owner": {
+    "name": "job-agency"
+  },
+  "metadata": {
+    "description": "Local marketplace for the job-agency plugin"
+  },
+  "plugins": [
+    {
+      "name": "job-agency",
+      "source": "./",
+      "description": "Job-search agency: agents, skills, hooks, MCP server",
+      "version": "0.1.0",
+      "author": {
+        "name": "job-agency"
+      }
+    }
+  ]
+}

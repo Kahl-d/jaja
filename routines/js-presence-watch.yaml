@@ -1,0 +1,30 @@
+# Routine spec (schema: schemas/routine.yaml). Weekly presence watch: runs scripts/presence_check.py over
+# state/presence/portals.yaml (every public surface says the current truth; nothing that arrives there goes unwatched),
+# then re-reads the owner's own public pages (their sites and GitHub, read only, no login) for a public search signal
+# (the confidential-terms list that scripts/outbox.py enforces) and puts every flag on "Needs you".
+# Receipt: logs/runs/js-presence-watch/<date>.md.
+# CREATED PAUSED: enabling it, and installing the scheduled task, are the owner's word. Until then the same checks run
+# by hand at the weekly check. Manual install: a scheduled task `js-presence-watch`, weekly, whose prompt runs the
+# linkedin-editor card's "Presence watch" procedure.
+name: js-presence-watch
+purpose: "Weekly, check that each public surface in state/presence/portals.yaml says the current truth and is watched, re-read the owner's own public pages for a public search signal, and put every flag on needs-owner."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: medium
+schedule: "0 8 * * 1"
+action: role:linkedin-editor
+inputs:
+  - state/presence/portals.yaml
+  - clock.yaml
+  - profile/PROFILE.md
+  - profile/facts.yaml
+  - state/linkedin/live.md
+outputs:
+  - logs/runs/js-presence-watch/<date>.md
+connectors: []                 # public pages read only; never a login, never a click, never LinkedIn by a routine
+tier: T1
+notify: {"on": needs-owner, via: push}      # presence_check.py flags; a public search signal on the owner's own pages
+budget: {max_runs_per_day: 1, max_tokens: 80000}
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: linkedin-editor

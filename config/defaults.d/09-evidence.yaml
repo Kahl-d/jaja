@@ -1,0 +1,3 @@
+# Profile evidence checks (scripts/check_evidence.py).
+policy:
+  lenses: []        # the lens names a corpus README may list in its `lenses:` frontmatter; empty = not checked

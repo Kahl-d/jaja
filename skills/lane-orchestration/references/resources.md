@@ -1,0 +1,120 @@
+# The shared resource — assigning a machine-global resource to a lane
+
+**A shared resource is any machine-global thing a lane must hold exclusively: a dev server port, a
+device, a browser profile, a connector quota, a live app instance. One resource. One holder. The
+orchestrator authorises one lane at a time.** (The vocabulary below speaks of a single live app —
+"the instance", slot 1; `inst-N` is the slot name.)
+
+> ⭐ **The principle:** the lanes take turns for the live instance and report to the orchestrator, which
+> authorises only one lane at a time to use the live app.
+
+---
+
+## 1 · ⛔ MEASURE WHETHER A SECOND INSTANCE IS EVEN POSSIBLE — before designing around one
+
+⭐ **The general rule for any project: measure whether your app's own security policy permits a
+second instance before designing around one.** *(Example: a product's own security policy can pin the backend port, so a second instance on another port
+has a live backend and an app showing a backend error, indistinguishable from a dead backend. One
+slot is then the only supported configuration.)*
+
+---
+
+## 2 · The turn-taking protocol
+
+```
+① lane posts   ### LIVE-APP REQUEST · to: ORCHESTRATOR   in its OWN hub file
+                 (what it will drive, and roughly how long)
+② orchestrator ### LIVE-APP GRANTED · to: <lane>          in SIGNAL.md + that lane's brief
+③ lane LAUNCHES IT ITSELF, on its OWN worktree and branch
+④ lane drives, captures evidence, then KILLS IT
+⑤ lane posts   ### LIVE-APP RELEASED · to: ORCHESTRATOR   + what it left behind
+```
+
+⛔ **Do not launch without a grant.** Two apps on one port cannot coexist — the second silently
+fails to bind and costs an hour.
+⭐ **Do not sit on the grant.** Batch everything the app can answer into one hold, then release.
+⚠ **If you need it and it is held, keep working on everything that is not app-gated** — that is the
+large majority of every scope's queue.
+
+### ⭐ THE OWNER CHANGES TWICE PER SCOPE — lend, then take back
+
+| phase | owner | which worktree | why |
+|---|---|---|---|
+| the lane is fixing / doing its own live pass | ⭐ **THE LANE** | ⛔ **its OWN worktree** | it is editing; HMR carries its fixes live. **Driving the review copy would show it code it did not just write** |
+| the lane has DECLARED | ⭐ **THE ORCHESTRATOR** | ⛔ **the review worktree at the exact reviewed SHA** | the merge review must drive **what merges**, not a tree that moved under it |
+| the owner's own pass before approval | the orchestrator keeps it running | the reviewed SHA | **the owner must look at the same thing that was reviewed** |
+
+⛔ **A sub-lane never requests the app directly** — it goes through its lane, which holds the grant.
+
+---
+
+## 3 · How a lane launches it — on ITS branch, with ITS work
+
+⛔ **The launch, health-check and release commands are programme-specific.** They live in
+`hub/RESOURCES.md` §2, filled in by the orchestrator when the programme opens. What does not change:
+
+⭐ **A slot is a port allocation, not a code allocation.** It serves whatever tree you point it at, so
+**save or commit your work first** and the running app is your branch's actual behaviour.
+
+### Prove EVERY plane before trusting a single observation
+
+⭐ **An instance can pass three planes with the feature not in it at all.** The plane that proves the
+feature itself is the one that matters. ⚠ A health probe says nothing about whether the **app** is
+signed in — a probe carries no token; look at the window.
+
+### Releasing — kill by PID, never by name
+
+⛔ **Never kill by process name** — that kills every lane session's MCP servers, including your own.
+Verify the process is dead, then post `LIVE-APP RELEASED`.
+
+---
+
+## 4 · ⚠ A SHARED DATA STORE IS MACHINE-GLOBAL AND SHARED BETWEEN LANES
+
+If the programme has a machine-global store (`hub/RESOURCES.md` §3 names it), it is **not per-slot**,
+and it holds **the owner's real work**.
+
+- ⛔ **DO NOT WIPE IT.** ⭐ **"Clear after driving" means remove ONLY what YOU created.** A lane
+  that refuses to clear a store it did not populate is right to — following the old wording
+  literally would destroy the owner's apps.
+- ⭐ **Namespace what you create** (`<scope>_<what>`) and say in your RELEASE post what you left.
+- ⚠ Stale `.lock` files with no `.json` beside them are debris from an interrupted drive — remove
+  only your own.
+- ⭐ **Sign-in persists in the profile**, so whoever holds the slot inherits it. ⛔ **NO DUMMY DATA.**
+
+---
+
+## 5 · ⛔ THINGS THAT ARE ENVIRONMENT REDS, NOT CODE REDS
+
+**Each cost a separate investigation. Provision once, deliberately, and record it in the brief so
+the next lane does not rediscover it.**
+
+| trap | symptom | fix |
+|---|---|---|
+| a build artifact that is **downloaded by `prebuild`, not committed** — and `npm ci` does not run `prebuild` | backend tests red in a fresh worktree | run the provisioning script before trusting any suite result |
+| a **vendored tarball** that is not committed and `npm ci` does not produce | guard tests red, *"vendor/x.tgz is missing"* | run the pack step |
+| a **sub-package outside the root workspace** | tests red; its own typecheck and lint never run in CI at all | install and build it explicitly |
+| the ambient interpreter | pinned tests red | ⛔ **repo venv by ABSOLUTE path**, always |
+
+⛔ **A lane that skips these reports phantom failures — or, worse, "fixes" them.**
+⭐ **Check the environment before believing a failure. A red you did not cause is a fact about your
+environment.**
+
+---
+
+## 6 · ⛔ THE APP DOES NOT HOT-RELOAD WHAT YOU THINK IT DOES
+
+Import-time constants (prompts, skeletons, briefs, module-level config) are read **once**. A drive
+after editing them measures the **OLD** code while you believe you are measuring your fix.
+⇒ **stop → apply → restart → drive.** Frontend HMR is not evidence that the backend moved.
+
+---
+
+## 7 · ⛔ THE REGISTRY IS A LEDGER, NOT THE TRUTH
+
+`hub/RESOURCES.md` §0 (CURRENT HOLDER) records the claim. **A registry can misreport** — a
+slot shown held by a session that closed hours earlier tells every lane that a free slot is
+taken.
+
+⇒ ⭐ **MEASURE, NEVER READ THE REGISTRY AS TRUTH.** Probe the ports before you believe a row, and
+release a claim whose process you have verified dead.

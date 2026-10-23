@@ -1,0 +1,81 @@
+{
+ "_captured": "synthetic fixture shaped like the Gem job board API answer (board gemco)",
+ "posts": [
+  {
+   "absolute_url": "https://jobs.gem.com/gemco/100201",
+   "content": "<h2>Role Details</h2><ul><li><strong>Location:</strong> This role is based 3 days per week in our San Francisco office and is not eligible for full-time remote work.</li><li><strong>Compensation:</strong> The annual cash compensation range for this position is $190,000–$260,000 based on level, in addition to equity and benefits.</li></ul>",
+   "content_plain": "Role Details  Location: This role is based 3 days per week in our San Francisco office and is not eligible for full-time remote work.  Compensation: The annual cash compensation range for this position is $190,000–$260,000 based on level, in addition to equity and benefits.",
+   "created_at": "2020-11-17T15:37:20.000Z",
+   "departments": [
+    {
+     "child_ids": [],
+     "id": "4001",
+     "name": "Engineering",
+     "parent_id": null
+    }
+   ],
+   "employment_type": "full_time",
+   "first_published_at": "2020-11-17T15:37:23.000Z",
+   "id": "100201",
+   "internal_job_id": "100301",
+   "location": {
+    "name": "San Francisco, United States"
+   },
+   "location_type": "hybrid",
+   "offices": [
+    {
+     "child_ids": [],
+     "child_office_external_ids": [],
+     "id": "4002",
+     "location": {
+      "name": "San Francisco, United States"
+     },
+     "name": "San Francisco",
+     "parent_id": null,
+     "parent_office_external_id": null
+    }
+   ],
+   "requisition_id": "95",
+   "title": "Software Engineer",
+   "updated_at": "2026-03-10T21:20:54.077Z"
+  },
+  {
+   "absolute_url": "https://jobs.gem.com/gemco/100202",
+   "content": "<p>Build LLM evals and agents in Python.</p><p>Salary range $160,000 - $200,000.</p>",
+   "content_plain": "Build LLM evals and agents in Python. Salary range $160,000 - $200,000.",
+   "created_at": "2020-11-17T15:37:20.000Z",
+   "departments": [
+    {
+     "child_ids": [],
+     "id": "4001",
+     "name": "Engineering",
+     "parent_id": null
+    }
+   ],
+   "employment_type": "full_time",
+   "first_published_at": "2026-09-29T17:00:00.000Z",
+   "id": "100202",
+   "internal_job_id": "100301",
+   "location": {
+    "name": "Remote, United States"
+   },
+   "location_type": "remote",
+   "offices": [
+    {
+     "child_ids": [],
+     "child_office_external_ids": [],
+     "id": "4002",
+     "location": {
+      "name": "San Francisco, United States"
+     },
+     "name": "San Francisco",
+     "parent_id": null,
+     "parent_office_external_id": null
+    }
+   ],
+   "requisition_id": "212",
+   "title": "AI Engineer, Evals",
+   "updated_at": "2026-03-10T21:20:54.077Z"
+  }
+ ]
+}

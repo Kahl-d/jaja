@@ -1,0 +1,10 @@
+type: resume
+title: Resume lane
+roster: [resume-tailor, resume-editor, base-comparer, hiring-manager-persona, technical-ai-reviewer, technical-recruiter-reviewer, ai-screener, corpus-keeper, role-analyst, company-researcher, prospector, fit-scorer, legal-visa]
+skills: [resume-for, role-package, base-compare, page-review, editorial-review, ats-check, build-resume-pdf, tailor-resume, build-resume-base, add-experience, research-company, research-person, score-fit, visa-check, prospect-search]
+scope: ["resumes/variants/**", "research/targets/**", "companies/**", "legal/checks/**", "applications/*/fit.md", "hub/lanes/CRAFT.md"]
+gates: [render_resume.py lint, ats_check.py, check_holds.py, rubric_check.py, editorial-review, base-compare, page-review]
+stops: ["a base change is needed (its own job, on the owner's word)", "a fourth loop on one page (the owner chooses)", "anything outward"]
+# Matrix files (single writer per field): research writes the rows, their type and rank; resume writes only
+# answer: and ceiling: through `python3 scripts/jd_matrix.py set`, never by hand. Neither edits the other's fields.
+# CRAFT = research + resume in one lane (lanes/research/AGENT.md is read when a research item is claimed); its log is hub/lanes/CRAFT.md

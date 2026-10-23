@@ -1,0 +1,6 @@
+# targets/x-deny.yaml: X accounts whose posts are never a hiring post for your search (aggregators, news, agencies).
+# Read by scripts/posts.py (poster_kind) and scripts/x_api.py watch_plan (adds -from:<handle> to every search).
+# Add-only; a row is retired by the orchestrator, never by a script. A person the heuristics flag by mistake goes under `allow:`.
+# Row shape: {x_handle: example, kind: news|aggregator|agency, why: "short reason", added: YYYY-MM-DD, source: "where you saw it"}
+accounts: []
+allow: []

@@ -1,0 +1,220 @@
+{
+ "comments": "SYNTHETIC fixture shaped like the live /jobs/api/search response observed 2026-09-25 (pubDate in seconds, locationRestrictions as country names).",
+ "updatedAt": 1790251200,
+ "offset": 0,
+ "limit": 20,
+ "totalCount": 40,
+ "jobs": [
+  {
+   "title": "Machine Learning Engineer, LLM Evaluation",
+   "excerpt": "Build evaluation pipelines for LLM agents. Python, evals, tracing.",
+   "companyName": "Northwind Labs",
+   "companySlug": "northwind-labs",
+   "companyLogo": "https://cdn-images.himalayas.app/northwind-labs",
+   "employmentType": "Full Time",
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPeriod": "annual",
+   "seniority": [
+    "Mid-level"
+   ],
+   "currency": null,
+   "locationRestrictions": [
+    "United States",
+    "Canada"
+   ],
+   "timezoneRestrictions": [
+    -8,
+    -7,
+    -6,
+    -5
+   ],
+   "categories": [
+    "Machine-Learning-Engineer"
+   ],
+   "parentCategories": [
+    "Developer"
+   ],
+   "description": "<p>Build evaluation pipelines for LLM agents. Python, evals, tracing.</p>",
+   "pubDate": 1790215200000,
+   "expiryDate": 1795132800,
+   "applicationLink": "https://himalayas.app/companies/northwind-labs/jobs/machine-learning-engineer-llm-evaluation-5100000002",
+   "guid": "https://himalayas.app/companies/northwind-labs/jobs/machine-learning-engineer-llm-evaluation-5100000002"
+  },
+  {
+   "title": "Applied AI Engineer",
+   "excerpt": "Ship agentic features on our platform. We sponsor visas for this role.",
+   "companyName": "Brightline Robotics",
+   "companySlug": "brightline-robotics",
+   "companyLogo": "https://cdn-images.himalayas.app/brightline-robotics",
+   "employmentType": "Full Time",
+   "minSalary": 150000,
+   "maxSalary": 190000,
+   "salaryPeriod": "annual",
+   "seniority": [
+    "Senior"
+   ],
+   "currency": "USD",
+   "locationRestrictions": [
+    "United States"
+   ],
+   "timezoneRestrictions": [
+    -8,
+    -7,
+    -6,
+    -5
+   ],
+   "categories": [
+    "Machine-Learning-Engineer"
+   ],
+   "parentCategories": [
+    "Developer"
+   ],
+   "description": "<p>Ship agentic features on our platform. We sponsor visas for this role.</p>",
+   "pubDate": 1790186400,
+   "expiryDate": 1795132800,
+   "applicationLink": "https://himalayas.app/companies/brightline-robotics/jobs/applied-ai-engineer-5100000001",
+   "guid": "https://himalayas.app/companies/brightline-robotics/jobs/applied-ai-engineer-5100000001"
+  },
+  {
+   "title": "Senior React Native Developer",
+   "excerpt": "Mobile work.",
+   "companyName": "Lemonade Dev",
+   "companySlug": "lemonade-dev",
+   "companyLogo": "https://cdn-images.himalayas.app/lemonade-dev",
+   "employmentType": "Contractor",
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPeriod": "annual",
+   "seniority": [
+    "Senior"
+   ],
+   "currency": null,
+   "locationRestrictions": [
+    "Albania",
+    "Andorra",
+    "Australia"
+   ],
+   "timezoneRestrictions": [
+    -8,
+    -7,
+    -6,
+    -5
+   ],
+   "categories": [
+    "Machine-Learning-Engineer"
+   ],
+   "parentCategories": [
+    "Developer"
+   ],
+   "description": "<p>Mobile work.</p>",
+   "pubDate": 1790154000,
+   "expiryDate": 1795132800,
+   "applicationLink": "https://himalayas.app/companies/lemonade-dev/jobs/senior-react-native-developer-5100000003",
+   "guid": "https://himalayas.app/companies/lemonade-dev/jobs/senior-react-native-developer-5100000003"
+  },
+  {
+   "title": "AI Engineer",
+   "excerpt": "Prompting, RAG, evals.",
+   "companyName": "Globex",
+   "companySlug": "globex",
+   "companyLogo": "https://cdn-images.himalayas.app/globex",
+   "employmentType": "Full Time",
+   "minSalary": 60,
+   "maxSalary": 80,
+   "salaryPeriod": "hourly",
+   "seniority": [
+    "Mid-level"
+   ],
+   "currency": "USD",
+   "locationRestrictions": [],
+   "timezoneRestrictions": [
+    -8,
+    -7,
+    -6,
+    -5
+   ],
+   "categories": [
+    "Machine-Learning-Engineer"
+   ],
+   "parentCategories": [
+    "Developer"
+   ],
+   "description": "<p>Prompting, RAG, evals.</p>",
+   "pubDate": 1790071200,
+   "expiryDate": 1795132800,
+   "applicationLink": "https://himalayas.app/companies/globex/jobs/ai-engineer-5100000004",
+   "guid": "https://himalayas.app/companies/globex/jobs/ai-engineer-5100000004"
+  },
+  {
+   "title": "LLM Engineer",
+   "excerpt": "Expired listing.",
+   "companyName": "Acme AI",
+   "companySlug": "acme-ai",
+   "companyLogo": "https://cdn-images.himalayas.app/acme-ai",
+   "employmentType": "Full Time",
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPeriod": "annual",
+   "seniority": [
+    "Mid-level"
+   ],
+   "currency": null,
+   "locationRestrictions": [
+    "United States"
+   ],
+   "timezoneRestrictions": [
+    -8,
+    -7,
+    -6,
+    -5
+   ],
+   "categories": [
+    "Machine-Learning-Engineer"
+   ],
+   "parentCategories": [
+    "Developer"
+   ],
+   "description": "<p>Expired listing.</p>",
+   "pubDate": 1790020800,
+   "expiryDate": 1789862400,
+   "applicationLink": "https://himalayas.app/companies/acme-ai/jobs/llm-engineer-5100000006",
+   "guid": "https://himalayas.app/companies/acme-ai/jobs/llm-engineer-5100000006"
+  },
+  {
+   "title": "Data Scientist",
+   "excerpt": "Dashboards.",
+   "companyName": "Hooli",
+   "companySlug": "hooli",
+   "companyLogo": "https://cdn-images.himalayas.app/hooli",
+   "employmentType": "Full Time",
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPeriod": "annual",
+   "seniority": [
+    "Mid-level"
+   ],
+   "currency": null,
+   "locationRestrictions": [
+    "United States"
+   ],
+   "timezoneRestrictions": [
+    -8,
+    -7,
+    -6,
+    -5
+   ],
+   "categories": [
+    "Machine-Learning-Engineer"
+   ],
+   "parentCategories": [
+    "Developer"
+   ],
+   "description": "<p>Dashboards.</p>",
+   "pubDate": 1790017200,
+   "expiryDate": 1795132800,
+   "applicationLink": "https://himalayas.app/companies/hooli/jobs/data-scientist-5100000007",
+   "guid": "https://himalayas.app/companies/hooli/jobs/data-scientist-5100000007"
+  }
+ ]
+}

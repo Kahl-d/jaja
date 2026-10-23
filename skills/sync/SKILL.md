@@ -1,0 +1,19 @@
+---
+name: sync
+description: Use after editing any role card, skill, hook, MCP config or AGENTS.md, and whenever the doctor reports drift. Regenerates every engine adapter (Claude and Codex) from the source files.
+disable-model-invocation: true
+---
+
+# Sync
+
+## Procedure
+1. `python3 scripts/kernel/sync.py` from the workspace root. It reads the role cards (`agents/*.md`), the skills
+   (`skills/*`), `hooks/hooks.json`, the MCP config, `AGENTS.md` and the engine notes, and writes the engine
+   adapters (agent folders, skill folders, the hooks key of the engine settings, the MCP config, `CLAUDE.md`
+   and the plugin manifests). Every output starts with the GENERATED header.
+2. `python3 scripts/kernel/sync.py --check` must now exit 0.
+3. `git status --short` and list what changed; stage only generated paths plus the sources that
+   were edited. Do not commit unless the owner asks.
+4. If a generated file was hand-edited, the guard hook or `--check` will say so: discard the hand
+   edit, move the change into the source, re-run.
+5. Report the counts written per output folder and the check result.

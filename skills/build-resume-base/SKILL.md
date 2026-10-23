@@ -1,0 +1,63 @@
+---
+name: build-resume-base
+description: "Use only when the owner orders a change to the one general base resume (resumes/bases/general/: new work, a ruling) or asks for a base designed for a specific title, role or company. Never to build a base per lens. Discussion-first with the owner."
+disable-model-invocation: true
+---
+
+# Change the base resume (one general base; no base per lens)
+
+Owner: resume-tailor. Tier: T1. Rules, the RESUME-ENGINE steps and the truthfulness pre-flight are
+in `agents/resume-tailor.md`; follow them exactly. Today is !`date +%F`.
+
+The standing rule: `resumes/bases/general/` (the frozen iteration its `README.md` Status line names) is the base used everywhere until the owner
+updates it or designs one for a specific title, role or company. Every variant copies it
+(`tailor-resume`, `base_of: general`); a lens is only a variant's emphasis label. How the base was made,
+the story it keeps and how a variant is made: `resumes/bases/general/README.md`.
+
+## Preconditions (check first; any failure = stop)
+1. The owner's words ordering the change, in this session or recorded (the Recruiter's plan, `issues.md`).
+   Without them the base is frozen: no edit, however small.
+2. `grep -m1 "^status:" profile/PROFILE.md` prints `status: approved`.
+3. Conflicts touching the changed material:
+   `grep -n -B1 -A1 "status: awaiting-owner" profile/facts.yaml`. Any conflict on a changed line must
+   be ruled first, or that line stays as it is.
+
+## Procedure
+1. Work from the user's data folder (`$JOB_AGENCY_DATA`);
+   `(cd resumes/bases/general && shasum -a 256 -c SHA256.txt)` passes before you start.
+2. **Discuss (RESUME-ENGINE step 2, live with the owner).** What changes and why, which lines move, what is
+   added from `profile/` with evidence ids, and how the timeline arc still reads. No line before the owner's OK.
+3. **Work on a copy**, never in place: `cp -R resumes/bases/general resumes/working/base-<date>/` (the
+   resume lane's working folder) and edit `resume.yaml` there. A designed base for a title, role or
+   company gets its own folder `resumes/bases/<name>/` only when the owner names it.
+4. **Lint, render, check** (the house renderer carries the base's design; `<Name>_Resume` is the file stem from
+   `identity.resume_pdf_name`):
+   `python3 scripts/render_resume.py lint --input W/resume.yaml --template classic --density one-page`
+   `python3 scripts/render_resume.py render --input W/resume.yaml --out W --template classic --density one-page --basename <Name>_Resume`
+   `python3 scripts/render_resume.py render --input W/resume.yaml --out W/inline --template inline --density one-page --basename <Name>_Resume_inline-dates`
+   `python3 scripts/ats_check.py check --pdf W/<Name>_Resume.pdf --taxonomy profile/skills-taxonomy.yaml --source W/resume.yaml --out W`
+   (and on the inline PDF; no `--jd` for a base). A claim past two lines or a labeled link needs
+   the owner's recorded ruling (`resumes/templates/README.md`, Rulings), never a wider allowance.
+5. **Pre-flight** (the verbatim checklist) written into the working `NOTES.md`, a line of evidence per box.
+6. **Editorial gate:** resume-editor (`editorial-review`) in a clean context; answer findings in `NOTES.md`.
+7. **The owner approves**, then promote: copy the approved files into `resumes/bases/general/`, rewrite
+   `SHA256.txt` (`shasum -a 256 <files> > SHA256.txt`), update its `README.md` (iteration, commit,
+   verdict) and commit. Variants already sent stay as they were; later variants start from the new base.
+
+## Output
+The changed base in `resumes/bases/general/` with new hashes, or a designed base the owner named. Reply:
+what changed, state (planned, drafted, rendered, ATS pass, in review, approved, promoted), hashes,
+needs you.
+
+## Stop conditions
+No order from the owner; PROFILE.md not approved; a changed claim in an open conflict; the hashes do not
+verify before you start; lint or ATS failures you cannot fix without inventing content (report, do not
+pad).
+
+## Worked example
+Owner: "add the new eval harness work to the Example Labs entry". Plan agreed live: the evaluation
+bench bullet gains the new run count from the corpus entry the corpus-keeper added (its evidence id),
+the knowledge-corpus bullet trims one clause to keep one page, nothing else moves. Worked in
+`resumes/working/base-<date>/`; lint 0 errors (one long-bullet NOTE naming the owner's facts.yaml ruling,
+re-recorded by the keeper for the new evidence set first); one page; ATS PASS on both PDFs; editor round
+1 finds a motif used three times; round 2 approves; the owner approves; promoted with new hashes.

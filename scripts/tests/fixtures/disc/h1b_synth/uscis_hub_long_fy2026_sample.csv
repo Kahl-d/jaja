@@ -1,0 +1,205 @@
+Employer (Petitioner) Name,Fiscal Year   ,Industry (NAICS) Code,Measure Names,Petitioner City,Petitioner State,Petitioner Zip Code,Tax ID,Line by line,Measure Values
+ORCHARD INC,2026,,New Employment Approval,SPRINGFIELD,CA,90999,4110,"3,343",3
+ORCHARD INC,2026,,New Employment Denial,SPRINGFIELD,CA,90999,4110,"3,343",0
+ORCHARD INC,2026,,Continuation Approval,SPRINGFIELD,CA,90999,4110,"3,343",0
+ORCHARD INC,2026,,Continuation Denial,SPRINGFIELD,CA,90999,4110,"3,343",0
+ORCHARD INC,2026,,Change with Same Employer Approval,SPRINGFIELD,CA,90999,4110,"3,343",6
+ORCHARD INC,2026,,Change with Same Employer Denial,SPRINGFIELD,CA,90999,4110,"3,343",0
+ORCHARD INC,2026,,New Concurrent Approval,SPRINGFIELD,CA,90999,4110,"3,343",0
+ORCHARD INC,2026,,New Concurrent Denial,SPRINGFIELD,CA,90999,4110,"3,343",0
+ORCHARD INC,2026,,Change of Employer Approval,SPRINGFIELD,CA,90999,4110,"3,343",3
+ORCHARD INC,2026,,Change of Employer Denial,SPRINGFIELD,CA,90999,4110,"3,343",0
+ORCHARD INC,2026,,Amended Approval,SPRINGFIELD,CA,90999,4110,"3,343",2
+ORCHARD INC,2026,,Amended Denial,SPRINGFIELD,CA,90999,4110,"3,343",0
+STELLAR PLATFORMS INC,2026,,New Employment Approval,OAK GLEN,CA,94025,5019,"27,638",1
+STELLAR PLATFORMS INC,2026,,New Employment Denial,OAK GLEN,CA,94025,5019,"27,638",0
+STELLAR PLATFORMS INC,2026,,Continuation Approval,OAK GLEN,CA,94025,5019,"27,638",0
+STELLAR PLATFORMS INC,2026,,Continuation Denial,OAK GLEN,CA,94025,5019,"27,638",0
+STELLAR PLATFORMS INC,2026,,Change with Same Employer Approval,OAK GLEN,CA,94025,5019,"27,638",3
+STELLAR PLATFORMS INC,2026,,Change with Same Employer Denial,OAK GLEN,CA,94025,5019,"27,638",0
+STELLAR PLATFORMS INC,2026,,New Concurrent Approval,OAK GLEN,CA,94025,5019,"27,638",0
+STELLAR PLATFORMS INC,2026,,New Concurrent Denial,OAK GLEN,CA,94025,5019,"27,638",0
+STELLAR PLATFORMS INC,2026,,Change of Employer Approval,OAK GLEN,CA,94025,5019,"27,638",5
+STELLAR PLATFORMS INC,2026,,Change of Employer Denial,OAK GLEN,CA,94025,5019,"27,638",0
+STELLAR PLATFORMS INC,2026,,Amended Approval,OAK GLEN,CA,94025,5019,"27,638",2
+STELLAR PLATFORMS INC,2026,,Amended Denial,OAK GLEN,CA,94025,5019,"27,638",0
+NORTHWIND CORPORATION,2026,,New Employment Approval,SANTA CLARA,CA,95051,7549,"30,888",6
+NORTHWIND CORPORATION,2026,,New Employment Denial,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,Continuation Approval,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,Continuation Denial,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,Change with Same Employer Approval,SANTA CLARA,CA,95051,7549,"30,888",3
+NORTHWIND CORPORATION,2026,,Change with Same Employer Denial,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,New Concurrent Approval,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,New Concurrent Denial,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,Change of Employer Approval,SANTA CLARA,CA,95051,7549,"30,888",2
+NORTHWIND CORPORATION,2026,,Change of Employer Denial,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,Amended Approval,SANTA CLARA,CA,95051,7549,"30,888",0
+NORTHWIND CORPORATION,2026,,Amended Denial,SANTA CLARA,CA,95051,7549,"30,888",0
+VANDELAY INC,2026,,New Employment Approval,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,New Employment Denial,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,Continuation Approval,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,Continuation Denial,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,Change with Same Employer Approval,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,Change with Same Employer Denial,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,New Concurrent Approval,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,New Concurrent Denial,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,Change of Employer Approval,FOSTER CITY,CA,94404,3316,"49,415",1
+VANDELAY INC,2026,,Change of Employer Denial,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,Amended Approval,FOSTER CITY,CA,94404,3316,"49,415",0
+VANDELAY INC,2026,,Amended Denial,FOSTER CITY,CA,94404,3316,"49,415",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",New Employment Approval,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",New Employment Denial,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Continuation Approval,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Continuation Denial,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Change with Same Employer Approval,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Change with Same Employer Denial,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",New Concurrent Approval,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",New Concurrent Denial,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Change of Employer Approval,OAK GLEN,CA,94025,5019,"27,639",1
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Change of Employer Denial,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Amended Approval,OAK GLEN,CA,94025,5019,"27,639",0
+STELLAR PLATFORMS INC,2026,"21 - Mining, Quarrying, and Oil and Gas Extraction",Amended Denial,OAK GLEN,CA,94025,5019,"27,639",0
+ORCHARD INC,2026,31-33 - Manufacturing,New Employment Approval,SPRINGFIELD,CA,90999,4110,"3,344","1,062"
+ORCHARD INC,2026,31-33 - Manufacturing,New Employment Denial,SPRINGFIELD,CA,90999,4110,"3,344",17
+ORCHARD INC,2026,31-33 - Manufacturing,Continuation Approval,SPRINGFIELD,CA,90999,4110,"3,344",4
+ORCHARD INC,2026,31-33 - Manufacturing,Continuation Denial,SPRINGFIELD,CA,90999,4110,"3,344",1
+ORCHARD INC,2026,31-33 - Manufacturing,Change with Same Employer Approval,SPRINGFIELD,CA,90999,4110,"3,344","1,751"
+ORCHARD INC,2026,31-33 - Manufacturing,Change with Same Employer Denial,SPRINGFIELD,CA,90999,4110,"3,344",14
+ORCHARD INC,2026,31-33 - Manufacturing,New Concurrent Approval,SPRINGFIELD,CA,90999,4110,"3,344",0
+ORCHARD INC,2026,31-33 - Manufacturing,New Concurrent Denial,SPRINGFIELD,CA,90999,4110,"3,344",0
+ORCHARD INC,2026,31-33 - Manufacturing,Change of Employer Approval,SPRINGFIELD,CA,90999,4110,"3,344",703
+ORCHARD INC,2026,31-33 - Manufacturing,Change of Employer Denial,SPRINGFIELD,CA,90999,4110,"3,344",2
+ORCHARD INC,2026,31-33 - Manufacturing,Amended Approval,SPRINGFIELD,CA,90999,4110,"3,344",344
+ORCHARD INC,2026,31-33 - Manufacturing,Amended Denial,SPRINGFIELD,CA,90999,4110,"3,344",5
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Employment Approval,SANTA CLARA,CA,95051,7549,"30,889",347
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Employment Denial,SANTA CLARA,CA,95051,7549,"30,889",2
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Continuation Approval,SANTA CLARA,CA,95051,7549,"30,889",126
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Continuation Denial,SANTA CLARA,CA,95051,7549,"30,889",2
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change with Same Employer Approval,SANTA CLARA,CA,95051,7549,"30,889",418
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change with Same Employer Denial,SANTA CLARA,CA,95051,7549,"30,889",2
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Concurrent Approval,SANTA CLARA,CA,95051,7549,"30,889",2
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Concurrent Denial,SANTA CLARA,CA,95051,7549,"30,889",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change of Employer Approval,SANTA CLARA,CA,95051,7549,"30,889",476
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change of Employer Denial,SANTA CLARA,CA,95051,7549,"30,889",4
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Amended Approval,SANTA CLARA,CA,95051,7549,"30,889",73
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Amended Denial,SANTA CLARA,CA,95051,7549,"30,889",1
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Employment Approval,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Employment Denial,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Continuation Approval,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Continuation Denial,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change with Same Employer Approval,WEXFORD,PA,15090,7549,"30,890",1
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change with Same Employer Denial,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Concurrent Approval,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,New Concurrent Denial,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change of Employer Approval,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Change of Employer Denial,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Amended Approval,WEXFORD,PA,15090,7549,"30,890",0
+NORTHWIND CORPORATION,2026,31-33 - Manufacturing,Amended Denial,WEXFORD,PA,15090,7549,"30,890",0
+VANDELAY INC,2026,31-33 - Manufacturing,New Employment Approval,FOSTER CITY,CA,94404,3316,"49,416",29
+VANDELAY INC,2026,31-33 - Manufacturing,New Employment Denial,FOSTER CITY,CA,94404,3316,"49,416",0
+VANDELAY INC,2026,31-33 - Manufacturing,Continuation Approval,FOSTER CITY,CA,94404,3316,"49,416",74
+VANDELAY INC,2026,31-33 - Manufacturing,Continuation Denial,FOSTER CITY,CA,94404,3316,"49,416",1
+VANDELAY INC,2026,31-33 - Manufacturing,Change with Same Employer Approval,FOSTER CITY,CA,94404,3316,"49,416",0
+VANDELAY INC,2026,31-33 - Manufacturing,Change with Same Employer Denial,FOSTER CITY,CA,94404,3316,"49,416",0
+VANDELAY INC,2026,31-33 - Manufacturing,New Concurrent Approval,FOSTER CITY,CA,94404,3316,"49,416",0
+VANDELAY INC,2026,31-33 - Manufacturing,New Concurrent Denial,FOSTER CITY,CA,94404,3316,"49,416",0
+VANDELAY INC,2026,31-33 - Manufacturing,Change of Employer Approval,FOSTER CITY,CA,94404,3316,"49,416",64
+VANDELAY INC,2026,31-33 - Manufacturing,Change of Employer Denial,FOSTER CITY,CA,94404,3316,"49,416",0
+VANDELAY INC,2026,31-33 - Manufacturing,Amended Approval,FOSTER CITY,CA,94404,3316,"49,416",4
+VANDELAY INC,2026,31-33 - Manufacturing,Amended Denial,FOSTER CITY,CA,94404,3316,"49,416",1
+ORCHARD INC,2026,51 - Information,New Employment Approval,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,New Employment Denial,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,Continuation Approval,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,Continuation Denial,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,Change with Same Employer Approval,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,Change with Same Employer Denial,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,New Concurrent Approval,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,New Concurrent Denial,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,Change of Employer Approval,SPRINGFIELD,CA,90999,4110,"3,345",1
+ORCHARD INC,2026,51 - Information,Change of Employer Denial,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,Amended Approval,SPRINGFIELD,CA,90999,4110,"3,345",0
+ORCHARD INC,2026,51 - Information,Amended Denial,SPRINGFIELD,CA,90999,4110,"3,345",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Employment Approval,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Employment Denial,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,Continuation Approval,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,Continuation Denial,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,Change with Same Employer Approval,OAK GLEN,CA,94025,,"27,637",3
+STELLAR PLATFORMS INC,2026,51 - Information,Change with Same Employer Denial,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Concurrent Approval,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Concurrent Denial,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,Change of Employer Approval,OAK GLEN,CA,94025,,"27,637",3
+STELLAR PLATFORMS INC,2026,51 - Information,Change of Employer Denial,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,Amended Approval,OAK GLEN,CA,94025,,"27,637",1
+STELLAR PLATFORMS INC,2026,51 - Information,Amended Denial,OAK GLEN,CA,94025,,"27,637",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Employment Approval,OAK GLEN,CA,94025,5019,"27,640",218
+STELLAR PLATFORMS INC,2026,51 - Information,New Employment Denial,OAK GLEN,CA,94025,5019,"27,640",6
+STELLAR PLATFORMS INC,2026,51 - Information,Continuation Approval,OAK GLEN,CA,94025,5019,"27,640",6
+STELLAR PLATFORMS INC,2026,51 - Information,Continuation Denial,OAK GLEN,CA,94025,5019,"27,640",1
+STELLAR PLATFORMS INC,2026,51 - Information,Change with Same Employer Approval,OAK GLEN,CA,94025,5019,"27,640",931
+STELLAR PLATFORMS INC,2026,51 - Information,Change with Same Employer Denial,OAK GLEN,CA,94025,5019,"27,640",22
+STELLAR PLATFORMS INC,2026,51 - Information,New Concurrent Approval,OAK GLEN,CA,94025,5019,"27,640",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Concurrent Denial,OAK GLEN,CA,94025,5019,"27,640",0
+STELLAR PLATFORMS INC,2026,51 - Information,Change of Employer Approval,OAK GLEN,CA,94025,5019,"27,640",809
+STELLAR PLATFORMS INC,2026,51 - Information,Change of Employer Denial,OAK GLEN,CA,94025,5019,"27,640",7
+STELLAR PLATFORMS INC,2026,51 - Information,Amended Approval,OAK GLEN,CA,94025,5019,"27,640",516
+STELLAR PLATFORMS INC,2026,51 - Information,Amended Denial,OAK GLEN,CA,94025,5019,"27,640",7
+STELLAR PLATFORMS INC,2026,51 - Information,New Employment Approval,OAK GLEN,CA,94025,5501,"27,641",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Employment Denial,OAK GLEN,CA,94025,5501,"27,641",0
+STELLAR PLATFORMS INC,2026,51 - Information,Continuation Approval,OAK GLEN,CA,94025,5501,"27,641",0
+STELLAR PLATFORMS INC,2026,51 - Information,Continuation Denial,OAK GLEN,CA,94025,5501,"27,641",0
+STELLAR PLATFORMS INC,2026,51 - Information,Change with Same Employer Approval,OAK GLEN,CA,94025,5501,"27,641",24
+STELLAR PLATFORMS INC,2026,51 - Information,Change with Same Employer Denial,OAK GLEN,CA,94025,5501,"27,641",1
+STELLAR PLATFORMS INC,2026,51 - Information,New Concurrent Approval,OAK GLEN,CA,94025,5501,"27,641",0
+STELLAR PLATFORMS INC,2026,51 - Information,New Concurrent Denial,OAK GLEN,CA,94025,5501,"27,641",0
+STELLAR PLATFORMS INC,2026,51 - Information,Change of Employer Approval,OAK GLEN,CA,94025,5501,"27,641",22
+STELLAR PLATFORMS INC,2026,51 - Information,Change of Employer Denial,OAK GLEN,CA,94025,5501,"27,641",0
+STELLAR PLATFORMS INC,2026,51 - Information,Amended Approval,OAK GLEN,CA,94025,5501,"27,641",18
+STELLAR PLATFORMS INC,2026,51 - Information,Amended Denial,OAK GLEN,CA,94025,5501,"27,641",1
+OPENLAB OPCO LLC,2026,51 - Information,New Employment Approval,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,New Employment Denial,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,Continuation Approval,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,Continuation Denial,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,Change with Same Employer Approval,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,Change with Same Employer Denial,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,New Concurrent Approval,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,New Concurrent Denial,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,Change of Employer Approval,SAN FRANCISCO,CA,94158,0637,"31,526",27
+OPENLAB OPCO LLC,2026,51 - Information,Change of Employer Denial,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,Amended Approval,SAN FRANCISCO,CA,94158,0637,"31,526",0
+OPENLAB OPCO LLC,2026,51 - Information,Amended Denial,SAN FRANCISCO,CA,94158,0637,"31,526",0
+SKYLINE AI INC,2026,51 - Information,New Employment Approval,SAN FRANCISCO,CA,94103,6208,"37,613",13
+SKYLINE AI INC,2026,51 - Information,New Employment Denial,SAN FRANCISCO,CA,94103,6208,"37,613",1
+SKYLINE AI INC,2026,51 - Information,Continuation Approval,SAN FRANCISCO,CA,94103,6208,"37,613",1
+SKYLINE AI INC,2026,51 - Information,Continuation Denial,SAN FRANCISCO,CA,94103,6208,"37,613",0
+SKYLINE AI INC,2026,51 - Information,Change with Same Employer Approval,SAN FRANCISCO,CA,94103,6208,"37,613",0
+SKYLINE AI INC,2026,51 - Information,Change with Same Employer Denial,SAN FRANCISCO,CA,94103,6208,"37,613",0
+SKYLINE AI INC,2026,51 - Information,New Concurrent Approval,SAN FRANCISCO,CA,94103,6208,"37,613",0
+SKYLINE AI INC,2026,51 - Information,New Concurrent Denial,SAN FRANCISCO,CA,94103,6208,"37,613",0
+SKYLINE AI INC,2026,51 - Information,Change of Employer Approval,SAN FRANCISCO,CA,94103,6208,"37,613",21
+SKYLINE AI INC,2026,51 - Information,Change of Employer Denial,SAN FRANCISCO,CA,94103,6208,"37,613",0
+SKYLINE AI INC,2026,51 - Information,Amended Approval,SAN FRANCISCO,CA,94103,6208,"37,613",1
+SKYLINE AI INC,2026,51 - Information,Amended Denial,SAN FRANCISCO,CA,94103,6208,"37,613",0
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",New Employment Approval,SAN FRANCISCO,CA,94104,6045,"3,129",48
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",New Employment Denial,SAN FRANCISCO,CA,94104,6045,"3,129",0
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Continuation Approval,SAN FRANCISCO,CA,94104,6045,"3,129",3
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Continuation Denial,SAN FRANCISCO,CA,94104,6045,"3,129",1
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Change with Same Employer Approval,SAN FRANCISCO,CA,94104,6045,"3,129",0
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Change with Same Employer Denial,SAN FRANCISCO,CA,94104,6045,"3,129",0
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",New Concurrent Approval,SAN FRANCISCO,CA,94104,6045,"3,129",0
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",New Concurrent Denial,SAN FRANCISCO,CA,94104,6045,"3,129",0
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Change of Employer Approval,SAN FRANCISCO,CA,94104,6045,"3,129",84
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Change of Employer Denial,SAN FRANCISCO,CA,94104,6045,"3,129",1
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Amended Approval,SAN FRANCISCO,CA,94104,6045,"3,129",8
+ACMEAI PBC,2026,"54 - Professional, Scientific, and Technical Services",Amended Denial,SAN FRANCISCO,CA,94104,6045,"3,129",0
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",New Employment Approval,SAN FRANCISCO,CA,94158,0637,"31,527",89
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",New Employment Denial,SAN FRANCISCO,CA,94158,0637,"31,527",3
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Continuation Approval,SAN FRANCISCO,CA,94158,0637,"31,527",7
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Continuation Denial,SAN FRANCISCO,CA,94158,0637,"31,527",0
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Change with Same Employer Approval,SAN FRANCISCO,CA,94158,0637,"31,527",2
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Change with Same Employer Denial,SAN FRANCISCO,CA,94158,0637,"31,527",0
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",New Concurrent Approval,SAN FRANCISCO,CA,94158,0637,"31,527",1
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",New Concurrent Denial,SAN FRANCISCO,CA,94158,0637,"31,527",0
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Change of Employer Approval,SAN FRANCISCO,CA,94158,0637,"31,527",173
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Change of Employer Denial,SAN FRANCISCO,CA,94158,0637,"31,527",2
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Amended Approval,SAN FRANCISCO,CA,94158,0637,"31,527",5
+OPENLAB OPCO LLC,2026,"54 - Professional, Scientific, and Technical Services",Amended Denial,SAN FRANCISCO,CA,94158,0637,"31,527",0

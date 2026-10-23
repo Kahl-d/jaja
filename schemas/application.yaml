@@ -1,0 +1,53 @@
+# Frontmatter contract for applications/<slug>/application.md in the data folder.
+# The body holds an append-only "## Events" log; tracker.py projects `stage`.
+type: application
+glob: "applications/*/application.md"
+required: [id, job, company, title, stage, created, updated]
+fields:
+  - type                # node type (application); set by the writing script (graph_links.py), always first
+  - id                  # application slug: <company_slug>-<title-slug>-<yyyymm>
+  - job                 # "[[<job id>]]"
+  - company
+  - company_slug
+  - title
+  - stage
+  - round
+  - applied_at
+  - applied_via
+  - resume_variant      # the page's folder: resumes/variants/<name> or resumes/bases/<name> (older records: a [[wikilink]])
+  - resume_pdf          # the PDF that went, path under resumes/; written by `tracker.py event <slug> applied --resume`
+  - resume_sha256       # that PDF's sha256 (no applied event without the page)
+  - resume_none_reason  # --resume none --reason: why no PDF went
+  - tier                # depth: dream / focused / mass; set only by `tracker.py tier`
+  - tier_source         # why that tier (the owner's word, the page's depth, or an inferred rule)
+  - path                # who carried it: person / cold / unknown; set only by `tracker.py path`
+  - via_prospect        # the prospect id that carried it (prospects/<id>.md) when path is person; else null
+  - path_source         # the evidence for that path (a file path, an event, a ruling)
+  - base_order          # the base order a mass base application used; written by apply_batch.py
+  - cover_variant
+  - cover_letter        # required when the role's form asks for one (none otherwise); apply_pack blocks on it
+  - why_us              # required when the form asks for a why-us note; else optional
+  - prospects           # list of prospect ids involved
+  - thread_ids
+  - next_action
+  - next_action_at
+  - last_inbound_at
+  - ghost_after_days
+  - sponsorship_confirmed
+  - wage_level
+  - outcome
+  - created
+  - updated
+  - links               # graph edges: list of path-qualified [[...]] wikilinks, written only by code
+                        # (its job, company dossier and prospects; scripts/graph_links.py), never by hand
+enums:
+  stage: [discovered, fit_checked, tailored, applied, confirmation, screen, oa, interviewing, final, offer, accepted, rejected, ghosted, withdrawn, on_hold]
+  applied_via: [ats, referral, recruiter, email, other]
+  outcome: [pending, offer, accepted, rejected, ghosted, withdrawn]
+  cover_letter: [required, not-needed]
+  why_us: [required, not-needed]
+  tier: [dream, focused, mass]
+  path: [person, cold, unknown]
+  base_order: [education-first, experience-first]
+dates: [applied_at, next_action_at, last_inbound_at, created, updated]
+wikilink_lists: [links]   # lint: each must be a list of [[...]] strings (schema-links)

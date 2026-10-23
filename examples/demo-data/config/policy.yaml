@@ -1,0 +1,19 @@
+# Demo policy (fictional): Sam is a US citizen in Austin, TX.
+policy:
+  years_gate: null
+  salary: null
+  fit_gates:
+    engineer_months: 56
+    cold_max_years: 4
+    reject_years: 10
+    degree_conferred: "2021-05"
+  location:
+    home_cities: ["austin", "round rock", "cedar park", "georgetown", "san marcos"]
+    home_cities_need_state: []
+    home_state_words: ["tx", "texas"]
+  employer:
+    staffing_names: ["^globex hiring partners\\b"]
+    it_services_names: []
+  outreach:
+    comments_per_day: 5
+    touch_cap: 3

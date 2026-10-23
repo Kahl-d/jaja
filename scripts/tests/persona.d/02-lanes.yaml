@@ -1,0 +1,7 @@
+# Synthetic persona: lane aliases (a merged lane inherits the rulings of the lanes it absorbed).
+policy:
+  lane_aliases:
+    hunt: [scout-lead, scout, inbox, linkedin, x, posts]
+    apply: [mass-apply, linkedin-apply]
+    craft: [resume, research]
+    focused: [focused-acme, focused-example]

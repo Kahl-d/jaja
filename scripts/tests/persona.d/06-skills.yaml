@@ -1,0 +1,6 @@
+policy:
+  skills_map:
+    skills:
+      - ["Python", "ev-ex-001, ev-ex-002", "A M"]
+      - ["Test Automation", "ev-ex-003", "A"]
+      - ["Data Analysis", "ev-ex-002 (checked)", "M"]

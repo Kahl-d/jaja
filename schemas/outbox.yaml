@@ -1,0 +1,46 @@
+# Frontmatter contract for outbox/O-YYYY-NNNN.md in the data folder.
+# A draft waiting for the owner; written only through scripts/outbox.py (messenger, prospector,
+# linkedin-editor; legal-visa for `kind: official`). The body is the exact text. Never sent from here.
+type: outbox
+glob: "outbox/*.md"
+required: [id, channel, status, created]
+fields:
+  - type                # node type (outbox); set by outbox.py (graph_links.py), always first
+  - id                  # O-YYYY-NNNN
+  - prospect            # prospect id, or null (official mail, comments, posts, profile edits)
+  - application         # application slug, when the draft is about one
+  - channel
+  - kind
+  - to
+  - subject
+  - thread_id
+  - in_reply_to
+  - references
+  - attachments
+  - created
+  - status
+  - approval            # A-YYYY-NNNN once filed for approval
+  - content_hash
+  - checks
+  - supersedes
+  - superseded_by
+  - gmail_draft_id
+  - sent_at
+  - message_id
+  - batch
+  - label
+  - evidence_ids
+  - personalization
+  - sponsorship_variant
+  - field               # linkedin-profile-edit: the profile field
+  - old_text
+  - links               # graph edges: list of path-qualified [[...]] wikilinks, written only by code
+                        # (its prospect and application; scripts/graph_links.py), never by hand
+enums:
+  channel: [email, linkedin-message, linkedin-connect, linkedin-comment, linkedin-post, linkedin-profile-edit]
+  kind: [intro, reply, follow_up, thank_you, scheduling, coffee, other, official]
+  status: [drafted, pending, approved, rejected, expired, withdrawn, sent, replied, bounced, superseded]
+patterns:
+  id: '^O-\d{4}-\d{4}$'
+dates: [created]
+wikilink_lists: [links]   # lint: each must be a list of [[...]] strings (schema-links)

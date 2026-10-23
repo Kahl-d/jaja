@@ -1,0 +1,32 @@
+# Frontmatter contract for companies/<slug>.md in the data folder.
+type: company
+glob: "companies/*.md"
+required: [slug, name, last_researched]
+fields:
+  - type                # node type: company (the graph hub every job, prospect and application links to)
+  - slug
+  - name
+  - aliases             # other spellings of this company (list): scripts/company_index.py resolves them to `slug`,
+                        # so every record joins this dossier; company-researcher sets them at research-company step 3
+  - ats_vendor
+  - board_token         # greenhouse board token / lever site / ashby org / workday tenant+site
+  - careers_url
+  - size
+  - stage
+  - hq
+  - remote_policy
+  - h1b_approvals_3y
+  - lca_count
+  - median_lca_wage
+  - e_verify
+  - sponsorship_stance
+  - interview_process
+  - prospects
+  - tier                # target tier: dream / strong / good / fallback
+  - last_researched
+enums:
+  ats_vendor: [greenhouse, lever, ashby, workday, icims, taleo, successfactors, smartrecruiters, workable, jibe, sitemap, amazon, rippling, gem, pinpoint, teamtailor, recruitee, other, unknown]
+  e_verify: [yes, no, unknown]
+  sponsorship_stance: [sponsors, sponsors-selectively, does-not-sponsor, cap-exempt, unknown]
+  tier: [dream, strong, good, fallback]
+dates: [last_researched]

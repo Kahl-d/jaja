@@ -1,0 +1,80 @@
+# Obsidian Bases view: the pursuits (pursuits/*/pursuit.md; schema system/schemas/pursuit.yaml), one row per
+# direction into a company. Change a pursuit only with `python3 scripts/pursuits.py` (owner job-lead); the join
+# over everything it names is pursuits/<slug>/HUB.md (scripts/pursuit_hub.py), linked in the first column.
+filters:
+  and:
+    - file.inFolder("{{DATA_REL}}/pursuits")
+    - file.basename == "pursuit"
+formulas:
+  hub: 'link(file.folder + "/HUB.md", title)'
+  days_to_next: 'if(next_action_at, (date(next_action_at) - today()).days, "")'
+properties:
+  formula.hub:
+    displayName: Pursuit
+  note.title:
+    displayName: Pursuit
+  note.company:
+    displayName: Company
+  note.kind:
+    displayName: Kind
+  note.stage:
+    displayName: Stage
+  note.waiting_on:
+    displayName: Waiting on
+  note.next_action:
+    displayName: Next action
+  note.next_action_at:
+    displayName: Due
+  formula.days_to_next:
+    displayName: Days to next
+  note.referrer:
+    displayName: Referrer
+  note.introducer:
+    displayName: Introducer
+  note.applications:
+    displayName: Picks
+  note.closed_reason:
+    displayName: Closed because
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Open pursuits
+    filters:
+      and:
+        - stage != "closed-won"
+        - stage != "closed-lost"
+    order:
+      - formula.hub
+      - stage
+      - waiting_on
+      - next_action
+      - next_action_at
+      - formula.days_to_next
+      - referrer
+    sort:
+      - property: next_action_at
+        direction: ASC
+  - type: table
+    name: Waiting on you
+    filters:
+      and:
+        - waiting_on == "owner"
+    order:
+      - formula.hub
+      - stage
+      - next_action
+      - next_action_at
+  - type: table
+    name: All pursuits
+    order:
+      - formula.hub
+      - company
+      - kind
+      - stage
+      - applications
+      - closed_reason
+      - updated
+    groupBy:
+      property: company
+      direction: ASC

@@ -1,0 +1,6 @@
+﻿From,To,Sent At,Message,Direction,inviterProfileUrl,inviteeProfileUrl
+Olivia Grant,Alex Example,"8/12/26, 9:14 AM","Hi Alex, I'm a recruiter at Meridian Health AI and we're hiring applied ML engineers. Would love to connect!",INCOMING,https://www.linkedin.com/in/olivia-grant-talent,https://www.linkedin.com/in/alex-example-test
+Hiro Sato,Alex Example,"7/28/26, 6:02 PM","Hi Alex, I'm the founder of Kumo Robotics. We're building home robots and hiring our first ML engineer. Open to connecting?",INCOMING,https://www.linkedin.com/in/hiro-sato-kumo,https://www.linkedin.com/in/alex-example-test
+Jane Wu,Alex Example,"6/1/26, 11:30 AM",,INCOMING,https://www.linkedin.com/in/jane-wu-22,https://www.linkedin.com/in/alex-example-test
+Alex Example,Ben Carter,"6/25/26, 10:00 AM","Hi Ben, thanks for your note about the perception team. Happy to connect.",OUTGOING,https://www.linkedin.com/in/alex-example-test,https://www.linkedin.com/in/ben-carter-perception
+Leila Haddad,Alex Example,"7/1/26, 4:40 PM",,INCOMING,https://www.linkedin.com/in/leila-haddad-7a1b2c,https://www.linkedin.com/in/alex-example-test

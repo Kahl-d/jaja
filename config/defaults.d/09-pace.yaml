@@ -1,0 +1,8 @@
+# Human pace for outward acts on LinkedIn and X (scripts/pace.py). Defaults are conservative; override any key.
+policy:
+  pace:
+    caps:
+      linkedin: {connect: 15, message: 30, comment: 10, follow: 20}
+      x: {follow: 10, message: 5, comment: 5}
+    read_caps: {linkedin: 150, x: 100}    # soft caps on page-heavy reads a day
+    gap_seconds: 120                      # at least this long between two acts on one platform

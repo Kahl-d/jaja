@@ -1,0 +1,9 @@
+# The prep sheet for one portal sitting (scripts/portal_sitting.py). Copy a key into <your data folder>/config/*.yaml.
+policy:
+  portal_sitting:
+    order: []                  # portal ids in the order `--all` writes sittings (empty = the registry's own order)
+    default_lens: ""           # lens family named when no recorded job from a portal matches a lens (empty = none)
+    authorization_ruling: ""   # id in hub/rulings.yaml whose quote (the part after "||") is your work-authorization sentence
+    salary_ruling: ""          # id in hub/rulings.yaml whose "reading" is your desired-salary answer
+    plan_file: ""              # a table of setup rows naming portals as (id), [id] or `id`, plus a "Shared alert queries" paragraph
+    census_file: ""            # a table of portal rows tagged [id]

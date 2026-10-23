@@ -1,0 +1,525 @@
+# Job platform registry for the job-search department. Owner: platform-scout (roles/platform-scout.md);
+# research and sources: research/job-platforms-2026.md. One entry per platform where the owner could find a
+# job. sources.yaml lists the pipeline's channels; this file says, per platform, what the terms allow,
+# how jobs reach jobs/, and what the platform yields.
+#
+#   access         api          a public API or feed whose terms allow this personal use; a script polls it
+#                  rss          a public RSS feed whose terms allow it
+#                  email-alert  the platform's own job-alert mail to the owner's Gmail, parsed by
+#                               scripts/job_alerts.py from the classified harvest (never by visiting the site)
+#                  browser      an agent may read pages the owner opens, with him present, at human pace
+#                               (skill browser-job-search); never logs in, never clicks apply or submit
+#                  manual       the owner reads the site himself; the agent only records what he reports
+#                               (scripts/jobs_manual.py). Used where the terms name AI or intelligent agents.
+#   control        how the agency reaches it: connector (an official Claude connector
+#                  used in the owner's sessions), api (a script polls an allowed API or feed), alert-mail (his alert mail,
+#                  parsed), browser-with-owner (an agent reads pages he opens, with him present), manual (he reads it;
+#                  agents only record what he reports, or the channel is retired or blocked)
+#   browser_pacing_s  seconds between browser reads of this site (default and minimum 60; scripts/browser_pace.py checks
+#                  it before every page; a block page is recorded there and stops every lane)
+#   inbox_senders: addresses or domains of the portal's non-alert mail (messages, application confirmations,
+#                  relays); with alert_senders they are how mail and touches are tagged `portal: <id>`
+#                  (scripts/portal_registry.py portal_for_sender)
+#   presence: the owner's presence on the portal:
+#                  kind, priority, terms note, account {state, evidence, email (never a secret)}, profile, resume,
+#                  last_updated, next_refresh, inbox {email_senders, in_app, classifier, last_swept}, alerts, next_step,
+#                  optional decision and linked. Read by presence_check.py and outbox.py through portal_registry.py.
+#                  Surfaces that are not job platforms sit in the top-level presence_surfaces (same fields plus id, name);
+#                  presence_base_resume is the base the presence checks compare against.
+#   adapter        the script that turns the channel into job records, or null
+#   alert_senders  addresses or domains whose job_alert mail belongs to this platform (job_alerts.py reads
+#                  this list; an unmapped sender goes to the review list, never into jobs/)
+#   tos            quote (the deciding clause, under 15 words), url, read_on; verified: yes (read on the
+#                  platform's own page) or no (the page
+#                  refused automated reading; the quote comes from a secondary source or is missing)
+#   agent_terms    what the terms say about agents, set from the granting or forbidding clause:
+#                  none          nothing beyond generic bot or scraping bans
+#                  names-agents  they name AI agents or automated agents (also: the terms could not be read)
+#                  gateway-only  the only agent access is a credentials or auto-apply gateway
+#                  bars-bots     the terms bar bots or automation on the platform itself
+#                                (clause reference); allowed active or probation because the channel is the owner's own alert mail and the
+#                                apply is the owner's click or the employer's site (charter section 7), never the platform
+#                  anything but none is never probation or active (platform_yield.py --check errors)
+#   status         active     wired and proven by yield at a monthly review
+#                  probation  wired or set up, not proven yet; judged at the monthly platform watch
+#                  manual     no agent reads the site: the owner reads it himself (his alert mail is still parsed);
+#                             also a retired alert platform
+#                  blocked    not used (terms, shutdown or scam risk); the reason is in notes
+#   setup_priority P0 tomorrow, P1 this week, P2 later, none (nothing for the owner to do)
+#   alerts_on      the date the owner confirmed his alerts on this platform (skill setup-job-alerts); null until then,
+#                  and null again once he confirms he deleted them (retirement; notes keep that date)
+#   proposed       only while a monthly-watch status change waits for job-lead's Monday review:
+#                  {from: <the status before>, date: <watch date>}; dropped once ratified, `from` restored on a
+#                  revert (platform_yield.py --check warns after that Monday)
+# Top level `ignored_senders:` (after the platforms): {sender (address or domain), why, decided, kind} for senders never
+# mapped (a re-aggregator, noise); job_alerts.py ledgers their mail `ignored` once instead of leaving it unmapped. kind
+# (platform_yield.py --check requires it): job-alert (real job mail we chose not to parse), marketing (a
+# platform's or organisation's promotional or news mail) or noise (automated pings with nothing to act on).
+#   yield          trailing 30 days by first_seen, written only by `python3 scripts/platform_yield.py --write`:
+#                  fetched (records naming the platform, including seen_on), new (first found here, not a
+#                  duplicate), queued (reached queued or later), applied, interviews (screen or later)
+
+# Starter registry: the public platforms the pipeline and job_alerts.py know. Terms were read on the dates shown; re-read before
+# relying on a quote. `yield` and `last_reviewed` are written by scripts/platform_yield.py --write and the monthly review.
+platforms:
+  - id: company-ats
+    name: Company ATS boards (Greenhouse, Lever, Ashby, Workday)
+    url: https://boards-api.greenhouse.io/v1/boards/{token}/jobs
+    access: [api]
+    control: api
+    adapter: scripts/fetch_ats.py
+    alert_senders: []
+    tos: {quote: 'Job Board data is publicly available, so authentication is not required', url: 'https://docs.greenhouse.io/job-board.html', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none on the boards; fit_gates.py reads the JD and h1b_lookup.py adds LCA history
+    account_needed: false
+    alert_setup: None. A script polls the platform's API from the pipeline.
+    setup_priority: none
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+    alerts_on: null
+  - id: hacker-news
+    name: Hacker News (Who is hiring)
+    url: https://news.ycombinator.com/submitted?id=whoishiring
+    access: [api]
+    control: api
+    adapter: scripts/hn_hiring.py
+    alert_senders: []
+    tos: {quote: there is currently no rate limit, url: 'https://github.com/HackerNews/API', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none; hn_hiring.py reads visa lines from each post
+    account_needed: false
+    alert_setup: None. A script polls the platform's API from the pipeline.
+    setup_priority: none
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+    alerts_on: null
+  - id: adzuna
+    name: Adzuna
+    url: https://www.adzuna.com
+    access: [api]
+    control: api
+    adapter: scripts/adzuna.py
+    alert_senders: []
+    tos: {quote: 'The Adzuna API may be used for: ... Personal research.', url: 'https://developer.adzuna.com/docs/terms_of_service', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none
+    account_needed: true
+    alert_setup: None. A script polls the platform's API from the pipeline.
+    setup_priority: P1
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+    alerts_on: null
+  - id: himalayas
+    name: Himalayas
+    url: https://himalayas.app/jobs
+    access: [api]
+    control: api
+    adapter: scripts/himalayas.py
+    alert_senders: [himalayas.app]
+    tos: {quote: link back to the URL found on Himalayas AND mention Himalayas, url: 'https://himalayas.app/api', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none in the API; remote-only listings with country restrictions (United States kept)
+    account_needed: false
+    alert_setup: None. A script polls the platform's API from the pipeline.
+    setup_priority: none
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+    alerts_on: null
+  - id: aidevjobs
+    name: AI Dev Jobs (aidevboard.com)
+    url: https://aidevboard.com
+    access: [api]
+    control: api
+    adapter: null
+    alert_senders: []
+    tos: {quote: 'Public read endpoints are open and free, with hourly throttles and abuse controls', url: 'https://aidevboard.com/terms', read_on: '2026-10-01', verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none
+    account_needed: false
+    alert_setup: None. A script polls the platform's API from the pipeline.
+    setup_priority: none
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: '2026-10-01'
+    notes: ''
+  - id: linkedin
+    name: LinkedIn Jobs
+    url: https://www.linkedin.com/jobs/
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [jobalerts-noreply@linkedin.com, jobs-listings@linkedin.com, jobs-noreply@linkedin.com]
+    inbox_senders: [invitations@linkedin.com, messaging-digest-noreply@linkedin.com, inmail-hit-reply@linkedin.com, messages-noreply@linkedin.com, hit-reply@linkedin.com, notifications-noreply@linkedin.com]
+    tos: {quote: Use bots or other unauthorized automated methods to access the Services, url: 'https://www.linkedin.com/legal/user-agreement', read_on: 2026-10-06, verified: 'yes'}
+    agent_terms: bars-bots
+    sponsorship_filter: 'none; a ''visa sponsorship'' keyword is the only workaround (not used: the gates read the JD)'
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P0
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-10-05
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+  - id: glassdoor
+    name: Glassdoor
+    url: https://www.glassdoor.com/Job/
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [glassdoor.com]
+    tos: {quote: 'software or automated agents ... to scrape, strip, or mine data', url: 'https://www.glassdoor.com/about/terms/', read_on: 2026-10-01, verified: 'no'}
+    agent_terms: names-agents
+    sponsorship_filter: none
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P0
+    alerts_on: null
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+  - id: ziprecruiter
+    name: ZipRecruiter
+    url: https://www.ziprecruiter.com
+    access: [email-alert, manual]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [ziprecruiter.com]
+    tos: {quote: 'unread: the terms page refused automated reading', url: 'https://www.ziprecruiter.com/terms', read_on: unread, verified: 'no'}
+    agent_terms: names-agents
+    sponsorship_filter: none
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P1
+    alerts_on: null
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-26
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+  - id: wttj
+    name: Welcome to the Jungle (formerly Otta)
+    url: https://www.welcometothejungle.com/en/jobs
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [welcometothejungle.com, otta.com]
+    tos: {quote: 'You must not attempt to gain unauthorised access to the Website, the App', url: 'https://us.welcometothejungle.com/terms-and-conditions/candidates', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: 'unconfirmed in 2026: Otta offered a visa-sponsorship filter; use it if the filters panel shows one'
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P0
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+  - id: hiringcafe
+    name: HiringCafe
+    url: https://hiringcafe.com
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [hiring.cafe, hiringcafe.com]
+    tos: {quote: 'unverified: robots.txt disallows the job pages and the terms page refused automated reading', url: 'https://hiringcafe.com/terms-and-conditions', read_on: 2026-09-26, verified: 'no'}
+    agent_terms: names-agents
+    sponsorship_filter: 'reported: a visa sponsorship filter among the search filters (confirm in the UI)'
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P0
+    alerts_on: null
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-26
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+  - id: yc
+    name: Y Combinator Work at a Startup
+    url: https://www.workatastartup.com
+    access: [browser, email-alert]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [workatastartup.com]
+    alert_sender_confirmed: false
+    directory_mirror: {url: 'https://yc-oss.github.io/api/companies/hiring.json', license: 'none (no license file in github.com/yc-oss/api, GitHub API read 2026-10-01)', verdict: 'index-only: company names, slugs and websites are facts; keep only those plus a board token verified on the vendor API, and never republish the mirror', script: scripts/yc_boards.py}
+    tos: {quote: 'you will not engage in or use any data mining, robots, scraping or similar data gathering or extraction methods', url: 'https://www.ycombinator.com/legal', read_on: 2026-09-26, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: 'profile question: candidates who need sponsorship are matched only with companies that sponsor'
+    account_needed: true
+    alert_setup: Complete the one profile on workatastartup.com (role, locations, work authorization) and turn on the new-matches email; that mail is the only automated channel (the site renders client-side and its terms bar scraping). Founders who write to you arrive as mail and go through mail triage as outreach, not alerts.
+    setup_priority: P0
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-26
+    notes: ''
+  - id: wellfound
+    name: Wellfound (formerly AngelList Talent)
+    url: https://wellfound.com/jobs
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [wellfound.com, angel.co]
+    tos: {quote: 'use any automated system (including a spider, robot, or offline reader) to access', url: 'https://wellfound.com/terms', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: profile setting US work authorization (Edit Profile); a visa sponsorship job filter is reported
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P0
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-10-05
+    notes: ''
+  - id: builtin
+    name: Built In (Built In San Francisco)
+    url: https://www.builtinsf.com/jobs
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [builtin.com, builtinsf.com]
+    tos: {quote: 'through the use of bots, spiders, scrapers, web crawlers, indexing agents, or other automated devices or mechanisms', url: 'https://builtin.com/acceptable-use', read_on: 2026-09-26, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none (an editorial list of H-1B sponsors exists, not a filter)
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P1
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-26
+    notes: ''
+  - id: indeed
+    name: Indeed
+    url: https://www.indeed.com
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [indeed.com]
+    tos: {quote: 'Use of any automation, scripting, or bots to automate the Indeed Apply process', url: 'https://www.indeed.com/legal', read_on: 2026-10-06, verified: 'yes'}
+    agent_terms: bars-bots
+    sponsorship_filter: none (keyword only)
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P0
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-10-05
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+  - id: dice
+    name: Dice
+    url: https://www.dice.com/jobs
+    access: [email-alert, manual]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [dice.com]
+    tos: {quote: 'spiders, robots, avatars, or intelligent agents ... not approved by Dice', url: 'https://www.dice.com/about/terms-and-conditions', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: names-agents
+    sponsorship_filter: none (postings show W2 or 1099 and clearance)
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P2
+    alerts_on: null
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+  - id: jobright
+    name: Jobright
+    url: https://jobright.ai/jobs
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [jobright.ai]
+    tos: {quote: 'any automated system, including... any spider, robot, cheat utility, scraper', url: 'https://jobright.ai/legal/service', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: H1B visa sponsorship filter (built on USCIS history)
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P1
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+  - id: trueup
+    name: TrueUp
+    url: https://www.trueup.io/jobs
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [trueup.io]
+    tos: {quote: 'any robot, spider, or other automatic device, process, or means to access Service', url: 'https://www.trueup.io/terms', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P2
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+  - id: levels-fyi
+    name: Levels.fyi Jobs
+    url: https://www.levels.fyi/jobs
+    access: [email-alert, manual]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [levels.fyi]
+    tos: {quote: 'robots, scrapers, headless browsers, extensions and artificial intelligence agents', url: 'https://www.levels.fyi/about/terms.html', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: names-agents
+    sponsorship_filter: none
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P2
+    alerts_on: null
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+  - id: handshake
+    name: Handshake
+    url: https://app.joinhandshake.com
+    access: [email-alert, browser]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [joinhandshake.com]
+    tos: {quote: does not permit third parties to bulk collect ... job descriptions, url: 'https://joinhandshake.com/legal/tos/', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: Work authorization filters (visa sponsorship, OPT) under All filters
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P1
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+  - id: vc-portfolio
+    name: VC portfolio job boards (a16z, Sequoia, Greylock; Getro and Consider)
+    url: https://jobs.a16z.com
+    access: [browser, email-alert]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [getro.com]
+    tos: {quote: 'prohibit crawling, scraping, or spidering any page', url: 'https://www.getro.com/terms', read_on: 2026-09-25, verified: 'no'}
+    agent_terms: none
+    sponsorship_filter: none
+    account_needed: false
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P2
+    alerts_on: null
+    status: probation
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+  - id: remotive
+    name: Remotive
+    url: https://remotive.com/remote-jobs
+    access: [api]
+    control: manual
+    adapter: null
+    alert_senders: [remotive.com]
+    tos: {quote: link back to the URL found on Remotive AND mention Remotive as a source, url: 'https://github.com/remotive-io/remote-jobs-api', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none
+    account_needed: false
+    alert_setup: None. You read the site yourself; record what you find with scripts/jobs_manual.py.
+    setup_priority: none
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+    alerts_on: null
+  - id: remoteok
+    name: Remote OK
+    url: https://remoteok.com
+    access: [api]
+    control: manual
+    adapter: null
+    alert_senders: [remoteok.com, remoteok.io]
+    tos: {quote: link back ... to the URL on Remote OK and mention Remote OK, url: 'https://remoteok.com/api', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: none
+    sponsorship_filter: none
+    account_needed: false
+    alert_setup: None. You read the site yourself; record what you find with scripts/jobs_manual.py.
+    setup_priority: none
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: ''
+    alerts_on: null
+  - id: simplify
+    name: Simplify
+    url: https://simplify.jobs/jobs
+    access: [manual]
+    control: manual
+    adapter: null
+    alert_senders: [simplify.jobs]
+    tos: {quote: '''Automated Means'' includes ... artificial-intelligence systems or agents', url: 'https://simplify.jobs/terms', read_on: 2026-09-25, verified: 'yes'}
+    agent_terms: names-agents
+    sponsorship_filter: its public GitHub lists mark roles that do not sponsor (a passport emoji) and US-citizen-only roles
+    account_needed: true
+    alert_setup: None. You read the site yourself; record what you find with scripts/jobs_manual.py.
+    setup_priority: none
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: 2026-09-25
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+    alerts_on: null
+  - id: google-jobs-search
+    name: Google Jobs (the jobs box in Google Search)
+    url: https://www.google.com/search?q=AI+engineer+jobs+San+Francisco
+    access: [manual, email-alert]
+    control: alert-mail
+    adapter: scripts/job_alerts.py
+    alert_senders: [notify-noreply@google.com]
+    tos: {quote: terms not read, url: 'https://policies.google.com/terms', read_on: unread, verified: 'no'}
+    agent_terms: names-agents
+    sponsorship_filter: none
+    account_needed: true
+    alert_setup: Save a search for your target titles on the platform and turn on its email alert; the alert mail is parsed by scripts/job_alerts.py (the site itself is never visited by a script).
+    setup_priority: P2
+    alerts_on: null
+    status: manual
+    yield: {fetched: 0, new: 0, queued: 0, applied: 0, interviews: 0}
+    yield_as_of: null
+    last_reviewed: '2026-10-01'
+    notes: 'The terms restrict automated or agent access: use the alert mail (or read the site yourself) and apply by hand.'
+
+ignored_senders: []   # {sender, why, decided, kind: job-alert|marketing|noise} for senders never mapped

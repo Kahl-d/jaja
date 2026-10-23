@@ -1,0 +1,62 @@
+{
+ "jobPostingInfo": {
+  "id": "wd-jr1005",
+  "title": "Applied Machine Learning Engineer - Layout Automation",
+  "jobDescription": "<p><span>Our work at CHIPCO is about making computing faster and easier to build for. As a member of the Applied ML team you will own layout automation work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</span></p><p><b>What you will be doing:</b></p><ul><li>Improve on-call tooling so incidents are rarer and shorter.</li><li>Mentor newer engineers and share what you learn with the wider team.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Work with research and product to move prototypes into reliable systems.</li></ul><p><b>What we need to see:</b></p><ul><li>Comfort reading research papers and turning them into working code.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Clear written communication and a preference for simple designs.</li><li>Hands-on experience with Python, graph neural networks and EDA flows.</li></ul><p><b>Ways to stand out:</b></p><ul><li>Experience with distributed training or large-scale data processing.</li><li>Open-source contributions in the layout automation area.</li></ul><p>CHIPCO is an equal opportunity employer. Base salary ranges depend on level and location.</p>",
+  "location": "US, CA, Santa Clara",
+  "postedOn": "Posted 2 Days Ago",
+  "startDate": "2026-09-22",
+  "timeType": "Full time",
+  "jobReqId": "JR1005",
+  "jobPostingId": "Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+  "jobPostingSiteId": "CHIPCOExternalCareerSite",
+  "country": {
+   "descriptor": "United States of America",
+   "id": "country-us"
+  },
+  "canApply": true,
+  "posted": true,
+  "includeResumeParsing": true,
+  "jobRequisitionLocation": {
+   "descriptor": "US, CA, Santa Clara",
+   "country": {
+    "descriptor": "United States of America",
+    "id": "country-us",
+    "alpha2Code": "US"
+   }
+  },
+  "externalUrl": "https://chipco.wd5.myworkdayjobs.com/CHIPCOExternalCareerSite/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+  "questionnaireId": "questionnaire-jr1005"
+ },
+ "hiringOrganization": {
+  "name": "CHIPCO USA",
+  "url": ""
+ },
+ "similarJobs": [
+  {
+   "title": "Senior Compiler Engineer - AI",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "2 Locations",
+   "postedOn": "Posted 30+ Days Ago",
+   "startDate": "2026-04-27"
+  },
+  {
+   "title": "Applied AI Engineer - Layout Design",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "US, CA, Santa Clara",
+   "postedOn": "Posted 30+ Days Ago",
+   "startDate": "2026-08-17"
+  },
+  {
+   "title": "Senior Machine Learning Engineer, Perception - Robot Navigation",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "US, CA, Santa Clara",
+   "postedOn": "Posted 30+ Days Ago",
+   "startDate": "2026-02-05"
+  }
+ ],
+ "userAuthenticated": false
+}

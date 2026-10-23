@@ -1,0 +1,15 @@
+# add-experience: Procedure step 3 (interview and record interview)
+
+The skill links here for the interview questions.
+
+3. **Interview** one item at a time, writing down the owner's words as said:
+   Q1 what, and for whom · Q2 when (start and end month or "ongoing"; which record has the exact dates) · Q3 where
+   (org or personal project, location, collaborators) · Q4 exact title and where it is written · Q5 scope (what
+   existed, what the owner owned, who else built it) · Q6 the three to six things built or decided, and which of them
+   agent sessions the owner directed implemented · Q7 tools used in this work · Q8 outcomes, each number with where it
+   is measured and its definition (none: Held) · Q9 sources (each becomes one evidence entry) · Q10 discretion.
+   Close: read back the facts and the held numbers; ask each conflict question (step 9) while the owner is there.
+   **Record interview** (about 15 minutes, through the Recruiter): one question at a time to close each open conflict
+   in `profile/facts.yaml` (ownership and authorship questions, the numbers ledger: only engineering-method numbers
+   with source and conditions, and signed releases). Each answer is one intake note line and one
+   `owner-statement` evidence id; a factual answer rules the conflict (step 9).

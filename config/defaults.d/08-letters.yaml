@@ -1,0 +1,13 @@
+# Cover letters, why-us answers and anything-else notes (scripts/letters_check.py).
+policy:
+  letters:
+    caps:                       # allowed word counts per letter file: [lowest, highest]
+      cover.md: [150, 400]
+      why-us.md: [0, 150]
+      else.md: [0, 150]
+    long_sentence: 30           # a sentence longer than this many words is a finding
+    work_of: {}                 # evidence-id prefix -> the piece of work it belongs to; a cover paragraph may use one work only ({acme: "Acme Studio"})
+style:
+  letters:
+    banned_phrases: []          # regex fragments that may not appear in a letter (case-insensitive)
+    prose_only: false           # true: a bullet list or a run of three tool names in a letter is a finding

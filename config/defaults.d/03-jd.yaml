@@ -1,0 +1,4 @@
+policy:
+  jd_capture:
+    reads_per_day: 20          # named hand reads the owner is asked for per day
+    careers_search: {}         # company slug -> {search: "https://.../results?q={q}", job_pattern: "regex of a job page URL"}

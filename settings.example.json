@@ -1,0 +1,21 @@
+{
+  "_comment": "Copy the parts you want into ~/.claude/settings.json (user) or <your data folder>/.claude/settings.json (project). Read-only by default: nothing here lets an agent send, post or submit; outward actions always go through an approval file.",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Bash(python3 scripts/*.py --help)",
+      "Bash(python3 scripts/kernel/lint.py:*)",
+      "Bash(python3 scripts/kernel/sync.py --check)",
+      "Bash(python3 scripts/doctor.py:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(~/.config/job-agency/**)"
+    ]
+  },
+  "env": {
+    "JOB_AGENCY_DATA": "/path/to/your/data-folder"
+  }
+}

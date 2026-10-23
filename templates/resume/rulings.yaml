@@ -1,0 +1,20 @@
+# The owner's rulings on how resumes render, where they bend a scripts/render_resume.py lint rule. Only the owner
+# rules; this file records what was said, with the record that holds the words (`source:`) and who wrote the entry
+# here (`recorded:`). render_resume.py reads it by default (--rulings) with the same parser as profile/facts.yaml
+# `rules:`. facts.yaml is the record for any ruling it holds; this file keeps template-only rulings and a ruling
+# until the record carries what the lint needs. When facts.yaml gains it, delete the entry here: an evidence set
+# listed in both files is a `long-bullet-rule` error; a link URL listed in both is allowed by facts.yaml and warns
+# `link-rule-duplicate` here.
+#
+# Entry format (one `rules:` item per ruling):
+#   - rule: what was allowed, in one line
+#     ruled: {by: <owner token>, "on": YYYY-MM-DD, basis: where and how it was ruled, ruling: the words when recorded}
+#     source: the file and row that hold the words (required here)
+#     recorded: {by: <role>, "on": YYYY-MM-DD}
+#     note: optional context
+#     labeled_links:                      # a link may show a short label instead of its URL (lint: hidden-link)
+#       - {url: https://..., label: what it is, for people}
+#     long_bullets:                       # a claim may run past two lines (lint: bullet-too-long)
+#       - {evidence: [ids of its trailing ev comment], max_lines: 3 or 4, label: what it is, for people}
+# A matching link or claim prints a NOTE naming the ruling; a malformed entry is an error and allows nothing.
+rules: []

@@ -1,0 +1,17 @@
+# Synthetic bullets with their pdftotext -layout line counts (classic template, one-page density, RenderCV 2.8).
+# The last is the wide-glyph case: about 390 characters, printed on 4 although a character estimate says 3.
+samples:
+- text: Sat with field technicians to decide what to automate; shipped the **inspection planner and template library** where they create and share their own routines; released four public builds and gave the live demo with the team at a robotics trade show.
+  lines: 2
+- text: Rebuilt the **maintenance knowledge corpus** as an index the assistant navigates, so answers trace to a source, and added a per-user memory that keeps, updates and forgets facts from each technician's sessions.
+  lines: 2
+- text: Became one of the engineering leads as the team grew to 12; with the team, shipped the mobile app to the app store and deployed the product on a cloud platform, and co-authored the patent application filed for the assistant architecture.
+  lines: 2
+- text: 'Designed and built the **assistant runtime** (Python, an agent SDK) of the released desktop app, where agents can plan, edit, simulate and debug robot cell layouts: simulator operations are typed, unit-aware MCP tools, so malformed calls fail before the simulator runs; edits are made in a sandbox and kept only when they succeed, and permission checks refuse disallowed actions.'
+  lines: 3
+- text: Created the **evaluation bench**, an RL environment without the training loop, where the assistant runs real user prompts in the sandbox and repairs failed runs, and an LLM judge scores runs on a domain rubric, with the layout verified from the saved project file. Each round improved the runtime's prompts, tools and knowledge; traces and error reports fed the prompts.
+  lines: 3
+- text: 'Caught regressions before users saw them by gating each release on behavior: re-ran a golden task set with an LLM judge grading each full trajectory for factual correctness and cross-turn consistency, beside manual validation, and fed recurring failures back into prompts, tool definitions and the runtime.'
+  lines: 3
+- text: 'Owned the **desktop application** end to end and sat in its **product calls**, translating between engineering, manufacturing and customer organizations: chose with **field technicians** which troubleshooting workflows to automate, worked with **customer organizations** on integration, and shipped the **routine builder and template library**, seven **signed releases** and documentation. <!-- ev:nw-rag-01,nw-eval-01,nw-serve-01,sk-python,sk-sql,sk-ts,sk-pytorch,sk-sklearn -->'
+  lines: 4

@@ -1,0 +1,108 @@
+%------------------------------------------------------------------------------------
+% FAANGPath Simple Template: EMPTY PLACEHOLDER SKELETON (hand-edited LaTeX alternative)
+% Based on the public FAANGPath simple template, hardened with the flags of ../ats-preamble.tex. render_resume.py does
+% not use this file; it is the manual route when a resume must be tuned by hand.
+% Fill the ALL-CAPS placeholders. Build: /Library/TeX/texbin/pdflatex resume_faangpath.tex
+%
+% Changes from the upstream template:
+%  - Added the proven hardening: \pdfinterwordspaceon at document start (real space glyphs,
+%    so PDFKit keeps interword spaces), ragged2e \RaggedRight, no hyphenation
+%    (\hyphenpenalty and \exhyphenpenalty = 10000).
+%  - Skills are a plain list, not a tabular: no tables anywhere.
+%  - Dates sit inline after a bar ("TITLE | MON YYYY - MON YYYY"), not flush right with
+%    \hfill: flush-right dates are read as a separate column by pdftotext and PDFKit.
+%  - Date ranges use a spaced hyphen (`Aug 2023 - May 2026`), never -- or ---.
+%
+% ATS notes (still true):
+%  - glyphtounicode + T1 encoding: every glyph extracts as real text.
+%  - Single column, standard sections, no images, no text boxes.
+%  - All \href links carry https://.
+%  - Class quirk: with THREE \address lines the class prints the third line FIRST;
+%    with TWO lines (as below) the order is normal. Stick to two.
+%------------------------------------------------------------------------------------
+\documentclass{resume} % Uses resume.cls in this folder
+
+\usepackage[left=0.4in,top=0.4in,right=0.4in,bottom=0.4in]{geometry} % Page margins
+\usepackage[T1]{fontenc}          % ATS: clean character encoding in the PDF
+\input{glyphtounicode}\pdfgentounicode=1 % ATS: guarantee glyph -> Unicode mapping
+\usepackage{ragged2e}             % \RaggedRight: greedy ragged-right line breaking
+\hyphenpenalty=10000              % no hyphenation: hyphen breaks split ATS keywords
+\exhyphenpenalty=10000
+\setlength{\RaggedRightRightskip}{0pt plus 3em}
+\tolerance=1000
+\emergencystretch=3em
+\RaggedRight
+% Real space glyphs between words. resume.cls prints the name and address inside
+% \begin{document}, so switch it on in the begin-document hook, before the header prints.
+\AtBeginDocument{\ifdefined\pdfinterwordspaceon\pdfinterwordspaceon\fi}
+
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}} % (template helpers, keep)
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+
+%--------------------------------- HEADER -------------------------------------------
+\name{FIRSTNAME LASTNAME} % Prints centered, uppercase, large
+% Two centered contact lines; "\\" inside a line becomes a diamond separator.
+\address{+1 (000) 000-0000 \\ CITY, ST}
+\address{%
+  \href{mailto:EMAIL@EXAMPLE.TEST}{EMAIL@EXAMPLE.TEST} \\
+  \href{https://linkedin.com/in/USERNAME}{linkedin.com/in/USERNAME} \\
+  \href{https://github.com/USERNAME}{github.com/USERNAME} \\
+  \href{https://YOURSITE.COM}{YOURSITE.COM}}
+
+\begin{document}
+% Belt and braces for engines where the hook above did not fire.
+\ifdefined\pdfinterwordspaceon\pdfinterwordspaceon\fi
+
+%--------------------------------- EDUCATION ----------------------------------------
+\begin{rSection}{EDUCATION}
+
+{\bf DEGREE NAME}, UNIVERSITY NAME, CITY, ST \textbar{} MON YYYY - MON YYYY\\
+DETAIL LINE (GPA, honors, award, or relevant coursework)
+
+{\bf DEGREE NAME}, UNIVERSITY NAME, CITY, ST \textbar{} MON YYYY - MON YYYY
+
+\end{rSection}
+
+%--------------------------------- SKILLS -------------------------------------------
+% One labeled line per skill group (a list, not a table). Add/remove lines freely.
+\begin{rSection}{SKILLS}
+
+\textbf{SKILL GROUP ONE:} ITEM, ITEM, ITEM, ITEM\\
+\textbf{SKILL GROUP TWO:} ITEM, ITEM, ITEM, ITEM\\
+\textbf{SKILL GROUP THREE:} ITEM, ITEM, ITEM, ITEM
+
+\end{rSection}
+
+%--------------------------------- EXPERIENCE ---------------------------------------
+% Pattern per role: bold title | dates, then company and location, then bullets.
+\begin{rSection}{EXPERIENCE}
+
+\textbf{ROLE TITLE} \textbar{} MON YYYY - MON YYYY\\
+COMPANY NAME, CITY, ST
+ \begin{itemize}
+    \itemsep -3pt
+     \item BULLET ONE.
+     \item BULLET TWO.
+     \item BULLET THREE.
+ \end{itemize}
+
+\textbf{ROLE TITLE} \textbar{} MON YYYY - MON YYYY\\
+COMPANY NAME, CITY, ST
+ \begin{itemize}
+    \itemsep -3pt
+     \item BULLET ONE.
+     \item BULLET TWO.
+     \item BULLET THREE.
+ \end{itemize}
+
+\end{rSection}
+
+%--------------------------------- PROJECTS -----------------------------------------
+% One \item per project: bold name, then the description sentence(s) with a visible URL.
+\begin{rSection}{PROJECTS}
+\vspace{-1.25em}
+\item \textbf{PROJECT NAME.} {PROJECT DESCRIPTION WITH STACK AND OUTCOME. \href{https://PROJECT-LINK.COM}{PROJECT-LINK.COM}}
+\item \textbf{PROJECT NAME.} {PROJECT DESCRIPTION WITH STACK AND OUTCOME.}
+\end{rSection}
+
+\end{document}

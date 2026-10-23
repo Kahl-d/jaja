@@ -1,0 +1,103 @@
+filters:
+  and:
+    - file.inFolder("graph/companies")
+    - file.ext == "md"
+properties:
+  file.name:
+    displayName: Hub
+  note.name:
+    displayName: Company
+  note.status:
+    displayName: Status
+  note.tier:
+    displayName: Tier
+  note.priority:
+    displayName: Best priority
+  note.roles:
+    displayName: Roles
+  note.people:
+    displayName: People
+  note.warmest:
+    displayName: Warmest person
+  note.last_touch:
+    displayName: Last touch
+  note.next_action:
+    displayName: Next action
+  note.next_action_at:
+    displayName: Due
+  note.visa:
+    displayName: Visa notes
+  note.dossier:
+    displayName: Dossier
+views:
+  - type: table
+    name: Active (applied, target, queued)
+    filters:
+      or:
+        - status == "applied"
+        - status == "target"
+        - status == "queued"
+    order:
+      - file.name
+      - status
+      - priority
+      - next_action_at
+      - next_action
+      - warmest
+      - last_touch
+      - roles
+      - people
+      - visa
+    sort:
+      - property: next_action_at
+        direction: ASC
+  - type: table
+    name: Leads
+    filters:
+      and:
+        - status == "lead"
+    order:
+      - file.name
+      - tier
+      - priority
+      - roles
+      - people
+      - warmest
+      - last_touch
+      - next_action
+      - next_action_at
+    sort:
+      - property: priority
+        direction: ASC
+      - property: last_touch
+        direction: DESC
+  - type: table
+    name: All companies
+    order:
+      - file.name
+      - status
+      - tier
+      - priority
+      - roles
+      - people
+      - warmest
+      - last_touch
+      - next_action_at
+      - dossier
+    sort:
+      - property: status
+        direction: ASC
+      - property: priority
+        direction: ASC
+  - type: table
+    name: By status
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - tier
+      - priority
+      - roles
+      - people
+      - next_action_at

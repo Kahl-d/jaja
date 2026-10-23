@@ -1,0 +1,29 @@
+# Routine spec (schema: schemas/routine.yaml). SUPERSEDED by the mail-intake pass (scripts/mail_intake.py) for pulling,
+# classifying and matching mail into the tracker; this spec stays paused and is kept for its history.
+# Cloud runs read Gmail only through the claude.ai Gmail connector (gmail.readonly + gmail.labels). Local runs use only
+# the read token; the compose token is never available to this routine, and it never creates Gmail drafts.
+# Outputs feed tracker-ops (application events) and the outreach roles (prospects).
+# Receipt: logs/runs/js-mail-triage/<date>.md. Enable only after the Gmail read login (docs/SETUP-CONNECTORS.md section 2).
+name: js-mail-triage
+purpose: "Hourly during the day, classify new job-related mail with the L0 to L3 ladder, match pipeline mail to applications in state/mail-events.jsonl for tracker-ops, route replies to prospects, and flag interview invites and offers; nothing is sent or drafted."
+runs_on: desktop
+engine: claude
+model: haiku
+effort: low
+schedule: "0 7-22 * * *"
+action: skill:gmail-sync
+inputs:
+  - Gmail (claude.ai connector, read only)
+  - prospects/
+  - applications/
+outputs:
+  - state/harvest/
+  - state/mail-events.jsonl
+  - state/review/mail-<date>.md
+  - logs/runs/js-mail-triage/<date>.md
+connectors: [gmail-read]
+tier: T1                       # labels are T2 and wait for promotion
+notify: {"on": needs-owner, via: push}      # an interview invite, an offer, a human reply waiting
+budget: {max_runs_per_day: 16, max_tokens: 60000}
+enabled: false                 # paused by default; see the header
+owner: mail-triage

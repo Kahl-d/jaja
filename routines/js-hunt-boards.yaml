@@ -1,0 +1,30 @@
+# Routine spec (schema: schemas/routine.yaml). The board poll. Install as a scheduled task running the action below from
+# the repo root; each run appends to logs/runs/js-scout/<date>.md (the pipeline's own receipt).
+# pipeline.py has a run guard (budget x1.5 + 5 minutes): a hang ends as exit 3 with a failed receipt naming the frame and
+# a stack file in state/pipeline/, never hours of silence.
+# The feeds (hn job stories and the monthly thread, himalayas, aidevjobs, adzuna with keys, remote_feeds when
+# sources.yaml lists them) ride on this run once a day (--daily: the first run of the day whose sources.yaml last_run
+# is not today reads them; the later runs skip them).
+name: js-hunt-boards
+purpose: "Every few hours during the day poll every company board (Greenhouse, Lever, Ashby, Workday, Jibe, sitemaps, amazon.jobs), once a day the feeds (HN, Himalayas, AI Dev Jobs, Adzuna), ingest the day's alert mail, dedup, enrich, gate, queue and triage-score, so a new role is seen within hours of posting."
+runs_on: desktop
+engine: script
+schedule: "0 7-22/3 * * *"
+action: "script:scripts/pipeline.py --stages fetch,hn,adzuna,himalayas,aidevjobs,remote_feeds,alerts,dedup,h1b,gates,queue,triage,dashboard,coverage --daily hn,adzuna,himalayas,aidevjobs,remote_feeds --routine-receipt js-hunt-boards"   # the script writes the routine receipt; one board erroring is a warning, not a failure
+inputs:
+  - targets/companies.yaml
+  - targets/roles.md
+  - sources.yaml
+  - state/harvest/
+outputs:
+  - jobs/*.md
+  - state/sitemap/
+  - DASHBOARD.md
+  - logs/runs/js-scout/<date>.md
+  - logs/runs/js-hunt-boards/<date>.md
+connectors: []                 # public board endpoints only (robots-first, polite); no account connector
+tier: T1
+notify: {"on": failure, via: home}
+budget: {max_runs_per_day: 6, max_tokens: 0}
+enabled: false                 # paused by default; script only, so it spends no tokens
+owner: job-scout

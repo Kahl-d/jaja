@@ -1,0 +1,29 @@
+# Routine spec (schema: schemas/routine.yaml). Uses the X READ token only: it cannot follow, post or send. Spend is
+# capped by `connectors: x` in the budgets config. Paused until the owner has X credits and has run the read login
+# (`python3 scripts/x_api.py login`; docs/SETUP-CONNECTORS.md section 6).
+# Once a weekday: the run is the X watch (the paid read, latest posts only) and then the shared posts pipeline
+# (scripts/posts.py ingest --write): each in-band hiring post makes or updates the poster's prospect and, when it
+# names a role and a company, a job that ranks above portal listings. Nothing is sent, followed or drafted.
+name: js-hunt-x
+purpose: "On weekday mornings search X through the official API for new hiring posts (targets/x-watch.yaml: the hiring searches plus the people query from targets/people-watch.yaml), then turn each hiring post into a structured record, the poster's prospect and a job (scripts/posts.py), for job-scout and the Recruiter."
+runs_on: desktop
+engine: script
+schedule: "0 8 * * 1-5"
+action: "script:scripts/posts.py x --write"
+inputs:
+  - targets/x-watch.yaml
+  - targets/people-watch.yaml
+  - state/x/since.json
+outputs:
+  - state/review/x-watch-<date>.md
+  - state/posts/x-<date>.jsonl
+  - state/posts/records.jsonl
+  - state/review/posts-<date>.md
+  - state/posts/people-watch-proposals-<date>.yaml
+  - state/x/usage.jsonl
+connectors: [x-api-read]       # ~/.config/job-agency/x_token_read.json (read scopes only)
+tier: T1                       # writes prospects/ and jobs/ records (workspace only)
+notify: {"on": failure, via: home}
+budget: {max_runs_per_day: 1, max_tokens: 0}
+enabled: false                 # waits for the owner's word, X credits and the read login
+owner: job-scout

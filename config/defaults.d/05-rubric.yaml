@@ -1,0 +1,5 @@
+# Resume rubric values (rubric_check.py). Empty by default: no word check, no NDA terms.
+style:
+  resume_slop_words: []         # words and phrases B13 rejects on a resume page (matched whole-word, case-insensitive)
+policy:
+  nda_terms: []                 # terms you must never publish on a page (B19), e.g. a client or project covered by an NDA

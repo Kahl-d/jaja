@@ -1,0 +1,5 @@
+# Test fixture: a FICTIONAL person. Only the identity block that render_resume.py reads for the
+# PDF title, shaped like profile/facts.yaml (identity.name_on_resumes.canonical, then identity.full_name).
+identity:
+  full_name: Riley Quinn Moreno
+  name_on_resumes: {canonical: Riley Moreno, seen: ["Riley Moreno", "R. Moreno"], status: confirmed}

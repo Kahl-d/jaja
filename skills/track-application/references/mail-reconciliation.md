@@ -1,0 +1,15 @@
+# track-application: Procedure step 3 detail (mail reconciliation)
+
+Detail for the skill's step 3; the skill links here.
+
+   - It takes the latest row per `message_id` (a `correction` supersedes earlier rows) and attaches only a thread
+     match, a req id or job URL match at the script's score threshold with its required lead and label confidence,
+     or a `decision: owner` row; duplicates are skipped.
+   - Everything else is held in `state/review/mail-<date>.md` with a blank `decision:` (review rows, foreign threads,
+     low scores, a stage earlier than the current one, suspected scams). Never attach a held row by hand or with
+     `event`; list it under Needs you.
+   - An `interview_invite` held because its evidence does not name the round: read the evidence and rerun with
+     `--round <message_id>=screen|interviewing|final`.
+   - Corrections: the script notes the superseded event and moves a stage back only on a `decision: owner`
+     correction; copy its `needs owner` lines.
+   - Ledger missing: the command exits 1 and says so (absent is not empty); report it.

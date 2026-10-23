@@ -1,0 +1,3 @@
+policy:
+  mail:
+    machine_addresses: ["bot@jobs-portal.example.test"]

@@ -1,0 +1,12 @@
+# skills-taxonomy.yaml - skills with level, last use and evidence ids (demo candidate, fictional).
+schema_version: 1
+updated: 2026-10-12
+groups:
+  languages:
+    - {skill: Python, level: expert, last_used: 2026-10, evidence: [ev-sam-003, ev-sam-005], lenses: [applied-ml, ai-software]}
+    - {skill: SQL, level: strong, last_used: 2026-09, evidence: [ev-sam-004], lenses: [applied-ml]}
+    - {skill: TypeScript, level: working, last_used: 2026-06, evidence: [ev-sam-005], lenses: [ai-software]}
+  llm_systems:
+    - {skill: Retrieval-augmented generation, level: strong, last_used: 2026-10, evidence: [ev-sam-007], lenses: [applied-ml, ai-software], aliases: [RAG]}
+    - {skill: LLM evaluation harnesses, level: strong, last_used: 2026-10, evidence: [ev-sam-006], lenses: [evaluation], aliases: [evals]}
+    - {skill: Agent tracing, level: working, last_used: 2026-09, evidence: [ev-sam-005], lenses: [ai-software]}

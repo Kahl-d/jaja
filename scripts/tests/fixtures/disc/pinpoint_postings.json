@@ -1,0 +1,91 @@
+{
+ "_captured": "synthetic fixture shaped like the Pinpoint postings.json answer (tenant talentco)",
+ "data": [
+  {
+   "id": "559001",
+   "benefits": "<div>We want Talentco to be a good place to work. Here is what you get: medical cover, flexible hours and a learning budget.</div>",
+   "benefits_header": "What we offer",
+   "compensation": null,
+   "compensation_minimum": null,
+   "compensation_maximum": null,
+   "compensation_currency": null,
+   "compensation_frequency": null,
+   "compensation_visible": false,
+   "deadline_at": null,
+   "description": "<div>Talentco builds recruiting software. We are hiring our first in-house lawyer to own commercial contracts and company policy.</div>",
+   "employment_type": "full_time",
+   "employment_type_text": "Full Time",
+   "key_responsibilities": "<div><strong>Contracts (35%)</strong></div><ul><li>Own commercial contracting end to end.</li><li>Keep company policies current.</li></ul>",
+   "key_responsibilities_header": "What you'll do",
+   "reporting_to": "Chief Operating Officer",
+   "skills_knowledge_expertise": "<ul><li>4+ years as a lawyer or contracts manager with negotiation authority</li></ul>",
+   "skills_knowledge_expertise_header": "What you'll bring",
+   "title": "Founding Legal Counsel",
+   "url": "https://talentco.pinpointhq.com/en/postings/legal-0001",
+   "path": "/en/postings/legal-0001",
+   "workplace_type": "remote",
+   "workplace_type_text": "Fully remote",
+   "job": {
+    "id": "560001",
+    "requisition_id": "PIN-0407",
+    "department": {
+     "id": "1001",
+     "name": "Operations"
+    },
+    "division": null,
+    "structure_custom_group_one": null
+   },
+   "location": {
+    "id": "283",
+    "city": "London",
+    "name": "Remote",
+    "postal_code": null,
+    "province": "London",
+    "street_address": null
+   }
+  },
+  {
+   "id": "559002",
+   "benefits": "<div>We want Talentco to be a good place to work. Here is what you get: medical cover, flexible hours and a learning budget.</div>",
+   "benefits_header": "What we offer",
+   "compensation": null,
+   "compensation_minimum": 175000,
+   "compensation_maximum": 215000,
+   "compensation_currency": "USD",
+   "compensation_frequency": "year",
+   "compensation_visible": true,
+   "deadline_at": null,
+   "description": "<div>Build LLM agents and evals in Python.</div>",
+   "employment_type": "full_time",
+   "employment_type_text": "Full Time",
+   "key_responsibilities": "<div><strong>Contracts (35%)</strong></div><ul><li>Own commercial contracting end to end.</li><li>Keep company policies current.</li></ul>",
+   "key_responsibilities_header": "What you'll do",
+   "reporting_to": "Chief Operating Officer",
+   "skills_knowledge_expertise": "<ul><li>4+ years as a lawyer or contracts manager with negotiation authority</li></ul>",
+   "skills_knowledge_expertise_header": "What you'll bring",
+   "title": "Senior AI Engineer, Agents",
+   "url": "https://talentco.pinpointhq.com/en/postings/ai-eng-0002",
+   "path": "/en/postings/ai-eng-0002",
+   "workplace_type": "hybrid",
+   "workplace_type_text": "Hybrid",
+   "job": {
+    "id": "560001",
+    "requisition_id": "PIN-0450",
+    "department": {
+     "id": "1001",
+     "name": "Operations"
+    },
+    "division": null,
+    "structure_custom_group_one": null
+   },
+   "location": {
+    "id": "283",
+    "city": "San Francisco",
+    "name": "San Francisco",
+    "postal_code": null,
+    "province": "California",
+    "street_address": null
+   }
+  }
+ ]
+}

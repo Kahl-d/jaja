@@ -1,0 +1,7 @@
+type: posts
+title: Posts lane
+roster: [prospector, messenger]
+skills: [x-channel, linkedin-draft, linkedin-assist, research-person, prospect-search, draft-reply]
+scope: ["state/posts/sweep-*.jsonl", "state/posts/x-*.jsonl", "state/x/**", "state/review/x-watch-*.md", "outbox/**", "hub/lanes/POSTS*.md"]
+gates: [posts_sweep_check.py, posts.py check, people_watch.py check, x_api.py watch --dry-run, outbox.py lint, check_holds.py]
+stops: ["LinkedIn or X shows a login wall, CAPTCHA, security check, limit notice or automated-activity warning (stop that platform for the day)", "the X budget refuses a call", "the daily connection-request cap reached", "a person cannot be shown to be a real, named person at a real company", "anything outward without the owner's yes in this session"]

@@ -1,0 +1,7 @@
+# The daily fresh-roles list (scripts/fresh10.py). Copy a key into <your data folder>/config/*.yaml to change it.
+policy:
+  fresh10:
+    hunt_cut: 69              # an unscored role needs a hunt score at or over this to fill the list
+    target_words: []          # title words that make an unscored role worth scoring (empty = any title)
+    off_target_words: []      # title words that never do (a seat you would not take)
+    sponsorship_prior: {"no": 1.0, "unknown": 1.0, "yes": 1.0}   # expected-interview weight by the role's sponsorship answer

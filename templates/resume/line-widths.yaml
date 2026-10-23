@@ -1,0 +1,66 @@
+# Measured characters per line, one entry per layout (page size, side margins, body size and font after the
+# density), read by scripts/render_resume.py for the `bullet-too-long` line estimate (a greedy word wrap at this
+# width). Written by `render_resume.py measure --record`, never by hand:
+#   python3 scripts/render_resume.py measure --input scripts/tests/fixtures/resume/calibration.yaml \
+#       --template <house|classic|inline> --density <house|one-page> --record
+# `measure` renders the input, counts every bullet's and paragraph's lines in `pdftotext -layout` and keeps the
+# middle of the widest run of widths that agree with the most counts (fit.low to fit.high). Templates that share
+# a layout share an entry: house and classic at the house density; classic and inline at one-page.
+widths:
+- layout:
+    page: us-letter
+    left_margin_pt: 43.2
+    right_margin_pt: 43.2
+    body_pt: 10.5
+    font: Source Sans 3
+  chars_per_line: 116
+  fit:
+    low: 116
+    high: 116
+    agree: 56
+    samples: 56
+    multi_line: 56
+  measured:
+    'on': '2026-09-26'
+    template: house
+    density: house
+    input: scripts/tests/fixtures/resume/calibration.yaml
+    rendercv: '2.8'
+- layout:
+    page: us-letter
+    left_margin_pt: 28.8
+    right_margin_pt: 28.8
+    body_pt: 10.0
+    font: Source Sans 3
+  chars_per_line: 128
+  fit:
+    low: 128
+    high: 129
+    agree: 56
+    samples: 56
+    multi_line: 56
+  measured:
+    'on': '2026-09-26'
+    template: house
+    density: one-page
+    input: scripts/tests/fixtures/resume/calibration.yaml
+    rendercv: '2.8'
+- layout:
+    page: us-letter
+    left_margin_pt: 36.0
+    right_margin_pt: 36.0
+    body_pt: 10.0
+    font: Source Sans 3
+  chars_per_line: 126
+  fit:
+    low: 126
+    high: 127
+    agree: 56
+    samples: 56
+    multi_line: 56
+  measured:
+    'on': '2026-09-26'
+    template: classic
+    density: one-page
+    input: scripts/tests/fixtures/resume/calibration.yaml
+    rendercv: '2.8'

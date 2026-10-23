@@ -1,0 +1,11 @@
+# Strategy review limits (scripts/strategy_review.py). Numbers are starting points; set your own in <data folder>/config/.
+policy:
+  strategy:
+    no_reply_tries: 15        # a bucket with this many applications in 30 days and no reply is flagged
+    dream_share_min: 0.20     # flag when the dream-list share of 30-day applications is under this
+    big_share_max: 0.60       # flag when the big-company share of 30-day applications is over this
+    interview_by_day: 21      # flag when no interview has happened by this day of the job clock
+    fit_median_min: 4.0       # flag when the median fit of 30-day applications is under this
+    tier_dream_fit: 4.5       # an unlisted application with fit at or over this is tier dream
+    tier_focused_fit: 4.0     # fit at or over this (under tier_dream_fit) is tier focused; under it, mass
+    pause_ruling: ""          # id of a ruling in hub/rulings.yaml that, while standing, pauses mass applications; "" = none

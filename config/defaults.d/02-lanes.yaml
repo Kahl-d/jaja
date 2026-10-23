@@ -1,0 +1,3 @@
+# Lanes that absorbed other lanes inherit their rulings (hooks/rulings_common.py): {lane: [absorbed lane, ...]}.
+policy:
+  lane_aliases: {}

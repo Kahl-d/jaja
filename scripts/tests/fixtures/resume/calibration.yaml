@@ -1,0 +1,118 @@
+# Line-width calibration fixture: a FICTIONAL person. 48 bullets and 8 paragraphs of resume-like
+# prose, composed once from a fixed seed, that `render_resume.py measure` renders in a template and
+# density to count the characters a line holds (resumes/templates/line-widths.yaml). Never a resume: the text
+# is invented and its evidence ids only point at this folder's fictional evidence.yaml.
+sidecar:
+  lens: null
+  base_of: null
+  job: null
+cv:
+  name: Riley Moreno
+  email: riley.moreno@example.com
+  sections:
+    Experience:
+    - company: Northwind Robotics Unit 1
+      position: Machine Learning Engineer
+      location: San Francisco, CA
+      start_date: 2023-03
+      end_date: present
+      evidence:
+      - nw-role
+      highlights:
+      - Designed a retrieval service over 1.2M maintenance logs with PyTorch embeddings and a pgvector index, freeing two analysts for modeling work each week. <!-- ev:nw-rag-01 -->
+      - Led the release gate that re-runs 600 golden questions using PyTorch Lightning modules fine-tuned on in-domain text, serving 40 requests per second at 180 ms p95 latency, cutting median lookup time from 9 to 4 minutes. <!-- ev:nw-rag-01 -->
+      - Designed the batch inference path from notebooks to a service with contract tests that fail the build on schema drift, adopted by two hospital partners within a quarter, adopted by two hospital partners within a quarter. Wrote the runbook and trained three engineers to operate it. <!-- ev:nw-rag-01 -->
+      - Evaluated the vector index with nightly compaction on AWS with per-tenant encryption and audit logs, cutting median lookup time from 9 to 4 minutes, which cut manual reporting by about 70 percent. The same pattern now runs in two other product lines. The same pattern now runs in two other product lines. <!-- ev:nw-rag-01 -->
+      - Trained the agent runtime as a state graph with typed tool calls with structured logs joined on one timeline, freeing two analysts for modeling work each week. <!-- ev:nw-rag-01 -->
+      - Reduced the on-call dashboards for model drift and latency on Kubernetes with autoscaling and canary rollouts, adopted by two hospital partners within a quarter, catching regressions before customers saw them. <!-- ev:nw-rag-01 -->
+      - Migrated the batch inference path from notebooks to a service through Terraform modules reviewed by the platform team, which cut manual reporting by about 70 percent, adopted by two hospital partners within a quarter. Presented the results to the leadership team and the partner clinics. <!-- ev:nw-rag-01 -->
+      - Built a feature store shared by four product teams through Terraform modules reviewed by the platform team, raising Macro-F1 from 0.41 to 0.49 on the held-out set, which cut manual reporting by about 70 percent. The design kept each step testable, retryable and easy to replace. The design kept each step testable, retryable and easy to replace. <!-- ev:nw-rag-01 -->
+    - company: Northwind Robotics Unit 2
+      position: Machine Learning Engineer
+      location: San Francisco, CA
+      start_date: 2023-03
+      end_date: present
+      evidence:
+      - nw-role
+      highlights:
+      - Shipped a streaming parser for partner HL7 feeds on AWS with per-tenant encryption and audit logs, and stopped malformed feeds before they reached reporting. <!-- ev:nw-rag-01 -->
+      - Evaluated a sandbox where agents edit configuration safely on Kubernetes with autoscaling and canary rollouts, lowering monthly inference spend by 35 percent, catching regressions before customers saw them. <!-- ev:nw-rag-01 -->
+      - Migrated an ingestion pipeline for 3M claims records on AWS with per-tenant encryption and audit logs, serving 40 requests per second at 180 ms p95 latency, serving 40 requests per second at 180 ms p95 latency. Wrote the runbook and trained three engineers to operate it. <!-- ev:nw-rag-01 -->
+      - Evaluated the release gate that re-runs 600 golden questions using Airflow with data-quality checks at every stage, catching regressions before customers saw them, so every answer traces back to a cited source. The design kept each step testable, retryable and easy to replace. The same pattern now runs in two other product lines. <!-- ev:nw-rag-01 -->
+      - Trained a cost report that attributes GPU hours to each team with PyTorch embeddings and a pgvector index, and stopped malformed feeds before they reached reporting. <!-- ev:nw-rag-01 -->
+      - Trained a cost report that attributes GPU hours to each team using Airflow with data-quality checks at every stage, which cut manual reporting by about 70 percent, which cut manual reporting by about 70 percent. <!-- ev:nw-rag-01 -->
+      - Measured an offline replay bench for production conversations with PyTorch embeddings and a pgvector index, catching regressions before customers saw them, serving 40 requests per second at 180 ms p95 latency. Presented the results to the leadership team and the partner clinics. <!-- ev:nw-rag-01 -->
+      - Evaluated the evaluation harness for every model release in Python and TypeScript behind a FastAPI service, raising Macro-F1 from 0.41 to 0.49 on the held-out set, freeing two analysts for modeling work each week. The design kept each step testable, retryable and easy to replace. The same pattern now runs in two other product lines. <!-- ev:nw-rag-01 -->
+    - company: Northwind Robotics Unit 3
+      position: Machine Learning Engineer
+      location: San Francisco, CA
+      start_date: 2023-03
+      end_date: present
+      evidence:
+      - nw-role
+      highlights:
+      - Deployed the agent runtime as a state graph with typed tool calls using Airflow with data-quality checks at every stage, raising Macro-F1 from 0.41 to 0.49 on the held-out set. <!-- ev:nw-rag-01 -->
+      - Owned a cost report that attributes GPU hours to each team on AWS with per-tenant encryption and audit logs, catching regressions before customers saw them, serving 40 requests per second at 180 ms p95 latency. <!-- ev:nw-rag-01 -->
+      - Trained a retrieval service over 1.2M maintenance logs through Terraform modules reviewed by the platform team, serving 40 requests per second at 180 ms p95 latency, lowering monthly inference spend by 35 percent. Every change shipped behind a flag with an owner and a rollback plan. <!-- ev:nw-rag-01 -->
+      - Measured the on-call dashboards for model drift and latency on AWS with per-tenant encryption and audit logs, which cut manual reporting by about 70 percent, which cut manual reporting by about 70 percent. The same pattern now runs in two other product lines. The same pattern now runs in two other product lines. <!-- ev:nw-rag-01 -->
+      - Migrated a streaming parser for partner HL7 feeds with structured logs joined on one timeline, cutting median lookup time from 9 to 4 minutes. <!-- ev:nw-rag-01 -->
+      - Measured a labeling workbench for clinical notes using PyTorch Lightning modules fine-tuned on in-domain text, serving 40 requests per second at 180 ms p95 latency, serving 40 requests per second at 180 ms p95 latency. <!-- ev:nw-rag-01 -->
+      - Measured a retrieval service over 1.2M maintenance logs with structured logs joined on one timeline, cutting median lookup time from 9 to 4 minutes, freeing two analysts for modeling work each week. The design kept each step testable, retryable and easy to replace. <!-- ev:nw-rag-01 -->
+      - Rebuilt the agent runtime as a state graph with typed tool calls with contract tests that fail the build on schema drift, serving 40 requests per second at 180 ms p95 latency, serving 40 requests per second at 180 ms p95 latency. Wrote the runbook and trained three engineers to operate it. Every change shipped behind a flag with an owner and a rollback plan. <!-- ev:nw-rag-01 -->
+    - company: Northwind Robotics Unit 4
+      position: Machine Learning Engineer
+      location: San Francisco, CA
+      start_date: 2023-03
+      end_date: present
+      evidence:
+      - nw-role
+      highlights:
+      - Scaled the prompt registry with versioned templates and owners with PyTorch embeddings and a pgvector index, catching regressions before customers saw them. <!-- ev:nw-rag-01 -->
+      - Owned the batch inference path from notebooks to a service with an LLM judge grading each full trajectory, raising Macro-F1 from 0.41 to 0.49 on the held-out set, which cut manual reporting by about 70 percent. <!-- ev:nw-rag-01 -->
+      - Migrated the prompt registry with versioned templates and owners with contract tests that fail the build on schema drift, raising Macro-F1 from 0.41 to 0.49 on the held-out set, serving 40 requests per second at 180 ms p95 latency. Every change shipped behind a flag with an owner and a rollback plan. <!-- ev:nw-rag-01 -->
+      - Built a labeling workbench for clinical notes with PyTorch embeddings and a pgvector index, freeing two analysts for modeling work each week, catching regressions before customers saw them. Every change shipped behind a flag with an owner and a rollback plan. Presented the results to the leadership team and the partner clinics. <!-- ev:nw-rag-01 -->
+      - Automated an offline replay bench for production conversations on Kubernetes with autoscaling and canary rollouts, so every answer traces back to a cited source. <!-- ev:nw-rag-01 -->
+      - Built an offline replay bench for production conversations using Airflow with data-quality checks at every stage, cutting median lookup time from 9 to 4 minutes, so every answer traces back to a cited source. <!-- ev:nw-rag-01 -->
+      - Automated a sandbox where agents edit configuration safely with structured logs joined on one timeline, raising Macro-F1 from 0.41 to 0.49 on the held-out set, raising Macro-F1 from 0.41 to 0.49 on the held-out set. The design kept each step testable, retryable and easy to replace. <!-- ev:nw-rag-01 -->
+      - Owned a retrieval service over 1.2M maintenance logs with structured logs joined on one timeline, lowering monthly inference spend by 35 percent, so every answer traces back to a cited source. Presented the results to the leadership team and the partner clinics. Presented the results to the leadership team and the partner clinics. <!-- ev:nw-rag-01 -->
+    - company: Northwind Robotics Unit 5
+      position: Machine Learning Engineer
+      location: San Francisco, CA
+      start_date: 2023-03
+      end_date: present
+      evidence:
+      - nw-role
+      highlights:
+      - Evaluated a streaming parser for partner HL7 feeds through Terraform modules reviewed by the platform team, which cut manual reporting by about 70 percent. <!-- ev:nw-rag-01 -->
+      - Deployed a feature store shared by four product teams through Terraform modules reviewed by the platform team, cutting median lookup time from 9 to 4 minutes, freeing two analysts for modeling work each week. <!-- ev:nw-rag-01 -->
+      - Owned the vector index with nightly compaction with structured logs joined on one timeline, which cut manual reporting by about 70 percent, and stopped malformed feeds before they reached reporting. The design kept each step testable, retryable and easy to replace. <!-- ev:nw-rag-01 -->
+      - Reduced a sandbox where agents edit configuration safely on AWS with per-tenant encryption and audit logs, cutting median lookup time from 9 to 4 minutes, raising Macro-F1 from 0.41 to 0.49 on the held-out set. Every change shipped behind a flag with an owner and a rollback plan. Every change shipped behind a flag with an owner and a rollback plan. <!-- ev:nw-rag-01 -->
+      - Automated the evaluation harness for every model release on Kubernetes with autoscaling and canary rollouts, and stopped malformed feeds before they reached reporting. <!-- ev:nw-rag-01 -->
+      - Trained a streaming parser for partner HL7 feeds on AWS with per-tenant encryption and audit logs, freeing two analysts for modeling work each week, lowering monthly inference spend by 35 percent. <!-- ev:nw-rag-01 -->
+      - Reduced a sandbox where agents edit configuration safely with PyTorch embeddings and a pgvector index, serving 40 requests per second at 180 ms p95 latency, cutting median lookup time from 9 to 4 minutes. Wrote the runbook and trained three engineers to operate it. <!-- ev:nw-rag-01 -->
+      - Shipped the evaluation harness for every model release in Python and TypeScript behind a FastAPI service, which cut manual reporting by about 70 percent, lowering monthly inference spend by 35 percent. Presented the results to the leadership team and the partner clinics. Presented the results to the leadership team and the partner clinics. <!-- ev:nw-rag-01 -->
+    - company: Northwind Robotics Unit 6
+      position: Machine Learning Engineer
+      location: San Francisco, CA
+      start_date: 2023-03
+      end_date: present
+      evidence:
+      - nw-role
+      highlights:
+      - Wrote an ingestion pipeline for 3M claims records on AWS with per-tenant encryption and audit logs, serving 40 requests per second at 180 ms p95 latency. <!-- ev:nw-rag-01 -->
+      - Built the vector index with nightly compaction using Airflow with data-quality checks at every stage, freeing two analysts for modeling work each week, and stopped malformed feeds before they reached reporting. <!-- ev:nw-rag-01 -->
+      - Designed a retrieval service over 1.2M maintenance logs in Python and TypeScript behind a FastAPI service, raising Macro-F1 from 0.41 to 0.49 on the held-out set, cutting median lookup time from 9 to 4 minutes. Presented the results to the leadership team and the partner clinics. <!-- ev:nw-rag-01 -->
+      - Measured the prompt registry with versioned templates and owners using PyTorch Lightning modules fine-tuned on in-domain text, cutting median lookup time from 9 to 4 minutes, catching regressions before customers saw them. Every change shipped behind a flag with an owner and a rollback plan. The same pattern now runs in two other product lines. <!-- ev:nw-rag-01 -->
+      - Reduced a cost report that attributes GPU hours to each team with structured logs joined on one timeline, cutting median lookup time from 9 to 4 minutes. <!-- ev:nw-rag-01 -->
+      - Built a cost report that attributes GPU hours to each team on AWS with per-tenant encryption and audit logs, lowering monthly inference spend by 35 percent, raising Macro-F1 from 0.41 to 0.49 on the held-out set. <!-- ev:nw-rag-01 -->
+      - Scaled the prompt registry with versioned templates and owners on Kubernetes with autoscaling and canary rollouts, catching regressions before customers saw them, freeing two analysts for modeling work each week. The design kept each step testable, retryable and easy to replace. <!-- ev:nw-rag-01 -->
+      - Deployed a cost report that attributes GPU hours to each team with contract tests that fail the build on schema drift, freeing two analysts for modeling work each week, cutting median lookup time from 9 to 4 minutes. Presented the results to the leadership team and the partner clinics. Presented the results to the leadership team and the partner clinics. <!-- ev:nw-rag-01 -->
+    Publications:
+    - Designed a retrieval service over 1.2M maintenance logs with PyTorch embeddings and a pgvector index, freeing two analysts for modeling work each week. Evaluated the vector index with nightly compaction on AWS with per-tenant encryption and audit logs, cutting median lookup time from 9 to 4 minutes, which cut manual reporting by about 70 percent. The same pattern now runs in two other product lines. The same pattern now runs in two other product lines. <!-- ev:pub-triage -->
+    - Migrated the batch inference path from notebooks to a service through Terraform modules reviewed by the platform team, which cut manual reporting by about 70 percent, adopted by two hospital partners within a quarter. Presented the results to the leadership team and the partner clinics. Evaluated a sandbox where agents edit configuration safely on Kubernetes with autoscaling and canary rollouts, lowering monthly inference spend by 35 percent, catching regressions before customers saw them. <!-- ev:pub-triage -->
+    - Trained a cost report that attributes GPU hours to each team with PyTorch embeddings and a pgvector index, and stopped malformed feeds before they reached reporting. Evaluated the evaluation harness for every model release in Python and TypeScript behind a FastAPI service, raising Macro-F1 from 0.41 to 0.49 on the held-out set, freeing two analysts for modeling work each week. The design kept each step testable, retryable and easy to replace. The same pattern now runs in two other product lines. <!-- ev:pub-triage -->
+    - Trained a retrieval service over 1.2M maintenance logs through Terraform modules reviewed by the platform team, serving 40 requests per second at 180 ms p95 latency, lowering monthly inference spend by 35 percent. Every change shipped behind a flag with an owner and a rollback plan. Measured a labeling workbench for clinical notes using PyTorch Lightning modules fine-tuned on in-domain text, serving 40 requests per second at 180 ms p95 latency, serving 40 requests per second at 180 ms p95 latency. <!-- ev:pub-triage -->
+    - Scaled the prompt registry with versioned templates and owners with PyTorch embeddings and a pgvector index, catching regressions before customers saw them. Built a labeling workbench for clinical notes with PyTorch embeddings and a pgvector index, freeing two analysts for modeling work each week, catching regressions before customers saw them. Every change shipped behind a flag with an owner and a rollback plan. Presented the results to the leadership team and the partner clinics. <!-- ev:pub-triage -->
+    - Automated a sandbox where agents edit configuration safely with structured logs joined on one timeline, raising Macro-F1 from 0.41 to 0.49 on the held-out set, raising Macro-F1 from 0.41 to 0.49 on the held-out set. The design kept each step testable, retryable and easy to replace. Deployed a feature store shared by four product teams through Terraform modules reviewed by the platform team, cutting median lookup time from 9 to 4 minutes, freeing two analysts for modeling work each week. <!-- ev:pub-triage -->
+    - Automated the evaluation harness for every model release on Kubernetes with autoscaling and canary rollouts, and stopped malformed feeds before they reached reporting. Shipped the evaluation harness for every model release in Python and TypeScript behind a FastAPI service, which cut manual reporting by about 70 percent, lowering monthly inference spend by 35 percent. Presented the results to the leadership team and the partner clinics. Presented the results to the leadership team and the partner clinics. <!-- ev:pub-triage -->
+    - Designed a retrieval service over 1.2M maintenance logs in Python and TypeScript behind a FastAPI service, raising Macro-F1 from 0.41 to 0.49 on the held-out set, cutting median lookup time from 9 to 4 minutes. Presented the results to the leadership team and the partner clinics. Built a cost report that attributes GPU hours to each team on AWS with per-tenant encryption and audit logs, lowering monthly inference spend by 35 percent, raising Macro-F1 from 0.41 to 0.49 on the held-out set. <!-- ev:pub-triage -->

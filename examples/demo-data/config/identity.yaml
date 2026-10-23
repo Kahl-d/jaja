@@ -1,0 +1,12 @@
+# Demo identity (fictional).
+identity:
+  name: "Sam Rivera"
+  emails: ["sam.rivera@example.test"]
+  signature_names: ["Sam", "Sam Rivera"]
+  linkedin_url: "https://linkedin.example.test/in/sam-rivera"
+  resume_file_pattern: "^SamRivera_Resume[\\w.\\-]*\\.pdf$"
+  resume_pdf_name: "SamRivera_Resume.pdf"
+  owner_label: "Sam"
+  timezone: "America/Chicago"
+  timezone_label: "CT"
+  degrees_held: ["master"]

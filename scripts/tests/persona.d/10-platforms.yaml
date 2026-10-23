@@ -1,0 +1,5 @@
+# Synthetic persona values for the platform registry readers (fictional).
+policy:
+  platforms:
+    not_boards_extra: [example-portfolio]
+    sitting_kinds: {introbot: ai-intro}

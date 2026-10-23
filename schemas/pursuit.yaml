@@ -1,0 +1,37 @@
+# Frontmatter contract for pursuits/<slug>/pursuit.md in the data folder.
+# One pursuit per DIRECTION into a company (a referral through one person, a direct application, a recruiter's
+# inbound); several pursuits may share a company_slug. It holds only what no other record holds: who the way in
+# is, which roles the owner picked, the stage, what it waits on and the next action. Written only by
+# scripts/pursuits.py (owner role: recruiter); the join over everything it names is the generated pursuits/<slug>/HUB.md
+# (scripts/pursuit_hub.py). Body: "## Strategy" (the owner's words, quoted), "## Decisions" (append-only; each line
+# cites a recorded decision or the owner's quoted words), "## Log" (append-only stage and field changes).
+type: pursuit
+glob: "pursuits/*/pursuit.md"
+required: [id, title, company_slug, kind, stage, waiting_on, created, updated]
+fields:
+  - type                # node type (pursuit); set by the writing script (graph_links.py), always first
+  - id                  # the direction, stable: <company_slug>-via-<referrer>-<YYYYMM> or <company_slug>-<kind>-<YYYYMM>
+  - title               # "Acme Corp via Sam Rivera, introduced by Alex Doe"
+  - company             # display name
+  - company_slug        # canonical (scripts/company_index.py: the dossier's slug first)
+  - kind
+  - referrer            # prospect slug: the person who refers the owner in
+  - introducer          # prospect slug: the person who connected the owner to the referrer
+  - contacts            # prospect slugs: everyone else on this direction
+  - case                # path under the job-search root: the research case file
+  - intake              # path under the job-search root: the intake note
+  - applications        # application slugs: the roles the owner picked for this direction
+  - master_variant      # resumes/variants/<slug>: the one resume that goes to the referrer
+  - stage
+  - waiting_on          # owner | nobody | contact:<prospect slug> | lane:<name> | role:<role slug>
+  - next_action
+  - next_action_at
+  - closed_reason       # required at closed-lost and closed-won
+  - created
+  - updated
+  - links               # graph edges: path-qualified [[...]] wikilinks, written only by code (graph_links.py)
+enums:
+  kind: [referral, direct, recruiter-inbound]
+  stage: [intake, researching, case-ready, packages, resumes, review, drafted, awaiting-approval, sent,
+          in-conversation, interviewing, offer, paused, closed-won, closed-lost]
+dates: [next_action_at, created, updated]

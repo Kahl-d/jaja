@@ -1,0 +1,432 @@
+{
+ "jobs": [
+  {
+   "id": "job-2001",
+   "title": "Machine Learning Engineer, Pricing AI/ML",
+   "department": "Applied AI",
+   "team": "Applied AI Engineering",
+   "employmentType": "FullTime",
+   "location": "San Francisco",
+   "shouldDisplayCompensationOnJobPostings": true,
+   "secondaryLocations": [],
+   "publishedAt": "2026-09-21T19:33:24.536+00:00",
+   "isListed": true,
+   "isRemote": null,
+   "workplaceType": null,
+   "address": {
+    "postalAddress": {
+     "addressRegion": "California",
+     "addressCountry": "United States",
+     "addressLocality": "San Francisco"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/modelco/job-2001",
+   "applyUrl": "https://jobs.ashbyhq.com/modelco/job-2001/application",
+   "descriptionHtml": "<h2>About the team</h2>\n<p>Modelco trains and ships language models. The Applied AI Engineering team is small, works in the open inside the company, and ships every week.</p>\n<h2>About the role</h2>\n<p>As a member of the Applied AI Engineering team you will own pricing and ranking models work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</p>\n<h2>Responsibilities</h2>\n<ul><li>Design, build and operate pricing and ranking models services that run in production.</li><li>Improve on-call tooling so incidents are rarer and shorter.</li><li>Keep dashboards and runbooks for pricing and ranking models accurate and easy to follow.</li><li>Work with research and product to move prototypes into reliable systems.</li></ul>\n<h2>Qualifications</h2>\n<ul><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Hands-on experience with Python, PyTorch and experimentation platforms.</li><li>A record of owning a system from the first commit to steady operation.</li><li>Clear written communication and a preference for simple designs.</li></ul>\n<h2>Nice to have</h2>\n<ul><li>Open-source contributions in the pricing and ranking models area.</li><li>Experience with distributed training or large-scale data processing.</li></ul>",
+   "descriptionPlain": "ABOUT THE TEAM\n\nModelco trains and ships language models. The Applied AI Engineering team is small, works in the open inside the company, and ships every week.\n\nABOUT THE ROLE\n\nAs a member of the Applied AI Engineering team you will own pricing and ranking models work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.\n\nRESPONSIBILITIES\n\n- Design, build and operate pricing and ranking models services that run in production.\n- Improve on-call tooling so incidents are rarer and shorter.\n- Keep dashboards and runbooks for pricing and ranking models accurate and easy to follow.\n- Work with research and product to move prototypes into reliable systems.\n\nQUALIFICATIONS\n\n- 3+ years of professional software engineering experience in Python or a similar language.\n- Hands-on experience with Python, PyTorch and experimentation platforms.\n- A record of owning a system from the first commit to steady operation.\n- Clear written communication and a preference for simple designs.\n\nNICE TO HAVE\n\n- Open-source contributions in the pricing and ranking models area.\n- Experience with distributed training or large-scale data processing.",
+   "compensation": {
+    "compensationTierSummary": "$381K – $555K • Offers Equity",
+    "scrapeableCompensationSalarySummary": "$381K - $555K",
+    "compensationTiers": [
+     {
+      "id": "tier-job-2001",
+      "tierSummary": "$381K – $555K • Offers Equity",
+      "title": null,
+      "additionalInformation": null,
+      "components": [
+       {
+        "id": "comp-job-2001-0",
+        "summary": "Offers Equity",
+        "compensationType": "EquityCashValue",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": null,
+        "maxValue": null
+       },
+       {
+        "id": "comp-job-2001-1",
+        "summary": "$381K – $555K",
+        "compensationType": "Salary",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": 381000,
+        "maxValue": 555000
+       }
+      ]
+     }
+    ],
+    "summaryComponents": [
+     {
+      "compensationType": "EquityCashValue",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": null,
+      "maxValue": null
+     },
+     {
+      "compensationType": "Salary",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": 381000,
+      "maxValue": 555000
+     }
+    ]
+   }
+  },
+  {
+   "id": "job-2002",
+   "title": "Forward Deployed Software Engineer - Bay Area",
+   "department": "Forward Deployed Engineering",
+   "team": "Forward Deployed Engineering",
+   "employmentType": "FullTime",
+   "location": "San Francisco",
+   "shouldDisplayCompensationOnJobPostings": true,
+   "secondaryLocations": [],
+   "publishedAt": "2025-11-15T01:25:39.198+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Hybrid",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "California",
+     "addressCountry": "United States",
+     "addressLocality": "San Francisco"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/modelco/job-2002",
+   "applyUrl": "https://jobs.ashbyhq.com/modelco/job-2002/application",
+   "descriptionHtml": "<h2>About the team</h2>\n<p>Modelco trains and ships language models. The Forward Deployed Engineering team is small, works in the open inside the company, and ships every week.</p>\n<h2>About the role</h2>\n<p>As a member of the Forward Deployed Engineering team you will own forward deployed engineering work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</p>\n<h2>Responsibilities</h2>\n<ul><li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Keep dashboards and runbooks for forward deployed engineering accurate and easy to follow.</li><li>Write short design documents and review code from the people you work with.</li></ul>\n<h2>Qualifications</h2>\n<ul><li>A record of owning a system from the first commit to steady operation.</li><li>Hands-on experience with Python, TypeScript and cloud platforms.</li><li>Comfort reading research papers and turning them into working code.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li></ul>\n<h2>Nice to have</h2>\n<ul><li>Open-source contributions in the forward deployed engineering area.</li><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li></ul>",
+   "descriptionPlain": "ABOUT THE TEAM\n\nModelco trains and ships language models. The Forward Deployed Engineering team is small, works in the open inside the company, and ships every week.\n\nABOUT THE ROLE\n\nAs a member of the Forward Deployed Engineering team you will own forward deployed engineering work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.\n\nRESPONSIBILITIES\n\n- Turn open product questions into measurable experiments and ship the ones that win.\n- Work with research and product to move prototypes into reliable systems.\n- Keep dashboards and runbooks for forward deployed engineering accurate and easy to follow.\n- Write short design documents and review code from the people you work with.\n\nQUALIFICATIONS\n\n- A record of owning a system from the first commit to steady operation.\n- Hands-on experience with Python, TypeScript and cloud platforms.\n- Comfort reading research papers and turning them into working code.\n- 3+ years of professional software engineering experience in Python or a similar language.\n\nNICE TO HAVE\n\n- Open-source contributions in the forward deployed engineering area.\n- Prior work on evaluation, red-teaming or reliability for learned systems.",
+   "compensation": {
+    "compensationTierSummary": "$185K – $325K • Offers Equity",
+    "scrapeableCompensationSalarySummary": "$185K - $325K",
+    "compensationTiers": [
+     {
+      "id": "tier-job-2002",
+      "tierSummary": "$185K – $325K • Offers Equity",
+      "title": null,
+      "additionalInformation": null,
+      "components": [
+       {
+        "id": "comp-job-2002-0",
+        "summary": "Offers Equity",
+        "compensationType": "EquityCashValue",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": null,
+        "maxValue": null
+       },
+       {
+        "id": "comp-job-2002-1",
+        "summary": "$185K – $325K",
+        "compensationType": "Salary",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": 185000,
+        "maxValue": 325000
+       }
+      ]
+     }
+    ],
+    "summaryComponents": [
+     {
+      "compensationType": "EquityCashValue",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": null,
+      "maxValue": null
+     },
+     {
+      "compensationType": "Salary",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": 185000,
+      "maxValue": 325000
+     }
+    ]
+   }
+  },
+  {
+   "id": "job-2003",
+   "title": "Research Engineer, Data Protection",
+   "department": "Security",
+   "team": "Security",
+   "employmentType": "FullTime",
+   "location": "San Francisco",
+   "shouldDisplayCompensationOnJobPostings": true,
+   "secondaryLocations": [],
+   "publishedAt": "2026-07-14T18:44:03.082+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Hybrid",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "California",
+     "addressCountry": "United States",
+     "addressLocality": "San Francisco"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/modelco/job-2003",
+   "applyUrl": "https://jobs.ashbyhq.com/modelco/job-2003/application",
+   "descriptionHtml": "<h2>About the team</h2>\n<p>Modelco trains and ships language models. The Security team is small, works in the open inside the company, and ships every week.</p>\n<h2>About the role</h2>\n<p>As a member of the Security team you will own data protection research work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</p>\n<h2>Responsibilities</h2>\n<ul><li>Write short design documents and review code from the people you work with.</li><li>Work with research and product to move prototypes into reliable systems.</li><li>Mentor newer engineers and share what you learn with the wider team.</li><li>Keep dashboards and runbooks for data protection research accurate and easy to follow.</li></ul>\n<h2>Qualifications</h2>\n<ul><li>A record of owning a system from the first commit to steady operation.</li><li>Comfort reading research papers and turning them into working code.</li><li>Clear written communication and a preference for simple designs.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li></ul>\n<h2>Nice to have</h2>\n<ul><li>Open-source contributions in the data protection research area.</li><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li></ul>",
+   "descriptionPlain": "ABOUT THE TEAM\n\nModelco trains and ships language models. The Security team is small, works in the open inside the company, and ships every week.\n\nABOUT THE ROLE\n\nAs a member of the Security team you will own data protection research work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.\n\nRESPONSIBILITIES\n\n- Write short design documents and review code from the people you work with.\n- Work with research and product to move prototypes into reliable systems.\n- Mentor newer engineers and share what you learn with the wider team.\n- Keep dashboards and runbooks for data protection research accurate and easy to follow.\n\nQUALIFICATIONS\n\n- A record of owning a system from the first commit to steady operation.\n- Comfort reading research papers and turning them into working code.\n- Clear written communication and a preference for simple designs.\n- 3+ years of professional software engineering experience in Python or a similar language.\n\nNICE TO HAVE\n\n- Open-source contributions in the data protection research area.\n- Prior work on evaluation, red-teaming or reliability for learned systems.",
+   "compensation": {
+    "compensationTierSummary": "$0 – $500K • Offers Equity",
+    "scrapeableCompensationSalarySummary": "$0 - $500K",
+    "compensationTiers": [
+     {
+      "id": "tier-job-2003",
+      "tierSummary": "$0 – $500K • Offers Equity",
+      "title": null,
+      "additionalInformation": null,
+      "components": [
+       {
+        "id": "comp-job-2003-0",
+        "summary": "Offers Equity",
+        "compensationType": "EquityCashValue",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": null,
+        "maxValue": null
+       },
+       {
+        "id": "comp-job-2003-1",
+        "summary": "$0 – $500K",
+        "compensationType": "Salary",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": 0,
+        "maxValue": 500000
+       }
+      ]
+     }
+    ],
+    "summaryComponents": [
+     {
+      "compensationType": "EquityCashValue",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": null,
+      "maxValue": null
+     },
+     {
+      "compensationType": "Salary",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": 0,
+      "maxValue": 500000
+     }
+    ]
+   }
+  },
+  {
+   "id": "job-2004",
+   "title": "Technical Program Manager, Training Infrastructure",
+   "department": "Technical Program Management",
+   "team": "Technical Program Management",
+   "employmentType": "FullTime",
+   "location": "San Francisco",
+   "shouldDisplayCompensationOnJobPostings": true,
+   "secondaryLocations": [],
+   "publishedAt": "2026-03-12T16:38:15.322+00:00",
+   "isListed": true,
+   "isRemote": null,
+   "workplaceType": null,
+   "address": {
+    "postalAddress": {
+     "addressRegion": "California",
+     "addressCountry": "United States",
+     "addressLocality": "San Francisco"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/modelco/job-2004",
+   "applyUrl": "https://jobs.ashbyhq.com/modelco/job-2004/application",
+   "descriptionHtml": "<h2>About the team</h2>\n<p>Modelco trains and ships language models. The Technical Program Management team is small, works in the open inside the company, and ships every week.</p>\n<h2>About the role</h2>\n<p>As a member of the Technical Program Management team you will own training infrastructure programs work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</p>\n<h2>Responsibilities</h2>\n<ul><li>Keep dashboards and runbooks for training infrastructure programs accurate and easy to follow.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Design, build and operate training infrastructure programs services that run in production.</li></ul>\n<h2>Qualifications</h2>\n<ul><li>A record of owning a system from the first commit to steady operation.</li><li>Comfort reading research papers and turning them into working code.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Hands-on experience with program tooling.</li></ul>\n<h2>Nice to have</h2>\n<ul><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Experience with distributed training or large-scale data processing.</li></ul>",
+   "descriptionPlain": "ABOUT THE TEAM\n\nModelco trains and ships language models. The Technical Program Management team is small, works in the open inside the company, and ships every week.\n\nABOUT THE ROLE\n\nAs a member of the Technical Program Management team you will own training infrastructure programs work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.\n\nRESPONSIBILITIES\n\n- Keep dashboards and runbooks for training infrastructure programs accurate and easy to follow.\n- Debug failures end to end, from data pipelines to model behaviour.\n- Build evaluation harnesses that track quality, latency and cost release over release.\n- Design, build and operate training infrastructure programs services that run in production.\n\nQUALIFICATIONS\n\n- A record of owning a system from the first commit to steady operation.\n- Comfort reading research papers and turning them into working code.\n- 3+ years of professional software engineering experience in Python or a similar language.\n- Hands-on experience with program tooling.\n\nNICE TO HAVE\n\n- Prior work on evaluation, red-teaming or reliability for learned systems.\n- Experience with distributed training or large-scale data processing.",
+   "compensation": {
+    "compensationTierSummary": "$257K – $335K • Offers Equity",
+    "scrapeableCompensationSalarySummary": "$257K - $335K",
+    "compensationTiers": [
+     {
+      "id": "tier-job-2004",
+      "tierSummary": "$257K – $335K • Offers Equity",
+      "title": null,
+      "additionalInformation": null,
+      "components": [
+       {
+        "id": "comp-job-2004-0",
+        "summary": "$257K – $335K",
+        "compensationType": "Salary",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": 257000,
+        "maxValue": 335000
+       },
+       {
+        "id": "comp-job-2004-1",
+        "summary": "Offers Equity",
+        "compensationType": "EquityCashValue",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": null,
+        "maxValue": null
+       }
+      ]
+     }
+    ],
+    "summaryComponents": [
+     {
+      "compensationType": "Salary",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": 257000,
+      "maxValue": 335000
+     },
+     {
+      "compensationType": "EquityCashValue",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": null,
+      "maxValue": null
+     }
+    ]
+   }
+  },
+  {
+   "id": "job-2005",
+   "title": "Applied AI Engineer, Code Assistant",
+   "department": "Go To Market",
+   "team": "Technical Success",
+   "employmentType": "FullTime",
+   "location": "Munich, Germany",
+   "shouldDisplayCompensationOnJobPostings": false,
+   "secondaryLocations": [],
+   "publishedAt": "2026-09-23T08:53:56.426+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Hybrid",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "Munich",
+     "addressCountry": "Germany",
+     "addressLocality": "Munich"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/modelco/job-2005",
+   "applyUrl": "https://jobs.ashbyhq.com/modelco/job-2005/application",
+   "descriptionHtml": "<h2>About the team</h2>\n<p>Modelco trains and ships language models. The Technical Success team is small, works in the open inside the company, and ships every week.</p>\n<h2>About the role</h2>\n<p>As a member of the Technical Success team you will own customer deployments of the code assistant work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</p>\n<h2>Responsibilities</h2>\n<ul><li>Keep dashboards and runbooks for customer deployments of the code assistant accurate and easy to follow.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Mentor newer engineers and share what you learn with the wider team.</li><li>Turn open product questions into measurable experiments and ship the ones that win.</li></ul>\n<h2>Qualifications</h2>\n<ul><li>Comfort reading research papers and turning them into working code.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Clear written communication and a preference for simple designs.</li><li>Hands-on experience with Python, TypeScript and developer tooling.</li></ul>\n<h2>Nice to have</h2>\n<ul><li>Open-source contributions in the customer deployments of the code assistant area.</li><li>Experience with distributed training or large-scale data processing.</li></ul>",
+   "descriptionPlain": "ABOUT THE TEAM\n\nModelco trains and ships language models. The Technical Success team is small, works in the open inside the company, and ships every week.\n\nABOUT THE ROLE\n\nAs a member of the Technical Success team you will own customer deployments of the code assistant work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.\n\nRESPONSIBILITIES\n\n- Keep dashboards and runbooks for customer deployments of the code assistant accurate and easy to follow.\n- Debug failures end to end, from data pipelines to model behaviour.\n- Mentor newer engineers and share what you learn with the wider team.\n- Turn open product questions into measurable experiments and ship the ones that win.\n\nQUALIFICATIONS\n\n- Comfort reading research papers and turning them into working code.\n- 3+ years of professional software engineering experience in Python or a similar language.\n- Clear written communication and a preference for simple designs.\n- Hands-on experience with Python, TypeScript and developer tooling.\n\nNICE TO HAVE\n\n- Open-source contributions in the customer deployments of the code assistant area.\n- Experience with distributed training or large-scale data processing.",
+   "compensation": {
+    "compensationTierSummary": null,
+    "scrapeableCompensationSalarySummary": null,
+    "compensationTiers": [],
+    "summaryComponents": []
+   }
+  },
+  {
+   "id": "job-2006",
+   "title": "Software Engineer, Data Infrastructure",
+   "department": "Scaling",
+   "team": "Scaling",
+   "employmentType": "FullTime",
+   "location": "San Francisco",
+   "shouldDisplayCompensationOnJobPostings": true,
+   "secondaryLocations": [
+    {
+     "location": "New York City",
+     "address": {
+      "postalAddress": {
+       "addressRegion": "New York",
+       "addressCountry": "United States",
+       "addressLocality": "New York"
+      }
+     }
+    },
+    {
+     "location": "Seattle",
+     "address": {
+      "postalAddress": {
+       "addressRegion": "Washington",
+       "addressCountry": "United States",
+       "addressLocality": "Seattle"
+      }
+     }
+    },
+    {
+     "location": "Mountain View",
+     "address": {
+      "postalAddress": {
+       "addressRegion": "California",
+       "addressCountry": "United States",
+       "addressLocality": "Mountain View"
+      }
+     }
+    }
+   ],
+   "publishedAt": "2024-06-27T22:14:24.195+00:00",
+   "isListed": true,
+   "isRemote": null,
+   "workplaceType": null,
+   "address": {
+    "postalAddress": {
+     "addressRegion": "California",
+     "addressCountry": "United States",
+     "addressLocality": "San Francisco"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/modelco/job-2006",
+   "applyUrl": "https://jobs.ashbyhq.com/modelco/job-2006/application",
+   "descriptionHtml": "<h2>About the team</h2>\n<p>Modelco trains and ships language models. The Scaling team is small, works in the open inside the company, and ships every week.</p>\n<h2>About the role</h2>\n<p>As a member of the Scaling team you will own data infrastructure work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</p>\n<h2>Responsibilities</h2>\n<ul><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Design, build and operate data infrastructure services that run in production.</li><li>Improve on-call tooling so incidents are rarer and shorter.</li><li>Write short design documents and review code from the people you work with.</li></ul>\n<h2>Qualifications</h2>\n<ul><li>A record of owning a system from the first commit to steady operation.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>Comfort reading research papers and turning them into working code.</li><li>Clear written communication and a preference for simple designs.</li></ul>\n<h2>Nice to have</h2>\n<ul><li>Open-source contributions in the data infrastructure area.</li><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li></ul>",
+   "descriptionPlain": "ABOUT THE TEAM\n\nModelco trains and ships language models. The Scaling team is small, works in the open inside the company, and ships every week.\n\nABOUT THE ROLE\n\nAs a member of the Scaling team you will own data infrastructure work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.\n\nRESPONSIBILITIES\n\n- Debug failures end to end, from data pipelines to model behaviour.\n- Design, build and operate data infrastructure services that run in production.\n- Improve on-call tooling so incidents are rarer and shorter.\n- Write short design documents and review code from the people you work with.\n\nQUALIFICATIONS\n\n- A record of owning a system from the first commit to steady operation.\n- 3+ years of professional software engineering experience in Python or a similar language.\n- Comfort reading research papers and turning them into working code.\n- Clear written communication and a preference for simple designs.\n\nNICE TO HAVE\n\n- Open-source contributions in the data infrastructure area.\n- Prior work on evaluation, red-teaming or reliability for learned systems.",
+   "compensation": {
+    "compensationTierSummary": "$266K – $445K • Offers Equity",
+    "scrapeableCompensationSalarySummary": "$266K - $445K",
+    "compensationTiers": [
+     {
+      "id": "tier-job-2006",
+      "tierSummary": "$266K – $445K • Offers Equity",
+      "title": null,
+      "additionalInformation": null,
+      "components": [
+       {
+        "id": "comp-job-2006-0",
+        "summary": "Offers Equity",
+        "compensationType": "EquityCashValue",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": null,
+        "maxValue": null
+       },
+       {
+        "id": "comp-job-2006-1",
+        "summary": "$266K – $445K",
+        "compensationType": "Salary",
+        "interval": "1 YEAR",
+        "currencyCode": "USD",
+        "minValue": 266000,
+        "maxValue": 445000
+       }
+      ]
+     }
+    ],
+    "summaryComponents": [
+     {
+      "compensationType": "EquityCashValue",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": null,
+      "maxValue": null
+     },
+     {
+      "compensationType": "Salary",
+      "interval": "1 YEAR",
+      "currencyCode": "USD",
+      "minValue": 266000,
+      "maxValue": 445000
+     }
+    ]
+   }
+  }
+ ],
+ "apiVersion": "1"
+}

@@ -1,0 +1,1338 @@
+#!/usr/bin/env python3
+"""build_graph.py - the tracking graph: companies, roles, people and connections, joined from the records.
+
+The graph keeps company, role, people and connection tables with their context in the vault, so none of it is lost.
+
+Reads the record files only and never edits one (single writer per record):
+  companies/*.md            dossiers (slug, name, tier, sponsorship, E-Verify, H-1B)
+  targets/companies.yaml    the watch list (tier, sponsorship stance)
+  jobs/*.md                 the job table (title, status, fit, platform, first seen)
+  applications/*/           application.md (stage, next action) and fit.md (fit score)
+  pursuits/*/pursuit.md     the ways in (referrer, introducer, picks, stage, next action, log)
+  prospects/*.md            the CRM (warmth, priority, channels, last in and out, next touch, relation)
+  touches/*.jsonl           every message in or out (dates, direction, channel, kind; never the text)
+  research/targets/*.md     cases and quick checks (frontmatter company, application)
+  research/targets/identity/*.yaml, research/targets/evidence/*   people named in research, evidence files
+  hub/intake/*.md           intake notes (case or target -> the case file)
+  legal/checks/<slug>.md    visa checks
+  state/inbox/prospects-table.csv   INBOX's generated table (people, past applications, companies from Gmail)
+
+Writes graph/ (every file carries the GENERATED header naming this script; a file there without it is never
+touched, and a generated file no longer produced is removed):
+  graph/COMPANIES.md  graph/ROLES.md  graph/PEOPLE.md  graph/CONNECTIONS.md  graph/PRIORITY.md
+  graph/companies/<slug>-company.md   one hub note per company (frontmatter for views/companies.base)
+  graph/people/<id>-person.md         one note per person (frontmatter for views/people.base)
+The note basenames carry a -company / -person suffix so they never collide with a record's basename
+(companies/<slug>.md, prospects/<id>.md): a bare [[acme]] elsewhere in the vault keeps resolving to the dossier.
+
+Missing is not empty: an unknown field prints `unknown`, never a blank or a zero. Message text is never copied
+(touch summaries and outbox bodies stay in their records); INBOX's one-line summaries are copied as INBOX wrote
+them. Em-dashes in copied text are printed as hyphens.
+
+Rules that derive a value (stated again in the tables' legends):
+  company status   applied (an application at applied or later) > target (an open pursuit or an application in
+                   progress) > queued (a dossier, research case, quick check or intake) > lead (a job, a prospect record,
+                   or an INBOX row whose action is not skip; a pursuit's introducer does not count) > contact (known
+                   only as a person's employer, or from an INBOX row marked skip) > watching (the watch list only)
+  role status      from the application stage when there is one (discovered, fit_checked, tailored: not applied;
+                   applied, confirmation: applied; screen, oa, interviewing, final: interviewing; offer, accepted:
+                   offer; rejected, ghosted, withdrawn: closed; on_hold: on hold), else from the job (applied:
+                   applied; queued: not applied; discovered with no fit score: lead; closed: closed); INBOX's past
+                   applications: "past application"
+  who wrote last   the later of last inbound and last outbound (prospect fields and touches), else INBOX's last_from
+  slugs            company_index.CompanyIndex (dossier, watch list, derived); a derived slug that extends exactly
+                   one known slug with a "-" ("acme-technologies" -> "acme") is merged and listed
+
+  python3 scripts/build_graph.py [--root JS] [--today YYYY-MM-DD] [--check | --dry-run] [--json]
+    (default) write graph/;  --dry-run  print what would change;  --check  exit 1 when graph/ is stale, a
+    wikilink or markdown link does not resolve, or a generated basename collides with another vault file.
+Deterministic for a given --today; no network.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import re
+import sys
+from dataclasses import dataclass, field
+from datetime import date
+from pathlib import Path
+from typing import Any, Iterable
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import js_common as jc  # noqa: E402
+from company_index import CompanyIndex  # noqa: E402
+import agency_config as cfg  # noqa: E402
+
+#: how the owner is shown in 'who wrote last', and the INBOX last_from values that mean the owner wrote
+OWNER_LABEL = str(cfg.get("style.owner_label", "owner"))
+OWNER_ALIASES = {str(a).strip().lower() for a in (cfg.get("identity.owner_aliases", []) or [])} | {"owner", "me"}
+
+SELF = "scripts/build_graph.py"
+VAULT_PREFIX = str(cfg.get("identity.vault_prefix", "") or "").strip("/")
+OUT = "graph"
+UNKNOWN = "unknown"
+HEADER_MD = f"<!-- GENERATED by {SELF} from the job-search records; do not edit -->"
+HEADER_YAML = f"# GENERATED by {SELF} from the job-search records; do not edit"
+MARK = f"GENERATED by {SELF}"
+EM = chr(0x2014)                                   # the em-dash, never printed
+
+STATUS_ORDER = ["applied", "target", "queued", "lead", "contact", "watching"]
+PRIO_ORDER = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+CLOSED_STAGES = {"rejected", "ghosted", "withdrawn"}
+CLOSED_PROSPECT = {"do_not_contact", "closed", "archived", "dead"}
+STAGE_TO_ROLE = {"discovered": "not applied", "fit_checked": "not applied", "tailored": "not applied",
+                 "applied": "applied", "confirmation": "applied", "screen": "interviewing", "oa": "interviewing",
+                 "interviewing": "interviewing", "final": "interviewing", "offer": "offer", "accepted": "offer",
+                 "rejected": "closed", "ghosted": "closed", "withdrawn": "closed", "on_hold": "on hold"}
+APPLIED_STAGES = {"applied", "confirmation", "screen", "oa", "interviewing", "final", "offer", "accepted"}
+ISO = re.compile(r"\b(\d{4}-\d{2}-\d{2})\b")
+LINK_RE = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]*)?(?:\|[^\]]*)?\]\]")
+MDLINK_RE = re.compile(r"\]\(([^)\s]+)\)")
+
+COMPANY_FIELDS = ["type", "slug", "name", "tier", "status", "priority", "roles", "people", "warmest",
+                  "last_touch", "next_action", "next_action_at", "visa", "dossier", "links"]
+PERSON_FIELDS = ["type", "id", "name", "company", "company_slug", "role", "how_known", "warmth", "priority",
+                 "channel", "last_contact", "wrote_last", "next_action", "next_action_at", "record", "links"]
+
+
+# --------------------------------------------------------------------------- small helpers
+def clean(value: Any) -> str:
+    """One-line display text: None and empty are unknown; em-dashes become hyphens; table pipes escaped."""
+    if value is None or value == "" or value == []:
+        return UNKNOWN
+    if isinstance(value, (list, tuple)):
+        value = ", ".join(str(v) for v in value if v not in (None, "")) or UNKNOWN
+    text = " ".join(str(value).split()).replace(EM, "-")
+    return LINK_RE.sub(lambda m: m.group(0)[2:-2].split("|")[-1].rsplit("/", 1)[-1], text)   # copied links as text
+
+
+def cell(value: Any) -> str:
+    return clean(value).replace("|", "\\|")
+
+
+def day(value: Any) -> str | None:
+    d = jc.parse_date(value) if value not in (None, "") else None
+    return d.isoformat() if d else None
+
+
+def wl(rel: str, label: str) -> str:
+    """Path-qualified wikilink from the vault root (resolves in Obsidian and in scripts/kernel/lint.py)."""
+    rel = rel[:-3] if rel.endswith(".md") else rel
+    return f"[[{VAULT_PREFIX + '/' if VAULT_PREFIX else ''}{rel}|{label.replace('|', '/').replace(']', ')')}]]"
+
+
+def ml(rel: str, label: str, depth: int) -> str:
+    """Markdown link relative to a file `depth` folders below the job-search root (safe inside tables)."""
+    return f"[{label.replace('[', '(').replace(']', ')').replace('|', '/')}]({'../' * depth}{rel})"
+
+
+def _list(value: Any) -> list[Any]:
+    if value in (None, "", [], {}):
+        return []
+    return list(value) if isinstance(value, (list, tuple)) else [value]
+
+
+def _bare(value: Any) -> str | None:
+    """The id in "[[x]]", "[[a/b/x|y]]" or "x"."""
+    if value in (None, ""):
+        return None
+    text = str(value).strip()
+    m = re.match(r"^\[\[([^\]|#]+)", text)
+    text = (m.group(1) if m else text).strip().rsplit("/", 1)[-1]
+    return text or None
+
+
+def name_key(name: Any) -> str:
+    return jc.slugify(str(name or ""))
+
+
+# --------------------------------------------------------------------------- the model
+@dataclass
+class Company:
+    slug: str
+    names: list[str] = field(default_factory=list)
+    tier: str | None = None
+    dossier: str | None = None          # rel path
+    watch: bool = False
+    visa: list[str] = field(default_factory=list)
+    research: list[str] = field(default_factory=list)   # rel paths (md)
+    evidence: list[str] = field(default_factory=list)   # rel paths (txt/json/yaml)
+    intake: list[str] = field(default_factory=list)
+    legal: str | None = None
+    inbox_rows: list[dict[str, Any]] = field(default_factory=list)
+    via_people_only: bool = True
+    has_lead: bool = False
+
+    @property
+    def name(self) -> str:
+        return self.names[0] if self.names else self.slug
+
+
+@dataclass
+class Role:
+    id: str
+    company: str
+    title: str
+    status: str
+    fit: str
+    source: str
+    found: str
+    job: str | None = None          # rel path
+    application: str | None = None  # app id
+    pursuits: list[str] = field(default_factory=list)
+    people: list[str] = field(default_factory=list)
+    note: str | None = None
+    origin: str = ""                # rel path of the record the row came from
+
+
+@dataclass
+class Person:
+    id: str
+    name: str
+    company: str | None = None
+    role: str | None = None
+    how_known: list[str] = field(default_factory=list)
+    warmth: Any = None
+    priority: str | None = None
+    channel: list[str] = field(default_factory=list)
+    last_in: str | None = None
+    last_out: str | None = None
+    last_contact_csv: str | None = None
+    last_from_csv: str | None = None
+    next_action: str | None = None
+    next_at: str | None = None
+    record: str | None = None       # prospects/<id>.md
+    sources: list[str] = field(default_factory=list)
+    status: str | None = None
+    inbox: dict[str, Any] | None = None
+    touch_due: bool = False
+
+    @property
+    def last_contact(self) -> str | None:
+        dates = [d for d in (self.last_in, self.last_out, self.last_contact_csv) if d]
+        return max(dates) if dates else None
+
+    @property
+    def wrote_last(self) -> str:
+        if self.last_in or self.last_out:
+            if self.last_in and (not self.last_out or self.last_in > self.last_out):
+                return "them"
+            if self.last_out and (not self.last_in or self.last_out > self.last_in):
+                return OWNER_LABEL
+            return "same day (both)"
+        if self.last_from_csv:
+            return OWNER_LABEL if self.last_from_csv.strip().lower() in OWNER_ALIASES else self.last_from_csv
+        return UNKNOWN
+
+
+@dataclass
+class Edge:
+    src_kind: str
+    src: str
+    relation: str
+    dst_kind: str
+    dst: str
+    source: str       # rel path of the record that says so
+
+
+@dataclass
+class Item:
+    due: str | None
+    priority: str | None
+    what: str
+    who: str
+    company: str | None
+    source: str
+    kind: str
+    last_contact: str | None = None
+
+
+class Graph:
+    def __init__(self) -> None:
+        self.companies: dict[str, Company] = {}
+        self.roles: list[Role] = []
+        self.people: dict[str, Person] = {}
+        self.edges: list[Edge] = []
+        self.items: list[Item] = []
+        self.pursuits: dict[str, dict[str, Any]] = {}
+        self.applications: dict[str, dict[str, Any]] = {}
+        self.merges: list[tuple[str, str, str]] = []     # (derived, merged into, where)
+        self.touches: dict[str, list[dict[str, Any]]] = {}
+        self.skipped_inbox = 0
+        self.unreadable: list[str] = UNREADABLE
+        self.flat_read: list[str] = []
+
+    def company(self, slug: str, name: str | None = None) -> Company:
+        c = self.companies.setdefault(slug, Company(slug))
+        if name and clean(name) != UNKNOWN and clean(name) not in c.names:
+            c.names.append(clean(name))
+        return c
+
+    def edge(self, *args: str) -> None:
+        e = Edge(*args)
+        if e not in self.edges:
+            self.edges.append(e)
+
+
+# --------------------------------------------------------------------------- loading
+def _rel(js: Path, p: Path) -> str:
+    return p.relative_to(js).as_posix()
+
+
+UNREADABLE: list[str] = []      # records whose frontmatter does not parse (reset by each load)
+
+
+def _read(p: Path) -> tuple[dict[str, Any], str]:
+    try:
+        return jc.fm.load(p)
+    except Exception:
+        UNREADABLE.append(p.as_posix())
+        return {}, ""
+
+
+def _records(folder: Path) -> Iterable[tuple[Path, dict[str, Any], str]]:
+    """jc.iter_records without the crash: a record another lane is mid-way through writing (or a broken one) is
+    listed as unreadable in every table's footer and skipped, never guessed at."""
+    if not folder.is_dir():
+        return []
+    out = []
+    for p in sorted(folder.glob("*.md")):
+        if p.is_file() and not p.name.startswith(("_", ".")) and p.name != "README.md":
+            meta, body = _read(p)
+            if meta:
+                out.append((p, meta, body))
+    return out
+
+
+def load(js: Path, today_hint: str | None = None) -> Graph:
+    js = Path(js)
+    g = Graph()
+    UNREADABLE.clear()
+    index = CompanyIndex.load(js)
+    known: set[str] = set()
+
+    def resolve(name: Any = None, slug: Any = None, where: str = "") -> str | None:
+        for value in (slug, name):
+            if value in (None, ""):
+                continue
+            s, src = index.resolve(str(value))
+            if src != "derived" or (slug and value == slug):
+                return s
+            if s in known:
+                return s
+            hits = sorted(k for k in known if s.startswith(k + "-"))
+            if len(hits) == 1:
+                g.merges.append((s, hits[0], where))
+                return hits[0]
+            return s
+        return None
+
+    # dossiers
+    for p, meta, _ in _records(js / "companies"):
+        slug = str(meta.get("slug") or p.stem)
+        c = g.company(slug, meta.get("name"))
+        c.dossier, c.tier, c.via_people_only = _rel(js, p), clean(meta.get("tier")), False
+        for key, label in (("sponsorship_stance", "sponsorship"), ("e_verify", "E-Verify"),
+                           ("h1b_approvals_3y", "H-1B approvals 3y")):
+            if meta.get(key) not in (None, ""):
+                c.visa.append(f"{label} {clean(meta.get(key))} (dossier)")
+        known.add(slug)
+    # watch list
+    if (js / "targets" / "companies.yaml").is_file():
+        from fetch_ats import load_companies
+        for w in load_companies(js):
+            slug = str(w.get("slug") or resolve(w.get("name")))
+            c = g.company(slug, w.get("name"))
+            c.watch, c.via_people_only = True, False
+            if not c.tier or c.tier == UNKNOWN:
+                c.tier = clean(w.get("tier"))
+            if w.get("sponsorship_stance") and not any("(dossier)" in v and "sponsorship" in v for v in c.visa):
+                c.visa.append(f"sponsorship {clean(w.get('sponsorship_stance'))} (watch list)")
+            known.add(slug)
+    # research files first pass: the company slugs they name are known slugs
+    research = []
+    for p in sorted((js / "research" / "targets").glob("*.md")) if (js / "research" / "targets").is_dir() else []:
+        meta, body = _read(p)
+        if meta.get("company"):
+            known.add(str(meta["company"]))
+        research.append((p, meta, body))
+    # jobs
+    jobs: dict[str, dict[str, Any]] = {}
+    for p, meta, _ in _records(js / "jobs"):
+        slug = resolve(meta.get("company"), meta.get("company_slug"), _rel(js, p)) or UNKNOWN
+        known.add(slug)
+        jobs[str(meta.get("id") or p.stem)] = {**meta, "_path": _rel(js, p), "_slug": slug}
+    # legal checks
+    legal = {p.stem: _rel(js, p) for p in sorted((js / "legal" / "checks").glob("*.md"))} \
+        if (js / "legal" / "checks").is_dir() else {}
+
+    # applications
+    for d in sorted((js / "applications").iterdir()) if (js / "applications").is_dir() else []:
+        if not d.is_dir():
+            continue
+        app_p = d / "application.md"
+        meta, body = _read(app_p) if app_p.is_file() else ({}, "")
+        fit_meta, _ = _read(d / "fit.md") if (d / "fit.md").is_file() else ({}, "")
+        jd_meta, _ = _read(d / "jd.md") if (d / "jd.md").is_file() else ({}, "")
+        slug = resolve(meta.get("company"), meta.get("company_slug"), _rel(js, d))
+        g.applications[d.name] = {**meta, "_dir": _rel(js, d), "_has_record": app_p.is_file(), "_slug": slug,
+                                  "_fit": fit_meta.get("fit_score", fit_meta.get("score")), "_body": body, "_jd": jd_meta}
+
+    # pursuits
+    for d in sorted((js / "pursuits").iterdir()) if (js / "pursuits").is_dir() else []:
+        p = d / "pursuit.md"
+        if p.is_file():
+            meta, body = _read(p)
+            meta["_slug"] = resolve(meta.get("company"), meta.get("company_slug"), _rel(js, p))
+            meta["_path"], meta["_body"] = _rel(js, p), body
+            g.pursuits[str(meta.get("id") or d.name)] = meta
+
+    # touches
+    for t in jc.iter_touches(js):
+        if t.get("prospect"):
+            g.touches.setdefault(str(t["prospect"]), []).append(t)
+
+    # prospects (a person who is only a pursuit's introducer does not make their employer a lead)
+    introducers = {str(m.get("introducer")) for m in g.pursuits.values() if m.get("introducer")} - \
+        {str(m.get(k)) for m in g.pursuits.values() for k in ("referrer",) if m.get(k)}
+    for p, meta, body in _records(js / "prospects"):
+        pid = str(meta.get("id") or p.stem)
+        slug = resolve(meta.get("company"), meta.get("company_slug"), _rel(js, p))
+        per = Person(pid, clean(meta.get("name") or pid), record=_rel(js, p), status=meta.get("status"))
+        per.company, per.role = slug, meta.get("title") or meta.get("role")
+        per.warmth, per.priority = meta.get("warmth"), meta.get("priority")
+        per.channel = [str(c) for c in _list(meta.get("channels"))]
+        per.last_in, per.last_out = day(meta.get("last_inbound_at")), day(meta.get("last_outbound_at"))
+        for t in g.touches.get(pid, []):
+            d = day(t.get("at"))
+            if d and t.get("direction") == "in" and (not per.last_in or d > per.last_in):
+                per.last_in = d
+            if d and t.get("direction") == "out" and (not per.last_out or d > per.last_out):
+                per.last_out = d
+        for key in ("relation", "found_via"):
+            if meta.get(key):
+                per.how_known.append(clean(meta.get(key)))
+        if meta.get("source"):
+            per.how_known.append(f"source {clean(meta.get('source'))}")
+        per.sources.append(_rel(js, p))
+        if meta.get("next_touch_at"):
+            per.next_at = day(meta.get("next_touch_at"))
+            per.next_action = "follow-up touch due (prospect next_touch_at)"
+            per.touch_due = True
+        g.people[pid] = per
+        if slug:
+            c = g.company(slug, meta.get("company"))
+            if pid not in introducers:
+                c.has_lead = True
+            g.edge("person", pid, "works at", "company", slug, _rel(js, p))
+        for app in _list(meta.get("applications")):
+            per_app = _bare(app)
+            if per_app:
+                g.edge("person", pid, "linked to application", "role", per_app, _rel(js, p))
+        # introduced_by and asked_by are prospect ids; the relation text is the fallback for older records
+        m = re.search(r"introduced by ([a-z0-9-]+)", str(meta.get("relation") or ""))
+        introducer = str(meta.get("introduced_by") or "").strip() or (m.group(1) if m else "")
+        if introducer:
+            g.edge("person", introducer, "introduced", "person", pid, _rel(js, p))
+        if str(meta.get("asked_by") or "").strip():
+            g.edge("person", str(meta["asked_by"]).strip(), "asked", "person", pid, _rel(js, p))
+
+    # INBOX table (people, past applications, companies from Gmail)
+    csv_p = js / "state" / "inbox" / "prospects-table.csv"
+    by_name = {name_key(p.name): p for p in g.people.values()}
+    by_name.update({pid: p for pid, p in g.people.items()})
+    if csv_p.is_file():
+        rel = _rel(js, csv_p)
+        with csv_p.open(encoding="utf-8", newline="") as fh:
+            rows = list(csv.DictReader(fh))
+        for n, row in enumerate(rows, 1):
+            where = f"{rel} row {n}"
+            action = (row.get("action") or "").strip()
+            known_per = by_name.get(name_key(row.get("name"))) if row.get("name") else None
+            slug = known_per.company if known_per and known_per.record and known_per.company else \
+                (resolve(row.get("company"), None, where) if row.get("company") else None)
+            if slug:
+                c = g.company(slug, row.get("company"))
+                c.inbox_rows.append({**row, "_where": where})
+                if action != "skip" and not (known_per and known_per.id in introducers):
+                    c.has_lead = True
+            kind = (row.get("kind") or "person").strip()
+            pid = None
+            if row.get("name"):
+                key = name_key(row["name"])
+                per = known_per
+                if per is None:
+                    per = Person(key, clean(row["name"]), company=slug, role=row.get("role") or None)
+                    per.how_known.append(f"INBOX row: {clean(row.get('who_reached_out'))} reached out first")
+                    g.people[key] = per
+                    by_name[key] = per
+                pid = per.id
+                per.sources.append(where)
+                per.inbox = row
+                if not per.channel and row.get("channel"):
+                    per.channel = [clean(row.get("channel"))]
+                per.last_contact_csv = day(row.get("last_date")) or per.last_contact_csv
+                per.last_from_csv = row.get("last_from") or per.last_from_csv
+                if not per.company and slug:
+                    per.company = slug
+                if not per.role and row.get("role"):
+                    per.role = row.get("role")
+                if slug:
+                    g.edge("person", pid, "works at" if kind == "person" else "contact on application",
+                           "company", slug, where)
+            if kind == "application" and slug:
+                rid = f"inbox-{jc.slugify(row.get('company') or '')}-{jc.slugify(row.get('role') or 'role', 40)}"
+                g.roles.append(Role(rid, slug, clean(row.get("role")), "past application", UNKNOWN,
+                                    f"Gmail ({clean(row.get('channel'))})", day(row.get("first_date")) or UNKNOWN,
+                                    note=f"where it went: {clean(row.get('where_it_went'))}; INBOX says: "
+                                         f"{clean(row.get('recommended_next'))}", origin=where,
+                                    people=[pid] if pid else []))
+                g.edge("company", slug, "had opening", "role", rid, where)
+                if pid:
+                    g.edge("person", pid, "contact (inbox)", "role", rid, where)
+            if action == "skip":
+                g.skipped_inbox += 1
+
+    # research cases, quick checks and packages
+    for p, meta, body in research:
+        rel = _rel(js, p)
+        slug = str(meta.get("company")) if meta.get("company") else None
+        if slug:
+            g.company(slug).research.append(rel)
+            g.company(slug).via_people_only = False
+            g.edge("research", p.stem, "researches", "company", slug, rel)
+        app = meta.get("application")
+        if app and app in g.applications:
+            g.edge("research", p.stem, "package for", "role", str(app), rel)
+    # identity observations: people named in research
+    for p in sorted((js / "research" / "targets" / "identity").glob("*.yaml")) \
+            if (js / "research" / "targets" / "identity").is_dir() else []:
+        try:
+            data = jc.fm.parse_yaml(p.read_text(encoding="utf-8")) or {}
+        except Exception:
+            continue
+        name = data.get("person")
+        if not name:
+            continue
+        obs = (data.get("observations") or [{}])[0] or {}
+        _named_person(g, js, p, str(name), obs.get("employer"), obs.get("title"), "named in research (identity check)",
+                      resolve, by_name)
+    # evidence files: LinkedIn snapshots name people; others belong to a company by filename prefix
+    ev_dir = js / "research" / "targets" / "evidence"
+    for p in sorted(ev_dir.iterdir()) if ev_dir.is_dir() else []:
+        if not p.is_file():
+            continue
+        rel = _rel(js, p)
+        if p.name.startswith("linkedin-"):
+            text = p.read_text(encoding="utf-8", errors="replace")
+            nm = re.search(r"^Name:\s*(.+?)\s*(\((1st|2nd|3rd)\))?\s*$", text, re.M)
+            cur = re.search(r"^Current:\s*([^;\n]+)", text, re.M)
+            head = re.search(r"^Headline:\s*(.+)$", text, re.M)
+            if nm:
+                degree = f"LinkedIn {nm.group(3)}-degree connection" if nm.group(3) else "LinkedIn profile read"
+                per = _named_person(g, js, p, nm.group(1), cur.group(1) if cur else None,
+                                    head.group(1) if head else None, f"{degree} (snapshot {p.name})", resolve, by_name)
+                if per.company:
+                    g.company(per.company).evidence.append(rel)
+            continue
+        hits = sorted((s for s in g.companies if p.name.startswith(s + "-")), key=len, reverse=True)
+        if hits:
+            g.company(hits[0]).evidence.append(rel)
+            g.edge("evidence", p.name, "evidence for", "company", hits[0], rel)
+
+    # intake notes -> their case -> company; people named in a title
+    case_company = {p.stem: str(meta.get("company")) for p, meta, _ in research if meta.get("company")}
+    for p in sorted((js / "hub" / "intake").glob("*.md")) if (js / "hub" / "intake").is_dir() else []:
+        meta, body = _read(p)
+        if not meta:                     # intake notes are flat: read key: value lines when the YAML is invalid
+            meta, body = _flat_frontmatter(p.read_text(encoding="utf-8", errors="replace"))
+            if meta:
+                UNREADABLE.remove(p.as_posix())
+                g.flat_read.append(_rel(js, p))
+        rel = _rel(js, p)
+        case = str(meta.get("case") or meta.get("target") or "")
+        slug = case_company.get(case)
+        if slug:
+            g.company(slug).intake.append(rel)
+            g.edge("intake", p.stem, "intake for", "company", slug, rel)
+        title = f"{meta.get('title') or ''}\n{_h1(body)}"
+        for per in list(g.people.values()):
+            if len(per.name.split()) >= 2 and per.name.lower() in title.lower():
+                g.edge("intake", p.stem, "names", "person", per.id, rel)
+    for p, meta, body in research:
+        title = _h1(body)
+        for per in list(g.people.values()):
+            if len(per.name.split()) >= 2 and per.name.lower() in title.lower():
+                g.edge("research", p.stem, "names", "person", per.id, _rel(js, p))
+
+    for slug, path in legal.items():
+        if slug in g.companies:
+            g.companies[slug].legal = path
+
+    # pursuits: edges and next actions
+    for pid, meta in g.pursuits.items():
+        rel, slug = meta["_path"], meta.get("_slug")
+        if slug:
+            c = g.company(slug, meta.get("company"))
+            c.via_people_only = False
+            g.edge("pursuit", pid, "into", "company", slug, rel)
+        for key, part in (("referrer", "referrer"), ("introducer", "introducer")):
+            if meta.get(key):
+                g.edge("pursuit", pid, part, "person", str(meta[key]), rel)
+        for cnt in _list(meta.get("contacts")):
+            g.edge("pursuit", pid, "contact", "person", str(_bare(cnt)), rel)
+        if meta.get("introducer") and meta.get("referrer"):
+            g.edge("person", str(meta["introducer"]), "introduced", "person", str(meta["referrer"]), rel)
+        for app in _list(meta.get("applications")):
+            g.edge("pursuit", pid, "pick", "role", str(_bare(app)), rel)
+            if meta.get("referrer"):
+                g.edge("person", str(meta["referrer"]), "referrer", "role", str(_bare(app)), rel)
+        for key in ("case", "intake"):
+            if meta.get(key):
+                g.edge("pursuit", pid, key, key, Path(str(meta[key])).stem, rel)
+        if meta.get("stage") not in ("closed", "won", "lost"):
+            ref = g.people.get(str(meta.get("referrer") or ""))
+            waiting = str(meta.get("waiting_on") or "")
+            wid = waiting.split(":", 1)[-1]
+            who = f"waiting on {g.people[wid].name}" if wid in g.people else f"waiting on {clean(waiting)}"
+            g.items.append(Item(day(meta.get("next_action_at")), ref.priority if ref else None,
+                                clean(meta.get("next_action")), who, slug, rel, "pursuit",
+                                ref.last_contact if ref else None))
+            if ref and meta.get("next_action"):
+                ref.next_action, ref.next_at = f"pursuit: {clean(meta.get('next_action'))}", \
+                    day(meta.get("next_action_at")) or ref.next_at
+
+    # roles from jobs (and their applications)
+    app_by_job = {}
+    for aid, a in g.applications.items():
+        if a.get("job"):
+            app_by_job[_bare(a["job"])] = aid
+    for jid, j in jobs.items():
+        slug = j["_slug"]
+        aid = _bare(j.get("application")) or app_by_job.get(jid)
+        a = g.applications.get(aid) if aid else None
+        status = _role_status(j, a)
+        fit = j.get("fit_score")
+        if fit in (None, "") and a:
+            fit = a.get("_fit")
+        role = Role(jid, slug, clean(j.get("title")), status, clean(fit), clean(j.get("platform") or j.get("source")),
+                    day(j.get("first_seen")) or UNKNOWN, job=j["_path"], application=aid if a else None,
+                    origin=j["_path"])
+        g.roles.append(role)
+        c = g.company(slug, j.get("company"))
+        c.via_people_only, c.has_lead = False, True
+        g.edge("company", slug, "has opening", "role", jid, j["_path"])
+        if a:
+            g.edge("application", aid, "application for", "role", jid, a["_dir"] + "/application.md")
+    # applications without a job record (synthesized profiles such as a referral master)
+    covered = {r.application for r in g.roles if r.application}
+    for aid, a in g.applications.items():
+        if aid in covered:
+            continue
+        jd = a.get("_jd") or {}
+        slug = a.get("_slug") or _slug_from_research(g, aid)
+        title = a.get("title") or (jd.get("type") and f"{clean(jd.get('type'))} (not a posting)") or aid
+        status = STAGE_TO_ROLE.get(str(a.get("stage")), UNKNOWN) if a.get("_has_record") else "no application record"
+        g.roles.append(Role(aid, slug or UNKNOWN, clean(title), status, clean(a.get("_fit")), "application folder",
+                            day(a.get("created")) or UNKNOWN, application=aid, origin=_app_file(a)))
+        if slug:
+            g.edge("company", slug, "has opening", "role", aid, _app_file(a))
+    # applications' next actions
+    for aid, a in g.applications.items():
+        if a.get("_has_record") and a.get("stage") not in CLOSED_STAGES and a.get("next_action"):
+            g.items.append(Item(day(a.get("next_action_at")), None, clean(a.get("next_action")),
+                                f"application {aid}", a.get("_slug"), a["_dir"] + "/application.md", "application"))
+    # people on roles, pursuits on roles
+    role_by_key = {r.id: r for r in g.roles}
+    role_by_key.update({r.application: r for r in g.roles if r.application})
+    for e in g.edges:
+        if e.dst_kind == "role" and e.dst in role_by_key:
+            r = role_by_key[e.dst]
+            if e.src_kind == "person" and e.src not in r.people:
+                r.people.append(e.src)
+            if e.src_kind == "pursuit" and e.src not in r.pursuits:
+                r.pursuits.append(e.src)
+
+    # people: next actions and the priority items
+    for per in g.people.values():
+        if per.status in CLOSED_PROSPECT:
+            continue
+        inbox_skip = bool(per.inbox) and (per.inbox.get("action") or "").strip() == "skip"
+        if per.record and per.last_in and (not per.last_out or per.last_in > per.last_out) and not inbox_skip:
+            g.items.append(Item(per.last_in, per.priority, "reply owed: they wrote last (no outbound since)",
+                                per.name, per.company, per.record, "reply", per.last_contact))
+            if not per.next_action:
+                per.next_action, per.next_at = "reply owed (they wrote last)", per.last_in
+        if per.record and per.touch_due and not (per.next_action or "").startswith("pursuit:"):
+            g.items.append(Item(per.next_at, per.priority, per.next_action or "follow-up", per.name, per.company,
+                                per.record, "follow-up", per.last_contact))
+        named = _named_date(per.inbox) if per.inbox else None
+        if per.record and named and named >= (today_hint or "0000-00-00"):
+            g.items.append(Item(named, per.priority, f"date INBOX named: {clean(per.inbox.get('where_it_went'))}",
+                                per.name, per.company, [x for x in per.sources if " row " in x][-1], "inbox date",
+                                per.last_contact))
+        if per.inbox and not per.record:
+            row = per.inbox
+            action = (row.get("action") or "").strip()
+            if not per.next_action:
+                per.next_action = clean(row.get("recommended_next"))
+                per.next_at = _named_date(row)
+            if action and action != "skip":
+                g.items.append(Item(_named_date(row), None, f"INBOX {action}: {clean(row.get('recommended_next'))}",
+                                    per.name, per.company, per.sources[-1], "inbox", per.last_contact))
+    # company-only INBOX rows (no person name)
+    for c in g.companies.values():
+        for row in c.inbox_rows:
+            if not row.get("name") and (row.get("action") or "").strip() not in ("", "skip"):
+                g.items.append(Item(_named_date(row), None,
+                                    f"INBOX {row['action']}: {clean(row.get('recommended_next'))}",
+                                    f"{c.name} (no person named)", c.slug, row["_where"], "inbox"))
+    g.unreadable = sorted({_rel(js, Path(u)) for u in UNREADABLE})
+    return g
+
+
+def _flat_frontmatter(text: str) -> tuple[dict[str, str], str]:
+    """`key: value` lines of a frontmatter block YAML refuses (an unquoted ": " inside a value)."""
+    m = re.match(r"^---\n(.*?)\n---\n?(.*)$", text, re.S)
+    if not m:
+        return {}, text
+    meta = {}
+    for line in m.group(1).splitlines():
+        kv = re.match(r"^([A-Za-z_][\w-]*):\s*(.*)$", line)
+        if kv:
+            meta[kv.group(1)] = kv.group(2).strip().strip("'\"")
+    return meta, m.group(2)
+
+
+def _h1(body: str) -> str:
+    m = re.search(r"^# (.+)$", body or "", re.M)
+    return m.group(1) if m else ""
+
+
+def _named_date(row: dict[str, Any]) -> str | None:
+    """The latest ISO date INBOX named in a row's where_it_went (a booked call, a meeting), when it is the row's
+    last date's successor or later (a date after the last message is an event ahead); None otherwise. Labelled "date named" wherever it prints."""
+    last = day(row.get("last_date")) or "0000-00-00"
+    dates = sorted(d for d in ISO.findall(str(row.get("where_it_went") or "")) if d > last)
+    return dates[-1] if dates else None
+
+
+def _slug_from_research(g: Graph, aid: str) -> str | None:
+    for e in g.edges:
+        if e.relation == "package for" and e.dst == aid:
+            for e2 in g.edges:
+                if e2.src == e.src and e2.dst_kind == "company":
+                    return e2.dst
+    return None
+
+
+def _named_person(g: Graph, js: Path, p: Path, name: str, employer: Any, title: Any, how: str, resolve,
+                  by_name: dict[str, Person]) -> Person:
+    key = name_key(name)
+    rel = _rel(js, p)
+    per = by_name.get(key)
+    emp = str(employer).split("(")[0].split(";")[0].strip() if employer else None
+    slug = resolve(emp, None, rel) if emp else None
+    if per is None:
+        per = Person(key, clean(name), company=slug, role=clean(title) if title else None)
+        g.people[key] = per
+        by_name[key] = per
+    if not per.company and slug:
+        per.company = slug
+    per.how_known.append(how)
+    per.sources.append(rel)
+    if slug:
+        g.company(slug, emp)
+        g.edge("person", per.id, "works at", "company", slug, rel)
+    return per
+
+
+def _app_file(a: dict[str, Any]) -> str:
+    """The file that stands for an application folder: application.md, else jd.md, else fit.md."""
+    if a.get("_has_record"):
+        return f"{a['_dir']}/application.md"
+    return f"{a['_dir']}/{'jd.md' if a.get('_jd') else 'fit.md'}"
+
+
+def _role_status(job: dict[str, Any], app: dict[str, Any] | None) -> str:
+    if app and app.get("_has_record") and app.get("stage"):
+        return STAGE_TO_ROLE.get(str(app["stage"]), clean(app["stage"]))
+    status = str(job.get("status") or "")
+    if job.get("closed") or job.get("closed_at") or status in ("closed", "expired"):
+        return "closed"
+    if status == "applied":
+        return "applied"
+    if status == "queued":
+        return "not applied"
+    if status in ("discovered", "review", "") and job.get("fit_score") in (None, ""):
+        return "lead"
+    return f"not applied ({status})" if status else UNKNOWN
+
+
+# --------------------------------------------------------------------------- derived company fields
+def company_status(g: Graph, c: Company) -> str:
+    apps = [a for a in g.applications.values() if a.get("_slug") == c.slug and a.get("_has_record")]
+    if any(a.get("stage") in APPLIED_STAGES for a in apps):
+        return "applied"
+    open_pursuit = any(m.get("_slug") == c.slug and m.get("stage") not in ("closed", "won", "lost")
+                       for m in g.pursuits.values())
+    if open_pursuit or any(a.get("stage") not in CLOSED_STAGES for a in apps):
+        return "target"
+    if c.research or c.intake or c.dossier:
+        return "queued"
+    if c.has_lead:
+        return "lead"
+    if c.watch:
+        return "watching"
+    return "contact"
+
+
+def company_people(g: Graph, c: Company) -> list[Person]:
+    return sorted((p for p in g.people.values() if p.company == c.slug), key=lambda p: p.name.lower())
+
+
+def company_roles(g: Graph, c: Company) -> list[Role]:
+    return [r for r in g.roles if r.company == c.slug]
+
+
+def best_priority(people: Iterable[Person]) -> str:
+    ps = sorted((p.priority for p in people if p.priority in PRIO_ORDER), key=PRIO_ORDER.get)
+    return ps[0] if ps else UNKNOWN
+
+
+def warmest(people: list[Person]) -> Person | None:
+    scored = [p for p in people if isinstance(p.warmth, (int, float))]
+    if not scored:
+        return None
+    return sorted(scored, key=lambda p: (-p.warmth, PRIO_ORDER.get(p.priority or "", 9), p.name))[0]
+
+
+def company_next(g: Graph, c: Company) -> Item | None:
+    items = [i for i in g.items if i.company == c.slug]
+    dated = sorted((i for i in items if i.due), key=lambda i: i.due)
+    return dated[0] if dated else (items[0] if items else None)
+
+
+def last_touch(people: list[Person]) -> str | None:
+    dates = [p.last_contact for p in people if p.last_contact]
+    return max(dates) if dates else None
+
+
+def visa_notes(c: Company) -> str:
+    notes = list(c.visa)
+    for row in c.inbox_rows:
+        if row.get("sponsorship"):
+            notes.append(f"INBOX: \"{clean(row['sponsorship'])}\"")
+    if c.legal:
+        notes.append(f"visa check {c.legal}")
+    return "; ".join(dict.fromkeys(notes)) or UNKNOWN
+
+
+def company_sort_key(g: Graph, c: Company):
+    people = company_people(g, c)
+    nxt = company_next(g, c)
+    return (STATUS_ORDER.index(company_status(g, c)), PRIO_ORDER.get(best_priority(people), 9),
+            nxt.due if nxt and nxt.due else "9999", -(int((last_touch(people) or "0000-00-00").replace("-", ""))),
+            c.slug)
+
+
+WINDOW = 14     # days either side of today that count as "now" in PRIORITY.md
+
+
+def priority_buckets(items: list[Item], today: date) -> dict[str, list[Item]]:
+    """now (due within WINDOW days or overdue by at most WINDOW), backlog (older), undated."""
+    lo = date.fromordinal(today.toordinal() - WINDOW).isoformat()
+    now = sorted((i for i in items if i.due and i.due >= lo), key=item_sort_key)
+    backlog = sorted((i for i in items if i.due and i.due < lo),
+                     key=lambda i: (PRIO_ORDER.get(i.priority or "", 9), "".join(chr(0x7f - ord(ch)) for ch in i.due),
+                                    i.who.lower(), i.source))
+    undated = sorted((i for i in items if not i.due), key=item_sort_key)
+    return {"now": now, "backlog": backlog, "undated": undated}
+
+
+def item_sort_key(i: Item):
+    return (0 if i.due else 1, i.due or "", PRIO_ORDER.get(i.priority or "", 9),
+            -(int((i.last_contact or "0000-00-00").replace("-", ""))), i.who.lower(), i.source)
+
+
+# --------------------------------------------------------------------------- rendering
+def company_note_rel(slug: str) -> str:
+    return f"{OUT}/companies/{slug}-company.md"
+
+
+def person_note_rel(pid: str) -> str:
+    return f"{OUT}/people/{pid}-person.md"
+
+
+def _when(due: str | None, today: date) -> str:
+    if not due:
+        return "due unknown"
+    delta = (date.fromisoformat(due) - today).days
+    if delta < 0:
+        return f"OVERDUE {-delta} d"
+    return "today" if delta == 0 else f"in {delta} d"
+
+
+def _node_rel(g: Graph, kind: str, key: str) -> str | None:
+    """The file a node id names (for links), or None."""
+    if kind == "company":
+        return company_note_rel(key) if key in g.companies else None
+    if kind == "person":
+        return person_note_rel(key) if key in g.people else None
+    if kind == "pursuit":
+        m = g.pursuits.get(key)
+        return m["_path"] if m else None
+    if kind == "role":
+        for r in g.roles:
+            if r.id == key or r.application == key:
+                return r.job or (_app_file(g.applications[r.application]) if r.application in g.applications
+                                 else None)
+    return None
+
+
+def render(g: Graph, today: date) -> dict[str, str]:
+    files: dict[str, str] = {}
+    comps = sorted(g.companies.values(), key=lambda c: company_sort_key(g, c))
+    stamp = f"Built for {today.isoformat()} by `scripts/build_graph.py` from the records; never hand-edit, re-run it."
+    unknown_note = "`unknown` means no record holds the value (missing is not empty)."
+    if g.unreadable:
+        unknown_note += (f" Records skipped because their frontmatter does not parse ({len(g.unreadable)}): "
+                         + ", ".join(f"`{u}`" for u in g.unreadable) + ".")
+    else:
+        unknown_note += " Unreadable records: none."
+    if g.flat_read:
+        unknown_note += (" Intake notes read line by line because their YAML is invalid: "
+                         + ", ".join(f"`{u}`" for u in g.flat_read) + ".")
+
+    # COMPANIES
+    counts = {s: sum(1 for c in comps if company_status(g, c) == s) for s in STATUS_ORDER}
+    lines = [HEADER_MD, "# Companies", "", stamp, unknown_note, "",
+             "Status: applied (an application at applied or later) > target (an open pursuit or an application in "
+             "progress) > queued (a dossier, research case, quick check or intake) > lead (a job, a prospect or a live INBOX "
+             "row) > contact (known only as a person's employer or from an INBOX row marked skip) > watching (watch list only). Order: status, best "
+             "person priority, next due date, latest touch.", "",
+             "| status | companies |", "|---|---|"]
+    lines += [f"| {s} | {counts[s]} |" for s in STATUS_ORDER] + [f"| total | {len(comps)} |", ""]
+    lines += ["| company | status | tier | priority | roles | people | warmest person | last touch | next action | due "
+              "| visa notes | research |", "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for c in comps:
+        people, roles = company_people(g, c), company_roles(g, c)
+        w, nxt = warmest(people), company_next(g, c)
+        res = [ml(r, Path(r).stem, 1) for r in c.research + c.intake] + ([ml(c.dossier, "dossier", 1)] if c.dossier else [])
+        lines.append("| " + " | ".join([
+            ml(company_note_rel(c.slug), c.name, 1), company_status(g, c), cell(c.tier), best_priority(people),
+            str(len(roles)), str(len(people)), f"{cell(w.name)} (warmth {w.warmth})" if w else UNKNOWN,
+            cell(last_touch(people)), cell(nxt.what if nxt else None), cell(nxt.due if nxt else None),
+            cell(visa_notes(c)), ", ".join(res) or "none on file"]) + " |")
+    if g.merges:
+        lines += ["", "## Slug merges", "",
+                  "A derived company slug that extends exactly one known slug was joined to it:", ""]
+        lines += [f"- `{a}` -> `{b}` ({w})" for a, b, w in sorted(set(g.merges))]
+    no_file = [c for c in comps if not c.dossier]
+    lines += ["", f"Companies with no dossier (companies/<slug>.md): {len(no_file)} of {len(comps)}.", ""]
+    files[f"{OUT}/COMPANIES.md"] = "\n".join(lines)
+
+    # ROLES
+    roles = sorted(g.roles, key=lambda r: (["interviewing", "offer", "applied", "not applied", "lead",
+                                             "past application", "closed"].index(r.status)
+                                            if r.status in ("interviewing", "offer", "applied", "not applied", "lead",
+                                                            "past application", "closed") else 7,
+                                            r.company, r.title, r.id))
+    rc: dict[str, int] = {}
+    for r in roles:
+        rc[r.status] = rc.get(r.status, 0) + 1
+    lines = [HEADER_MD, "# Roles", "", stamp, unknown_note, "",
+             "Status comes from the application stage when there is an application (discovered, fit_checked, tailored: "
+             "not applied; applied, confirmation: applied; screen to final: interviewing; offer; rejected, ghosted, "
+             "withdrawn: closed), else from the job record (queued: not applied; discovered with no fit score: lead). "
+             "Past applications are the ones INBOX found in Gmail.", "", "| status | roles |", "|---|---|"]
+    lines += [f"| {k} | {v} |" for k, v in sorted(rc.items())] + [f"| total | {len(roles)} |", ""]
+    lines += ["| role | company | status | fit | source | found | application | pursuit | people | note |",
+              "|---|---|---|---|---|---|---|---|---|---|"]
+    for r in roles:
+        a = g.applications.get(r.application) if r.application else None
+        app = ml(_app_file(a), r.application, 1) if a else "none"
+        lines.append("| " + " | ".join([
+            ml(r.job or r.origin.split(" row ")[0], r.title, 1) if (r.job or r.application) else cell(r.title),
+            ml(company_note_rel(r.company), g.companies[r.company].name, 1) if r.company in g.companies else cell(r.company),
+            r.status, cell(r.fit), cell(r.source), cell(r.found), app,
+            ", ".join(ml(g.pursuits[p]["_path"], p, 1) for p in r.pursuits) or "none",
+            ", ".join(ml(person_note_rel(p), g.people[p].name, 1) for p in r.people if p in g.people) or "none",
+            cell(r.note) if r.note else f"record {r.origin}"]) + " |")
+    files[f"{OUT}/ROLES.md"] = "\n".join(lines) + "\n"
+
+    # PEOPLE
+    people = sorted(g.people.values(), key=lambda p: (PRIO_ORDER.get(p.priority or "", 9), p.next_at or "9999",
+                                                      -(int((p.last_contact or "0000-00-00").replace("-", ""))),
+                                                      p.name.lower()))
+    lines = [HEADER_MD, "# People", "", stamp, unknown_note, "",
+             f"People: {len(people)} (with a prospect record {sum(1 for p in people if p.record)}; from the INBOX table "
+             f"only {sum(1 for p in people if not p.record and p.inbox)}; named in research only "
+             f"{sum(1 for p in people if not p.record and not p.inbox)}). Who wrote last compares the latest inbound "
+             "and outbound dates; a date after a next action from INBOX is a date INBOX named in the row.", "",
+             "| person | company | role | how the owner knows them | warmth | priority | channel | last contact "
+             "| wrote last | next action | due | record |", "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for p in people:
+        lines.append("| " + " | ".join([
+            ml(person_note_rel(p.id), p.name, 1),
+            ml(company_note_rel(p.company), g.companies[p.company].name, 1) if p.company in g.companies else UNKNOWN,
+            cell(p.role), cell("; ".join(dict.fromkeys(p.how_known))), cell(p.warmth), cell(p.priority),
+            cell(p.channel), cell(p.last_contact), p.wrote_last, cell(p.next_action), cell(p.next_at),
+            ml(p.record, "prospect", 1) if p.record else
+            ("prospect record unreadable" if f"prospects/{p.id}.md" in g.unreadable else "no prospect record")]) + " |")
+    files[f"{OUT}/PEOPLE.md"] = "\n".join(lines) + "\n"
+
+    # CONNECTIONS
+    edges = sorted(g.edges, key=lambda e: (e.src_kind, e.src, e.relation, e.dst_kind, e.dst))
+    ec: dict[str, int] = {}
+    for e in edges:
+        k = f"{e.src_kind} -> {e.dst_kind}"
+        ec[k] = ec.get(k, 0) + 1
+    lines = [HEADER_MD, "# Connections", "", stamp, unknown_note,
+             "Every edge between a company, role, person, pursuit, research file, intake note or evidence file, with the "
+             "record that states it. A node shown without a link has no file on disk.", "",
+             "| edge kind | edges |", "|---|---|"]
+    lines += [f"| {k} | {v} |" for k, v in sorted(ec.items())] + [f"| total | {len(edges)} |", ""]
+    lines += ["| from | relation | to | source record |", "|---|---|---|---|"]
+
+    def node(kind: str, key: str) -> str:
+        rel = _node_rel(g, kind, key)
+        label = g.people[key].name if kind == "person" and key in g.people else \
+            g.companies[key].name if kind == "company" and key in g.companies else key
+        return f"{kind} " + (ml(rel, label, 1) if rel else cell(label))
+
+    for e in edges:
+        src = e.source.split(" row ")
+        lines.append(f"| {node(e.src_kind, e.src)} | {e.relation} | {node(e.dst_kind, e.dst)} | "
+                     f"{ml(src[0], src[0], 1)}{' line ' + src[1] if len(src) > 1 else ''} |")
+    files[f"{OUT}/CONNECTIONS.md"] = "\n".join(lines) + "\n"
+
+    # PRIORITY
+    buckets = priority_buckets(g.items, today)
+    lines = [HEADER_MD, "# Priority: what to do next", "", stamp, unknown_note, "",
+             "Every open next action across pursuits, applications, prospects and the INBOX table, in three parts. "
+             f"**Now**: due within the next {WINDOW} days or overdue by at most {WINDOW} days, by due date then person "
+             "priority. **Backlog**: overdue by more than that (mostly old inbound mail nobody answered), by person "
+             "priority then newest first. **No date**: by person priority and the latest contact. A reply owed is dated "
+             "by the inbound it answers. An INBOX date is the latest date INBOX named in the row (a booked call or "
+             "meeting).", "",
+             f"Open items: {len(g.items)} (now {len(buckets['now'])}, backlog {len(buckets['backlog'])}, no date "
+             f"{len(buckets['undated'])}); INBOX rows marked skip, not listed: {g.skipped_inbox}.", ""]
+    for key, title in (("now", "Now"), ("backlog", "Backlog (overdue more than "
+                                                         f"{WINDOW} days)"), ("undated", "No date")):
+        lines += [f"## {title}", "", "| due | when | priority | what | who | company | kind | source |",
+                  "|---|---|---|---|---|---|---|---|"]
+        for i in buckets[key]:
+            src = i.source.split(" row ")
+            lines.append("| " + " | ".join([
+                cell(i.due), _when(i.due, today), cell(i.priority), cell(i.what), cell(i.who),
+                ml(company_note_rel(i.company), g.companies[i.company].name, 1) if i.company in g.companies else UNKNOWN,
+                i.kind, ml(src[0], Path(src[0]).stem if src[0].endswith(".md") else src[0], 1)
+                + (f" row {src[1]}" if len(src) > 1 else "")]) + " |")
+        if not buckets[key]:
+            lines.append("| none | | | | | | | |")
+        lines.append("")
+    files[f"{OUT}/PRIORITY.md"] = "\n".join(lines)
+
+    # company hub notes
+    for c in comps:
+        files[company_note_rel(c.slug)] = _company_note(g, c, today)
+    for p in people:
+        files[person_note_rel(p.id)] = _person_note(g, p)
+    return files
+
+
+def _frontmatter(meta: dict[str, Any], body: str) -> str:
+    text = jc.fm.dump(meta, body)
+    return text.replace("---\n", f"---\n{HEADER_YAML}\n", 1)
+
+
+def _company_note(g: Graph, c: Company, today: date) -> str:
+    people, roles = company_people(g, c), company_roles(g, c)
+    w, nxt = warmest(people), company_next(g, c)
+    links: list[str] = []
+    body = [f"# {clean(c.name)}", "",
+            "The company's hub: every line links the record that holds the fact. Generated by "
+            "`scripts/build_graph.py`; never hand-edit.", "", "## Records", ""]
+    if c.dossier:
+        links.append(wl(c.dossier, f"{c.slug} dossier"))
+        body.append(f"- dossier: {links[-1]}")
+    else:
+        body.append("- dossier: none on file (company-researcher writes companies/<slug>.md)")
+    body.append(f"- visa: {visa_notes(c)}")
+    if c.legal:
+        links.append(wl(c.legal, f"{c.slug} visa check"))
+        body.append(f"- visa check: {links[-1]}")
+    body.append(f"- watch list: {'yes' if c.watch else 'no'} · tier {clean(c.tier)} · status {company_status(g, c)}")
+    for r in c.research:
+        links.append(wl(r, Path(r).stem))
+        body.append(f"- research: {links[-1]}")
+    for r in c.intake:
+        links.append(wl(r, Path(r).stem))
+        body.append(f"- intake: {links[-1]}")
+    for r in c.evidence:
+        body.append(f"- evidence: {ml(r, Path(r).name, 2)}")
+    if not (c.research or c.intake):
+        body.append("- research: none on file")
+    body += ["", "## Pursuits", ""]
+    ps = [(pid, m) for pid, m in g.pursuits.items() if m.get("_slug") == c.slug]
+    for pid, m in ps:
+        links.append(wl(m["_path"], pid))
+        body.append(f"- {links[-1]} · stage {clean(m.get('stage'))} · waiting on {clean(m.get('waiting_on'))} · next "
+                    f"{clean(m.get('next_action'))} · due {clean(day(m.get('next_action_at')))}")
+    if not ps:
+        body.append("- none")
+    body += ["", "## Roles", ""]
+    for r in roles:
+        target = r.job or (f"{g.applications[r.application]['_dir']}/application.md" if r.application
+                           and g.applications.get(r.application, {}).get("_has_record") else None)
+        label = f"{r.title} ({r.id})"
+        if target:
+            links.append(wl(target, label))
+            line = f"- {links[-1]}"
+        else:
+            line = f"- {cell(label)} (from {r.origin})"
+        line += f" · {r.status} · fit {clean(r.fit)} · found {clean(r.found)} · source {clean(r.source)}"
+        if r.application and r.job and g.applications.get(r.application, {}).get("_has_record"):
+            links.append(wl(f"{g.applications[r.application]['_dir']}/application", r.application))
+            line += f" · application {links[-1]}"
+        if r.note:
+            line += f" · {clean(r.note)}"
+        body.append(line)
+    if not roles:
+        body.append("- none on file")
+    body += ["", "## People", ""]
+    for p in people:
+        links.append(wl(person_note_rel(p.id), p.name))
+        rec = f" · record {wl(p.record, p.id)}" if p.record else " · no prospect record"
+        body.append(f"- {links[-1]} · {clean(p.role)} · warmth {clean(p.warmth)} · {clean(p.priority)} · last contact "
+                    f"{clean(p.last_contact)} (wrote last: {p.wrote_last}){rec}")
+        if p.record:
+            links.append(wl(p.record, p.id))
+    if not people:
+        body.append("- none on file")
+    here = {p.id for p in people}
+    paths = [e for e in g.edges if e.src_kind == "person" and e.dst_kind == "person" and e.dst in here
+             and e.src not in here]
+    if paths:
+        body += ["", "### Paths in (people elsewhere who connect the owner to someone here)", ""]
+        for e in paths:
+            src = g.people.get(e.src)
+            if src:
+                links.append(wl(person_note_rel(src.id), src.name))
+            body.append(f"- {links[-1] if src else clean(e.src)} {e.relation} {g.people[e.dst].name} (source {e.source})")
+    body += ["", "## Context", "", "### Open next actions", ""]
+    items = sorted((i for i in g.items if i.company == c.slug), key=item_sort_key)
+    body += [f"- {clean(i.due)} ({_when(i.due, today)}) · {clean(i.what)} · {clean(i.who)} · {i.source}" for i in items] \
+        or ["- none"]
+    body += ["", "### Latest history (newest first; message text stays in the records)", ""]
+    hist: list[tuple[str, str]] = []
+    for p in people:
+        for t in g.touches.get(p.id, []):
+            d = day(t.get("at"))
+            if d:
+                hist.append((d, f"{clean(t.get('direction'))} · {clean(t.get('channel'))} · {clean(t.get('kind'))} · "
+                                f"{p.name} · {clean(t.get('status'))} (touches)"))
+    for pid, m in ps:
+        for line in re.findall(r"^- (\d{4}-\d{2}-\d{2}) · (.+)$", m.get("_body") or "", re.M):
+            hist.append((line[0], f"{clean(line[1])} (pursuit {pid})"))
+    for aid, a in g.applications.items():
+        if a.get("_slug") == c.slug:
+            for line in re.findall(r"^- (\d{4}-\d{2}-\d{2})T[\d:]+Z? · (.+)$", a.get("_body") or "", re.M):
+                hist.append((line[0], f"{clean(line[1])} (application {aid})"))
+    for row in c.inbox_rows:
+        d = day(row.get("last_date"))
+        if d:
+            hist.append((d, f"INBOX ({clean(row.get('name'))}): {clean(row.get('where_it_went'))}"))
+    hist = sorted(dict.fromkeys(hist), key=lambda h: h[0], reverse=True)[:12]     # stable within a day
+    body += [f"- {d} · {text}" for d, text in hist] or ["- none on file"]
+    meta = {"type": "company-hub", "slug": c.slug, "name": clean(c.name), "tier": clean(c.tier),
+            "status": company_status(g, c), "priority": best_priority(people), "roles": len(roles),
+            "people": len(people), "warmest": w.name if w else UNKNOWN, "last_touch": last_touch(people) or UNKNOWN,
+            "next_action": clean(nxt.what) if nxt else UNKNOWN, "next_action_at": (nxt.due if nxt else None) or UNKNOWN,
+            "visa": visa_notes(c), "dossier": c.dossier or "none", "links": list(dict.fromkeys(links))}
+    return _frontmatter(meta, "\n".join(body) + "\n")
+
+
+def _person_note(g: Graph, p: Person) -> str:
+    links, body = [], [f"# {p.name}", "", "Generated by `scripts/build_graph.py`; never hand-edit. The record is the "
+                       "prospect file when there is one.", "", "## Links", ""]
+    if p.company in g.companies:
+        links.append(wl(company_note_rel(p.company), g.companies[p.company].name))
+        body.append(f"- company: {links[-1]}")
+    else:
+        body.append("- company: unknown")
+    if p.record:
+        links.append(wl(p.record, p.id))
+        body.append(f"- prospect record: {links[-1]}")
+    else:
+        body.append("- prospect record: none (the orchestrator or prospector creates one)")
+    for s in p.sources:
+        if s != p.record:
+            body.append(f"- source: {s}")
+    body += ["", "## Connections", ""]
+    conns = [e for e in g.edges if (e.src_kind == "person" and e.src == p.id) or (e.dst_kind == "person" and e.dst == p.id)]
+    for e in conns:
+        other_kind, other = (e.dst_kind, e.dst) if e.src == p.id and e.src_kind == "person" else (e.src_kind, e.src)
+        rel = _node_rel(g, other_kind, other)
+        label = g.people[other].name if other_kind == "person" and other in g.people else \
+            g.companies[other].name if other_kind == "company" and other in g.companies else other
+        target = wl(rel, label) if rel else clean(label)
+        if rel:
+            links.append(target)
+        arrow = f"{e.relation} -> {other_kind} {target}" if e.src == p.id else f"{other_kind} {target} -> {e.relation}"
+        body.append(f"- {arrow} (source {e.source})")
+    if not conns:
+        body.append("- none")
+    meta = {"type": "person-hub", "id": p.id, "name": p.name,
+            "company": g.companies[p.company].name if p.company in g.companies else UNKNOWN,
+            "company_slug": p.company or UNKNOWN, "role": clean(p.role),
+            "how_known": clean("; ".join(dict.fromkeys(p.how_known))), "warmth": p.warmth if p.warmth is not None else UNKNOWN,
+            "priority": p.priority or UNKNOWN, "channel": clean(p.channel), "last_contact": p.last_contact or UNKNOWN,
+            "wrote_last": p.wrote_last, "next_action": clean(p.next_action), "next_action_at": p.next_at or UNKNOWN,
+            "record": p.record or "none", "links": list(dict.fromkeys(links))}
+    return _frontmatter(meta, "\n".join(body) + "\n")
+
+
+# --------------------------------------------------------------------------- checks and writing
+def link_problems(os_root: Path, js: Path, files: dict[str, str]) -> list[str]:
+    """Every wikilink and relative markdown link in the generated files must resolve to a file."""
+    out = []
+    planned = {(js / rel).resolve() for rel in files}
+    for rel, text in files.items():
+        for target in LINK_RE.findall(text):
+            p = os_root / target
+            if not ((p.with_suffix(p.suffix + ".md") if p.suffix != ".md" else p).resolve() in planned
+                    or p.with_name(p.name + ".md").is_file() or p.is_file()):
+                out.append(f"{rel}: [[{target}]]")
+        for target in MDLINK_RE.findall(text):
+            if "://" in target:
+                continue
+            p = ((js / rel).parent / target).resolve()
+            if not (p.is_file() or p in planned):
+                out.append(f"{rel}: ({target})")
+    return out
+
+
+def collisions(os_root: Path, js: Path, files: dict[str, str]) -> list[str]:
+    """Generated note basenames that another vault file also uses (a bare [[name]] would become ambiguous)."""
+    ours = {Path(rel).stem.lower(): rel for rel in files if rel.startswith(f"{OUT}/companies/")
+            or rel.startswith(f"{OUT}/people/")}
+    out_dir = (js / OUT).resolve()
+    hits = []
+    for p in os_root.rglob("*.md"):
+        if any(part.startswith(".") or part in ("node_modules", "__pycache__") for part in p.parts):
+            continue
+        if out_dir in p.resolve().parents:
+            continue
+        if p.stem.lower() in ours:
+            hits.append(f"{ours[p.stem.lower()]} vs {p.relative_to(os_root).as_posix()}")
+    return sorted(hits)
+
+
+def em_dashes(files: dict[str, str]) -> list[str]:
+    return [rel for rel, text in files.items() if EM in text]
+
+
+def plan(js: Path, files: dict[str, str]) -> dict[str, list[str]]:
+    out_dir = js / OUT
+    existing = {p.relative_to(js).as_posix() for p in out_dir.rglob("*.md")} if out_dir.is_dir() else set()
+    changed = sorted(r for r, t in files.items() if not (js / r).is_file() or (js / r).read_text(encoding="utf-8") != t)
+    stale = sorted(r for r in existing - set(files) if MARK in (js / r).read_text(encoding="utf-8")[:400])
+    return {"write": changed, "remove": stale}
+
+
+def apply(js: Path, files: dict[str, str], todo: dict[str, list[str]]) -> None:
+    for rel in todo["write"]:
+        p = js / rel
+        if p.is_file() and MARK not in p.read_text(encoding="utf-8")[:400]:
+            raise SystemExit(f"refused: {rel} exists without this script's header")
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(files[rel], encoding="utf-8")
+    for rel in todo["remove"]:
+        (js / rel).unlink()
+
+
+def refresh(js: Path, today: date, os_root: Path | None = None) -> dict[str, Any]:
+    """Rebuild graph/ for today (dashboard.py calls this on every write, REQ-2). All or nothing: a file in the way that
+    lacks this script's header, or an em-dash in the output, refuses the whole write. Links are checked; the basename
+    collision walk covers the whole vault (about 9 s here, most of it gitignored Projects/), so only --check runs it."""
+    js = Path(js).resolve()
+    os_root = Path(os_root) if os_root is not None else jc.os_root_for(js)
+    g = load(js, today.isoformat())
+    files = render(g, today)
+    todo = plan(js, files)
+    refused = [rel for rel in todo["write"] if (js / rel).is_file()
+               and MARK not in (js / rel).read_text(encoding="utf-8")[:400]]
+    problems = {"links": link_problems(os_root, js, files), "em_dashes": em_dashes(files)}
+    if refused or problems["em_dashes"]:
+        todo = {"write": [], "remove": []}
+    else:
+        apply(js, files, todo)
+    return {"counts": counts(g), **todo, "refused": refused, **problems, "unreadable": g.unreadable}
+
+
+def summary(report: dict[str, Any]) -> str:
+    """One line for the dashboard's output."""
+    c = report["counts"]
+    line = (f"graph: companies {c['companies']} · roles {c['roles']} · people {c['people']} · connections "
+            f"{c['connections']} (scripts/build_graph.py): wrote {len(report['write'])}, removed {len(report['remove'])}"
+            f" · broken links {len(report['links'])} · em-dashes {len(report['em_dashes'])}")
+    if report["refused"]:
+        line += f" · REFUSED, not written: {', '.join(report['refused'][:3])} (no generated header)"
+    return line
+
+
+def counts(g: Graph) -> dict[str, int]:
+    return {"companies": len(g.companies), "roles": len(g.roles), "people": len(g.people),
+            "connections": len(g.edges), "priority_items": len(g.items)}
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--root", default=str(jc.JS_ROOT))
+    ap.add_argument("--today", type=jc.cli_date, default=None)
+    mode = ap.add_mutually_exclusive_group()
+    mode.add_argument("--check", action="store_true")
+    mode.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--json", action="store_true")
+    args = ap.parse_args(argv)
+    js = Path(args.root).resolve()
+    os_root = jc.os_root_for(js)
+    today = args.today or jc.today()
+    g = load(js, today.isoformat())
+    files = render(g, today)
+    todo = plan(js, files)
+    problems = {"links": link_problems(os_root, js, files), "collisions": collisions(os_root, js, files),
+                "em_dashes": em_dashes(files)}
+    report = {"counts": counts(g), "files": len(files), "write": len(todo["write"]), "remove": len(todo["remove"]),
+              "unreadable": g.unreadable, **{k: v for k, v in problems.items()}}
+    if not (args.check or args.dry_run):
+        if problems["em_dashes"]:
+            print(f"refused: em-dash in {problems['em_dashes'][:3]}", file=sys.stderr)
+            return 1
+        apply(js, files, todo)
+    if args.json:
+        print(json.dumps(report, indent=2))
+    else:
+        c = report["counts"]
+        verb = "would write" if (args.check or args.dry_run) else "wrote"
+        print(f"build_graph: companies {c['companies']} · roles {c['roles']} · people {c['people']} · connections "
+              f"{c['connections']} · priority items {c['priority_items']} · {verb} {report['write']}, "
+              f"{'would remove' if (args.check or args.dry_run) else 'removed'} {report['remove']} · "
+              f"broken links {len(problems['links'])} · basename collisions {len(problems['collisions'])} · "
+              f"em-dashes {len(problems['em_dashes'])}")
+        for u in g.unreadable:
+            print(f"  unreadable record skipped: {u}")
+        for k, v in problems.items():
+            for line in v[:20]:
+                print(f"  {k}: {line}")
+    if args.check:
+        return 1 if (todo["write"] or todo["remove"] or any(problems.values())) else 0
+    return 1 if any(problems.values()) else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,0 +1,10 @@
+# Reviewed findings that are public technology/vendor words or ordinary English, not anything from a user's records.
+# Format: <path>:<rule>   (one per line). Every entry needs a reason on the line above it.
+# A skills lexicon of public AI/data tools (ATS keyword matching).
+scripts/ats_check.py:denylist-company
+# Identity-provider words in a login-wall detector.
+scripts/credential_check.py:denylist-company
+# Code-host / social URL templates.
+scripts/render_resume.py:denylist-company
+# An ordinary word in a regex of non-ask phrases.
+scripts/fit_gates.py:denylist-hard

@@ -1,0 +1,8 @@
+type: hunt
+title: Hunt lane
+roster: [job-scout, platform-scout, prospector, company-researcher, fit-scorer, legal-visa, messenger]
+skills: [hunt-daily, scout-jobs, browser-job-search, connector-search, setup-job-alerts, platform-watch, x-channel, sota-watch, research-company, research-person, prospect-search, score-fit, visa-check, linkedin-draft, linkedin-assist, draft-reply]
+scope: ["jobs/**", "jobs-pending/**", "research/targets/**", "companies/**", "legal/checks/**", "state/posts/sweep-*.jsonl", "state/posts/x-*.jsonl", "state/x/**", "state/review/x-watch-*.md", "outbox/**", "hub/lanes/HUNT.md"]
+gates: [fit_gates.py, hunt_score.py, hunt_review.py, check_records.py, check_dossier.py --root ., browser_research.py verify, x_api.py watch --dry-run]
+stops: ["a site shows a bot wall, login wall, CAPTCHA or automated-activity notice", "the X budget stops a call", "a person cannot be verified by two publishers", "a role needs a citizenship, clearance or E-Verify ruling", "anything outward"]
+# Absorbs the posts lane (lanes/posts/AGENT.md is read when a posts item is claimed; its log lines go to hub/lanes/HUNT.md, never POSTS.md)

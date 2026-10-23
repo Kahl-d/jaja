@@ -1,0 +1,5 @@
+policy:
+  numbers_ledger:
+    path: "profile/corpus/numbers-ledger.md"   # the numbers ledger, relative to the data folder
+    employer_pattern: ""                       # regex naming the employer whose figures are governed; empty = none
+    blocked_source_ids: []                     # source ids that mark a figure as a target or estimate

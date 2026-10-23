@@ -1,0 +1,4 @@
+# Neutral defaults for the approved skills list (scripts/skills_map.py).
+policy:
+  skills_map:
+    skills: []      # [[name, evidence ids, role families], ...]

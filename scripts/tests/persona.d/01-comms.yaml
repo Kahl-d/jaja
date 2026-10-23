@@ -1,0 +1,14 @@
+# Synthetic persona values for the batch-01 scripts (fictional).
+identity:
+  resume_pdf_name: "AlexExample_Resume.pdf"
+  account_emails: ["alex@example.test"]
+  name_variants: ["Alex E"]
+policy:
+  apply:
+    academic_orgs: ["Harborview"]
+    portal_hosts:
+      - {pattern: "(^|\\.)(careers|apply)\\.acme-motors\\.example$", portal: "oracle"}
+    company_board_sources: ["acmejobs"]
+    authorization_answer_starts_with: "yes"
+    sponsorship_answer_starts_with: "yes"
+    require_everify_employer: true

@@ -1,0 +1,49 @@
+{
+ "_captured": "synthetic fixture shaped like the Remotive remote-jobs API answer",
+ "00-warning": "Synthetic fixture. The live answer carries a domain-move warning here.",
+ "0-legal-notice": "Synthetic fixture. The live answer carries a terms notice here: link back to Remotive and name it as the source; call at most 4 times a day.",
+ "job-count": 16,
+ "total-job-count": 16,
+ "jobs": [
+  {
+   "id": 3000000,
+   "url": "https://remotive.com/remote-jobs/all-others/content-reviewer-united-states-3000000",
+   "title": "Content Reviewer - United States",
+   "company_name": "Initech Digital",
+   "company_logo": "https://remotive.com/job/3000000/logo",
+   "category": "All others",
+   "tags": [
+    "android",
+    "ios",
+    "social media",
+    "AI/ML"
+   ],
+   "job_type": "part_time",
+   "publication_date": "2026-09-21T12:55:11",
+   "candidate_required_location": "USA",
+   "salary": "",
+   "description": "<p>Review short pieces of content against written guidelines. Part-time and remote within the United States.</p>",
+   "company_logo_url": "https://remotive.com/job/3000000/logo"
+  },
+  {
+   "id": 3000001,
+   "url": "https://remotive.com/remote-jobs/software-dev/senior-ai-engineer-3000001",
+   "title": "Senior AI Engineer",
+   "company_name": "Beta Labs",
+   "company_logo": "https://remotive.com/job/3000000/logo",
+   "category": "All others",
+   "tags": [
+    "android",
+    "ios",
+    "social media",
+    "AI/ML"
+   ],
+   "job_type": "full_time",
+   "publication_date": "2026-09-29T10:00:00",
+   "candidate_required_location": "USA",
+   "salary": "$180k - $220k",
+   "description": "<p>LLM evals and agents.</p>",
+   "company_logo_url": "https://remotive.com/job/3000000/logo"
+  }
+ ]
+}

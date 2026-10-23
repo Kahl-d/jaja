@@ -1,0 +1,5 @@
+# How the dashboard and calendar address and time-stamp you. Copy a key into <your data folder>/config/*.yaml to change it.
+identity:
+  owner_label: "you"            # shown in section titles: "Needs you", "Waiting on you" (use your first name if you prefer)
+  timezone: "UTC"               # your IANA time zone, e.g. America/New_York; used for mail-pass times and calendar defaults
+  timezone_label: "UTC"         # the short label printed after a time, e.g. ET

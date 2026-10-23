@@ -1,0 +1,9 @@
+type: research
+title: Research lane
+roster: [role-analyst, company-researcher, prospector, fit-scorer, legal-visa]
+skills: [role-package, research-company, research-person, score-fit, visa-check, prospect-search]
+scope: ["research/targets/**", "companies/**", "legal/checks/**", "applications/*/fit.md", "hub/lanes/RESEARCH.md"]
+gates: [check_dossier.py --root ., check_holds.py, jd_matrix.py check]
+stops: ["a JD is missing or truncated", "a person cannot be verified by two publishers", "anything outward"]
+# Matrix files (single writer per field): research writes the rows, their type and rank; resume writes only
+# answer: and ceiling: through `python3 scripts/jd_matrix.py set`, never by hand. Neither edits the other's fields.

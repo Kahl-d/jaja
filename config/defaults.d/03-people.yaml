@@ -1,0 +1,3 @@
+policy:
+  people:
+    not_name_words: []     # company, product and school words that must never be read as part of a person's name

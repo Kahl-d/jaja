@@ -1,0 +1,6 @@
+# Synthetic persona values for the cards' location order (fictional).
+policy:
+  location:
+    preferred:
+    - {name: "Home metro", kinds: [bay], pattern: "\\b(springfield|example city)\\b"}
+    - {name: "Home state", pattern: "(?<![a-z])(ex|examplestate)(?![a-z])"}

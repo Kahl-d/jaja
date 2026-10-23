@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<edgarSubmission>
+    <schemaVersion>X0708</schemaVersion>
+    <submissionType>D</submissionType>
+    <primaryIssuer>
+        <entityName>Quillstone Systems AI, Inc.</entityName>
+        <issuerAddress>
+            <city>SAN FRANCISCO</city>
+            <stateOrCountry>CA</stateOrCountry>
+        </issuerAddress>
+        <entityType>Corporation</entityType>
+    </primaryIssuer>
+    <offeringData>
+        <industryGroup>
+            <industryGroupType>Other Technology</industryGroupType>
+        </industryGroup>
+        <typeOfFiling>
+            <newOrAmendment>
+                <isAmendment>false</isAmendment>
+            </newOrAmendment>
+        </typeOfFiling>
+        <offeringSalesAmounts>
+            <totalOfferingAmount>40000000</totalOfferingAmount>
+            <totalAmountSold>25000000</totalAmountSold>
+        </offeringSalesAmounts>
+    </offeringData>
+</edgarSubmission>

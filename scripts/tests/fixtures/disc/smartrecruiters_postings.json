@@ -1,0 +1,101 @@
+{
+ "_captured": "synthetic fixture shaped like the SmartRecruiters postings list (company srco)",
+ "offset": 0,
+ "limit": 100,
+ "totalFound": 3,
+ "content": [
+  {
+   "id": "100001",
+   "name": "Data Operations Consultant ",
+   "uuid": "uuid-100001",
+   "refNumber": "REF2025N",
+   "company": {
+    "identifier": "srco",
+    "name": "Srco Inc"
+   },
+   "releasedDate": "2026-09-09T09:43:26.403Z",
+   "location": {
+    "city": "Lisbon",
+    "region": "Remote",
+    "country": "pt",
+    "remote": true,
+    "hybrid": false,
+    "fullLocation": "Lisbon, Remote, Portugal"
+   },
+   "department": {
+    "id": "5001",
+    "label": "Technical Services"
+   },
+   "typeOfEmployment": {
+    "id": "contract",
+    "label": "Contract"
+   },
+   "experienceLevel": {
+    "id": "associate",
+    "label": "Associate"
+   }
+  },
+  {
+   "id": "100002",
+   "name": "AI Engineer, Agents",
+   "uuid": "uuid-100002",
+   "refNumber": "REF2101Q",
+   "company": {
+    "identifier": "srco",
+    "name": "Srco Inc"
+   },
+   "releasedDate": "2026-09-28T16:00:00.000Z",
+   "location": {
+    "city": "San Francisco",
+    "region": "CA",
+    "country": "us",
+    "remote": false,
+    "hybrid": true,
+    "fullLocation": "San Francisco, CA, United States"
+   },
+   "department": {
+    "id": "5001",
+    "label": "Technical Services"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "associate",
+    "label": "Associate"
+   }
+  },
+  {
+   "id": "100003",
+   "name": "Account Executive",
+   "uuid": "uuid-100003",
+   "refNumber": "REF2102Q",
+   "company": {
+    "identifier": "srco",
+    "name": "Srco Inc"
+   },
+   "releasedDate": "2026-09-28T16:00:00.000Z",
+   "location": {
+    "city": "San Francisco",
+    "region": "CA",
+    "country": "us",
+    "remote": false,
+    "hybrid": true,
+    "fullLocation": "San Francisco, CA, United States"
+   },
+   "department": {
+    "id": "5001",
+    "label": "Technical Services"
+   },
+   "typeOfEmployment": {
+    "id": "permanent",
+    "label": "Full-time"
+   },
+   "experienceLevel": {
+    "id": "associate",
+    "label": "Associate"
+   }
+  }
+ ]
+}

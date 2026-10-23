@@ -1,0 +1,53 @@
+# Test fixture: a deliberately BROKEN variant of the fictional Riley Moreno resume.
+# Defects on purpose: (1) no email, (2) an em-dash, (3) table/column content (a pipe-table row
+# and tab-separated columns), (4) far more content than one page (entries repeated via YAML
+# aliases). Every bullet still carries evidence so the failures stay specific to these defects.
+sidecar:
+  lens: applied-ml
+  base_of: applied-ml
+  job: jobs/example-labs-mle-0001.md
+cv:
+  name: Riley Moreno
+  location: San Francisco, CA
+  phone: "+14155550142"
+  sections:
+    Experience:
+      - &nw
+        company: Northwind Robotics
+        position: Machine Learning Engineer
+        location: San Francisco, CA
+        start_date: 2023-03
+        end_date: present
+        highlights:
+          - "Built a retrieval-augmented support assistant — the first one the field team trusted <!-- ev:nw-rag-01 -->"
+          - "| Tool | Level | Years | <!-- ev:sk-pytorch -->"
+          - "PyTorch\tExpert\t5 years <!-- ev:sk-pytorch -->"
+          - "Designed an evaluation harness of 600 golden questions with an LLM judge that gates every model release in CI <!-- ev:nw-eval-01 -->"
+          - "Moved batch inference from notebooks to a FastAPI service on Kubernetes serving 40 requests per second <!-- ev:nw-serve-01 -->"
+      - &ch
+        company: Contoso Health
+        position: Data Scientist
+        location: Seattle, WA
+        start_date: 2020-06
+        end_date: 2023-02
+        highlights:
+          - "Trained gradient-boosted readmission models on 3M claims records with scikit-learn and XGBoost, adopted by two hospital partners <!-- ev:ch-readmit-01 -->"
+          - "Wrote Airflow pipelines with data-quality checks that stopped malformed HL7 feeds before they reached reporting <!-- ev:ch-airflow-01 -->"
+          - "Partnered with clinicians to turn readmission questions into weekly reports that care managers used in their rounds <!-- ev:ch-readmit-01 -->"
+          - "Reduced dashboard refresh time by moving aggregation from the BI tool into scheduled SQL views in the warehouse <!-- ev:ch-airflow-01 -->"
+      - *nw
+      - *ch
+      - *nw
+      - *ch
+      - *nw
+      - *ch
+    Education:
+      - institution: Harborview State University
+        area: Computer Science
+        degree: M.S.
+        location: Seattle, WA
+        start_date: 2018-09
+        end_date: 2020-05
+    Skills:
+      - label: Languages
+        details: "Python, SQL, TypeScript <!-- ev:sk-python,sk-sql,sk-ts -->"

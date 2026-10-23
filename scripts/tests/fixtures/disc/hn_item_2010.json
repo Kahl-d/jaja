@@ -1,0 +1,8 @@
+{
+ "by": "contoso_hiring",
+ "id": 2010,
+ "parent": 2001,
+ "text": "Contoso | Senior Software Engineer, Application Security | San Francisco, CA | ONSITE | $280K–$330K TC<p>Contoso is where communities spend time together, on desktop, mobile and inside third-party apps. That surface area and a large, sometimes adversarial user base make application security a hard and interesting problem.<p>We are hiring a Senior Application Security Engineer for the Product Security team. You will do threat modeling and design review, build AppSec tooling (SAST/DAST/dependency scanning) and work with engineering teams to fix findings.<p>Stack: Python mostly, some TypeScript/React. Runs on a major cloud.<p>Looking for: hands-on AppSec experience, comfort reviewing code in several languages and judgment about real risk.<p>Interview process: recruiter call, coding round, hiring manager interview, virtual onsite, decision.<p>Apply: <a href=\"https:&#x2F;&#x2F;job-boards.greenhouse.io&#x2F;contoso&#x2F;jobs&#x2F;1000001\" rel=\"nofollow\">https:&#x2F;&#x2F;job-boards.greenhouse.io&#x2F;contoso&#x2F;jobs&#x2F;1000001</a>",
+ "time": 1788286616,
+ "type": "comment"
+}

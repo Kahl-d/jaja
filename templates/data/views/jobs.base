@@ -1,0 +1,180 @@
+filters:
+  and:
+    - file.inFolder("{{DATA_REL}}/jobs")
+    - file.ext == "md"
+formulas:
+  role: link(file.path, title)
+  comp: if(comp_min, (comp_min / 1000).round() + "k-" + (comp_max / 1000).round() + "k", "")
+properties:
+  formula.role:
+    displayName: Role
+  formula.comp:
+    displayName: Comp
+  note.company:
+    displayName: Company
+  note.location:
+    displayName: Location
+  note.remote:
+    displayName: Remote
+  note.sponsorship:
+    displayName: Sponsorship
+  note.gate_reasons:
+    displayName: Why review
+  note.fit_score:
+    displayName: Fit
+  note.fit_verdict:
+    displayName: Verdict
+  note.lens:
+    displayName: Lens
+  note.ghost_score:
+    displayName: Ghost
+  note.posted_at:
+    displayName: Posted
+  note.first_seen:
+    displayName: Found
+  note.h1b_approvals_3y:
+    displayName: H-1B (3y)
+  note.status:
+    displayName: Status
+  note.source:
+    displayName: Source
+  note.apply_url:
+    displayName: Apply
+  note.application:
+    displayName: Application
+views:
+  - type: table
+    name: Needs your call
+    filters:
+      and:
+        - gate == "review"
+    order:
+      - formula.role
+      - company
+      - gate_reasons
+      - location
+      - remote
+      - sponsorship
+      - formula.comp
+      - ghost_score
+      - posted_at
+      - h1b_approvals_3y
+      - source
+      - apply_url
+    sort:
+      - property: first_seen
+        direction: DESC
+  - type: table
+    name: Apply queue
+    filters:
+      or:
+        - fit_verdict == "apply"
+        - fit_verdict == "priority"
+        - status == "queued"
+        - status == "tailoring"
+    order:
+      - formula.role
+      - company
+      - fit_score
+      - fit_verdict
+      - status
+      - sponsorship
+      - location
+      - formula.comp
+      - lens
+      - posted_at
+      - application
+      - apply_url
+    sort:
+      - property: fit_score
+        direction: DESC
+  - type: table
+    name: Passed gates
+    filters:
+      and:
+        - gate == "pass"
+        - status != "skipped"
+        - status != "applied"
+        - status != "closed"
+    order:
+      - formula.role
+      - company
+      - fit_score
+      - fit_verdict
+      - sponsorship
+      - location
+      - remote
+      - formula.comp
+      - ghost_score
+      - posted_at
+      - first_seen
+      - h1b_approvals_3y
+      - lens
+      - source
+      - apply_url
+    sort:
+      - property: fit_score
+        direction: DESC
+      - property: first_seen
+        direction: DESC
+  - type: table
+    name: Sponsors
+    filters:
+      and:
+        - gate != "fail"
+        - or:
+            - sponsorship == "yes"
+            - sponsorship == "cap_exempt"
+    order:
+      - formula.role
+      - company
+      - sponsorship
+      - sponsorship_evidence
+      - h1b_approvals_3y
+      - fit_score
+      - location
+      - formula.comp
+      - status
+      - apply_url
+    sort:
+      - property: h1b_approvals_3y
+        direction: DESC
+  - type: table
+    name: Applied
+    filters:
+      and:
+        - status == "applied"
+    order:
+      - formula.role
+      - company
+      - application
+      - fit_score
+      - sponsorship
+      - posted_at
+    sort:
+      - property: posted_at
+        direction: DESC
+  - type: table
+    name: All jobs
+    order:
+      - formula.role
+      - company
+      - status
+      - gate
+      - fit_score
+      - fit_verdict
+      - sponsorship
+      - location
+      - remote
+      - formula.comp
+      - ghost_score
+      - lens
+      - posted_at
+      - first_seen
+      - last_seen
+      - source
+      - apply_url
+      - application
+    sort:
+      - property: first_seen
+        direction: DESC

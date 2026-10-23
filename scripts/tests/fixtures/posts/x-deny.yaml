@@ -1,0 +1,9 @@
+# A synthetic X deny list: accounts that are never a hiring person (news, job boards, agencies, bots).
+accounts:
+  - {x_handle: mktnewsdaily, kind: news, why: market news feed}
+  - {x_handle: cryptojobs_feed, kind: aggregator, why: job-board feed}
+  - {x_handle: ai_jobs_digest, kind: aggregator, why: job-board feed}
+  - {x_handle: remote_jobs_hub, kind: aggregator, why: job-board feed}
+  - {x_handle: web3_listings, kind: aggregator, why: job-board feed}
+  - {x_handle: talent_scout_eu, kind: agency, why: talent partner, reposts roles for clients}
+allow: []

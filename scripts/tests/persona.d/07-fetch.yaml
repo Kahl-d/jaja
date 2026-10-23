@@ -1,0 +1,19 @@
+# Synthetic persona: title filter and board searches for an AI-engineer candidate.
+policy:
+  title_filter:
+    include:
+      - '\b(?:machine[- ]learning|ml|ai|llms?|genai|gen[- ]ai|generative ai|deep[- ]learning|nlp|agents?|agentic|inference|ml ?ops|computer vision|reinforcement learning)\b.*\b(?:engineer(?:ing)?|engr|developer|scientist|architect|researcher|swe|mts)\b'
+      - '\b(?:engineer(?:ing)?|engr|developer|scientist|architect|researcher|swe|mts)\b.*\b(?:machine[- ]learning|ml|ai|llms?|genai|gen[- ]ai|generative ai|deep[- ]learning|nlp|agents?|agentic|inference|ml ?ops|computer vision|reinforcement learning)\b'
+      - '\bresearch engineer\b'
+      - '\bforward[- ]deployed\b'
+      - '\bapplied (?:ai|ml|scientist|research)\b'
+      - '\bmember of (?:the )?technical staff\b'
+      - '\bml (?:platform|infra\w*|systems|ops)\b'
+      - '\bai (?:platform|infra\w*)\b'
+    ai_first_include: ['product engineer']
+  search:
+    role_searches: ['machine learning', 'artificial intelligence', 'AI engineer', 'applied scientist', 'LLM', 'generative AI', 'deep learning', 'AI agents']
+    amazon_queries:
+      - {q: 'machine learning engineer', loc: 'San Francisco, California'}
+      - {q: 'applied scientist', loc: 'San Francisco, California'}
+      - {q: 'AI agents engineer', loc: 'San Francisco, California'}

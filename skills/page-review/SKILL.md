@@ -1,0 +1,48 @@
+---
+name: page-review
+description: "Use when a variant has passed the scripts, the editor and base-compare: runs the layout gate, then four readers in clean contexts (hiring-manager persona, technical AI reviewer, company recruiter, AI screener), findings only; screener_check.py gates screener.md."
+---
+
+# Page review (layout gate, then four readers, one pass each)
+
+Today is !`date +%F`. Argument: `$ARGUMENTS` = `<slug>`.
+
+1. Make the page text: `pdftotext -layout resumes/variants/<slug>/Resume.pdf "$TMPDIR/page-<slug>-$(date +%s).txt"` (the classic PDF, named by `identity.resume_pdf_name` in the config; each reader writes its scratch under $TMPDIR, never inside the repo).
+2. Layout gate: `python3 scripts/page_layout_check.py resumes/variants/<slug>/Resume.pdf --out "$TMPDIR/page-<slug>"`.
+   Exit 1 (FAIL): stop; no reader runs; the failures go back to the tailor (fill the page) or the resume lane (renderer
+   spacing). Exit 2: UNCHECKABLE, stop and report. Exit 0: the readers get `$TMPDIR/page-<slug>/page-1.png`.
+3. Launch four subagents in parallel, each with the slug, the page-text path and the page-1.png path and nothing else
+   from this session: `hiring-manager-persona`, `technical-ai-reviewer`, `technical-recruiter-reviewer`, `ai-screener`.
+   The three readers of the charter's page-review section are all required: the human (the persona), the ATS
+   (`ats_check` exit 0 from the scripts step, read by the recruiter) and the AI (the screener). Each Reads
+   page-1.png (the Read tool shows the image) before the text and judges the page by eye against "Page design" below.
+   Each writes its own file in the
+   variant folder (`persona.md`, `technical.md`, `recruiter.md`, `screener.md`). The AI screener ranks the page in a
+   pool of synthetic competitors for this req (`agents/ai-screener.md`). If `agents/ai-screener.md` does not exist,
+   do not launch the screener: run `python3 scripts/screener_check.py resumes/variants/<slug>/ --not-run` (it records
+   screener.md as NOT RUN, a gap, never a PASS) and go on. Otherwise run
+   `python3 scripts/screener_check.py resumes/variants/<slug>/`: exit 1 means the file is incomplete (the screener
+   runs again), and a REVISE goes back to the tailor like the recruiter's. The recruiter reviewer is this company's senior
+   recruiter for this role: it writes or reuses `research/targets/<slug>.recruiter.md` first, then signs
+   `recruiter.md` APPROVE or REVISE with a `layout:` line in its front matter. A REVISE goes back to the tailor and
+   this skill runs again; the page reaches
+   the owner only with a literal APPROVE (or a GAP with the owner's decision); anything else, "ADVANCE" or "APPROVE if" included,
+   goes back to the Recruiter (apply_pack.py refuses it, and refuses any recruiter.md without `layout: PASS`).
+4. Collect: each verdict line and each layout line, the screener's rank, score and copied or stuffed lines, every
+   finding at High or above. The page reaches the owner only with the recruiter's APPROVE and the screener's PASS (or the screener NOT RUN recorded while the role does not exist). A finding that needs a fact the
+   record lacks becomes a question for the owner, never an edit. Return a five-line summary.
+
+## Page design: what the first scan needs
+A recruiter's first pass is a scan of a few seconds that lands on the name, the current title and company, the dates,
+the education and the first bullet. The page must let the eye do that without reading a sentence:
+- Sections found at a glance: each header has clearly more whitespace above it than any break inside a section (the
+  script's header ratio, and an entry never more air than a header). A header jammed under the previous
+  line reads as clutter.
+- Balance and whitespace: the text reaches the bottom margin (within the script's bottom-slack limit); no blank strip at the foot while Experience is
+  packed; space shared evenly between sections. Margins equal on every side; nothing past the right margin.
+- Breathing room: bullets separated, at most two lines each in Experience, no orphan word alone on a line; titles,
+  companies and dates on one rhythm so the eye can run down them.
+- One page, unless the variant's meta.yaml says two.
+Layout verdict, one line, falsifiable: `layout: PASS (bottom slack x%, header ratio y; what you saw)` or
+`layout: FAIL <the region and what is wrong>`, quoting the script's numbers.
+A layout FAIL blocks APPROVE, whether the script or a reader finds it: the page goes back before it reaches the owner.

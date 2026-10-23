@@ -1,0 +1,31 @@
+# Routine spec (schema: schemas/routine.yaml). The one-time backlog harvest of older mail is run by hand with the owner
+# present (`harvest-inbound`, mode backlog). This spec is the weekly safety net.
+# Desktop because the Gmail tokens live in ~/.config/job-agency on the owner's machine and the LinkedIn export sits
+# in profile/_inbox/linkedin-export/.
+# SAFETY: this routine uses only the read token (gmail.readonly + gmail.labels); gmail_pull.py harvest fails closed if only
+# a compose token exists. The compose token is created per approved batch with `gmail_auth.py login --compose` and deleted after.
+# Enable it once the read login is done (docs/SETUP-CONNECTORS.md section 2) and connectors_doctor.py shows the read token green.
+# Receipt: logs/runs/js-backlog-harvest/<date>.md.
+name: js-backlog-harvest
+purpose: "Every week, run the safety-net harvest of the week's recruiter, founder and hiring-manager mail (and a new LinkedIn export if the owner dropped one) into prospects/, with the audit and the sender reconciliation."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: low
+schedule: "30 7 * * 1"
+action: skill:harvest-inbound
+inputs:
+  - Gmail (scripts/gmail_pull.py, read-only token required for unattended runs)
+  - state/harvest/
+  - profile/_inbox/linkedin-export/
+  - prospects/
+outputs:
+  - state/harvest/
+  - prospects/*.md
+  - logs/runs/js-backlog-harvest/<date>.md
+connectors: [gmail-read]
+tier: T1
+notify: {"on": needs-owner, via: push}      # senders missing after reconciliation, or re-auth needed
+budget: {max_runs_per_day: 1, max_tokens: 200000}
+enabled: false                 # paused by default; see the header
+owner: inbox-harvester

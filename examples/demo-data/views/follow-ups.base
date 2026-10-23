@@ -1,0 +1,84 @@
+filters:
+  and:
+    - file.inFolder("prospects")
+    - file.ext == "md"
+    - status == "replied"
+formulas:
+  days_overdue: if(next_touch_at, (today() - date(next_touch_at)).days, "")
+  nudges_left: max_follow_ups - follow_ups_sent
+properties:
+  file.name:
+    displayName: Person
+  note.name:
+    displayName: Name
+  note.company:
+    displayName: Company
+  note.role:
+    displayName: Role
+  note.priority:
+    displayName: Priority
+  note.next_touch_at:
+    displayName: Next touch
+  note.follow_ups_sent:
+    displayName: Nudges sent
+  note.last_outbound_at:
+    displayName: Last outbound
+  note.last_inbound_at:
+    displayName: Last inbound
+  note.channels:
+    displayName: Channels
+  formula.days_overdue:
+    displayName: Days overdue
+  formula.nudges_left:
+    displayName: Nudges left
+views:
+  - type: table
+    name: Due now
+    filters:
+      and:
+        - date(next_touch_at) <= today()
+        - follow_ups_sent < max_follow_ups
+    order:
+      - file.name
+      - name
+      - company
+      - priority
+      - formula.days_overdue
+      - formula.nudges_left
+      - channels
+      - role
+      - next_touch_at
+      - follow_ups_sent
+      - last_outbound_at
+    sort:
+      - property: next_touch_at
+        direction: ASC
+  - type: table
+    name: Coming up
+    filters:
+      and:
+        - date(next_touch_at) > today()
+        - date(next_touch_at) <= today() + "7d"
+    order:
+      - name
+      - company
+      - next_touch_at
+      - follow_ups_sent
+      - last_outbound_at
+    sort:
+      - property: next_touch_at
+        direction: ASC
+  - type: table
+    name: Out of nudges
+    filters:
+      and:
+        - follow_ups_sent >= max_follow_ups
+    order:
+      - name
+      - company
+      - follow_ups_sent
+      - last_outbound_at
+      - last_inbound_at
+    sort:
+      - property: last_outbound_at
+        direction: ASC

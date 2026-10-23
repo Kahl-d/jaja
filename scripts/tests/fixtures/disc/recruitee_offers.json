@@ -1,0 +1,61 @@
+{
+ "_captured": "synthetic fixture shaped like the Recruitee offers API answer (company bankco)",
+ "offers": [
+  {
+   "id": 100501,
+   "guid": "mtpr7",
+   "title": "iOS Developer",
+   "slug": "ios-developer-3",
+   "careers_url": "https://careers.bankco.example.test/o/ios-developer-3",
+   "careers_apply_url": "https://careers.bankco.example.test/o/ios-developer-3/c/new",
+   "created_at": "2026-09-29 15:56:16 UTC",
+   "published_at": "2026-09-29 16:02:37 UTC",
+   "location": "Amsterdam, Noord-Holland, Netherlands",
+   "city": "Amsterdam",
+   "country": "Netherlands",
+   "state_name": "Noord-Holland",
+   "remote": false,
+   "hybrid": true,
+   "on_site": true,
+   "employment_type_code": "fulltime_permanent",
+   "salary": {
+    "max": null,
+    "min": null,
+    "period": null,
+    "currency": null
+   },
+   "department": "Technology",
+   "description": "<p>At Bankco we build a mobile banking app. As an iOS developer you will build and maintain the app's screens and shared components.</p>",
+   "requirements": "<ul><li>Proficiency in Swift and SwiftUI.</li></ul>",
+   "status": "published"
+  },
+  {
+   "id": 100502,
+   "guid": "mtpr7",
+   "title": "AI Engineer, LLM Agents",
+   "slug": "ai-engineer-llm-agents",
+   "careers_url": "https://careers.bankco.example.test/o/ai-engineer-llm-agents",
+   "careers_apply_url": "https://careers.bankco.example.test/o/ai-engineer-llm-agents/c/new",
+   "created_at": "2026-09-29 15:56:16 UTC",
+   "published_at": "2026-09-30 15:00:00 UTC",
+   "location": "San Francisco, California, United States",
+   "city": "San Francisco",
+   "country": "United States",
+   "state_name": "California",
+   "remote": true,
+   "hybrid": false,
+   "on_site": false,
+   "employment_type_code": "fulltime_permanent",
+   "salary": {
+    "min": "170000",
+    "max": "210000",
+    "period": "year",
+    "currency": "USD"
+   },
+   "department": "Technology",
+   "description": "<p>Build LLM agents and evals in Python.</p>",
+   "requirements": "<ul><li>Python</li></ul>",
+   "status": "published"
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+/* The Portals page (portals.js). Tokens from style.css; the Status pill from ui.css. */
+.portals .topline { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; padding: 4px 2px 12px; }
+.portals .topline .big b { font-size: 18px; font-variant-numeric: tabular-nums; }
+.portals .topline .good { color: var(--good); font-weight: 600; }
+.portals .topline .src { margin-left: auto; font-size: 12px; }
+.portals th.part, .portals td.part { text-align: center; padding-left: 4px; padding-right: 4px; }
+.portals td.next { max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink-2); }
+.portals .small { font-size: 12px; }
+.portals tr.current td { box-shadow: inset 2px 0 0 var(--accent); }
+.portals tr.complete td b { color: var(--ink-2); }
+.portals .waits { font-size: 12px; white-space: nowrap; }
+.portals .waits.owner, .drawer .waits.owner { color: var(--warn); font-weight: 600; }
+.portals .waits.recruiter, .drawer .waits.recruiter { color: var(--accent-ink); }
+.portals .waits.nobody, .drawer .waits.nobody { color: var(--ink-3); }
+.portals h3.sect { margin-top: 24px; }
+.drawer .quick-links { display: flex; flex-wrap: wrap; gap: 6px 8px; margin: 6px 0 4px; }
+.drawer .quick-links a { font-size: 12px; padding: 2px 9px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2); color: var(--accent-ink); white-space: nowrap; }
+.drawer .quick-links a:hover { border-color: var(--accent); text-decoration: none; }
+.drawer .kv { display: grid; gap: 6px; margin: 10px 0 6px; font-size: 13px; }
+.drawer .kv .k { display: inline-block; width: 110px; color: var(--ink-3); }
+.drawer .parts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 16px; }
+.drawer .parts .part { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; padding: 3px 0; border-bottom: 1px solid var(--line); }
+.drawer .parts .k { color: var(--ink-2); min-width: 0; }
+.drawer .parts .ui-status { flex-shrink: 0; }
+.drawer .updates .upd { display: grid; grid-template-columns: 84px 72px minmax(0, 1fr); gap: 8px; padding: 5px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.drawer .updates .upd:first-child { border-top: 0; }
+.drawer .updates .at { color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.drawer .updates .by { color: var(--ink-3); font-size: 12px; }
+.drawer table.findings { width: 100%; font-size: 12px; }
+.drawer table.findings td.wrap { white-space: normal; }
+.drawer .needs.apply { color: var(--good); }
+.drawer .needs.decide { color: var(--warn); font-weight: 600; }
+@media (max-width: 900px) { .drawer .parts { grid-template-columns: 1fr; } }

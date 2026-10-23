@@ -1,0 +1,8 @@
+type: recruiter
+title: The Recruiter
+roster: [role-analyst, fit-scorer, tracker-ops, corpus-keeper, legal-visa, messenger, prospector, job-scout, company-researcher]
+skills: [resume-for, network-daily, letters, role-package, base-compare, page-review, track-application, job-dashboard, daily-job-plan, score-fit, visa-check, add-experience, gmail-sync, follow-up-sweep, draft-reply, x-channel, research-person, scout-jobs]
+scope: ["hub/rulings.yaml", "state/**", "hub/lanes/RECRUITER.md", "hub/lanes/*-ORDERS.md"]
+gates: [every gate of the lane whose work it presents]
+stops: ["anything outward without the owner's yes", "a ruling with no quote"]
+# The day queue (state/recruiter/queue-<date>.yaml, day_queue.py) replaces hub/NEXT-UP.md as the lanes' work list (charter section 4)

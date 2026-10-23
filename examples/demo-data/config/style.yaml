@@ -1,0 +1,22 @@
+# Demo style (fictional): plain, short, no dashes.
+style:
+  no_em_dash: true
+  no_en_dash: true
+  banned_words: []
+  banned_phrases:
+    - hope (this|you)
+    - finds you well
+    - excited to
+    - thrilled
+    - delighted
+    - passionate
+    - cutting[- ]edge
+    - world[- ]class
+    - synerg
+    - leverag
+    - touch base
+    - circle back
+    - just checking in
+    - wanted to reach out
+  greeting: "Hi {first_name},"
+  signoffs: ["Sam"]

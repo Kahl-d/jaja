@@ -1,0 +1,288 @@
+# The connection — how sessions actually reach each other
+
+**Read this before addressing any other session.**
+
+Source: the **official mechanism** (`code.claude.com/docs/en/cross-session-messaging`). Where this file and
+the docs disagree, the docs win.
+
+> ⛔⛔ **TWO COMMON BELIEFS ARE FALSE, AND BOTH CHANGE THE ARCHITECTURE.**
+>
+> **① "Registries are account-scoped, so a lane on another account is unreachable."** ⛔ **FALSE.**
+> Accounts are **not an axis of reachability at all.** Same-machine delivery runs over a
+> **per-session named pipe** (Windows) or **unix socket** (mac/Linux), ⛔ **never through Anthropic
+> servers**, and sessions discover each other through **files on disk under the same home
+> directory.** ⇒ ⭐ **Same OS user + same home directory = reachable, whatever account each session
+> is logged into.**
+>
+> **② "There is no push — a session is not a daemon."** ⛔ **FALSE for messages.** The docs:
+> *"The receiving Claude reads the message between tool calls during an active turn... When the
+> receiving session is idle, Claude Code starts a new turn with the message."*
+> ⇒ ⭐⭐ **A MESSAGE WAKES AN IDLE SESSION. A FILE DOES NOT.** That is the difference between an
+> orchestrator that needs a human to relay every instruction and one that actually drives the
+> programme. **It is the most valuable fact in this document.**
+
+---
+
+## 0 · The mechanism, exactly
+
+| where the peer runs | how the message travels |
+|---|---|
+| ⭐ **this machine** | a **per-session named pipe** (native Windows) or **unix domain socket** (macOS/Linux/WSL2). ⛔ **Never through Anthropic servers.** Discovery is by **files on disk** |
+| another of your machines | through Anthropic servers, over that machine's **Remote Control** connection |
+| Claude Code on the web | through Anthropic's servers to the web session |
+
+| ✅ reachable on one machine | ⛔ not reachable |
+|---|---|
+| any two sessions of the **same OS user** — **any Claude accounts**, any project folders | a session **in a container** ↔ one on the host (different filesystem) |
+| a `claude -p` headless worker (it binds an inbox too) | **WSL 2 ↔ native Windows** on one computer (different home dirs, different socket types) |
+| interactive, background, and Remote-Control-connected sessions | **bare mode** (binds no socket, never appears) · another **OS user's** sessions |
+
+**Version floor:** v2.1.224+ on macOS/Linux/WSL2, ⛔ **v2.1.234+ on native Windows.** Off on
+third-party cloud model providers (Bedrock and similar), and off when
+`CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC`, `DISABLE_TELEMETRY`, `DO_NOT_TRACK` or
+`DISABLE_GROWTHBOOK` disables feature-flag evaluation. Check `claude --version` against the floor.
+
+---
+
+## 0a · ⭐⭐⭐ IDENTITY — the three strings, and which one to use
+
+| string | what it is | use it for |
+|---|---|---|
+| ⭐ **the peer address** — `uds:\\.\pipe\LOCAL\cc-msg-<32 hex>` | the **transport address**. `/status` prints it as `Peer address`; every hook and Bash call gets it as **`CLAUDE_CODE_MESSAGING_SOCKET`**; every inbound message carries it as `from` | ⭐⭐ **the authoritative reply address.** Copy **verbatim**. Account-, project- and rename-independent |
+| **the registry name** — `AR-PAYMENTS`, or auto `air_name-55` | the **addressable name** `SendMessage({to})` resolves. Set with `--name` or `/rename`; auto-generated from the folder otherwise | ⭐ the readable address — **deterministic if you set it** (§0b) |
+| the session **title** | what the UI shows | ⛔ **NOTHING. Not an address.** |
+
+⚠ **An auto-generated name is unstable** — one lane can show several ids in a short time. ⛔ Never
+write one down as durable. ⚠ **A rename usually propagates but is not guaranteed** — Claude Code
+updates the shared lookup record and *warns in `/rename` output* when it cannot. Some renamed titles
+resolve and some are refused. ⇒ **"titles never work" is too strong;
+the reliable rule is that the session reports its OWN name.**
+
+**Three first-party ways a session learns its own identity:**
+
+```bash
+/list-agents      # (alias /peers) FIRST LINE = this session's own name; rows below = reachable peers
+/status           # the `Peer address` row = this session's own uds: address
+echo $CLAUDE_CODE_MESSAGING_SOCKET     # the same address, in any hook or Bash call
+```
+
+⭐⭐ **The third is why registration is automatic here.** `lane_register.py` (SessionStart) reads
+that env var and writes this session's address, branch, tip and role into `hub/registry.json`.
+**Nobody types an address. Nobody infers one.**
+
+---
+
+## 0b · ⭐⭐⭐ STRUCTURED NOMENCLATURE — name the lane at LAUNCH
+
+⛔ **A starter that says "RENAME THIS SESSION TO …" sets the TITLE only.**
+⭐ **Launch with `--name` instead — it sets the addressable registry name, deterministically.**
+
+```
+<PROG>-ORCH              the one orchestrator      AR-ORCH   OS-ORCH
+<PROG>-<SCOPE>           a lane                    AR-PAYMENTS   OS-BRAIN
+<PROG>-<SCOPE>-<PART>    a sub-lane                AR-PAYMENTS-webhooks
+```
+
+```bash
+claude --name AR-PAYMENTS
+```
+
+- ⭐ **Uppercase programme prefix, one per programme** — every surface greppable, a stray session obvious.
+- ⛔ **No spaces** — a spaced name invites title/name confusion.
+- ⭐ **One string, six surfaces:** registry key · `--name` · `hub/lanes/<SCOPE>.md` · branch
+  `<prog>-<scope>` · worktree `~/tmp/<prog>-<scope>` · the `TRACKER.md` row.
+- ⚠ **Duplicate names get a variant**; listings disambiguate by **working directory** and a short
+  `[ref]`. Append the `[ref]` only when a listing or an error asks you to.
+- ⛔ **A session cannot message itself** — Claude Code refuses and says the target is this session.
+
+---
+
+## 0c · ⛔⛔ THE SILENT KILLER — `crossSessionInbound`
+
+**With the key UNSET, delivery is decided by the two sessions' PERMISSION-MODE CLASSES:**
+
+| receiver | sender | outcome |
+|---|---|---|
+| prompts for permissions | anything but bypass | ✅ delivered |
+| prompts for permissions | **bypassPermissions** | ⚠ **HELD** for your approval |
+| ⛔ **bypassPermissions** | not bypassing | ⛔⛔ **HELD → dialog → DROPPED after `dialogExpiry` (default 5 min)** |
+| bypassPermissions | bypassPermissions | ✅ delivered |
+
+⇒ ⭐⭐ **A lane in bypass mode silently drops messages from a normal orchestrator five minutes
+later, and the sender sees nothing wrong.** The likeliest cause of any "I sent it and it never
+arrived" that was not a title.
+
+⭐ **Fix: set `"crossSessionInbound": "accept"` in `.claude/settings.local.json`** on every session that takes
+part in a programme. ⛔ **Do not remove it.**
+
+---
+
+## 1 · ⭐⭐⭐ THE PROTOCOL — five steps, and step 1 is the one everybody skips
+
+### ① EVERY SESSION REGISTERS ITSELF — automatic, no typing
+
+`lane_register.py` (SessionStart) writes `hub/registry.json` from
+`CLAUDE_CODE_MESSAGING_SOCKET` + the cwd's git state:
+
+```json
+{"lanes": {"PAYMENTS": {"key":"PAYMENTS", "role":"lane", "address":"uds:\\\\.\\pipe\\LOCAL\\cc-msg-…",
+  "branch":"ar-payments", "tip":"464033f", "dirty":0,
+  "registered_utc":"YYYY-MM-DDT…Z", "messaging":"up"}}}
+```
+
+⭐ **An address the OWNER supplies is authoritative. An address the orchestrator INFERS is a guess
+that misroutes** — inferred addresses misroute replies without anyone noticing.
+⛔ **A registry row is a CACHE, never a liveness proof** — confirm `interactive` in `ListAgents`,
+or that the peer answered, before acting on one.
+
+⛔ **Who may write the `ORCH` row.** Every session on the shipping branch derives as the
+orchestrator, so the hook guards the row: a session with no messaging socket never registers, and
+a live `ORCH` row (address set, socket still on disk) held by another session is replaced only by
+a session started with `OS_LANE=orchestrator`. A lane launched from the Desktop app (no `OS_LANE`)
+is bound by its transcript id: add it to that lane's `"session_ids": [...]` in `hub/programme.json`
+(the `lane_context` hook prints it at SessionStart). The hooks match `session_ids` before the branch.
+
+### ② THE ORCHESTRATOR READS THE HUB, NOT ITS MEMORY
+
+`hub/LANES-LIVE.md` is the registry, and it is **split in two on purpose**:
+
+| half | contents | rots? |
+|---|---|---|
+| ⭐ **STABLE IDENTITY** — the key | scope · what it owns · worktree · branch · charter file · transcript uuid | **no.** This table does not change |
+| ⛔ **VOLATILE ADDRESS** — a cache | the registry name, **with the UTC time it was verified** | **yes, constantly.** Every row expires |
+
+⛔⛔ **A registry keyed on the address rots, because the address is the part that moves.**
+⛔ **A row older than the current session is not an address, it is a memory.** Re-handshake.
+
+### ③ SENDING — and reading the result honestly
+
+```
+SendMessage({ to: "<registry name>", message: "..." })
+```
+
+| result | what it means |
+|---|---|
+| `success: false` — *"No agent named X is reachable"* | ⭐ **TRUSTWORTHY.** The name is absent from the registry. It failed loudly and closed |
+| `success: true` **and** the `ListAgents` row was `interactive` | ⭐ delivered; it drains at the receiver's next tool round |
+| ⛔ `success: true` **and** the row was `Remote Control · offline` | ⛔⛔ **SILENTLY DISCARDED.** This is the trap |
+
+⛔ **Read the row before believing the send.** ⭐ **The danger was never "success means nothing" — it
+is that offline Remote Control rows occupy real, plausible names.**
+
+### ④ REPLYING — copy the `from` attribute verbatim
+
+An inbound message arrives wrapped as `<cross-session-message from="…">`. ⭐ **The reply address is
+that `from` attribute, copied exactly.** Never retype it, never reconstruct it from a title.
+
+### ⑤ WAITING — subscribe, never poll
+
+```
+SendMessage({ to: "<name>", notify_when_idle: true })      # pure subscription, costs them nothing
+SendMessage({ to: "<name>", message: "...", notify_when_idle: true })   # deliver AND subscribe
+```
+
+One `[Cross-session idle notice]` arrives when that session next goes idle or exits. ⛔ **Never poll
+`ListAgents` in a loop. Never send "are you done?".** This is the only in-band mitigation for
+*a session is not a daemon*, and it is one-shot — re-subscribe if you still need it.
+
+---
+
+## 2 · ⛔⛔ THE TWELVE FAILURE MODES
+
+| # | what goes wrong | what happens | ⭐ the rule |
+|:--:|---|---|---|
+| **F1** | Telling every lane *"RENAME THIS SESSION TO `<name>`"* and addressing that string | Sends are refused. **The channel is believed dead** | ⛔ **A session TITLE is not an address.** Renaming sets the title; `SendMessage` resolves only the **registry name** |
+| **F2** | Writing a registry name into a document as the lane's address | The name changes within minutes | ⛔ The name is **auto-generated from the folder and unstable.** Record the **mechanism**, never the value. *A fact recorded next to something that moves* |
+| **F3** | Sending messages to a plausible name | **`success: true` every time, reaching nobody** — a duplicate name resolves to an **offline Remote Control** row | ⛔ **A refusal is trustworthy; a success is trustworthy only when the row was `interactive`** |
+| **F4** | The orchestrator infers each lane's address | **Replies go to the wrong session** | ⭐ **Inbound-first: the owner supplies the address.** The misroute class then cannot occur |
+| **F5** | Concluding *"registries are account-scoped, cross-account is impossible"* and writing it into the doctrine | ⛔ **The conclusion is FALSE.** Cross-account lanes message both ways; a lane on a **different account AND a different project folder** can hold a two-way channel | ⛔ **Accounts are not an axis.** Same OS user + same home directory = reachable. ⭐ **Separate accounts are a pure win: separate rate limits, full messaging.** ⚠ The real axes are OS user · home dir · container · WSL-vs-native · version floor |
+| **F5b** | Writing *"there is no push; a session is not a daemon"* and building the whole polling discipline on it | ⛔ **True for FILES, false for MESSAGES.** An idle receiver is woken: Claude Code **starts a new turn** with the message | ⭐⭐ **Message the lane instead of waiting for a human to relay.** Long lane idles are self-inflicted |
+| **F6** | Using a session-management MCP tool's listing to find the lanes | Its enumeration returns only sessions of the root project, never the lanes | ⛔ **Its ENUMERATION is scope-bound to the root project.** ⭐ `get_session("self")` answers correctly — **test an instrument on yourself before pointing it at a peer** |
+| **F7** | Building an addressable id from the transcript filenames on disk | A transcript filename and the session-management id are **two different UUIDs for one session** | ⛔ **A transcript filename is not a session id.** ⭐ Reading a transcript is safe — it does **not** resume the session |
+| **F8** | Verifying a lane's identity with `git branch -a --contains <sha>` | ⛔ **It cannot return NO.** All lane worktrees share ONE object database (`--git-common-dir` = the canonical clone), so every lane "contains" every sha | ⭐ **Use ancestry of MY HEAD, from the lane's OWN cwd, with no `-C`:** `git merge-base --is-ancestor <tip> HEAD` |
+| **F9** | Piping that check through `tr -d ' *'` to tidy it | ⛔ **The `*` (my HEAD) and `+` (checked out elsewhere) markers ARE the discriminator, and the filter deletes them** — a confident row is then written from what is left | ⛔ **A normalisation step can delete the answer.** The instrument is never wrong; the reading is |
+| **F10** | Choosing `--contains <product tip>` as the doctrine's worked example | It reads as correct **only while no lane has merged yet.** Every lane descends from a product tip by construction | ⛔ **Pick the example that MUST REJECT, not the one at hand.** *An example chosen while the instrument happens to be unambiguous memorialises the ambiguity it was lucky to miss* |
+| **F11** | Acting on a liveness line inside a message | **Interactive peers vanish within minutes** of being reported | ⛔ **A liveness claim inside a message is a MEMORY.** Re-measure before acting |
+| **F12** | Assuming the orchestrator can open the channel from its side | There is no name to send to, and lanes sit idle on already-answered questions | ⭐ **Step ① fixes this permanently** — but only because the lane runs it. Put it in the ORDERS `§0`, not in a message |
+
+---
+
+## 3 · ⭐ THE SELF-HEALING HALF — put it in the lane's own ORDERS, not in the hub
+
+Every `hub/lanes/<id>-ORDERS.md` opens with a standing `§0` the lane re-runs on **every** resume.
+⇒ ⛔ **the orchestrator is removed from the critical path.** A registry that cannot be refreshed by
+the only party who knows the answer is not a registry.
+
+```markdown
+# §0 · STANDING — CHECK IN. Every resume, before anything else. Not a work order.
+
+The SessionStart hook has already published your address to hub/registry.json. Your job is
+to prove the channel is LIVE, which a file cannot do:
+
+1. Send ONE line to the orchestrator (`<PROG>-ORCH`), nothing more:
+      lane=<id>  tip=<sha measured in YOUR OWN worktree>  dirty=<n>  alive=yes
+2. Then continue exactly what you were doing.
+
+⭐ If you are PAUSED, still send it, then stop. Checking in is not resuming work.
+⛔ No status, no rows, no findings in that line — disk is the contract; this line is a heartbeat.
+⚠ If the send is REFUSED, the orchestrator's name has moved: read hub/registry.json for its
+  current address and use that. If YOUR registry row says messaging is DOWN, say so in your
+  file and fall back to the ORDERS channel — the programme still works, just slower.
+```
+
+⚠ **Re-send after every re-open, compaction or restart.** One call, and it is what turns a
+published address into a proven channel.
+
+---
+
+## 4 · ⛔ THE RULES THAT DO NOT CHANGE
+
+- ⛔ **A lane never messages another lane.** Everything routes through the orchestrator. Lane→lane
+  works by *reading their file and posting in yours, addressed to them*.
+- ⛔ **The orchestrator never starts a lane.** The owner does.
+- ⛔ **Permission boundaries are per-session.** Never ask a peer to perform an action that was denied
+  or blocked in your session — a peer doing it for you launders the user's permission decision.
+  Route blocked work back to the owner.
+- ⭐ **`mcp__ccd_session_mgmt__set_session_title`** renames another session or `"self"`. Useful for
+  the owner's navigation; ⛔ **it does not change the address.** `--name` / `/rename` do.
+- ⭐ **A file watch complements messaging; it does not replace it.** Reading each lane's branch,
+  commits and hub file every ~90s tells you what a lane *did* without asking. ⛔ **But it cannot
+  wake anyone — and a message can.** Use the watch to know; use the message to act.
+
+### ⛔⛔ AND THE ONE THAT SURVIVES EVERYTHING ABOVE
+
+**DISK IS STILL THE CONTRACT.** A message is plain text with no history, capped at ~1M characters,
+refused in bursts, de-duplicated, queue-capped at 50, subject to inbound controls — and ⛔ **invisible
+to the next session that resumes this work.**
+
+⇒ ⭐⭐ **The correct pairing, and it is the whole design:**
+
+```
+WRITE the ruling into hub/briefs/<scope>.md       durable · survives resumption · one writer
+SEND  "ruling <id> is in your brief"              wakes the lane · carries no state · costs nothing
+```
+
+**The file is what makes it true tomorrow. The message is what makes the lane read it now.**
+
+---
+
+## 5 · ⭐ THE FIVE-MINUTE PROBE — run it at the start of every programme
+
+⛔ **Never assert messaging works or fails without running this. Record the result in
+`hub/LANES-LIVE.md` with its timestamp.**
+
+1. `claude --version` ≥ the floor for this OS (⛔ **native Windows: 2.1.234+**) and
+   `echo $CLAUDE_CODE_MESSAGING_SOCKET` non-empty. ⛔ **Empty ⇒ messaging is OFF in this session**
+   and no amount of addressing will fix it.
+2. `ListAgents` → my own name (line 1) · every peer's `name [ref]` · **and its `interactive` vs
+   `Remote Control · offline` status.** ⚠ An auto name is `<folder>-<2 chars>`, so two lanes in one
+   folder differ only by suffix — **append the `[ref]` when the bare name is ambiguous**, and
+   ⭐ **launch lanes with `--name` so this never arises.**
+3. Confirm `crossSessionInbound: "accept"` applies on **both** sides (§0c), or that both sessions
+   sit in the same permission class. ⛔ **Skip this and a send can vanish five minutes later.**
+4. When the first lane opens it **auto-registers** → **send it one line → it replies.**
+   ⭐⭐ **Only a completed ROUND TRIP counts as reachable.** One direction proves half a channel.
+5. Write the result, with its UTC time, into `hub/LANES-LIVE.md`.
+
+⛔ **Do not ask the owner "which account?" as a reachability question — it is not one.** Ask only if
+the owner wants separate rate limits, which is a capacity decision, and ⭐ **the answer is usually yes.**

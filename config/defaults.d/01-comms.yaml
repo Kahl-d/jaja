@@ -1,0 +1,16 @@
+# Keys read by bundle.py, apply_pack.py, js_comms_util.py and the other batch-01 scripts (neutral defaults).
+identity:
+  resume_pdf_name: "Resume.pdf"      # the file name a built resume variant carries
+  account_emails: []                 # mailboxes the system reads (defaults to identity.emails when empty)
+  owner_handles: ["owner"]           # names a routine's `owner:` may carry for you yourself (watchdog routing)
+  name_variants: []                  # other spellings of your name that appear on LinkedIn or in mail
+style:
+  no_em_dash: false                  # when true, an em-dash in a built apply pack is a finding
+policy:
+  apply:
+    academic_orgs: []                # extra organisation names (a school, a residence office) that are not industry employers
+    portal_hosts: []                 # [{pattern: "<host regex>", portal: "<portal id>"}] company career hosts that map to a known portal
+    company_board_sources: []        # extra job-record source ids that mean "the company's own careers page"
+    authorization_answer_starts_with: ""   # e.g. "yes": the recorded work-authorization answer must start with it ("" = no rule)
+    sponsorship_answer_starts_with: ""     # same rule for the sponsorship answer
+    require_everify_employer: false  # true: an employer whose E-Verify check says "no" blocks the pack

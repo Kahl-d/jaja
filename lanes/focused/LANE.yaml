@@ -1,0 +1,7 @@
+type: focused
+title: Focused lane
+roster: [role-analyst, company-researcher, prospector, messenger, resume-tailor, resume-editor, base-comparer, technical-recruiter-reviewer, technical-ai-reviewer, hiring-manager-persona, legal-visa, tracker-ops, apply-assist]
+skills: [role-package, research-company, research-person, resume-for, page-review, letters, track-application, draft-reply, follow-up-sweep, base-compare, editorial-review, ats-check, build-resume-pdf, tailor-resume, apply-assist]
+scope: ["research/targets/**", "research/people/**", "companies/**", "prospects/**", "outbox/**", "applications/*/fit.md", "applications/*/apply-pack.md", "state/apply-batches/**", "resumes/variants/**", "hub/lanes/FOCUSED*.md"]
+gates: [reader_model.py check, jd_matrix.py check, rubric_check.py, review_sign.py, outbox.py lint, check_holds.py]
+stops: ["anything outward without the owner's yes in this session", "a message whose earlier thread was not read", "a fact not in the owner's records"]

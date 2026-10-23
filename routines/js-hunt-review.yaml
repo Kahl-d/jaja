@@ -1,0 +1,31 @@
+# Routine spec (schema: schemas/routine.yaml). Runs before the morning brief so the brief carries the fresh roles.
+# jd_capture runs best first inside a time budget (the rest are deferred to the next run); the whole review has a run
+# guard (exit 3, stack under state/review/). Run it in the background with --fresh10.
+name: js-hunt-review
+purpose: "Each morning capture every JD a terms-safe channel reaches (jd_capture.py, no Firecrawl), re-score, then write the daily fresh-roles review: every new find since the last review, ranked by triage score, each with one action (capture the JD, full report, apply, maybe) plus referral and outreach paths, freshness, coverage and the day's LinkedIn sweep; then rebuild Fresh 10 (fresh10.py --write) so the day's list sees the morning poll."
+runs_on: desktop
+engine: claude                 # step 1b scores a few roles with the fit-scorer (model work)
+model: sonnet
+effort: medium
+schedule: "30 7 * * *"
+action: "script:scripts/hunt_review.py --capture --fresh10"
+inputs:
+  - jobs/
+  - applications/
+  - prospects/
+  - targets/people-watch.yaml
+  - hub/NEXT-UP.md
+outputs:
+  - jobs/*.md
+  - state/jd/
+  - state/review/fresh-roles-<date>.md
+  - state/hunt/
+  - state/daily/<date>-fresh10.md
+  - applications/<slug>/fit.md   # step 1b: a few fit reports
+  - hub/NEXT-UP.md                # step 1b regenerates it (next_up.py --write)
+connectors: []
+tier: T1
+notify: {"on": failure, via: home}
+budget: {max_runs_per_day: 2, max_tokens: 300000}   # inside the fit-scorer card's daily run and token budget
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: recruiter

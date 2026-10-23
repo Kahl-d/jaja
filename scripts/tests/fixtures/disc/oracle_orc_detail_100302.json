@@ -1,0 +1,126 @@
+{
+ "items": [
+  {
+   "Id": "100302",
+   "Title": "AI & Emerging Technology Strategist – Orbit Cloud Applications",
+   "Category": "Pre Sales",
+   "RequisitionType": "Professional",
+   "JobGrade": null,
+   "RequisitionId": 100302,
+   "ExternalPostedStartDate": "2026-09-30T13:29:27+00:00",
+   "JobLevel": null,
+   "JobSchedule": "Full time",
+   "JobShift": null,
+   "StudyLevel": null,
+   "InternationalTravelRequired": null,
+   "ExternalContactName": null,
+   "ExternalContactEmail": null,
+   "ContractType": null,
+   "ExternalPostedEndDate": null,
+   "JobFamilyId": 7101,
+   "GeographyId": 5002,
+   "GeographyNodeId": 5102,
+   "ExternalDescriptionStr": "<div><p>As a member of the Strategy team you will own AI strategy engagements work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</p><p>You will advise executive clients on practical uses of AI, run workshops and turn the outcome into a delivery plan.</p></div>",
+   "CorporateDescriptionStr": "<p>Orbitco brings together data, infrastructure and applications for its customers. We value curiosity, plain language and shipping.</p>",
+   "OrganizationDescriptionStr": "",
+   "ShortDescriptionStr": "Orbitco is seeking an AI & Emerging Technology Strategist to lead strategy work with executive clients and help shape the AI, analytics and applications offerings.\n\nThis is a high-impact, client-facing role.",
+   "ContentLocale": "en",
+   "PrimaryLocation": "United States",
+   "PrimaryLocationCountry": "US",
+   "ObjectVerNumberProfile": "1",
+   "ApplyWhenNotPostedFlag": true,
+   "ExternalQualificationsStr": "Disclaimer:<br><br><b>Some roles may need to meet customer requirements such as health or background checks.</b><br><br><ul><li>Hands-on experience with cloud applications and analytics.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>A record of owning a system from the first commit to steady operation.</li><li>Comfort reading research papers and turning them into working code.</li></ul>",
+   "InternalQualificationsStr": "Disclaimer:<br><br><b>Some roles may need to meet customer requirements such as health or background checks.</b><br><br><ul><li>Hands-on experience with cloud applications and analytics.</li><li>3+ years of professional software engineering experience in Python or a similar language.</li><li>A record of owning a system from the first commit to steady operation.</li><li>Comfort reading research papers and turning them into working code.</li></ul>",
+   "InternalResponsibilitiesStr": "<ul><li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Mentor newer engineers and share what you learn with the wider team.</li></ul>",
+   "ExternalResponsibilitiesStr": "<ul><li>Build evaluation harnesses that track quality, latency and cost release over release.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Mentor newer engineers and share what you learn with the wider team.</li></ul>",
+   "JobFunctionCode": "PRESALES-PRODAPPS",
+   "HotJobFlag": false,
+   "TrendingFlag": false,
+   "BeFirstToApplyFlag": false,
+   "WorkplaceTypeCode": null,
+   "WorkplaceType": "",
+   "OtherRequisitionTitle": null,
+   "NumberOfOpenings": null,
+   "HiringManager": null,
+   "Organization": null,
+   "BusinessUnitId": 6001,
+   "LegalEmployerId": 6002,
+   "OrganizationId": 6003,
+   "WorkerType": null,
+   "JobType": null,
+   "WorkMonths": null,
+   "WorkYears": null,
+   "WorkHours": null,
+   "WorkDays": null,
+   "LegalEmployer": null,
+   "BusinessUnit": null,
+   "Department": null,
+   "DomesticTravelRequired": null,
+   "JobFunction": "PRESALES-PRODAPPS",
+   "secondaryLocations": [],
+   "media": [],
+   "workLocation": [],
+   "otherWorkLocations": [],
+   "requisitionFlexFields": [
+    {
+     "Prompt": "Role",
+     "Value": "Individual Contributor",
+     "ControlType": "SingleChoiceList",
+     "SequenceNumber": 4
+    },
+    {
+     "Prompt": "Job Type",
+     "Value": "Regular Employee",
+     "ControlType": "SingleChoiceList",
+     "SequenceNumber": 5
+    },
+    {
+     "Prompt": "Does this position require a security clearance?",
+     "Value": "No",
+     "ControlType": "SingleChoiceList",
+     "SequenceNumber": 12
+    },
+    {
+     "Prompt": "Years",
+     "Value": "6 to 10+ years",
+     "ControlType": "SingleChoiceList",
+     "SequenceNumber": 13
+    },
+    {
+     "Prompt": "Additional Info",
+     "Value": "Visa / work permit sponsorship is not available for this position",
+     "ControlType": "SingleChoiceList",
+     "SequenceNumber": 45
+    },
+    {
+     "Prompt": "Applicants are required to read, write, and speak the following languages",
+     "Value": "English",
+     "ControlType": "TextArea",
+     "SequenceNumber": 46
+    }
+   ],
+   "primaryLocationCoordinates": [
+    {
+     "GeographyNodeId": 5102,
+     "GeographyId": 5002,
+     "Latitude": "39.0",
+     "Longitude": "-98.0",
+     "CountryCode": "US"
+    }
+   ],
+   "skills": []
+  }
+ ],
+ "count": 1,
+ "hasMore": false,
+ "limit": 499,
+ "offset": 0,
+ "links": [
+  {
+   "rel": "self",
+   "href": "https://orbitco.fa.us2.oraclecloud.com:443/hcmRestApi/resources/11.13.18.05/recruitingCEJobRequisitionDetails",
+   "name": "recruitingCEJobRequisitionDetails",
+   "kind": "collection"
+  }
+ ]
+}

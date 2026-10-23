@@ -1,0 +1,11 @@
+Notes:
+"When exporting your connection data, you may notice that some of the email addresses are missing. You will only see email addresses for connections who have allowed their connections to see or download their email address using this setting https://www.linkedin.com/psettings/privacy/email. You can learn more here https://www.linkedin.com/help/linkedin/answer/261"
+
+First Name,Last Name,URL,Email Address,Company,Position,Connected On
+Derek,Osei,https://www.linkedin.com/in/derek-osei-4b1a2c,,Northwind Robotics,Technical Sourcer,10 Jun 2026
+Leila,Haddad,https://www.linkedin.com/in/leila-haddad-7a1b2c,leila@brightloop.example.test,Brightloop,Co-founder & CTO,03 Jul 2026
+Marta,Lopez,https://www.linkedin.com/in/marta-lopez-eng,,Tidewater AI,Engineering Manager,02 May 2026
+Sanjay,Rao,https://www.linkedin.com/in/sanjay-rao-99,sanjay.rao.sf@example.test,Northstar Labs,Staff Engineer,15 Jan 2025
+Omar,Siddiqui,https://www.linkedin.com/in/omar-siddiqui-1,,Pier Analytics,Data Analyst,20 Feb 2022
+Priyanka,Das,https://www.linkedin.com/in/priyanka-das-ml,,Helio Systems,ML Engineer,11 Mar 2026
+Ben,Carter,https://www.linkedin.com/in/ben-carter-perception,,Mosaic Robotics,Tech Lead,26 Jun 2026

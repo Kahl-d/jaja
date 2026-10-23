@@ -1,0 +1,35 @@
+# Frontmatter contract for agents/*.md (role cards)
+# sync.py turns each card into engine agents.
+type: role
+glob: "agents/*.md"
+required: [name, title, department, purpose, tools_allow, tier_max, model, status]
+fields:
+  - name
+  - title
+  - department         # agency | domain:<slug> | project:<slug>
+  - purpose
+  - inputs
+  - outputs
+  - tools_allow
+  - connectors
+  - tier_max
+  - model
+  - effort
+  - budget             # {tokens_per_day, runs_per_day}
+  - skills
+  - memory             # project | none (Claude persistent agent memory)
+  - reports_to
+  - status
+  - kpis
+  - stop_conditions
+  - version
+  - created
+  - updated
+enums:
+  tier_max: [T0, T1, T2, T3, T4]
+  model: [opus, sonnet, haiku, fable, inherit]
+  status: [probation, active, stale, archived]
+dates: [created, updated]
+patterns:
+  name: "^[a-z0-9]+(-[a-z0-9]+)*$"
+  department: "^(agency|os|domain:[a-z0-9-]+|project:[a-z0-9-]+)$"

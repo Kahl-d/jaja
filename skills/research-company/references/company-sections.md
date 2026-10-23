@@ -1,0 +1,16 @@
+# research-company: Procedure step 5 (company sections)
+
+Detail for the skill's step 5; the skill links here.
+
+5. **Company.** Product, team (the AI/ML org), stack (their own words or code only), news from the last 90 days
+   (dated), hiring signals (open AI/ML reqs counted from the board API), interview process (official first; Glassdoor,
+   Blind, Levels.fyi labelled "secondhand, <site>, <date>").
+
+## Tools, unknowns and citation blocks
+- News (step 5) and secondhand reviews (step 7) come from WebSearch and WebFetch. A search-result summary is labelled
+  "search summary" and is never quoted as the page itself.
+- An unknown is written `Unknown - to confirm` (check_dossier also accepts "(to confirm)").
+- A fact that runs over several lines carries its `[n]` on the last line of the block: check_dossier reads consecutive
+  lines as one item.
+- A company's own stack words (Docker, for example) may stand in the company-fact sections; check_holds treats those
+  sections as a register. Only the sections about the owner are checked as claims.

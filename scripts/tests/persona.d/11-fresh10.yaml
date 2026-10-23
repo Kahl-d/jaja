@@ -1,0 +1,7 @@
+# Synthetic persona values for the fresh10 tests.
+policy:
+  fresh10:
+    hunt_cut: 69
+    target_words: [ai, ml, machine learning, agent, agents, agentic, llm, llms, genai, generative, intelligence, applied ai]
+    off_target_words: [analog, circuit, firmware, mechanical, electrical, pcb, silicon validation]
+    sponsorship_prior: {"no": 0.4, "unknown": 0.8, "yes": 1.0}

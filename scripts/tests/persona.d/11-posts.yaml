@@ -1,0 +1,15 @@
+# Synthetic persona values for the hiring-post tests.
+policy:
+  posts:
+    us_only: true
+    extra_places: [Palo Alto, Mountain View, San Jose, Sunnyvale, Redwood City, Oakland, Berkeley]
+    extra_qualifiers: [design automation, eda]
+    families:
+      - {name: founding engineer, pattern: "\\bfounding\\b|\\bfirst (?:ai |ml |software )?engineer\\b"}
+      - {name: evals, pattern: "\\bevals?\\b|\\bevaluation\\b"}
+      - {name: agents and AI engineer, pattern: "\\bagent(?:s|ic)?\\b|\\bai engineer\\b|\\bllm engineer\\b|\\bgenai\\b"}
+      - {name: forward deployed and applied AI, pattern: "\\bforward[- ]deployed\\b|\\bdeployed engineer\\b|\\bapplied ai\\b"}
+      - {name: ML and research, pattern: "\\bml\\b|\\bmachine learning\\b|\\bresearch|\\bscientist\\b|\\bmts\\b|\\bmember of technical staff\\b"}
+      - {name: AI infra and inference, pattern: "\\binfra(?:structure)?\\b|\\binference\\b|\\bplatform\\b"}
+      - {name: product and full stack, pattern: "\\bproduct engineer\\b|\\bfull[- ]?stack\\b|\\bfrontend\\b|\\bbackend\\b"}
+      - {name: design automation, pattern: "\\bdesign automation\\b|\\beda\\b|\\bem simulation\\b|\\bhfss\\b"}

@@ -1,0 +1,287 @@
+# Held-out inbox: written after the rules were built and scored once, blind, to estimate
+# real-world accuracy (the labeled set was used to build the rules). Same schema and label
+# contract as labeled_emails.yaml. All people and companies are invented.
+# Accuracy guard: the classifier must keep micro-F1 and macro-F1 at or above 0.9 on this set.
+- id: h-rec-01
+  label: recruiter_outreach
+  at: "2026-09-02T09:10:00-07:00"
+  from: "Priyanka Rao <priyanka@nimbusdata.test>"
+  subject: "Quick question"
+  body: |
+    Hi Alex,
+
+    Hope your week is going well. I help the ML Platform team at Nimbus Data find great engineers,
+    and your experience shipping agent tooling looks like a match for a Staff ML Engineer opening we
+    have. Remote across the US, strong comp, and we can transfer H-1Bs.
+
+    Worth a quick chat?
+
+    Priyanka Rao
+    Talent Acquisition | Nimbus Data
+
+- id: h-rec-02
+  label: recruiter_outreach
+  at: "2026-07-14T07:45:00-07:00"
+  from: "David Kim <david@talentbridge.test>"
+  subject: "Head of Applied AI - Series C healthtech (SF)"
+  headers:
+    List-Unsubscribe: "<https://app.sequencer.example.test/unsubscribe/abc>"
+  body: |
+    Hi Alex,
+
+    I'm working on an exclusive search for a Head of Applied AI at a Series C healthtech in San
+    Francisco, reporting to the CTO. Comp is $250-300k plus equity.
+
+    Is this something you'd consider? If not, happy to hear who might be interested.
+
+    Best,
+    David Kim | Partner, TalentBridge Search
+
+- id: h-rec-03
+  label: recruiter_outreach
+  at: "2026-08-11T13:05:00-07:00"
+  from: "Grace Obi via LinkedIn <inmail-hit-reply@linkedin.com>"
+  subject: "Opportunity: AI Engineer, Voice Agents"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=zz>"
+  body: |
+    Grace Obi
+    Recruiter at Sonora Health
+
+    Hi Alex, we're building voice agents for hospitals and I think your background is a great fit
+    for our AI Engineer role. Can we connect this week?
+
+    Reply
+
+    Unsubscribe | Help
+
+- id: h-fdr-01
+  label: founder_outreach
+  at: "2026-06-30T21:00:00-07:00"
+  from: "Tariq Aziz <tariq@loomgrid.test>"
+  subject: "Your MCP work"
+  body: |
+    Alex - I run Loomgrid (we're 4 people, pre-seed, backed by a couple of great angels). We're
+    building MCP infrastructure for enterprises and your writing on agent memory is the clearest I've
+    read. Any chance you'd be up for a coffee to talk about what we're building? Even if you're not
+    looking, I'd value your take.
+
+    Tariq
+    CEO, Loomgrid
+
+- id: h-fdr-02
+  label: founder_outreach
+  at: "2026-05-20T10:30:00-07:00"
+  from: "Hana Suzuki <hana@kitebio.test>"
+  subject: "Kite Bio + you?"
+  body: |
+    Hi Alex, I co-founded Kite Bio last year. We're hiring our first ML engineers to build protein
+    language models, and we'd sponsor your visa. Let me know if you'd like to chat!
+
+    Hana
+
+- id: h-hm-01
+  label: hiring_manager_outreach
+  at: "2026-09-09T16:00:00-07:00"
+  from: "Marco Bianchi <marco@finch.test>"
+  subject: "ML infra at Finch"
+  body: |
+    Hey Alex,
+
+    I manage the ML infrastructure team at Finch (we're the payments company). I'm hiring two senior
+    engineers for my team and came across your GitHub. Would you be open to a 30 min chat with me?
+
+    Marco
+    Engineering Manager, ML Infra
+
+- id: h-hm-02
+  label: hiring_manager_outreach
+  at: "2026-08-22T11:00:00-07:00"
+  from: "Lina Park <lina@orchardai.test>"
+  subject: "Research engineer on my team"
+  body: |
+    Hi Alex,
+
+    I lead the agents research group at Orchard AI and we have an opening for a research engineer on
+    my team. Your work on tool-use evaluation is very close to what we do. Interested in talking?
+
+    Lina Park
+    Head of Research, Orchard AI
+
+- id: h-ref-01
+  label: referral_intro
+  at: "2026-09-05T08:20:00-07:00"
+  from: "Omar Siddiqui <omar.sidd@gmail.com>"
+  to: "Alex Example <alex@example.test>, Jess Moore <jess@driftwood.test>"
+  subject: "Intro to Jess @ Driftwood"
+  body: |
+    Jess, meet Alex, the agent systems wizard I mentioned. Alex, Jess runs hiring for Driftwood's
+    AI team. You two should talk!
+
+    Omar
+
+- id: h-ref-02
+  label: referral_intro
+  at: "2026-09-14T19:40:00-07:00"
+  from: "Ravi Menon <ravi@stratoscale.test>"
+  subject: "referral"
+  body: |
+    Hey man, I put your name in for the Applied ML role here. The recruiter should reach out in a
+    few days. Let me know if you need anything!
+
+    Ravi
+
+- id: h-ats-01
+  label: ats_confirmation
+  at: "2026-09-03T10:00:00-07:00"
+  from: "Nimbus Data <no-reply@us.greenhouse-mail.io>"
+  subject: "Nimbus Data: Application Received"
+  body: |
+    Hi Alex, thank you for your interest in the Staff ML Engineer role. This note confirms that we
+    received your application. We'll be in touch if your qualifications match our needs.
+
+- id: h-ats-02
+  label: ats_confirmation
+  at: "2026-08-02T06:00:00-07:00"
+  from: "Driftwood <driftwood@myworkday.com>"
+  subject: "Application Submitted: Senior Applied Scientist"
+  body: |
+    Your application has been submitted successfully. Thank you for considering a career with
+    Driftwood.
+
+- id: h-oa-01
+  label: ats_assessment
+  at: "2026-09-10T12:00:00-07:00"
+  from: "HackerEarth <noreply@hackerearth.com>"
+  subject: "Invitation: Finch Coding Challenge"
+  body: |
+    Hi Alex, you have been invited to participate in the Finch Coding Challenge. Duration: 60
+    minutes. The challenge link is valid for 5 days.
+
+- id: h-inv-01
+  label: interview_invite
+  at: "2026-09-12T09:30:00-07:00"
+  from: "Priya Das <priya@finch.test>"
+  subject: "Finch - next steps"
+  body: |
+    Hi Alex, thanks for sending your resume over. Marco would like to meet you! Could we set up a
+    45-minute technical interview next week? Here's my scheduling link.
+
+    Priya Das
+    Recruiting Coordinator, Finch
+
+- id: h-inv-02
+  label: interview_invite
+  at: "2026-09-16T15:00:00-07:00"
+  from: "Finch <no-reply@hire.lever.co>"
+  subject: "Next steps with Finch"
+  body: |
+    Congrats! We'd love to move you to the next stage: a virtual onsite with the team. Please pick
+    the dates that work best for you.
+
+- id: h-sch-01
+  label: interview_scheduling
+  at: "2026-09-25T08:00:00-07:00"
+  from: "Orchard AI Scheduling <scheduling@modernloop.io>"
+  subject: "Your interview schedule with Orchard AI"
+  body: |
+    Here's your confirmed interview schedule for Monday, Oct 5: 10:00 AM system design, 11:00 AM
+    coding, 1:00 PM hiring manager.
+
+- id: h-sch-02
+  label: interview_scheduling
+  at: "2026-09-24T17:00:00-07:00"
+  from: "Google Calendar <calendar-notification@google.com>"
+  subject: "Invitation: Alex <> Marco (Finch) @ Thu Oct 1, 2026 3pm - 3:30pm (PDT) (alex@example.test)"
+  calendar:
+    start: "2026-10-01T15:00:00"
+    end: "2026-10-01T15:30:00"
+    tz: "America/Los_Angeles"
+    summary: "Alex <> Marco (Finch)"
+    organizer: "marco@finch.test"
+  body: |
+    Alex <> Marco (Finch)
+    Thursday Oct 1, 2026 3pm - 3:30pm (Pacific Time - Los Angeles)
+
+    Invitation from Google Calendar
+
+- id: h-rej-01
+  label: rejection
+  at: "2026-08-29T10:10:00-07:00"
+  from: "Orchard AI <no-reply@ashbyhq.com>"
+  subject: "Update from Orchard AI"
+  body: |
+    Hi Alex, thanks for taking the time to apply. We've reviewed your background carefully and
+    unfortunately won't be moving forward at this stage.
+
+- id: h-rej-02
+  label: rejection
+  at: "2026-07-31T18:00:00-07:00"
+  from: "Nora Hale <nora@kitebio.test>"
+  subject: "Following up"
+  body: |
+    Hi Alex, I wanted to follow up personally. The team decided to go with a candidate who has more
+    production RL experience. It was close, and I'd love to keep you in mind for future roles.
+
+    Nora
+
+- id: h-off-01
+  label: offer
+  at: "2026-09-24T12:00:00-07:00"
+  from: "Priya Das <priya@finch.test>"
+  subject: "Finch offer"
+  body: |
+    Congratulations! We're excited to offer you the Senior ML Engineer position at Finch. Please find
+    the offer details attached and let me know when you'd like to talk them through.
+
+- id: h-ja-01
+  label: job_alert
+  at: "2026-06-06T05:00:00-07:00"
+  from: "ZipRecruiter <alerts@ziprecruiter.com>"
+  subject: "12 new jobs for 'machine learning engineer'"
+  headers:
+    List-Unsubscribe: "<https://www.ziprecruiter.com/unsubscribe>"
+  body: |
+    Machine Learning Engineer - Finch - Remote
+    ML Engineer II - Driftwood - Oakland, CA
+    See all 12 jobs
+
+- id: h-nl-01
+  label: newsletter
+  at: "2026-07-24T06:00:00-07:00"
+  from: "The Weekly Tensor <hello@weeklytensor.test>"
+  subject: "Agents that interview candidates, and a record offer for AI talent"
+  headers:
+    List-Unsubscribe: "<https://weeklytensor.example.test/unsubscribe>"
+  body: |
+    This week: startups using agents to run first-round interviews, and a record offer for a
+    research team. Plus our hiring roundup.
+
+    Unsubscribe
+
+- id: h-net-01
+  label: networking
+  at: "2026-04-15T20:00:00-07:00"
+  from: "Kevin Park <kevin.park.dev@gmail.com>"
+  subject: "catching up"
+  body: |
+    Long time! Saw you're at Example Corp now, congrats. Want to catch up over lunch sometime this
+    month?
+
+    Kevin
+
+- id: h-oth-01
+  label: other
+  at: "2026-03-02T09:00:00-08:00"
+  from: "Figma <no-reply@figma.test>"
+  subject: "Your team's invoice"
+  body: |
+    Your invoice for March is available. Amount due: $45.00.
+
+- id: h-oth-02
+  label: other
+  at: "2026-05-11T14:00:00-07:00"
+  from: "Apple <no_reply@email.apple.test>"
+  subject: "Your receipt from Apple"
+  body: |
+    Receipt. Apple ID: alex. iCloud+ 200 GB, $2.99.

@@ -1,0 +1,10 @@
+CASE_NUMBER,CASE_STATUS,RECEIVED_DATE,DECISION_DATE,VISA_CLASS,JOB_TITLE,SOC_CODE,SOC_TITLE,FULL_TIME_POSITION,EMPLOYER_NAME,EMPLOYER_CITY,EMPLOYER_STATE,WORKSITE_CITY,WORKSITE_STATE,WAGE_RATE_OF_PAY_FROM,WAGE_RATE_OF_PAY_TO,WAGE_UNIT_OF_PAY,PREVAILING_WAGE,PW_UNIT_OF_PAY,PW_WAGE_LEVEL
+I-200-26001-000001,Certified,2026-01-05,2026-01-12,H-1B,Research Engineer,15-1221.00,Computer and Information Research Scientists,Y,"ACMEAI, PBC",San Francisco,CA,San Francisco,CA,"$300,000.00",,Year,"$201,219.00",Year,III
+I-200-26001-000002,Certified,2026-01-06,2026-01-13,H-1B,Research Engineer,15-1221.00,Computer and Information Research Scientists,Y,"ACMEAI, PBC",San Francisco,CA,San Francisco,CA,150.00,,Hour,96.74,Hour,III
+I-200-26001-000003,Certified,2026-01-07,2026-01-14,H-1B,Research Engineer,15-1221.00,Computer and Information Research Scientists,Y,"ACMEAI, PBC",San Francisco,CA,Seattle,WA,"$330,000.00",,Year,"$226,574.00",Year,IV
+I-200-26001-000004,Certified,2026-02-02,2026-02-09,H-1B,Software Engineer,15-1252.00,Software Developers,Y,"ACMEAI, PBC",San Francisco,CA,San Francisco,CA,"20,000",,Month,"14,540",Month,III
+I-200-26001-000005,Certified,2026-02-03,2026-02-10,H-1B,Software Engineer,15-1252.00,Software Developers,Y,"ACMEAI, PBC",San Francisco,CA,San Francisco,CA,250000,,Year,160347,Year,II
+I-200-26001-000006,Withdrawn,2026-02-04,2026-02-05,H-1B,Software Engineer,15-1252.00,Software Developers,Y,"ACMEAI, PBC",San Francisco,CA,San Francisco,CA,260000,,Year,160347,Year,II
+I-200-26001-000007,Certified,2026-02-05,2026-02-12,E-3 Australian,Research Engineer,15-1221.00,Computer and Information Research Scientists,Y,"ACMEAI, PBC",San Francisco,CA,San Francisco,CA,280000,,Year,201219,Year,III
+I-200-26001-000008,Denied,2026-02-06,2026-02-13,H-1B,Research Engineer,15-1221.00,Computer and Information Research Scientists,Y,"ACMEAI, PBC",San Francisco,CA,San Francisco,CA,90000,,Year,201219,Year,I
+I-200-26001-000009,Certified,2026-03-01,2026-03-08,H-1B,Software Engineer,15-1252.00,Software Developers,Y,NORTHWIND CORPORATION,Santa Clara,CA,Santa Clara,CA,200000,,Year,160347,Year,II

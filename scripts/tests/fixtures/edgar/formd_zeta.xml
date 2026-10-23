@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<edgarSubmission>
+    <schemaVersion>X0708</schemaVersion>
+    <submissionType>D</submissionType>
+    <primaryIssuer>
+        <entityName>Zeta AI Opportunities LLC</entityName>
+        <issuerAddress>
+            <city>AUSTIN</city>
+            <stateOrCountry>TX</stateOrCountry>
+        </issuerAddress>
+        <entityType>Corporation</entityType>
+    </primaryIssuer>
+    <offeringData>
+        <industryGroup>
+            <industryGroupType>Pooled Investment Fund</industryGroupType>
+        </industryGroup>
+        <typeOfFiling>
+            <newOrAmendment>
+                <isAmendment>false</isAmendment>
+            </newOrAmendment>
+        </typeOfFiling>
+        <offeringSalesAmounts>
+            <totalOfferingAmount>5000000</totalOfferingAmount>
+            <totalAmountSold>0</totalAmountSold>
+        </offeringSalesAmounts>
+    </offeringData>
+</edgarSubmission>

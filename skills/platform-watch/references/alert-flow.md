@@ -1,0 +1,22 @@
+# platform-watch: Procedure step 3 (alert flow)
+
+Detail for the skill's step 3; the skill links here.
+
+3. **Alert flow** for the month:
+   ```bash
+   python3 - <yyyy-mm> <<'PY'
+   import json, collections, sys
+   c = collections.Counter()
+   for line in open("state/job-alerts.jsonl", encoding="utf-8"):
+       r = json.loads(line)
+       if r.get("at", "").startswith(sys.argv[1]):
+           c[(r.get("platform") or "unmapped", r.get("status"))] += 1
+   for (p, s), n in sorted(c.items()):
+       print(f"{p:16} {s:10} {n}")
+   PY
+   grep -h "unmapped\|partial\|review:\|unlabeled" state/review/job-alerts-*.md
+   ```
+   Known platform, new sender: add it to that entry's `alert_senders` (the next `job_alerts.py` run parses the waiting
+   alerts with no `--reparse`; older than 14 days by then they are ledgered `stale`). Unknown platform: step 5 first.
+   `partial` or `review` layouts: one `issues.md` row for engineering with the message ids and the card text quoted.
+   `alerts_on` set but no alert for 14 days: a Needs-you line.

@@ -1,0 +1,3 @@
+policy:
+  mail:
+    machine_addresses: []     # portal bots that are machines even though their platform's other senders are people

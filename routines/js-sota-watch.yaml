@@ -1,0 +1,25 @@
+# Routine spec (schema: schemas/routine.yaml). Monthly research. Output is a report with approval-gated diffs; nothing
+# outside research/ changes without the owner's approval, and profile facts never change here.
+# Receipt: logs/runs/js-sota-watch/<date>.md.
+name: js-sota-watch
+purpose: "Monthly, research what changed last month in agentic engineering (Claude Code, Agent SDK, Codex, MCP, Agent Skills, eval tooling) and in the target market's hiring (measured JD keyword drift), and propose approval-gated diffs to the market research, lenses, skills taxonomy and resume bases."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: medium
+schedule: "0 7 2 * *"
+action: skill:sota-watch
+inputs:
+  - research/
+  - jobs/
+  - profile/skills-taxonomy.yaml
+  - resumes/bases/
+outputs:
+  - research/sota/<yyyy-mm>.md
+  - logs/runs/js-sota-watch/<date>.md
+connectors: []                 # public web research only
+tier: T1
+notify: {"on": needs-owner, via: push}      # proposed diffs wait for approval
+budget: {max_runs_per_day: 1, max_tokens: 300000}
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: company-researcher

@@ -1,0 +1,15 @@
+# The synthetic persona every test runs as (never a real person). Fragments add the keys their tests need.
+identity:
+  name: "Alex Example"
+  emails: ["alex@example.test", "alex.alt@example.test"]
+  signature_names: ["Alex", "Alex Example"]
+  linkedin_url: "https://www.linkedin.com/in/alex-example"
+  resume_file_pattern: "^AlexExample_Resume[\\w.\\-]*\\.pdf$"
+style:
+  no_em_dash: true
+  banned_words: []
+  greeting: "Hi {first_name},"
+  signoffs: ["Alex", "Alex Example"]
+policy:
+  years_gate: null
+  salary: null

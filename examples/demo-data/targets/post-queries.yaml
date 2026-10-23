@@ -1,0 +1,18 @@
+# targets/post-queries.yaml: what the posts lane searches every morning for hiring posts, people and startups.
+# Posts outrank portal listings; they are read on LinkedIn and X only. Owner: the recruiter lane; the posts lane proposes
+# changes in its lane file with the yield behind them. Use first-person hiring words ("we're hiring", "my team is hiring"),
+# not a bare `hiring`, which matches commentary.
+#
+# Row: {id, rank, family, where, q, why}. `where` is one of the entries in location_order.
+as_of: null
+location_order: [local, region, country]
+
+linkedin:
+  queries:
+    - {id: li-01, rank: 1, family: example-role, where: local, q: '("we''re hiring" OR "my team is hiring") "example role title"', why: "the core title near you"}
+    - {id: li-02, rank: 2, family: example-role, where: country, q: '"hiring" "example role title" remote', why: "the same title anywhere in the country"}
+
+x:
+  daily: [x-01]                # the searches the x watch runs each day, after the people query
+  queries:
+    - {id: x-01, rank: 1, family: example-role, q: '("we''re hiring" OR "we’re hiring" OR "we are hiring" OR "I''m hiring" OR "my team is hiring" OR "join my team" OR "join our team" OR "join us") "example role title" -is:retweet -is:quote -is:reply lang:en -India -Paris -London -Berlin -Europe -EU -UK -Canada -Toronto -Bangalore -"work permit"', why: "the core title"}

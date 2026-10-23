@@ -1,0 +1,123 @@
+#!/usr/bin/env python
+"""Divide a diff into scopes BY MECHANISM, and assert full coverage.
+
+  python classify.py [--repo <path>] [--base <ref>] [--json <out>]
+
++-------------------------------------------------------------------------+
+| THE INPUT IS MEASURED, NOT REMEMBERED.                                   |
+|                                                                         |
+| A script that reads a FROZEN snapshot on disk while the live diff moves  |
+| can only ever print UNASSIGNED: 0.  A check that cannot fail reads       |
+| exactly like a check that keeps passing.                                 |
+|                                                                         |
+| It asks git.  If git cannot answer it EXITS.  It must never fall back    |
+| to a file on disk, because a silent fallback rebuilds the very defect    |
+| this comment is about.  An empty diff is refused for the same reason.    |
++-------------------------------------------------------------------------+
+
+EDIT THE TWO TABLES BELOW.  Nothing else needs to change.
+
+  GROUPS  ordered.  The FIRST matching rule wins the PRIMARY label -- the
+          scope whose lane may WRITE that file.  Order therefore matters.
+
+  ALSO    unordered.  Adds a SECOND READER without a second writer.  Use it
+          when a scope owns the SUBJECT that another scope's file describes,
+          guards, generates or tests.  Overlap is a feature; two writers
+          are not.
+"""
+import argparse, collections, json, re, subprocess, sys
+
+# ---------------------------------------------------------------- the tables
+GROUPS = [
+    # ("G1", "<title>", [r"^path/regex/", r"^another/"]),
+]
+
+ALSO = {
+    # "G4": [r"^some/file/another/group/owns\.ts$"],
+}
+# ---------------------------------------------------------------------------
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--repo", default=".", help="path to the git worktree")
+    ap.add_argument("--base", default="origin/dev...HEAD",
+                    help="three-dot range: OUR changes only, not the base's")
+    ap.add_argument("--json", default=None, help="write the mapping here")
+    args = ap.parse_args()
+
+    if not GROUPS:
+        sys.exit("classify.py: GROUPS is empty. Fill the table before running -- "
+                 "an empty rule set would report every file unassigned, which is "
+                 "not the same thing as a division.")
+
+    try:
+        out = subprocess.run(
+            ["git", "-C", args.repo, "diff", "--numstat", args.base],
+            capture_output=True, text=True, check=True).stdout
+    except Exception as exc:
+        sys.exit("classify.py: could not measure the diff (%s).\n"
+                 "  Run it where %s is a git worktree.\n"
+                 "  This script does NOT fall back to a snapshot, on purpose."
+                 % (exc, args.repo))
+
+    rows = []
+    for line in out.splitlines():
+        if not line.strip():
+            continue
+        a, d, f = line.split("\t", 2)
+        rows.append((f, 0 if a == "-" else int(a), 0 if d == "-" else int(d)))
+
+    if not rows:
+        sys.exit("classify.py: git returned an EMPTY diff. Refusing to report "
+                 "full coverage of nothing.")
+
+    comp = [(g, t, [re.compile(p) for p in ps]) for g, t, ps in GROUPS]
+    alsoc = {g: [re.compile(p) for p in ps] for g, ps in ALSO.items()}
+
+    primary, members, unassigned = {}, collections.defaultdict(list), []
+    for f, a, d in rows:
+        hits = [g for g, _, ps in comp if any(p.search(f) for p in ps)]
+        if not hits:
+            unassigned.append((f, a, d))
+            continue
+        primary[f] = hits[0]
+        for g, ps in alsoc.items():
+            if g not in hits and any(p.search(f) for p in ps):
+                hits.append(g)
+        for h in hits:
+            members[h].append((f, a, d))
+
+    print(f"TOTAL FILES: {len(rows)}   ASSIGNED: {len(primary)}   "
+          f"UNASSIGNED: {len(unassigned)}")
+    if unassigned:
+        print("\n=== UNASSIGNED — place each one DELIBERATELY; never sweep ===")
+        for f, a, _ in sorted(unassigned, key=lambda r: -r[1]):
+            print(f"  +{a:<6} {f}")
+
+    hdr = f"{'ID':<6}{'SCOPE':<44}{'files':>6}{'+lines':>9}{'tests':>7}{'also':>6}"
+    print("\n" + hdr + "\n" + "-" * len(hdr))
+    tf = ta = 0
+    for g, t, _ in comp:
+        mem = members[g]
+        pr = [(f, a, d) for f, a, d in mem if primary.get(f) == g]
+        add = sum(a for _, a, _ in pr)
+        tst = sum(1 for f, _, _ in pr
+                  if "test" in f.lower() or "/fixtures/" in f or "__fixtures__" in f)
+        tf += len(pr); ta += add
+        print(f"{g:<6}{t:<44}{len(pr):>6}{add:>9}{tst:>7}{len(mem) - len(pr):>6}")
+    print("-" * len(hdr))
+    print(f"{'':6}{'TOTAL (primary, no double-count)':<44}{tf:>6}{ta:>9}")
+
+    if args.json:
+        with open(args.json, "w", encoding="utf-8") as fh:
+            json.dump({"primary": primary,
+                       "members": {g: [f for f, _, _ in v] for g, v in members.items()},
+                       "unassigned": [f for f, _, _ in unassigned]}, fh, indent=1)
+
+    # The division is not accepted until this is zero.
+    return 1 if unassigned else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

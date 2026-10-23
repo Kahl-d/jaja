@@ -1,0 +1,5 @@
+# build_graph.py: how the owner appears in the people table.
+identity:
+  owner_aliases: []         # INBOX last_from values (lowercase) that mean the owner wrote last, besides "owner" and "me"
+style:
+  owner_label: "owner"      # how the owner is shown in the "wrote last" column

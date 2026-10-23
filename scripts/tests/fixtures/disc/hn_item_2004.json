@@ -1,0 +1,11 @@
+{
+ "by": "brightpath_eng",
+ "id": 2004,
+ "kids": [
+  3302
+ ],
+ "parent": 2001,
+ "text": "Brightpath Foundation | Research Engineer (Speech AI/ML) | Remote (worldwide)<p>Brightpath Foundation connects philanthropists with innovators working on hard problems. Its engineering hub supports grant-funded education technology projects that improve early reading.<p>We are looking for an expert in modern voice AI. Partner teams build tools that assess early reading from children's speech in real classrooms: noisy rooms, young voices and high stakes for fairness.<p>We are looking for folks who:<p>- have built and operated production speech recognition or speech-processing systems<p>- know the data-to-model pipeline: collection, annotation, fine-tuning, evaluation and deployment<p>- can speak the languages of both research and engineering<p>If this sounds like you, please apply: <a href=\"https:&#x2F;&#x2F;www.brightpath.example.test&#x2F;careers\" rel=\"nofollow\">https:&#x2F;&#x2F;www.brightpath.example.test&#x2F;careers</a>",
+ "time": 1788278203,
+ "type": "comment"
+}

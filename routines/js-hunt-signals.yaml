@@ -1,0 +1,26 @@
+# Routine spec (schema: schemas/routine.yaml). The funding stage runs only when sources.yaml `funding` says
+# enabled: true; the news stage reads only pages in targets/news-watch.yaml whose terms were checked, at most
+# `credits_per_day` Firecrawl credits a day.
+name: js-hunt-signals
+purpose: "Each morning read the day's hiring signals: SEC Form D raises by watch-list and AI companies (funding) and the listing and news pages of the page watch (careers pages, funding news), for company-researcher and job-scout."
+runs_on: desktop
+engine: script
+schedule: "0 7 * * *"
+action: "script:scripts/pipeline.py --stages funding,news,feeds,discover"   # feed_watch and discover_companies as stages
+inputs:
+  - targets/companies.yaml
+  - targets/news-watch.yaml
+  - sources.yaml
+outputs:
+  - state/signals/
+  - state/news/
+  - state/review/news-watch-<date>.md
+  - state/feeds/feed-watch-<date>.md
+  - state/reports/new-companies-<yesterday>.md    # the companies that posted the day before
+  - logs/runs/js-scout/<date>.md
+connectors: [firecrawl]        # through scripts/web_snapshot.py only (key in the keychain, budget, robots-first)
+tier: T0
+notify: {"on": failure, via: home}
+budget: {max_runs_per_day: 1, max_tokens: 0}
+enabled: false                 # paused by default; script only, so it spends no tokens
+owner: company-researcher

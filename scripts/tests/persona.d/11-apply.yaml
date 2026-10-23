@@ -1,0 +1,4 @@
+# Synthetic persona values for the apply-batch tests.
+policy:
+  apply:
+    visa_note: "Written answer: \"I hold work authorization through a student-training extension.\"; form questions Yes and Yes"

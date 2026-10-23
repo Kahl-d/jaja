@@ -1,0 +1,31 @@
+# Routine spec (schema: schemas/routine.yaml). Monthly job-platform watch, after the SOTA watch: registry check,
+# per-platform yield written by scripts/platform_yield.py, terms re-read where due, new platforms vetted, keep-or-retire
+# proposals and adapter proposals. Legal, help and API documentation pages only; never job listings, never a login.
+# Receipt: logs/runs/js-platform-watch/<date>.md.
+name: js-platform-watch
+purpose: "Monthly, check the job-platform registry, write each platform's 30-day yield, re-read terms that are due, vet new job platforms and tools, and propose keeps, retirements and adapters to the Recruiter."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: low
+schedule: "0 7 3 * *"
+action: skill:platform-watch
+steps:      # the skill runs these first
+  - python3 scripts/platform_watch.py      # diff of the official MCP registry into candidates
+  - python3 scripts/platform_yield.py
+inputs:
+  - targets/platforms.yaml
+  - research/job-platforms-2026.md
+  - jobs/
+  - applications/
+  - state/job-alerts.jsonl
+outputs:
+  - targets/platforms.yaml
+  - research/job-platforms-2026.md
+  - logs/runs/js-platform-watch/<date>.md
+connectors: []                 # public terms and API documentation only
+tier: T1
+notify: {"on": needs-owner, via: push}      # alerts for the owner to set up or remove, a paid tool to decide
+budget: {max_runs_per_day: 1, max_tokens: 200000}
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: platform-scout

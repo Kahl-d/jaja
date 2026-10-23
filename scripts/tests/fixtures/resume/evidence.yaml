@@ -1,0 +1,24 @@
+# Test fixture: evidence_id -> source pointer for the fictional Riley Moreno resume.
+# Mirrors the shape of profile/evidence.yaml (a mapping of id -> {source, kind}).
+evidence:
+  nw-role: {kind: document, source: "Northwind Robotics offer letter (fictional)"}
+  nw-rag-01: {kind: repo, source: "northwind/support-assistant README (fictional)"}
+  nw-eval-01: {kind: repo, source: "northwind/eval-harness CI config (fictional)"}
+  nw-serve-01: {kind: doc, source: "inference service design doc (fictional)"}
+  ch-role: {kind: document, source: "Contoso Health employment verification (fictional)"}
+  ch-readmit-01: {kind: doc, source: "readmission model card (fictional)"}
+  ch-airflow-01: {kind: repo, source: "contoso/ingest DAGs (fictional)"}
+  tern-repo: {kind: repo, source: "https://example.com/tern"}
+  tern-adoption: {kind: conversation, source: "internal adoption thread (fictional)"}
+  hsu-degree: {kind: document, source: "Harborview State University diploma (fictional)"}
+  pub-triage: {kind: paper, source: "https://example.com/papers/triage"}
+  sk-python: {kind: skill, source: "used across nw-rag-01, ch-readmit-01"}
+  sk-sql: {kind: skill, source: "ch-airflow-01"}
+  sk-ts: {kind: skill, source: "tern-repo web viewer"}
+  sk-pytorch: {kind: skill, source: "nw-rag-01"}
+  sk-sklearn: {kind: skill, source: "ch-readmit-01"}
+  sk-xgboost: {kind: skill, source: "ch-readmit-01"}
+  sk-hf: {kind: skill, source: "nw-rag-01 embeddings"}
+  sk-langgraph: {kind: skill, source: "tern-repo examples"}
+  sk-aws: {kind: skill, source: "nw-serve-01 deployment"}
+  sk-ray: {kind: skill, source: "nw batch backfill job (fictional)"}

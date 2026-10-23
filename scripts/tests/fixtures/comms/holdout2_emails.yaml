@@ -1,0 +1,300 @@
+# Second held-out inbox, written after the rule fixes prompted by holdout_emails.yaml and scored
+# once, blind, for an honest accuracy estimate. Invented people and companies.
+# Accuracy guard: micro-F1 and macro-F1 must stay at or above 0.9 (includes an 'offer to another
+# candidate' that must not read as an offer).
+- id: h2-01
+  label: recruiter_outreach
+  at: "2026-09-18T10:00:00-07:00"
+  from: "Sam from Lumen Labs Recruiting <sam@lumenlabs.test>"
+  subject: "Lumen Labs <> Alex"
+  body: |
+    Hey Alex! Sam here from the recruiting team at Lumen Labs. We're scaling our applied AI group
+    and your agent orchestration work caught our eye. Up for a 20 min intro call next week?
+
+    Sam
+
+- id: h2-02
+  label: recruiter_outreach
+  at: "2026-08-08T08:00:00-07:00"
+  from: "Wen Li via LinkedIn <inmail-hit-reply@linkedin.com>"
+  subject: "Senior ML Engineer, Search - Corvid"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=q1>"
+  body: |
+    Wen Li
+    Talent Acquisition Lead at Corvid
+
+    Hi Alex, I lead hiring for Corvid's search team. Your background in retrieval and agents
+    lines up well with a Senior ML Engineer opening. Open to exploring?
+
+    Reply
+
+    Unsubscribe | Help
+
+- id: h2-03
+  label: recruiter_outreach
+  at: "2026-04-22T09:00:00-07:00"
+  from: "Jamie Fox <jamie.fox@parsechealth.test>"
+  subject: "Re: AI Engineer at Parsec Health"
+  body: |
+    Hi Alex, just following up on my note below in case the timing is better now. We're still
+    hiring for the AI Engineer role and I'd love to share more.
+
+    Jamie Fox
+    Senior Recruiter, Parsec Health
+
+    On Tue, Apr 14, 2026 at 8:00 AM Jamie Fox <jamie.fox@parsechealth.test> wrote:
+    > Hi Alex, I'm a recruiter at Parsec Health...
+
+- id: h2-04
+  label: recruiter_outreach
+  at: "2026-03-03T11:30:00-05:00"
+  from: "Rhea Kapoor <rhea@harbortalentgroup.test>"
+  subject: "Staff Applied Scientist - fully remote"
+  body: |
+    Hope you're doing well! I've got a Staff Applied Scientist role with one of my clients, a public
+    cybersecurity company, fully remote. OTE $280k. Let me know if you're open to it.
+
+    Thanks,
+    Rhea
+    Harbor Talent Group
+
+- id: h2-05
+  label: founder_outreach
+  at: "2026-05-02T19:00:00-07:00"
+  from: "Bo Nguyen <bo@quarryhq.test>"
+  subject: "Dinner with the Quarry team?"
+  body: |
+    Hey Alex, Bo here, founder at Quarry. We met briefly at the demo day mixer. We're hiring
+    founding engineers to build agent tooling for construction firms and I'd love to have you over
+    for dinner with the team next week.
+
+    Bo
+
+- id: h2-06
+  label: founder_outreach
+  at: "2026-06-11T08:30:00-07:00"
+  from: "Elif Demir <elif@parsechealth.test>"
+  subject: "Parsec Health"
+  body: |
+    Dear Alex,
+
+    My name is Elif Demir, and I am the CEO and co-founder of Parsec Health, a seed-stage company
+    building AI scribes for clinics. I would welcome the chance to tell you about a senior AI
+    engineering role on our founding team.
+
+    Warm regards,
+    Elif
+
+- id: h2-07
+  label: hiring_manager_outreach
+  at: "2026-09-01T14:00:00-07:00"
+  from: "Noah Brandt <noah@zephyr.test>"
+  subject: "Agent platform team at Zephyr"
+  body: |
+    Hi Alex, I'm a staff engineer and the hiring manager for our new agent platform team at
+    Zephyr. We're looking for a senior engineer who has built production LLM pipelines, and your
+    Example Corp work looks like exactly that. Could we chat this week?
+
+    Noah
+
+- id: h2-08
+  label: hiring_manager_outreach
+  at: "2026-07-07T10:00:00-07:00"
+  from: "Ines Duarte <ines@corvid.test>"
+  subject: "ML at Corvid"
+  body: |
+    Hi Alex,
+
+    I'm VP of ML at Corvid. I'm building out a new applied research team and I'm hiring for three
+    roles on it. Would you be interested in a conversation with me?
+
+    Ines
+
+- id: h2-09
+  label: referral_intro
+  at: "2026-09-19T12:00:00-07:00"
+  from: "Mia Chen <mia.chen@tandem.test>"
+  subject: "Referred you for ML Platform"
+  body: |
+    Hi Alex, as promised I referred you for the ML Platform role at Tandem through our internal
+    portal. You'll get an email from Greenhouse asking you to complete your application.
+
+    Mia
+
+- id: h2-10
+  label: referral_intro
+  at: "2026-06-20T09:00:00-07:00"
+  from: "Priya Menon <priya.menon@gmail.com>"
+  to: "Alex Example <alex@example.test>, Leo Grant <leo@corvid.test>"
+  subject: "Connecting Alex and Leo"
+  body: |
+    Leo, I wanted to introduce you to Alex, who has been building agent systems at Example Corp.
+    Alex, Leo leads the evaluation team at Corvid. I think you two would have a lot to talk about.
+
+    Priya
+
+- id: h2-11
+  label: ats_confirmation
+  at: "2026-07-08T09:00:00-07:00"
+  from: "Corvid <noreply@smartrecruiters.com>"
+  subject: "Thanks for your application to Corvid"
+  body: |
+    Hi Alex, we have received your application for Senior ML Engineer, Search. We will be in touch
+    after reviewing your profile.
+
+- id: h2-12
+  label: ats_confirmation
+  at: "2026-05-15T10:00:00-07:00"
+  from: "Zephyr Careers <donotreply@icims.com>"
+  subject: "Zephyr - Req 55123"
+  body: |
+    Thank you for your interest in Zephyr! Your submission for Req 55123 has been received.
+
+- id: h2-13
+  label: ats_assessment
+  at: "2026-09-21T11:00:00-07:00"
+  from: "Jamie Fox <jamie.fox@parsechealth.test>"
+  subject: "Next step: CodeSignal"
+  body: |
+    Hi Alex, the next step is a 90-minute CodeSignal assessment; you'll receive a separate email
+    with the link. Let me know if you have questions.
+
+    Jamie
+
+- id: h2-14
+  label: ats_assessment
+  at: "2026-09-22T15:00:00-07:00"
+  from: "Byteboard <no-reply@byteboard.dev>"
+  subject: "Your Byteboard interview for Zephyr"
+  body: |
+    Zephyr has invited you to complete a Byteboard interview. It takes about 2 hours and can be
+    completed anytime in the next 7 days.
+
+- id: h2-15
+  label: interview_invite
+  at: "2026-08-12T10:00:00-07:00"
+  from: "Zephyr <no-reply@us.greenhouse-mail.io>"
+  subject: "Zephyr: technical phone interview"
+  body: |
+    Hi Alex, the Zephyr team would like to schedule a technical phone interview with you. Please
+    click the link below to provide your availability.
+
+- id: h2-16
+  label: interview_invite
+  at: "2026-09-02T17:00:00-07:00"
+  from: "Noah Brandt <noah@zephyr.test>"
+  subject: "Re: Agent platform team at Zephyr"
+  body: |
+    Loved chatting today. Next step would be a 60-minute pairing session with two engineers from my
+    team; can you send over some times for next week?
+
+    Noah
+
+- id: h2-17
+  label: interview_scheduling
+  at: "2026-10-01T09:00:00-07:00"
+  from: "Google Calendar <calendar-notification@google.com>"
+  subject: "Canceled event: Technical Screen with Corvid @ Mon Oct 12, 2026 11am - 12pm (PDT) (alex@example.test)"
+  body: |
+    This event has been canceled.
+
+    Technical Screen with Corvid
+    Monday Oct 12, 2026 11am - 12pm (Pacific Time - Los Angeles)
+
+- id: h2-18
+  label: interview_scheduling
+  at: "2026-09-29T08:00:00-07:00"
+  from: "Corvid Interviews <interviews@goodtime.io>"
+  subject: "Your interview with Corvid has been rescheduled"
+  body: |
+    Your interview has been moved to Tuesday, October 13 at 10:00 AM PT. The Zoom link is unchanged.
+
+- id: h2-19
+  label: rejection
+  at: "2026-09-05T16:00:00-07:00"
+  from: "Ines Duarte <ines@corvid.test>"
+  subject: "Corvid update"
+  body: |
+    Hi Alex, thank you for interviewing with us. After much deliberation, we've decided to extend
+    an offer to another candidate. We were impressed by your work and hope our paths cross again.
+
+    Ines
+
+- id: h2-20
+  label: rejection
+  at: "2026-04-01T07:00:00-07:00"
+  from: "Tandem <tandem@myworkday.com>"
+  subject: "Your application status has changed"
+  body: |
+    Thank you for your interest in Tandem. We have filled the position you applied for and your
+    application is no longer under consideration.
+
+- id: h2-21
+  label: offer
+  at: "2026-09-26T10:00:00-07:00"
+  from: "Jamie Fox <jamie.fox@parsechealth.test>"
+  subject: "Your Parsec Health offer"
+  attachments: ["Parsec_Offer_Alex.pdf"]
+  body: |
+    Hi Alex, following up on our call: attached is your offer package for the Machine Learning
+    Engineer role. The offer is valid through October 3.
+
+    Jamie
+
+- id: h2-22
+  label: job_alert
+  at: "2026-06-01T06:00:00-07:00"
+  from: "Jobs Board <hello@jobsboard.example.com>"
+  subject: "New roles for you this week"
+  headers:
+    List-Unsubscribe: "<https://otta.com/unsubscribe>"
+  body: |
+    18 new roles match your preferences.
+    Applied AI Engineer at Quarry
+    ML Engineer at Tandem
+
+- id: h2-23
+  label: newsletter
+  at: "2026-08-20T05:00:00-07:00"
+  from: "Build Notes <notes@buildnotes.substack.com>"
+  subject: "The ML job market in 2026: what changed"
+  headers:
+    List-Id: "<buildnotes.substack.com>"
+    List-Unsubscribe: "<https://buildnotes.substack.com/unsub>"
+  body: |
+    Hiring slowed in the spring, recruiters shifted to referrals, and offers moved toward equity.
+    Here is what we saw across 400 candidates.
+
+- id: h2-24
+  label: networking
+  at: "2026-09-08T18:00:00-07:00"
+  from: "Ada Brooks <ada.brooks@gmail.com>"
+  subject: "Agent builders dinner"
+  body: |
+    Hi Alex, I'm organizing a small dinner for agent builders in SF next Thursday and would love
+    for you to join. No agenda, just good conversation.
+
+    Ada
+
+- id: h2-25
+  label: other
+  at: "2026-07-01T06:00:00-07:00"
+  from: "Tidewater Electric <billing@tidewaterelectric.test>"
+  subject: "Your bill is ready"
+  body: |
+    Your July bill is ready. Amount due: $62.10. Pay online or set up autopay.
+
+- id: h2-26
+  label: other
+  at: "2026-07-15T12:00:00-07:00"
+  from: "LinkedIn <messages-noreply@linkedin.com>"
+  subject: "You have 3 new messages"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=q2>"
+  body: |
+    You have 3 new messages waiting for you on LinkedIn.
+
+    View messages
+
+    Unsubscribe | Help

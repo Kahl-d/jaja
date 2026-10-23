@@ -1,0 +1,65 @@
+{
+ "jobPostingInfo": {
+  "id": "wd-jr1004",
+  "title": "Senior Machine Learning Engineer, Perception - Robot Navigation",
+  "jobDescription": "<p><span>Our work at CHIPCO is about making computing faster and easier to build for. As a member of the Applied ML team you will own robot perception work from idea to production. You will pair with colleagues in research and product and be trusted with real responsibility early.</span></p><p><b>What you will be doing:</b></p><ul><li>Mentor newer engineers and share what you learn with the wider team.</li><li>Turn open product questions into measurable experiments and ship the ones that win.</li><li>Debug failures end to end, from data pipelines to model behaviour.</li><li>Build evaluation harnesses that track quality, latency and cost release over release.</li></ul><p><b>What we need to see:</b></p><ul><li>Clear written communication and a preference for simple designs.</li><li>A record of owning a system from the first commit to steady operation.</li><li>Comfort reading research papers and turning them into working code.</li><li>Hands-on experience with PyTorch, CUDA and sensor fusion.</li></ul><p><b>Ways to stand out:</b></p><ul><li>Prior work on evaluation, red-teaming or reliability for learned systems.</li><li>Experience with distributed training or large-scale data processing.</li></ul><p>CHIPCO is an equal opportunity employer. Base salary ranges depend on level and location.</p>",
+  "location": "US, CA, Santa Clara",
+  "additionalLocations": [
+   "US, CA, Remote"
+  ],
+  "postedOn": "Posted 3 Days Ago",
+  "startDate": "2026-09-21",
+  "timeType": "Full time",
+  "jobReqId": "JR1004",
+  "jobPostingId": "Senior-Machine-Learning-Engineer--Perception---Robot-Navigation_JR1004",
+  "jobPostingSiteId": "CHIPCOExternalCareerSite",
+  "country": {
+   "descriptor": "United States of America",
+   "id": "country-us"
+  },
+  "canApply": true,
+  "posted": true,
+  "includeResumeParsing": true,
+  "jobRequisitionLocation": {
+   "descriptor": "US, CA, Santa Clara",
+   "country": {
+    "descriptor": "United States of America",
+    "id": "country-us",
+    "alpha2Code": "US"
+   }
+  },
+  "externalUrl": "https://chipco.wd5.myworkdayjobs.com/CHIPCOExternalCareerSite/job/US-CA-Santa-Clara/Senior-Machine-Learning-Engineer--Perception---Robot-Navigation_JR1004",
+  "questionnaireId": "questionnaire-jr1004"
+ },
+ "hiringOrganization": {
+  "name": "CHIPCO USA",
+  "url": ""
+ },
+ "similarJobs": [
+  {
+   "title": "Senior Compiler Engineer - AI",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "3 Locations",
+   "postedOn": "Posted 26 Days Ago",
+   "startDate": "2026-08-29"
+  },
+  {
+   "title": "Applied AI Engineer - Layout Design",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "US, CA, Santa Clara",
+   "postedOn": "Posted 23 Days Ago",
+   "startDate": "2026-09-01"
+  },
+  {
+   "title": "Senior Machine Learning Engineer, Perception - Robot Navigation",
+   "externalPath": "/job/US-CA-Santa-Clara/Applied-Machine-Learning-Engineer---Layout-Automation_JR1005",
+   "timeType": "Full time",
+   "locationsText": "US, CA, Santa Clara",
+   "postedOn": "Posted 26 Days Ago",
+   "startDate": "2026-08-29"
+  }
+ ],
+ "userAuthenticated": false
+}

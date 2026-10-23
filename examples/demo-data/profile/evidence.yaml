@@ -1,0 +1,40 @@
+# evidence.yaml - evidence id -> where a demo-candidate fact comes from (all fictional).
+schema_version: 1
+updated: '2026-10-12'
+count: 7
+evidence:
+  ev-sam-001:
+    source: profile/PROFILE.md
+    locator: header
+    captured_at: '2026-10-01'
+    note: Name, contact details and location of the demo candidate.
+  ev-sam-002:
+    source: Lakeview State University diploma (fictional)
+    locator: page 1
+    captured_at: '2026-10-01'
+    note: M.S. Computer Science, conferred 2021-05-15.
+  ev-sam-003:
+    source: Brightline Systems employment letter (fictional)
+    locator: page 1
+    captured_at: '2026-10-01'
+    note: Machine Learning Engineer from 2023-02.
+  ev-sam-004:
+    source: Kestrel Labs employment letter (fictional)
+    locator: page 1
+    captured_at: '2026-10-01'
+    note: Data Scientist 2021-06 to 2023-01.
+  ev-sam-005:
+    source: https://github.example.test/sam-rivera/tern
+    locator: README
+    captured_at: '2026-10-01'
+    note: Tern, an open-source library that traces agent runs.
+  ev-sam-006:
+    source: Brightline eval harness design doc (fictional)
+    locator: section 2
+    captured_at: '2026-10-01'
+    note: 600-question golden set with an LLM judge gating releases in CI.
+  ev-sam-007:
+    source: Brightline retrieval service runbook (fictional)
+    locator: section 1
+    captured_at: '2026-10-01'
+    note: Retrieval-augmented support assistant over maintenance logs.

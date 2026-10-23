@@ -1,0 +1,235 @@
+# Third held-out inbox, written after the fixes prompted by holdout2 and scored once, blind.
+# This batch is NOT used for tuning: its first score is the honest estimate for the current rules.
+# Accuracy guard: micro-F1 and macro-F1 must stay at or above 0.9.
+- id: h3-01
+  label: recruiter_outreach
+  at: "2026-09-10T09:00:00-07:00"
+  from: "Olga Ivanova <olga@meridianhealth.test>"
+  subject: "Applied ML at Meridian Health AI"
+  body: |
+    Hi Alex,
+
+    I'm a technical recruiter at Meridian Health AI. We're hiring an Applied ML Engineer to work on
+    clinical summarization, hybrid in Redwood City. Would you be up for a quick call to hear more?
+
+    Olga
+
+- id: h3-02
+  label: recruiter_outreach
+  at: "2026-06-15T10:00:00-07:00"
+  from: "Chris Park via LinkedIn <inmail-hit-reply@linkedin.com>"
+  subject: "ML roles at Tidewater AI"
+  headers:
+    List-Unsubscribe: "<https://www.linkedin.com/comm/psettings/email-unsubscribe?lipi=r3>"
+  body: |
+    Chris Park
+    Sourcer at Tidewater AI
+
+    Hey Alex, I'm building out Tidewater's ML team and your profile stood out. Any interest in a
+    conversation about our open ML Engineer roles?
+
+    Reply
+
+- id: h3-03
+  label: recruiter_outreach
+  at: "2026-02-25T08:00:00-08:00"
+  from: "Maria Santos <maria.santos@apexsearchpartners.test>"
+  subject: "Senior NLP Engineer - Series B - SF"
+  body: |
+    Hello Alex,
+
+    We are partnering with a Series B conversational AI company in SF to hire a Senior NLP Engineer.
+    Base up to $230k plus meaningful equity. Could we set up a time to discuss?
+
+    Maria Santos
+    Principal, Apex Search Partners
+
+- id: h3-04
+  label: founder_outreach
+  at: "2026-07-19T20:00:00-07:00"
+  from: "Luca Moretti <luca@driftlabs.test>"
+  subject: "Drift Labs"
+  body: |
+    Hey Alex, Luca here. My co-founder and I left Stripe to start Drift Labs; we're building agents
+    for finance ops and just closed our seed. We need a strong first ML engineer and your repo on agent
+    memory is exactly the kind of work we admire. Open to a call?
+
+    Luca
+
+- id: h3-05
+  label: founder_outreach
+  at: "2026-08-30T12:00:00-07:00"
+  from: "Priya Kulkarni <priya@sprout.test>"
+  subject: "Would love your help building Sprout"
+  body: |
+    Hi Alex,
+
+    I'm the founder of Sprout, a pre-seed company building AI care coordinators. I'd love to talk
+    about you joining as our founding ML engineer.
+
+    Priya
+
+- id: h3-06
+  label: hiring_manager_outreach
+  at: "2026-09-12T11:00:00-07:00"
+  from: "Tom Becker <tom@fernwood-robotics.test>"
+  subject: "Perception + LLM planning at Fernwood Robotics"
+  body: |
+    Hi Alex, I'm the engineering manager for our planning team at Fernwood Robotics. We're adding an
+    LLM planning track and I'm hiring for it. Your agent work looks like a great fit. Up for a chat?
+
+    Tom
+
+- id: h3-07
+  label: hiring_manager_outreach
+  at: "2026-05-05T09:00:00-07:00"
+  from: "Rina Patel <rina@lattice-ai.test>"
+  subject: "Hiring for my team"
+  body: |
+    Hello Alex, I'm Director of Engineering for the AI platform at Lattice AI and I have two open
+    senior roles on my team. Would you be interested in talking?
+
+    Rina Patel
+
+- id: h3-08
+  label: referral_intro
+  at: "2026-09-03T08:00:00-07:00"
+  from: "Jon Rivera <jon.rivera@gmail.com>"
+  to: "Alex Example <alex@example.test>, Sana Mir <sana@meridianhealth.test>"
+  subject: "Intro: Alex (agents) + Sana (Meridian)"
+  body: |
+    Sana, Alex is the friend I mentioned who builds agent systems. Alex, Sana leads ML at
+    Meridian and is hiring. I'll let you two take it from here.
+
+    Jon
+
+- id: h3-09
+  label: referral_intro
+  at: "2026-09-11T19:00:00-07:00"
+  from: "Anika Shah <anika.shah@corvid.test>"
+  subject: "Put you in for the Search role"
+  body: |
+    Hey Alex, I submitted a referral for you for the Senior ML Engineer, Search role. Recruiting
+    usually reaches out within a week.
+
+    Anika
+
+- id: h3-10
+  label: ats_confirmation
+  at: "2026-09-04T09:00:00-07:00"
+  from: "Meridian Health AI <no-reply@ashbyhq.com>"
+  subject: "Thanks for applying to Meridian Health AI"
+  body: |
+    Hi Alex, thanks for applying for the Applied ML Engineer role. Our team will review your
+    application and get back to you soon.
+
+- id: h3-11
+  label: ats_assessment
+  at: "2026-09-13T10:00:00-07:00"
+  from: "Meridian Health AI <no-reply@ashbyhq.com>"
+  subject: "Take-home exercise for Applied ML Engineer"
+  body: |
+    Hi Alex, as a next step we'd like you to complete a short take-home exercise. You'll have 72
+    hours from when you open the link.
+
+- id: h3-12
+  label: interview_invite
+  at: "2026-09-17T09:00:00-07:00"
+  from: "Olga Ivanova <olga@meridianhealth.test>"
+  subject: "Re: Applied ML at Meridian Health AI"
+  body: |
+    Hi Alex, the team loved your take-home. We'd like to invite you to a final round next week with
+    four interviews. What days work for you?
+
+    Olga
+
+- id: h3-13
+  label: interview_scheduling
+  at: "2026-09-18T12:00:00-07:00"
+  from: "Google Calendar <calendar-notification@google.com>"
+  subject: "Invitation: Final round - Meridian Health AI @ Wed Sep 30, 2026 9am - 1pm (PDT) (alex@example.test)"
+  calendar:
+    start: "2026-09-30T09:00:00"
+    end: "2026-09-30T13:00:00"
+    tz: "America/Los_Angeles"
+    summary: "Final round - Meridian Health AI"
+    organizer: "olga@meridianhealth.test"
+  body: |
+    Final round - Meridian Health AI
+    Wednesday Sep 30, 2026 9am - 1pm (Pacific Time - Los Angeles)
+
+    Invitation from Google Calendar
+
+- id: h3-14
+  label: rejection
+  at: "2026-06-24T15:00:00-07:00"
+  from: "Lattice AI <no-reply@hire.lever.co>"
+  subject: "Your application to Lattice AI"
+  body: |
+    Hi Alex, thank you for your interest in Lattice AI. We have reviewed your application and will
+    not be moving forward. We appreciate your time and wish you the best.
+
+- id: h3-15
+  label: rejection
+  at: "2026-08-14T17:00:00-07:00"
+  from: "Tom Becker <tom@fernwood-robotics.test>"
+  subject: "Fernwood update"
+  body: |
+    Hi Alex, thanks again for the conversations with the team. We've decided not to proceed with
+    your candidacy for the planning role. I enjoyed our chat and wish you well.
+
+    Tom
+
+- id: h3-16
+  label: offer
+  at: "2026-09-29T10:00:00-07:00"
+  from: "Olga Ivanova <olga@meridianhealth.test>"
+  subject: "Offer: Applied ML Engineer"
+  body: |
+    Hi Alex, congratulations! We're delighted to extend you an offer for the Applied ML Engineer role.
+    Your offer letter is attached; let's find time to walk through it.
+
+    Olga
+
+- id: h3-17
+  label: job_alert
+  at: "2026-07-01T06:00:00-07:00"
+  from: "Wellfound <hello@hi.wellfound.com>"
+  subject: "Startups hiring AI engineers this week"
+  headers:
+    List-Unsubscribe: "<https://wellfound.com/unsubscribe?u=1>"
+  body: |
+    Startups hiring AI engineers this week
+    Founding ML Engineer at Drift Labs · Remote
+    AI Engineer at Sprout · San Francisco
+    View all jobs
+
+- id: h3-18
+  label: newsletter
+  at: "2026-06-19T06:00:00-07:00"
+  from: "Agents Weekly <editor@agentsweekly.test>"
+  subject: "Issue 88: eval harnesses, memory, and hiring trends"
+  headers:
+    List-Unsubscribe: "<https://agentsweekly.example.test/unsubscribe>"
+  body: |
+    This week: three eval harnesses compared, long-term memory for agents, and hiring trends for AI
+    engineers. Read online.
+
+- id: h3-19
+  label: networking
+  at: "2026-05-22T21:00:00-07:00"
+  from: "Deepa Rao <deepa.rao.ml@gmail.com>"
+  subject: "Great meeting you at the agents meetup"
+  body: |
+    Hi Alex, great meeting you tonight! I'd love to trade notes on eval harnesses sometime. Coffee
+    next week?
+
+    Deepa
+
+- id: h3-20
+  label: other
+  at: "2026-04-18T08:00:00-07:00"
+  from: "Notion <notify@mail.notion.test>"
+  subject: "Your workspace export is ready"
+  body: |
+    Your export of the workspace "Alex's notes" is ready to download. The link expires in 7 days.

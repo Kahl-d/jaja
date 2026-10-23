@@ -1,0 +1,65 @@
+# Frontmatter contract for jobs/<company>-<reqid>.md in the data folder.
+# Written by scripts/fetch_ats.py and the job-scout role.
+type: job
+glob: "jobs/*.md"
+required: [id, company, company_slug, title, source, source_url, first_seen, last_seen, status]
+fields:
+  - type                # node type (job); set by the writing script (graph_links.py), always first
+  - id                  # <company_slug>-<req_id or short hash>
+  - company
+  - company_slug
+  - title
+  - req_id
+  - source              # where we found it
+  - source_url
+  - apply_url
+  - ats_vendor
+  - posted_at
+  - first_seen
+  - last_seen
+  - location
+  - remote
+  - comp_min
+  - comp_max
+  - comp_currency
+  - employment_type
+  - seniority_est
+  - lens                # closest resume base lens
+  - sponsorship
+  - sponsorship_evidence
+  - h1b_approvals_3y
+  - median_lca_wage
+  - wage_level_est
+  - jd_hash
+  - ghost_score         # 0.0-1.0
+  - freshness_hours
+  - fit_score           # 1.0-5.0
+  - fit_verdict
+  - status
+  - application         # "[[<application slug>]]" once one exists
+  - tags
+  - platform            # targets/platforms.yaml id the posting was found on (alerts, himalayas, manual captures)
+  - seen_on             # other platform ids that surfaced the same posting later
+  - alert_message_id    # Gmail message id of the job-alert email (job_alerts.py)
+  - prospect            # prospects/<slug> the posting came through (a recruiter's or referrer's message; jobs_manual.py)
+  - hiring_signal       # mapping {url, date, by}: a dated hiring post a person wrote naming this role (X or LinkedIn);
+                        # written by scripts/posts.py, ranked above portal listings by hunt_score.py and next_up.py
+  - source_message_id   # Gmail message id the posting arrived in, for a hand capture (jobs_manual.py --message-id)
+  - alert_received_at   # when that alert arrived (a card rarely states its posting date)
+  - live_checked_at     # the day job-scout's liveness fetch succeeded (scripts/scout_review.py live)
+  - hunt_score          # 0-100 triage score (scripts/hunt_score.py); ranks, never gates
+  - hunt_reasons        # one short line per component of hunt_score
+  - hunt_scored_at      # the run date of hunt_score
+  - links               # graph edges: list of path-qualified [[...]] wikilinks, written only by code
+                        # (its company dossier; scripts/graph_links.py), never by hand
+enums:
+  source: [greenhouse, lever, ashby, workday, jibe, sitemap, amazon, adzuna, hn, himalayas, linkedin-alert, glassdoor-alert, ziprecruiter-alert, wttj-alert, hiringcafe-alert, yc-alert, email-alert, prospect, referral, manual, indeed-connector, ziprecruiter-connector, dice-connector, smartrecruiters, workable, rippling, gem, pinpoint, teamtailor, recruitee, aidevjobs, remotive, remoteok, oracle, eightfold]
+  ats_vendor: [greenhouse, lever, ashby, workday, icims, taleo, successfactors, smartrecruiters, workable, jibe, sitemap, amazon, rippling, gem, pinpoint, teamtailor, recruitee, oracle, eightfold, other, unknown]
+  remote: [remote, hybrid, onsite, unknown]
+  sponsorship: ["yes", "no", unknown, cap_exempt]
+  wage_level_est: [I, II, III, IV, unknown]
+  fit_verdict: [skip, maybe, apply, priority, unscored]
+  status: [discovered, fit_checked, queued, tailoring, applied, closed, skipped]
+  lens: [agentic-systems, applied-ml, ai-software, research-nlp, forward-deployed, ml-infra, other, 3d-and-spatial-ai, agent-harness, ai-engineer, applied-ml-and-nlp, design-automation, evaluation, founding-engineer, full-stack-ai, inference-and-serving, orchestration-and-multi-agent, post-training, product-engineer, prompt-engineering, rag-and-context-engineering, research-engineer, tool-use-and-integrations, voice-and-realtime-agents]   # legacy lens names and the focus-profile lens names (new records use the focus-profile ones)
+dates: [posted_at, first_seen, last_seen]
+wikilink_lists: [links]   # lint: each must be a list of [[...]] strings (schema-links)

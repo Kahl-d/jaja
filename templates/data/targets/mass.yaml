@@ -1,0 +1,7 @@
+# Mass applications: the one config place (read by scripts/apply_batch.py).
+#
+# base_ab: an A/B of two section orders on base rows.
+#   off  every mass base row uses the default base order.
+#   on   each row's order comes from its job id (sha256, about half each); the alternate copy is `experience_first`.
+base_ab: off
+experience_first: null

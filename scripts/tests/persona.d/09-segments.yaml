@@ -1,0 +1,16 @@
+# Synthetic known-names table for the segment tests (keys are normalised company names).
+policy:
+  segments:
+    known_names:
+      bigsearch:
+        segment: big-tech
+        reason: "public company (Example Exchange: BIGS), a largest-tier platform"
+      bigsearch cloud:
+        segment: big-tech
+        reason: "public company (Example Exchange: BIGC)"
+      northwind ai:
+        segment: ai-lab
+        reason: "frontier AI lab"
+      roadrunner:
+        segment: big-tech
+        reason: "subsidiary of a public company (autonomous driving)"

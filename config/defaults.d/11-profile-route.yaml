@@ -1,0 +1,4 @@
+# Which profile resume a job title sends (scripts/profile_route.py). Copy a key into <your data folder>/config/*.yaml.
+policy:
+  profile_route:
+    lens_to_profile: {}     # lens family -> profile slug, e.g. {backend: software-engineer}; a lens with no row sends the general base

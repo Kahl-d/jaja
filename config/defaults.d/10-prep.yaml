@@ -1,0 +1,7 @@
+# Neutral defaults for scripts/prep_focus.py. Copy a key into <your data folder>/config/*.yaml to set your own.
+policy:
+  prep:
+    focus_topics: {}              # {focus family: [topic ids of prep/questions.yaml, in order]}; behavioral is always added
+    default_topics:               # topics for a family with no entry above
+    - system-design
+    - coding

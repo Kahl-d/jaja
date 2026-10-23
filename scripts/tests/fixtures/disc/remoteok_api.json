@@ -1,0 +1,72 @@
+{
+ "_captured": "synthetic fixture shaped like the remoteok.com/api answer (legal notice row first, then jobs); the first job is made up, the others are variants for the parser tests",
+ "rows": [
+  {
+   "last_updated": 1790792682,
+   "legal": "API Terms of Service: Please link back (with follow, and without nofollow!) to the URL on Remote OK and mention Remote OK as a source, so we get traffic back from your site. If you do not we'll have to suspend API access.\n\nPlease don't use the Remote OK logo without written permission as it's a registered trademark, please DO use our name Remote OK though."
+  },
+  {
+   "slug": "remote-enterprise-sales-development-representative-northwind-1100001",
+   "id": "1100001",
+   "epoch": 1790792682,
+   "date": "2026-09-30T18:24:42+00:00",
+   "company": "Northwind",
+   "company_logo": "",
+   "position": "Enterprise Sales Development Representative",
+   "tags": [
+    "customer support",
+    "sales"
+   ],
+   "description": "<h3>About Northwind</h3><p>Northwind is a global network of talent in business, design, and technology that helps companies scale their teams on demand.</p>",
+   "location": "",
+   "salary_min": 10000,
+   "salary_max": 50000,
+   "apply_url": "https://remoteOK.com/remote-jobs/remote-enterprise-sales-development-representative-northwind-1100001",
+   "original": true,
+   "logo": "",
+   "url": "https://remoteOK.com/remote-jobs/remote-enterprise-sales-development-representative-northwind-1100001"
+  },
+  {
+   "slug": "remote-enterprise-sales-development-representative-northwind-1100001",
+   "id": "2000001",
+   "epoch": 1790769600,
+   "date": "2026-09-30T12:00:00+00:00",
+   "company": "Acme AI",
+   "company_logo": "",
+   "position": "AI Engineer, Agents",
+   "tags": [
+    "customer support",
+    "sales"
+   ],
+   "description": "<p>Build LLM agents in Python.</p>",
+   "location": "United States",
+   "salary_min": 170000,
+   "salary_max": 210000,
+   "apply_url": "https://jobs.ashbyhq.com/acme/role-0001",
+   "original": true,
+   "logo": "",
+   "url": "https://remoteOK.com/remote-jobs/remote-ai-engineer-agents-acme-ai-2000001"
+  },
+  {
+   "slug": "remote-enterprise-sales-development-representative-northwind-1100001",
+   "id": "2000002",
+   "epoch": 1790769600,
+   "date": "2026-09-30T12:00:00+00:00",
+   "company": "Acme AI",
+   "company_logo": "",
+   "position": "Machine Learning Engineer",
+   "tags": [
+    "customer support",
+    "sales"
+   ],
+   "description": "<p>Build LLM agents in Python.</p>",
+   "location": "Europe only",
+   "salary_min": 170000,
+   "salary_max": 210000,
+   "apply_url": "https://jobs.ashbyhq.com/acme/role-0001",
+   "original": true,
+   "logo": "",
+   "url": "https://remoteOK.com/remote-jobs/x-2000002"
+  }
+ ]
+}

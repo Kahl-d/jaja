@@ -1,0 +1,11 @@
+{
+ "programme": "Demo Job Search",
+ "prefix": "DEMO",
+ "ticket": "DEMO-1",
+ "shipping_branch": "main",
+ "base": "origin/main",
+ "author": "Sam Rivera <sam.rivera@example.test>",
+ "created": "2026-10-01",
+ "hub": "hub",
+ "lanes": []
+}

@@ -1,0 +1,26 @@
+# Routine spec (schema: schemas/routine.yaml). Weekdays only: follow-ups fall due on business days (charter section 6).
+# Drafts land in outbox/ with one approval batch; the run never creates Gmail drafts (a compose scope can send)
+# and never sends. Receipt: logs/runs/js-follow-up-sweep/<date>.md. Paused by default; start it as a drafts-only
+# trial where the owner reviews every draft and nothing is pre-approved.
+name: js-follow-up-sweep
+purpose: "On weekday mornings, draft the nudges that are due (the cadence in charter section 6 and config/defaults.d; at most two per person), route silent applications to find a person, mark silent prospects dormant, and file one approval batch for the owner's review window."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: medium
+schedule: "0 8 * * 1-5"
+action: skill:follow-up-sweep
+inputs:
+  - prospects/
+  - touches/
+  - outbox/
+outputs:
+  - outbox/*.md
+  - work/approvals/A-YYYY-NNNN.md
+  - logs/runs/js-follow-up-sweep/<date>.md
+connectors: []                 # never gmail-draft on an unattended routine
+tier: T1
+notify: {"on": needs-owner, via: push}      # an approval batch is waiting
+budget: {max_runs_per_day: 1, max_tokens: 80000}
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: messenger

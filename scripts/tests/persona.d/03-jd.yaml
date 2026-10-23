@@ -1,0 +1,7 @@
+policy:
+  jd_capture:
+    reads_per_day: 20
+    careers_search:
+      veridian:
+        search: "https://careers.veridian.example.test/jobs/results?q={q}"
+        job_pattern: "^https://careers\\.veridian\\.example\\.test/jobs/results/\\d+[-\\w]*$"

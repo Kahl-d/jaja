@@ -1,0 +1,3 @@
+policy:
+  connectors:
+    firecrawl_keychain_service: "job-agency-firecrawl"

@@ -1,0 +1,31 @@
+# Routine spec (schema: schemas/routine.yaml). Weekdays; appends actuals and tomorrow's batch to the day plan.
+# Receipt: logs/runs/js-evening-review/<date>.md in the workspace runtime. Paused by default.
+name: js-evening-review
+purpose: "On weekday evenings run python3 scripts/evening_wrap.py --write: the one evening file, state/recruiter/wrap-<date>.md (docs/AGENCY-CHARTER.md section 3 step 7), with today's numbers against the floors in targets/goals.yaml (no ceiling, charter section 0), what went out and what came back, what worked by path with n, new LESSONS candidates (state/learn via scripts/learn.py, each rejection and debrief today), experiment n per arm and re-checks due (scripts/lessons.py), and the items for the owner to decide; tomorrow's morning cards (scripts/cards.py) read it. Lead with interviews booked this week (python3 scripts/interviews.py), record misses as states with causes in state/daily/<date>.md, and set tomorrow's first items. Lessons come from state/learn and LESSONS.md."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: medium
+schedule: "30 18 * * 1-5"
+action: skill:daily-job-plan
+inputs:
+  - state/daily/<date>.md
+  - targets/goals.yaml
+  - state/recruiter/LESSONS.md
+  - state/recruiter/experiments.yaml
+  - state/learn/
+  - touches/
+  - applications/
+  - prep/debriefs/
+  - jobs/
+outputs:
+  - state/recruiter/wrap-<date>.md      # scripts/evening_wrap.py --write
+  - state/daily/<date>.md
+  - checkpoints.md
+  - logs/runs/js-evening-review/<date>.md
+connectors: []
+tier: T1
+notify: {"on": needs-owner, via: push}      # a weekly floor still below by mid-week, a reply or invite to act on, a round tomorrow, or a wrap item for the owner to decide
+budget: {max_runs_per_day: 1, max_tokens: 120000}
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: recruiter

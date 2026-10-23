@@ -1,0 +1,59 @@
+{
+ "_fixture_note": "SYNTHETIC: hand-built from the documented Adzuna GET /v1/api/jobs/{country}/search/{page} response schema (developer.adzuna.com). Not captured live.",
+ "__CLASS__": "Adzuna::API::Response::JobSearchResults",
+ "count": 3,
+ "mean": 176512.33,
+ "results": [
+  {
+   "__CLASS__": "Adzuna::API::Response::Job",
+   "id": "5123456789",
+   "adref": "opaque-ref-5123456789",
+   "title": "Senior <strong>Machine</strong> <strong>Learning</strong> Engineer",
+   "description": "We are looking for a <strong>machine</strong> <strong>learning</strong> engineer to build evaluation pipelines for large language models. You will work with Python, PyTorch and distributed training&hellip;",
+   "created": "2026-09-23T17:12:40Z",
+   "redirect_url": "https://www.adzuna.com/land/ad/5123456789?se=dGVzdA&utm_medium=api&utm_source=test-app-id&v=A1B2C3",
+   "company": {"__CLASS__": "Adzuna::API::Response::Company", "display_name": "Globex AI"},
+   "location": {"__CLASS__": "Adzuna::API::Response::Location", "display_name": "San Francisco, California",
+                "area": ["US", "California", "San Francisco Bay Area", "San Francisco"]},
+   "category": {"__CLASS__": "Adzuna::API::Response::Category", "label": "IT Jobs", "tag": "it-jobs"},
+   "salary_min": 185000,
+   "salary_max": 240000,
+   "salary_is_predicted": "0",
+   "contract_time": "full_time",
+   "contract_type": "permanent",
+   "latitude": 37.7749,
+   "longitude": -122.4194
+  },
+  {
+   "__CLASS__": "Adzuna::API::Response::Job",
+   "id": "5123456790",
+   "adref": "opaque-ref-5123456790",
+   "title": "Applied AI Engineer (Remote)",
+   "description": "Build agentic workflows with LLMs for healthcare operations teams&hellip;",
+   "created": "2026-09-22T09:00:00Z",
+   "redirect_url": "https://www.adzuna.com/land/ad/5123456790?se=dGVzdDI&utm_medium=api&utm_source=test-app-id&v=D4E5F6",
+   "company": {"__CLASS__": "Adzuna::API::Response::Company", "display_name": "Acme Health, Inc."},
+   "location": {"__CLASS__": "Adzuna::API::Response::Location", "display_name": "US", "area": ["US"]},
+   "category": {"__CLASS__": "Adzuna::API::Response::Category", "label": "IT Jobs", "tag": "it-jobs"},
+   "salary_min": 151234.5,
+   "salary_max": 151234.5,
+   "salary_is_predicted": "1",
+   "contract_time": "full_time"
+  },
+  {
+   "__CLASS__": "Adzuna::API::Response::Job",
+   "id": "5123456791",
+   "adref": "opaque-ref-5123456791",
+   "title": "Sales Development Representative - <strong>AI</strong> Platform",
+   "description": "Prospect into enterprise accounts&hellip;",
+   "created": "2026-09-23T12:00:00Z",
+   "redirect_url": "https://www.adzuna.com/land/ad/5123456791?se=dGVzdDM&utm_medium=api&utm_source=test-app-id&v=G7H8I9",
+   "company": {"__CLASS__": "Adzuna::API::Response::Company", "display_name": "Example Cloud"},
+   "location": {"__CLASS__": "Adzuna::API::Response::Location", "display_name": "Oakland, California",
+                "area": ["US", "California", "San Francisco Bay Area", "Oakland"]},
+   "category": {"__CLASS__": "Adzuna::API::Response::Category", "label": "Sales Jobs", "tag": "sales-jobs"},
+   "salary_is_predicted": "1",
+   "contract_time": "full_time"
+  }
+ ]
+}

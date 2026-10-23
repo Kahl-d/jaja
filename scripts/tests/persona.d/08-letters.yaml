@@ -1,0 +1,14 @@
+policy:
+  letters:
+    caps:
+      cover.md: [250, 380]
+      why-us.md: [0, 150]
+      else.md: [0, 150]
+    long_sentence: 28
+    work_of: {acme: "Acme Studio", acmeb: "Acme Studio", lab: "Example Labs", side: "a project"}
+style:
+  letters:
+    banned_phrases: ["excited to apply", "i am excited", "passionate", "great fit", "perfect fit", "leverag", "synerg",
+                     "spearhead", "results[- ]driven", "cutting[- ]edge", "world[- ]class", "game[- ]chang", "thrilled",
+                     "dream job", "state[- ]of[- ]the[- ]art"]
+    prose_only: true

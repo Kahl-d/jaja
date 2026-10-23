@@ -1,0 +1,19 @@
+# gitleaks configuration (used by CI and, when installed, by tools/leak_check.py).
+# Default rules stay on. Only synthetic material is allowlisted: the demo data and test fixtures contain invented
+# addresses and made-up token-shaped strings that exercise the credential guards.
+title = "job-agency"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "synthetic demo data and test fixtures"
+paths = [
+  '''^examples/demo-data/''',
+  '''^scripts/tests/''',
+  '''^scripts/kernel/tests/''',
+  '''^mcp/tests/''',
+  '''^evals/''',
+  '''uv\.lock$''',
+  '''__pycache__/''',
+]

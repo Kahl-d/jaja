@@ -1,0 +1,7 @@
+# Hiring posts on LinkedIn and X (scripts/posts.py). Copy a key into <your data folder>/config/*.yaml to change it.
+policy:
+  posts:
+    us_only: false            # true: a post placed only outside the US, or asking for a non-US work permit, is out of band
+    extra_places: []          # towns of your own region read as places in a post (and as US places when us_only is on)
+    extra_qualifiers: []      # title words of your own field that may stand before "engineer" (for example "firmware")
+    families: []              # role families for the trend: [{name: "evals", pattern: "\\bevals?\\b"}, ...]; first match wins

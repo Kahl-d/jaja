@@ -1,0 +1,20 @@
+# Contract for each entry in connectors.yaml .
+# The file holds a list under `connectors:` (or a mapping name -> fields).
+type: connector
+glob: "connectors.yaml"
+required: [name, host, owner_role, tier_max, token_location, status]
+fields:
+  - name
+  - host
+  - scopes
+  - owner_role
+  - tier_max
+  - token_location     # pointer only (Keychain item / env var name), never a value
+  - rotation_date
+  - approval_policy
+  - status
+  - notes
+enums:
+  tier_max: [T0, T1, T2, T3, T4]
+  status: [planned, active, paused, revoked]
+dates: [rotation_date]

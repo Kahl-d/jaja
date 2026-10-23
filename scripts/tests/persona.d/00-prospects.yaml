@@ -1,0 +1,22 @@
+policy:
+  prospects:
+    bigtech_companies: ["acme cloud", "example corp", "globex"]
+    ai_lab_companies: ["example ai labs", "initech ai"]
+    specific_refs: ["example studio", "example state university", "agent memory", "agent orchestration", "mcp"]
+    title_words: ["machine learning", "ml", "ai", "llm", "genai", "gen ai", "applied ai", "applied ml", "applied", "deep learning",
+                  "nlp", "computer vision", "research", "software", "backend", "back-end", "full-stack", "fullstack", "platform",
+                  "data", "infrastructure", "ml infrastructure", "agent", "agents", "agentic", "forward-deployed",
+                  "forward deployed", "ai platform", "product", "search", "inference", "perception", "autonomy"]
+    lead_fields: ["ai", "applied ai", "ml", "machine learning"]
+    fit_keywords:
+      high: ["ai", "ml", "machine learning", "llm", "genai", "agent", "agentic", "applied scientist", "research engineer",
+             "nlp", "deep learning", "applied ai", "applied ml", "inference", "perception"]
+      mid: ["software", "backend", "back-end", "platform", "infrastructure", "full stack", "fullstack", "founding engineer",
+            "data engineer", "search", "forward deployed", "autonomy"]
+      low: ["sales", "marketing", "account executive", "product manager", "designer", "recruiter", "customer success", "support"]
+    avoid_title_regex: "\\b(intern|new grad|junior)\\b"
+  location:
+    hint_places: ["Springfield", "Shelbyville", "Remote"]
+    home_area: ["springfield", "remote"]
+  sponsorship:
+    weight: 0.5

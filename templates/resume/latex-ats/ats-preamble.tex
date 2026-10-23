@@ -1,0 +1,57 @@
+%-------------------------------------------------------------------------------
+% ATS-hardened preamble for the LaTeX fallback renderer (render_resume.py --engine latex).
+% Hardened against poppler pdftotext AND a macOS PDFKit copy test (32/32 probes).
+% Every hardening flag below is load-bearing. Deliberate layout choices, none hardening:
+%   - margins match templates/resume/rendercv-ats.yaml;
+%   - \entry puts the date inline after a bar instead of \hfill (see the note at \entry);
+%   - section headings are bold without small caps and links are black, to match the RenderCV
+%     template (small caps extracted cleanly in all three extractors; this is looks only).
+% Build by hand: pdflatex <file>.tex  (TeX Live: /Library/TeX/texbin/pdflatex)
+%-------------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newtxtext,newtxmath}
+\usepackage[left=0.6in,right=0.6in,top=0.5in,bottom=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{ragged2e} % \RaggedRight: ragged text with finite stretch, so line
+                      % breaking stays greedy (plain \raggedright lets TeX pick
+                      % degenerate early breaks and breaks copy/paste line flow)
+\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true,urlcolor=black,linkcolor=black}
+
+% Ensure text extracts perfectly for ATS
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+\pagestyle{empty}
+\linespread{0.95}
+\setlength{\parindent}{0pt}
+% No hyphenation: a hyphenated line break splits keywords in ATS extraction
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+% With hyphenation off, ragged2e's default 2em stretch is too little and lines
+% overflow the right margin; more stretch (set BEFORE \RaggedRight latches it)
+% guarantees every line has an in-margin break point
+\setlength{\RaggedRightRightskip}{0pt plus 3em}
+\tolerance=1000
+% Third-pass rescue for paragraphs with long unbreakable compounds (e.g.
+% "orchestrator-worker"): stretches ONLY failing paragraphs, never overflows
+\emergencystretch=3em
+\RaggedRight
+
+% Section format: bold, rule underneath
+\titleformat{\section}{\bfseries\large}{}{0em}{}[\vspace{-7pt}\rule{\textwidth}{0.5pt}\vspace{-3.5pt}]
+\titlespacing*{\section}{0pt}{5pt}{3pt}
+
+% Entry header line. A flush-right date (\hfill) was measured with this preamble: pdftotext then puts every date on its own line away from its
+% entry, and PDFKit moved a flush-right publication date under the NEXT heading; an inline
+% "Title | Date" line extracts identically in pdftotext, pypdf and PDFKit. So the date follows
+% the text on the same line.
+\newcommand{\entry}[1]{\par #1\par}
+% Italic context line under an entry
+\newcommand{\context}[1]{{\small\itshape #1}\par}
+
+% Tight bullet lists
+\setlist[itemize]{leftmargin=0.15in,itemsep=1.0pt,parsep=0pt,topsep=0.75pt,label=\textbullet}

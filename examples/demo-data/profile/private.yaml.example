@@ -1,0 +1,53 @@
+# profile/private.yaml.example: the keys scripts/apply_pack.py reads from profile/private.yaml.
+#
+# Copy this file to profile/private.yaml and fill in only what you want application forms to say:
+#   cp profile/private.yaml.example profile/private.yaml
+# profile/private.yaml is gitignored (it never enters git), and so is every applications/*/apply-pack.md,
+# because each pack copies these values. Owner: you. Agents read this file; they never write it.
+#
+# Rules the packs follow:
+# - A key left out or left "" means the pack says "ask the owner" for that question; nothing is guessed.
+# - Values are copied verbatim, so write them exactly as a form should receive them. Nothing from
+#   profile/PROFILE-HOLDS.md, and nothing your style rules forbid (the pack lint flags both). A held string (for example a location
+#   variant such as "United States") is flagged, so write the form the holds list allows ("the US").
+# - No passwords, account ids, immigration numbers or anything legal-visa owns. Work authorization and
+#   sponsorship answers come only from legal/timers.md "## Answer scripts" (legal-visa), never from here.
+# - Earliest start date and notice come from clock.yaml (your job clock) first; notice_period here is
+#   used only while clock.yaml has no confirmed employment_end.
+# Check what a pack will say: python3 scripts/apply_pack.py answers
+
+schema_version: 1
+
+# "What are your salary expectations?" Free text, copied verbatim. Examples of shape:
+#   "USD <min> to <max> base, flexible on equity"   or   "Open, depending on level and total package"
+salary_expectation: ""
+
+# "Are you willing to relocate?" Example: "Yes, anywhere in the US"
+relocation: ""
+
+# "Remote, hybrid or onsite?" Example: "Onsite, hybrid or remote". A preferred area is only
+# a tie-break when the agency ranks roles; it is never written on a form as a limit.
+remote_preference: ""
+
+# "What is your notice period?" Used only while clock.yaml has no confirmed employment_end. Example: "2 weeks"
+notice_period: ""
+
+# "May we contact your current employer?" (the search is confidential). Example: "No, not before an offer"
+may_contact_current_employer: ""
+
+# Only if your legal name splits differently from profile/facts.yaml identity.full_name. Left empty, the
+# pack uses the first word as first name, the last word as last name and the words between as middle name.
+legal_name:
+  first: ""
+  middle: ""
+  last: ""
+
+# Voluntary self-identification (US EEO). "decline" (the default) renders "Decline to answer" as your choice.
+# Any other value is copied verbatim: use the form's own wording, for example "No".
+# Quote yes/no answers so YAML keeps them as text.
+eeo:
+  gender: decline
+  hispanic_latino: decline
+  race: decline
+  veteran: decline
+  disability: decline

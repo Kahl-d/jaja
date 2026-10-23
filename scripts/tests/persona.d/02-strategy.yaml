@@ -1,0 +1,11 @@
+# Synthetic persona: strategy review limits (same numbers as the defaults; no pause ruling).
+policy:
+  strategy:
+    no_reply_tries: 15
+    dream_share_min: 0.20
+    big_share_max: 0.60
+    interview_by_day: 21
+    fit_median_min: 4.0
+    tier_dream_fit: 4.5
+    tier_focused_fit: 4.0
+    pause_ruling: ""

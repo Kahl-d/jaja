@@ -1,0 +1,544 @@
+{
+ "res": {
+  "id": "REQ-100123",
+  "type": "REQ",
+  "managedPipelineRole": false,
+  "reqId": "REQ-100123",
+  "jobNumber": "100123-0201",
+  "postingTitle": "ML Engineer - Automated Evaluation and Stress Testing",
+  "transformedPostingTitle": "ml-engineer-automated-evaluation-and-stress-testing",
+  "jobSummary": "The Product Evaluation team keeps the quality of AI-powered features high across a suite of everyday apps. The team is the main evaluation function: it produces the quality signals that guide model decisions and product launches.\nThis role builds and scales automated evaluation systems and designs stress-testing methods for several AI features. As features move from single answers to multi-turn, agent-style experiences, evaluation has to cover whole conversations, not single outputs.\n",
+  "description": "Day to day, you will design, build and maintain automated evaluation systems that score AI feature quality at scale, including multi-turn conversation evaluation and end-to-end agent workflow tests. You will partner with engineers and designers to turn findings into fixes.\n",
+  "responsibilities": "Define and own the automated evaluation approach for AI features, turning qualitative ideas of quality into measurable, repeatable checks\nBuild stress tests that probe failure modes across single-turn and multi-turn experiences\nReport evaluation results to product and model teams and help set launch bars\nImprove the evaluation infrastructure so new features can be covered quickly\n",
+  "standardWeeklyHours": 40,
+  "highJobTitle": "Machine Learning Band 4",
+  "lowJobTitle": "Machine Learning Band 3",
+  "teamNames": [
+   "Product Software"
+  ],
+  "locations": [
+   {
+    "id": "postLocation-CUL",
+    "name": "Culver City",
+    "city": "Culver City",
+    "code": "CUL",
+    "stateProvince": "California",
+    "metro": "Los Angeles Metro Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "90100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0201",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   },
+   {
+    "id": "postLocation-CUP",
+    "name": "Cupertino",
+    "city": "Cupertino",
+    "code": "CUP",
+    "stateProvince": "California",
+    "metro": "San Francisco Bay Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "91100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0202",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   },
+   {
+    "id": "postLocation-SDO",
+    "name": "San Diego",
+    "city": "San Diego",
+    "code": "SDO",
+    "stateProvince": "California",
+    "metro": "San Diego Metro Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "92100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0203",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   },
+   {
+    "id": "postLocation-SEA",
+    "name": "Seattle",
+    "city": "Seattle",
+    "code": "SEA",
+    "stateProvince": "Washington",
+    "metro": "Seattle Metro Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "93100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0204",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   }
+  ],
+  "localeInfo": {
+   "languageCode": "en_US",
+   "dateFormat": "MMM D, YYYY",
+   "defaultLocaleCode": "en-US",
+   "locale": "en-us",
+   "data": "en_US",
+   "translation": "en-US"
+  },
+  "postDateInGMT": "2026-09-28T20:18:26.231+00:00",
+  "postingPostLocationData": {
+   "en_US": {
+    "postLocation-SDO": {
+     "localeLanguage": {
+      "en_US": "English - US"
+     },
+     "postingDate": "2026-09-28T20:18:26.231+00:00"
+    },
+    "postLocation-CUP": {
+     "localeLanguage": {
+      "en_US": "English - US"
+     },
+     "postingDate": "2026-09-28T20:18:26.231+00:00"
+    },
+    "postLocation-SEA": {
+     "localeLanguage": {
+      "en_US": "English - US"
+     },
+     "postingDate": "2026-09-28T20:18:26.231+00:00"
+    },
+    "postLocation-CUL": {
+     "localeLanguage": {
+      "en_US": "English - US"
+     },
+     "postingDate": "2026-09-28T20:18:26.231+00:00"
+    }
+   }
+  },
+  "longPostingDate": "2026-09-28T20:18:26.231+00:00",
+  "postingDateMeta": "2026-09-28",
+  "usaIndicator": false,
+  "uaeIndicator": false,
+  "localeLanguages": [
+   {
+    "code": "en_US",
+    "name": "English - US",
+    "translation": "en-US",
+    "direction": "ltr"
+   }
+  ],
+  "postLocationLocaleLanguage": {
+   "postLocation-CUP": [
+    {
+     "code": "en_US",
+     "name": "English - US",
+     "translation": "en-US",
+     "direction": "ltr"
+    }
+   ],
+   "postLocation-SDO": [
+    {
+     "code": "en_US",
+     "name": "English - US",
+     "translation": "en-US",
+     "direction": "ltr"
+    }
+   ],
+   "postLocation-SEA": [
+    {
+     "code": "en_US",
+     "name": "English - US",
+     "translation": "en-US",
+     "direction": "ltr"
+    }
+   ],
+   "postLocation-CUL": [
+    {
+     "code": "en_US",
+     "name": "English - US",
+     "translation": "en-US",
+     "direction": "ltr"
+    }
+   ]
+  },
+  "localizations": {
+   "en_US": {
+    "posting": {
+     "postingTitle": "ML Engineer - Automated Evaluation and Stress Testing",
+     "jobSummary": "The Product Evaluation team keeps the quality of AI-powered features high across a suite of everyday apps. The team is the main evaluation function: it produces the quality signals that guide model decisions and product launches.\nThis role builds and scales automated evaluation systems and designs stress-testing methods for several AI features. As features move from single answers to multi-turn, agent-style experiences, evaluation has to cover whole conversations, not single outputs.\n",
+     "description": "Day to day, you will design, build and maintain automated evaluation systems that score AI feature quality at scale, including multi-turn conversation evaluation and end-to-end agent workflow tests. You will partner with engineers and designers to turn findings into fixes.\n",
+     "responsibilities": "Define and own the automated evaluation approach for AI features, turning qualitative ideas of quality into measurable, repeatable checks\nBuild stress tests that probe failure modes across single-turn and multi-turn experiences\nReport evaluation results to product and model teams and help set launch bars\nImprove the evaluation infrastructure so new features can be covered quickly\n",
+     "preferredQualifications": "Experience evaluating user-facing AI features  \nFamiliarity with productivity or creative software  \nClear written communication\n",
+     "minimumQualifications": "Bachelor’s degree in Computer Science, Machine Learning, Statistics or a related field  \n4+ years of experience building evaluation systems or quality benchmarks for ML models  \nStrong Python and experience with LLM-based tooling\n",
+     "internalDetails": null
+    },
+    "location": [
+     {
+      "id": "postLocation-CUL",
+      "name": "Culver City",
+      "city": "Culver City",
+      "code": "CUL",
+      "stateProvince": "California",
+      "metro": "Los Angeles Metro Area",
+      "countryName": "United States",
+      "countryID": "iso-country-USA",
+      "zipCode": "90100",
+      "region": "West",
+      "level": 5,
+      "active": true,
+      "postLocationCountryID": "postLocation-USA",
+      "postingIdentifier": "0201",
+      "showPayAndBenefits": false,
+      "promotedOnLinkedIn": false
+     },
+     {
+      "id": "postLocation-CUP",
+      "name": "Cupertino",
+      "city": "Cupertino",
+      "code": "CUP",
+      "stateProvince": "California",
+      "metro": "San Francisco Bay Area",
+      "countryName": "United States",
+      "countryID": "iso-country-USA",
+      "zipCode": "91100",
+      "region": "West",
+      "level": 5,
+      "active": true,
+      "postLocationCountryID": "postLocation-USA",
+      "postingIdentifier": "0202",
+      "showPayAndBenefits": false,
+      "promotedOnLinkedIn": false
+     },
+     {
+      "id": "postLocation-SDO",
+      "name": "San Diego",
+      "city": "San Diego",
+      "code": "SDO",
+      "stateProvince": "California",
+      "metro": "San Diego Metro Area",
+      "countryName": "United States",
+      "countryID": "iso-country-USA",
+      "zipCode": "92100",
+      "region": "West",
+      "level": 5,
+      "active": true,
+      "postLocationCountryID": "postLocation-USA",
+      "postingIdentifier": "0203",
+      "showPayAndBenefits": false,
+      "promotedOnLinkedIn": false
+     },
+     {
+      "id": "postLocation-SEA",
+      "name": "Seattle",
+      "city": "Seattle",
+      "code": "SEA",
+      "stateProvince": "Washington",
+      "metro": "Seattle Metro Area",
+      "countryName": "United States",
+      "countryID": "iso-country-USA",
+      "zipCode": "93100",
+      "region": "West",
+      "level": 5,
+      "active": true,
+      "postLocationCountryID": "postLocation-USA",
+      "postingIdentifier": "0204",
+      "showPayAndBenefits": false,
+      "promotedOnLinkedIn": false
+     }
+    ],
+    "teams": [
+     {
+      "code": "PRSW",
+      "name": "Product Software",
+      "id": "teamsAndSubTeams-PRSW"
+     },
+     {
+      "code": "PRSW",
+      "name": "Product Software",
+      "id": "teamsAndSubTeams-PRSW"
+     }
+    ]
+   }
+  },
+  "localeLocation": [
+   {
+    "id": "postLocation-CUL",
+    "name": "Culver City",
+    "city": "Culver City",
+    "code": "CUL",
+    "stateProvince": "California",
+    "metro": "Los Angeles Metro Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "90100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0201",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   },
+   {
+    "id": "postLocation-CUP",
+    "name": "Cupertino",
+    "city": "Cupertino",
+    "code": "CUP",
+    "stateProvince": "California",
+    "metro": "San Francisco Bay Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "91100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0202",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   },
+   {
+    "id": "postLocation-SDO",
+    "name": "San Diego",
+    "city": "San Diego",
+    "code": "SDO",
+    "stateProvince": "California",
+    "metro": "San Diego Metro Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "92100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0203",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   },
+   {
+    "id": "postLocation-SEA",
+    "name": "Seattle",
+    "city": "Seattle",
+    "code": "SEA",
+    "stateProvince": "Washington",
+    "metro": "Seattle Metro Area",
+    "countryName": "United States",
+    "countryID": "iso-country-USA",
+    "zipCode": "93100",
+    "region": "West",
+    "level": 5,
+    "active": true,
+    "postLocationCountryID": "postLocation-USA",
+    "postingIdentifier": "0204",
+    "showPayAndBenefits": false,
+    "promotedOnLinkedIn": false
+   }
+  ],
+  "employmentType": "Standard",
+  "homeOffice": false,
+  "positionId": "100123",
+  "isFavorited": false,
+  "submitted": false,
+  "resubmitted": false,
+  "jobType": "CORPORATE",
+  "preferredQualifications": "Experience evaluating user-facing AI features  \nFamiliarity with productivity or creative software  \nClear written communication\n",
+  "minimumQualifications": "Bachelor’s degree in Computer Science, Machine Learning, Statistics or a related field  \n4+ years of experience building evaluation systems or quality benchmarks for ML models  \nStrong Python and experience with LLM-based tooling\n",
+  "internalDetails": null,
+  "selfDisclosureConfig": {
+   "countryID": "iso-country-USA",
+   "gender": true,
+   "ethnicity": true,
+   "veteranStatus": true,
+   "disability": false
+  },
+  "questionCategories": [
+   "applicationQuestion"
+  ],
+  "roleLocationSelection": false,
+  "selectedLocation": {
+   "id": "postLocation-CUL",
+   "name": "Culver City",
+   "city": "Culver City",
+   "code": "CUL",
+   "stateProvince": "California",
+   "metro": "Los Angeles Metro Area",
+   "countryName": "United States",
+   "countryID": "iso-country-USA",
+   "zipCode": "90100",
+   "region": "West",
+   "level": 5,
+   "active": true,
+   "postLocationCountryID": "postLocation-USA",
+   "postingIdentifier": "0201",
+   "showPayAndBenefits": false,
+   "promotedOnLinkedIn": false
+  },
+  "postingFooters": [
+   {
+    "postLocationId": "postLocation-SDO",
+    "localizations": {
+     "en_US": [
+      {
+       "displayOrder": 1,
+       "name": "Pay & Benefits",
+       "content": "At Fruitco, base pay is one part of total compensation and is set within a range. The base pay range for this role is between $141,000 and $262,000, and your base pay will depend on your skills, qualifications, experience and location.<br><br>Fruitco employees may also receive stock awards and benefits such as medical and dental coverage and retirement plans. Programs are subject to eligibility requirements.<br>",
+       "label": "Pay & Benefits"
+      },
+      {
+       "displayOrder": 2,
+       "name": "EEO Statement",
+       "content": "<p>Fruitco is an equal opportunity employer and considers all applicants without regard to protected characteristics.</p>"
+      },
+      {
+       "displayOrder": 3,
+       "name": "Accessibility",
+       "content": "<p>Fruitco provides reasonable accommodation to applicants with disabilities. Contact the recruiting team to ask for one.</p>"
+      },
+      {
+       "displayOrder": 4,
+       "name": "Application Deadline",
+       "content": "<p>Fruitco accepts applications to this posting on an ongoing basis.</p>"
+      }
+     ]
+    }
+   },
+   {
+    "postLocationId": "postLocation-CUP",
+    "localizations": {
+     "en_US": [
+      {
+       "displayOrder": 1,
+       "name": "Pay & Benefits",
+       "content": "At Fruitco, base pay is one part of total compensation and is set within a range. The base pay range for this role is between $149,500 and $276,000, and your base pay will depend on your skills, qualifications, experience and location.<br><br>Fruitco employees may also receive stock awards and benefits such as medical and dental coverage and retirement plans. Programs are subject to eligibility requirements.<br>",
+       "label": "Pay & Benefits"
+      },
+      {
+       "displayOrder": 2,
+       "name": "EEO Statement",
+       "content": "<p>Fruitco is an equal opportunity employer and considers all applicants without regard to protected characteristics.</p>"
+      },
+      {
+       "displayOrder": 3,
+       "name": "Accessibility",
+       "content": "<p>Fruitco provides reasonable accommodation to applicants with disabilities. Contact the recruiting team to ask for one.</p>"
+      },
+      {
+       "displayOrder": 4,
+       "name": "Application Deadline",
+       "content": "<p>Fruitco accepts applications to this posting on an ongoing basis.</p>"
+      }
+     ]
+    }
+   },
+   {
+    "postLocationId": "postLocation-SEA",
+    "localizations": {
+     "en_US": [
+      {
+       "displayOrder": 1,
+       "name": "Pay & Benefits",
+       "content": "At Fruitco, base pay is one part of total compensation and is set within a range. The base pay range for this role is between $141,000 and $262,000, and your base pay will depend on your skills, qualifications, experience and location.<br><br>Fruitco employees may also receive stock awards and benefits such as medical and dental coverage and retirement plans. Programs are subject to eligibility requirements.<br>",
+       "label": "Pay & Benefits"
+      },
+      {
+       "displayOrder": 2,
+       "name": "EEO Statement",
+       "content": "<p>Fruitco is an equal opportunity employer and considers all applicants without regard to protected characteristics.</p>"
+      },
+      {
+       "displayOrder": 3,
+       "name": "Accessibility",
+       "content": "<p>Fruitco provides reasonable accommodation to applicants with disabilities. Contact the recruiting team to ask for one.</p>"
+      },
+      {
+       "displayOrder": 4,
+       "name": "Application Deadline",
+       "content": "<p>Fruitco accepts applications to this posting on an ongoing basis.</p>"
+      }
+     ]
+    }
+   },
+   {
+    "postLocationId": "postLocation-CUL",
+    "localizations": {
+     "en_US": [
+      {
+       "displayOrder": 1,
+       "name": "Pay & Benefits",
+       "content": "At Fruitco, base pay is one part of total compensation and is set within a range. The base pay range for this role is between $141,000 and $262,000, and your base pay will depend on your skills, qualifications, experience and location.<br><br>Fruitco employees may also receive stock awards and benefits such as medical and dental coverage and retirement plans. Programs are subject to eligibility requirements.<br>",
+       "label": "Pay & Benefits"
+      },
+      {
+       "displayOrder": 2,
+       "name": "EEO Statement",
+       "content": "<p>Fruitco is an equal opportunity employer and considers all applicants without regard to protected characteristics.</p>"
+      },
+      {
+       "displayOrder": 3,
+       "name": "Accessibility",
+       "content": "<p>Fruitco provides reasonable accommodation to applicants with disabilities. Contact the recruiting team to ask for one.</p>"
+      },
+      {
+       "displayOrder": 4,
+       "name": "Application Deadline",
+       "content": "<p>Fruitco accepts applications to this posting on an ongoing basis.</p>"
+      }
+     ]
+    }
+   }
+  ],
+  "postingDate": "Sep 28, 2026",
+  "selectedLocale": "en_US",
+  "translationCd": "en-US",
+  "translations": {
+   "en_US": {
+    "jobsite.jobdetails.responsibilities": "Responsibilities",
+    "jobsite.jobdetails.keyQualifications": "Key Qualifications",
+    "jobsite.jobdetails.workLocations": "Work Locations ({numberOfLocations})",
+    "jobsite.common.mediumDate": "MMM D, YYYY",
+    "jobsite.jobdetails.internalDetails": "Internal Details",
+    "jobsite.common.yes": "Yes",
+    "jobsite.jobdetails.jobShift": "Shift: {shiftSelection}",
+    "jobsite.jobdetails.roleNumber": "Role Number:",
+    "jobsite.jobdetails.jobHighProfileTitle": "High Job Profile: {title}",
+    "jobsite.jobdetails.addlReq": "Additional Requirements",
+    "jobsite.jobdetails.jobLowProfileTitle": "Low Job Profile: {title}",
+    "jobsite.jobdetails.recruiter": "Recruiter: {firstName} {lastName}",
+    "jobsite.jobdetails.jobCostCenter": "Cost Center Name: {dept}",
+    "jobsite.jobdetails.preferredQualifications": "Preferred Qualifications",
+    "jobsite.jobdetails.jobPosted": "Posted: {postedDate}",
+    "jobsite.jobdetails.internalInformation": "Internal Information",
+    "jobsite.jobdetails.weeklyHoursFulltime": "Weekly Hours: {fullTime}",
+    "jobsite.jobdetails.jobHomeOffice": "Home Office:",
+    "jobsite.search.findMore": "See all roles in {location}",
+    "jobsite.jobdetails.description": "Description",
+    "jobsite.common.no": "No",
+    "jobsite.jobdetails.jobDeadLine": "Internal Deadline: {title}",
+    "jobsite.jobdetails.minimumQualifications": "Minimum Qualifications",
+    "jobsite.jobdetails.hiringManager": "Hiring Manager: {firstName} {lastName}",
+    "jobsite.jobdetails.summary": "Summary",
+    "jobsite.information.jobEmployeeTypeTitle": "Employee Type: {type}",
+    "jobsite.jobdetails.eduAndExp": "Education & Experience",
+    "jobsite.jobdetails.jobCompany": "Company: {company}"
+   }
+  },
+  "talentLimitDetails": {
+   "submissionCount": 0,
+   "limit": 0,
+   "thresholdReached": false,
+   "limitReached": false
+  }
+ }
+}

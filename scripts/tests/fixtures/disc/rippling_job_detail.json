@@ -1,0 +1,30 @@
+{
+ "_captured": "synthetic fixture shaped like the Rippling ATS job detail (board ripco)",
+ "uuid": "job-5002",
+ "name": "Applied AI Engineer, Agents",
+ "description": {
+  "company": "<div><p>Ripco builds workforce software.</p></div>",
+  "role": "<div><p>Build LLM agents and evals in Python.</p><p>Pay range $170,000 - $210,000 USD.</p></div>"
+ },
+ "workLocations": [
+  "San Francisco, CA",
+  "Remote (United States)"
+ ],
+ "department": {
+  "name": "Platform",
+  "base_department": "Engineering",
+  "department_tree": [
+   "Engineering",
+   "Applied AI",
+   "Platform"
+  ]
+ },
+ "employmentType": {
+  "label": "SALARIED_FT",
+  "id": "Salaried, full-time"
+ },
+ "createdOn": "2026-09-29T09:00:00.000000-07:00",
+ "url": "https://ats.rippling.com/ripco/jobs/job-5002",
+ "payRangeDetails": [],
+ "companyName": "Ripco"
+}

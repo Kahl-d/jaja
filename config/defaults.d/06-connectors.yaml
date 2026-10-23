@@ -1,0 +1,8 @@
+# Neutral defaults for connector and browser settings read by web_snapshot.py and browser_research.py.
+policy:
+  connectors:
+    firecrawl_keychain_service: "job-agency-firecrawl"   # macOS Keychain item holding the Firecrawl key
+  browser:
+    daily_profile_views: 25      # most different LinkedIn profiles read a day
+    min_gap_seconds: 20          # human pace between two profile or job-page reads
+    daily_job_views: 20          # most named LinkedIn job pages read a day

@@ -1,0 +1,4 @@
+# The mass batch path (scripts/apply_batch.py). Copy a key into <your data folder>/config/*.yaml to change it.
+policy:
+  apply:
+    visa_note: ""     # sentence added to a "visa check pending" note, e.g. the written work-authorization answer to type into forms

@@ -1,0 +1,16 @@
+# Template: copy to evals/<role>/cases.yaml, rename the role, write three cases with synthetic fixtures.
+role: example-role
+department: job-search
+pass_threshold: 0.8
+cases:
+  - id: happy-path-01
+    title: One-line description of what a good run does
+    fixtures:
+      - {from: fixtures/happy-path-01, to: applications/acme-widgets}
+    task: |
+      Describe the task exactly as you would give it to the agent.
+    checks:
+      - {kind: file_exists, path: applications/acme-widgets/fit.md, weight: 1}
+      - {kind: frontmatter, path: applications/acme-widgets/fit.md, field: verdict, one_of: [apply, review, skip], weight: 2}
+    rubric:
+      - {criterion: "Every claim cites a source from the fixtures", weight: 2}

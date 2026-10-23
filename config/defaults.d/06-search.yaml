@@ -1,0 +1,5 @@
+# Neutral defaults for the search filters read by yc_boards.py.
+policy:
+  search:
+    yc_location_pattern: "Remote|United States"   # regex: which mirror companies' locations are kept
+    yc_topic_pattern: ""                          # regex: topic words a company must mention (empty: any topic)

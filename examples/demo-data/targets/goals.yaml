@@ -1,0 +1,40 @@
+# The agency's goals: as many interviews as possible, as fast as possible, no ceiling. Each metric has a daily and a
+# weekly FLOOR (null = reported, no floor for that span); a floor is the least the day or week must reach, never a cap.
+# Readers: js_common.load_goals (strategy review, dashboard), lessons.progress (the cards header) and the evening wrap.
+# Change a floor together with the number behind it. Every metric below must be present.
+status: proposed
+set_by: starter defaults; replace them with floors your own measured rates support
+updated: null
+floors:
+  interviews_booked:
+    daily: null
+    weekly: 2
+    why: "reported every day; two a week is a starting floor to be tuned from your own rates"
+  interviews_held:
+    daily: null
+    weekly: 2
+    why: "every booked round is held with a prep pack, a mock and a debrief"
+  applications_mass:
+    daily: 10
+    weekly: 50
+    why: "mass applications run all day; a floor, so a day with fewer is a state to explain"
+  applications_focused:
+    daily: 2
+    weekly: 10
+    why: "the person path carries the goal; focused applications get the full package"
+  first_touches:
+    daily: 5
+    weekly: 25
+    why: "people first: openers about the person's own post, inside each network's daily limits"
+  posts_read_linkedin:
+    daily: 20
+    weekly: 100
+    why: "posts and people before portals; LinkedIn is read in your signed-in browser at human pace"
+  posts_read_x:
+    daily: 10
+    weekly: 50
+    why: "X through the official API inside your monthly cap: the best queries first"
+  posts_read_yc:
+    daily: 5
+    weekly: 25
+    why: "YC and new startups: the niche roles the crowd misses"

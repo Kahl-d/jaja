@@ -1,0 +1,36 @@
+# Routine spec (schema: schemas/routine.yaml). Runs before the owner's morning so the dashboard and the day's brief are fresh.
+# Receipt: logs/runs/js-morning-brief/<date>.md in the workspace runtime. Paused by default: the owner switches it on.
+name: js-morning-brief
+purpose: "Each morning run the first half of the Recruiter's day (docs/AGENCY-CHARTER.md section 3), records only and without starting the lane: the mail pass (python3 scripts/mail_intake.py: pull, classify and match into the tracker, read and record only); python3 scripts/follow_ups.py --write (the section 6 cadence; it drafts nothing); python3 scripts/recruiter_sweep.py --since last --write; python3 scripts/cards.py --write (the morning flashcards); then python3 scripts/lessons.py, scripts/interviews.py, scripts/strategy_review.py and scripts/dashboard.py (the dashboard and the home feed); then the brief in state/daily/<date>.md: interviews booked and held, today and this week, no ceiling; the day count on the search clock; the cards file with its counts; the top quick cards; rounds in the next 3 days; follow-ups due; owner-only items. It does not build the day queue: that needs the owner's answers to the cards."
+runs_on: desktop
+engine: claude
+model: sonnet
+effort: medium
+schedule: "45 6 * * *"
+action: skill:daily-job-plan
+inputs:
+  - docs/AGENCY-CHARTER.md
+  - clock.yaml
+  - targets/goals.yaml
+  - plan.md
+  - DASHBOARD.md
+  - state/daily/
+  - legal/timers.md
+  - profile/PROFILE.md
+  - profile/facts.yaml
+outputs:
+  - state/daily/<date>.md
+  - state/mail-events.jsonl                 # mail_intake.py
+  - state/follow-ups/<date>.md              # follow_ups.py --write
+  - state/recruiter/sweep-<date>.json       # recruiter_sweep.py --write
+  - state/recruiter/cards-<date>.md         # cards.py --write
+  - DASHBOARD.md
+  - state/dashboard.json
+  - state/home-feed.json
+  - logs/runs/js-morning-brief/<date>.md
+connectors: [gmail-read]       # the mail pass reads Gmail with the read token; rounds come from application records
+tier: T1
+notify: {"on": needs-owner, via: push}      # today's cards wait, a round within 2 days, an unanswered interview, scheduling or offer mail, a work-authorization clock coming due, or the mail pass or sweep failed
+budget: {max_runs_per_day: 1, max_tokens: 120000}
+enabled: false       # paused by default: the owner switches it on and sets enabled_by
+owner: recruiter

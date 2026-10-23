@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Agency</title>
+<style>
+:root {
+  --bg: #fbfbfa; --panel: #ffffff; --line: #ebebea; --text: #1b1b1a; --muted: #6f6f6c; --faint: #a3a3a0;
+  --accent: #4f46e5; --accent-soft: #eef0ff; --good: #15803d; --warn: #b45309;
+  --r: 8px; font-family: ui-sans-serif, -apple-system, "Inter", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #111111; --panel: #18181a; --line: #2a2a2c; --text: #ececea; --muted: #9b9b98;
+    --faint: #66666a; --accent: #8b85ff; --accent-soft: #23224a; --good: #4ade80; --warn: #fbbf24; }
+}
+:root[data-theme="dark"] { --bg: #111111; --panel: #18181a; --line: #2a2a2c; --text: #ececea; --muted: #9b9b98;
+  --faint: #66666a; --accent: #8b85ff; --accent-soft: #23224a; --good: #4ade80; --warn: #fbbf24; }
+* { box-sizing: border-box; }
+a { color: var(--accent); }
+body { margin: 0; background: var(--bg); color: var(--text); font-size: 13px; line-height: 1.45; }
+.app { display: grid; grid-template-columns: 200px 1fr; min-height: 100vh; }
+nav { border-right: 1px solid var(--line); padding: 16px 8px; display: flex; flex-direction: column; gap: 2px; }
+nav .brand { font-weight: 600; padding: 0 8px 16px; }
+nav a { color: var(--muted); text-decoration: none; padding: 6px 8px; border-radius: 6px; cursor: pointer; }
+nav a.on { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+nav .foot { margin-top: auto; padding: 8px; color: var(--faint); font-size: 11px; }
+main { padding: 16px 24px; min-width: 0; }
+header { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+header h1 { font-size: 16px; margin: 0; font-weight: 600; }
+header .sub { color: var(--muted); }
+header .search { margin-left: auto; border: 1px solid var(--line); border-radius: 6px; padding: 4px 8px; color: var(--faint); min-width: 200px; }
+kbd { border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; font-size: 11px; }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 10px 16px; min-width: 0; }
+.card h2 { font-size: 12px; font-weight: 600; margin: 0 0 8px; color: var(--muted); text-transform: none; letter-spacing: 0; }
+.span12 { grid-column: span 12; } .span8 { grid-column: span 8; } .span7 { grid-column: span 7; } .span5 { grid-column: span 5; } .span4 { grid-column: span 4; }
+.band { display: flex; gap: 24px; align-items: stretch; flex-wrap: wrap; }
+.band .item { display: flex; flex-direction: column; gap: 2px; min-width: 120px; }
+.band .big { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.band .lbl { color: var(--muted); }
+.missing { color: var(--warn); }
+.kpis { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.kpi .v { font-size: 20px; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.kpi .l { color: var(--muted); }
+.kpi .n { color: var(--faint); font-size: 11px; text-align: right; }
+.trend.up { color: var(--good); }
+ul.feed { list-style: none; margin: 0; padding: 0; }
+ul.feed li { display: flex; align-items: flex-start; gap: 8px; padding: 3px 0; border-top: 1px solid var(--line); }
+ul.feed li:first-child { border-top: 0; }
+.tag { align-self: flex-start; font-size: 11px; padding: 0 6px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); white-space: nowrap; }
+.time { color: var(--faint); margin-left: auto; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.finding { padding: 4px 0; border-top: 1px solid var(--line); }
+.finding:first-of-type { border-top: 0; }
+.finding .n { color: var(--faint); font-size: 11px; }
+.finding .few { color: var(--warn); font-size: 11px; }
+.track { position: relative; height: 44px; margin-top: 4px; }
+.track .rail { position: absolute; left: 0; right: 0; top: 20px; height: 4px; background: var(--line); border-radius: 2px; }
+.track .done { position: absolute; left: 0; top: 20px; height: 4px; background: var(--accent); border-radius: 2px; }
+.track .wk { position: absolute; top: 28px; font-size: 10px; color: var(--faint); transform: translateX(-50%); }
+.track .dot { position: absolute; width: 8px; border-radius: 2px; transform: translateX(-50%); }
+.legend { display: flex; gap: 16px; color: var(--muted); font-size: 11px; }
+.legend i { display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 4px; }
+.cal { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; }
+.cal .d { border-top: 2px solid var(--line); padding-top: 4px; min-height: 32px; }
+.cal .d.today { border-color: var(--accent); }
+.cal .dn { color: var(--muted); font-size: 11px; }
+.cal .ev { font-size: 11px; margin-top: 4px; }
+.tasks div { display: flex; gap: 8px; padding: 4px 0; border-top: 1px solid var(--line); }
+.tasks div:first-child { border-top: 0; }
+.tasks input { margin: 2px 0 0; }
+.board { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(200px, 1fr); gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+.col h3 { font-size: 12px; margin: 0 0 8px; color: var(--muted); font-weight: 600; display: flex; justify-content: space-between; }
+.deal { background: var(--panel); border: 1px solid var(--line); border-radius: var(--r); padding: 8px 12px; margin-bottom: 8px; cursor: pointer; }
+.deal:hover { border-color: var(--accent); }
+.deal .co { font-weight: 600; } .deal .ro { color: var(--muted); }
+.deal .meta { display: flex; gap: 8px; margin-top: 4px; font-size: 11px; color: var(--faint); flex-wrap: wrap; }
+table { width: 100%; border-collapse: collapse; }
+th { position: sticky; top: 0; background: var(--panel); text-align: left; font-weight: 500; color: var(--muted); border-bottom: 1px solid var(--line); padding: 6px 8px; cursor: pointer; }
+td { border-bottom: 1px solid var(--line); padding: 6px 8px; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; margin-left: 8px; }
+.toggle button { border: 0; background: transparent; color: var(--muted); padding: 4px 10px; font: inherit; cursor: pointer; }
+.toggle button.on { background: var(--accent-soft); color: var(--accent); }
+.note { color: var(--faint); font-size: 11px; margin-top: 8px; }
+.hidden { display: none; }
+@media (max-width: 900px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .track .wk:nth-of-type(odd) { display: none; }
+  .cal { grid-template-columns: 1fr; }
+  .cal .d { min-height: 0; display: flex; gap: 8px; }
+  nav { flex-direction: row; align-items: center; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); padding: 8px; }
+  nav .brand, nav .foot { display: none; }
+  main { padding: 16px; }
+  .span8, .span7, .span5, .span4 { grid-column: span 12; }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  header { flex-wrap: wrap; gap: 8px; }
+  header .search { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav>
+    <div class="brand">Job Agency</div>
+    <a data-page="home" class="on">Home</a><a data-page="pipeline">Pipeline</a><a>Companies</a><a>People</a><a>Jobs</a>
+    <div class="foot" id="gen"></div>
+  </nav>
+  <main>
+    <header><h1 id="title">Home</h1><span class="sub" id="clockline"></span>
+      <span class="search"><kbd>/</kbd> Search companies, people, jobs</span>
+      <button id="theme" class="toggle" style="padding:4px 8px">Theme</button></header>
+    <section id="home"></section>
+    <section id="pipeline" class="hidden"></section>
+  </main>
+</div>
+<script>
+const D = /*DATA*/null;
+const el = (t, a = {}, ...k) => { const e = document.createElement(t); for (const [x, v] of Object.entries(a)) { if (x === "text") e.textContent = v; else if (x === "html") e.innerHTML = v; else e.setAttribute(x, v); } k.flat().forEach(c => c && e.append(c)); return e; };
+const miss = (v, f = String) => (v === null || v === undefined ? el("span", { class: "missing", text: "missing" }) : f(v));
+const fmtDay = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+document.getElementById("gen").textContent = "Data: snapshot " + D.generated_at.slice(0, 16).replace("T", " ") + " UTC (mock)";
+const ck = D.clock;
+document.getElementById("clockline").textContent = ck.day < 1 ? `Clock starts ${ck.clock_start} · ${ck.days_left} days left` : `Day ${ck.day} of 90 · ${ck.days_left} days left`;
+
+function card(cls, title, ...body) { return el("div", { class: "card " + cls }, el("h2", { text: title }), ...body); }
+
+function home() {
+  const g = el("div", { class: "grid" });
+  const b = D.band48;
+  const r = b.rounds.length ? b.rounds.map(x => el("div", { class: "ev" }, `${x.company} ${x.stage} · ${x.when || "time not on record"} · `,
+    x.pack ? el("a", { href: "#", text: "prep pack" }) : el("span", { class: "missing", text: "no prep pack" }))) : [el("span", { text: "none" })];
+  g.append(card("span12", "Next 48 hours", el("div", { class: "band" },
+    el("div", { class: "item" }, el("span", { class: "lbl", text: "Rounds" }), ...r),
+    el("div", { class: "item" }, el("span", { class: "big", text: b.replies_waiting }), el("span", { class: "lbl", text: "replies waiting on you" })),
+    el("div", { class: "item" }, el("span", { class: "big", text: b.approvals }), el("span", { class: "lbl", text: "approvals waiting" })),
+    el("div", { class: "item" }, el("span", { class: "big", text: b.follow_ups }), el("span", { class: "lbl", text: "follow-ups due" })),
+    el("div", { class: "item" }, el("span", { class: "lbl", text: "Calendar" }), b.calendar === null ? el("span", { class: "missing", text: "not read (Google token)" }) : el("span", { text: b.calendar })))));
+
+  g.append(el("div", { class: "span12 kpis" }, D.kpis.map(k => el("div", { class: "card kpi" }, el("div", { class: "l", text: k.label }), el("div", { class: "v" }, miss(k.value)),
+    el("div", { class: "n" }, k.trend ? el("span", { class: "trend up", text: `+${k.trend} vs last week · ` }) : "", k.n !== null && k.n !== undefined ? `n = ${k.n} · ` : "", k.note)))));
+  const cnt = Object.entries(D.update_counts).map(([k, v]) => `${v} ${k.toLowerCase()}`).join(" · ") || "nothing new";
+  g.append(card("span7", "Since your last visit · " + cnt, el("ul", { class: "feed" },
+    D.updates.slice(0, 6).map(u => el("li", {}, el("span", { class: "tag", text: u.type.replace(/_/g, " ") }), el("span", { text: `${u.company} · ${u.title}` }), el("span", { class: "time", text: u.at.slice(5, 16).replace("T", " ") })))),
+    D.updates.length > 6 ? el("div", { class: "note" }, el("a", { href: "#", text: `+${D.updates.length - 6} more updates` })) : ""));
+
+  g.append(card("span5", "What the numbers say", ...D.findings.map(x => el("div", { class: "finding" }, el("div", { text: x.text }),
+    x.enough ? el("span", { class: "n", text: `n = ${x.n}` }) : el("span", { class: "few", text: `too few to say (n = ${x.n}, under 10)` })))));
+
+  const t = el("div", { class: "track" }, el("div", { class: "rail" }), el("div", { class: "done", style: `width:${Math.max(0, ck.day) / 90 * 100}%` }));
+  for (let w = 0; w <= 13; w++) t.append(el("span", { class: "wk", style: `left:${w * 7 / 90 * 100}%`, text: w ? "W" + w : "D1" }));
+  const col = { applied: "var(--accent)", reply: "var(--good)", round: "var(--warn)" };
+  const pre = D.plot["0"];
+  Object.entries(D.plot).filter(([day]) => day !== "0").forEach(([day, c]) => { let y = 26; ["applied", "reply", "round"].forEach(k => { if (!c[k]) return; const h = Math.min(24, 4 + c[k] * 1.5); y -= h; t.append(el("span", { class: "dot", title: `day ${day}: ${c[k]} ${k}`, style: `left:${Math.max(0.5, day / 90 * 100)}%;top:${y}px;height:${h}px;background:${col[k]}` })); }); });
+  g.append(card("span12", "90-day tracker", el("div", { class: "legend" }, el("span", {}, el("i", { style: "background:var(--accent)" }), "applications"), el("span", {}, el("i", { style: "background:var(--good)" }), "replies"), el("span", {}, el("i", { style: "background:var(--warn)" }), "rounds"), el("span", { text: pre ? `before day 1: ${pre.applied} applications, ${pre.reply} replies, ${pre.round} rounds` : "" })), t));
+
+
+  const days = [...Array(7)].map((_, i) => { const d = new Date(D.today + "T12:00:00"); d.setDate(d.getDate() + i); return d.toISOString().slice(0, 10); });
+  g.append(card("span7", "Next 7 days", el("div", { class: "cal" }, days.map((d, i) => el("div", { class: "d" + (i ? "" : " today") }, el("div", { class: "dn", text: fmtDay(d) }),
+    D.band48.rounds.filter(x => x.when === d).map(x => el("div", { class: "ev", text: `${x.company} ${x.stage}` }))))),
+    el("div", { class: "note", text: "Rounds from the tracker; calendar events join once the Google token is re-authorized." })));
+
+  g.append(card("span5", "Today", el("div", { class: "tasks" }, D.tasks.map(x => el("div", {}, el("input", { type: "checkbox" }), el("span", { text: x.what }))))));
+  return g;
+}
+
+function pipeline() {
+  const wrap = el("div");
+  const head = el("div", { style: "display:flex;align-items:center;margin-bottom:12px" }, el("span", { class: "sub", text: `${D.pipeline.length} deals` }));
+  const tg = el("span", { class: "toggle" }, el("button", { class: "on", text: "Board" }), el("button", { text: "Table" }));
+  head.append(tg, el("span", { class: "note", style: "margin:0 0 0 auto", text: D.queue_note }));
+  const board = el("div", { class: "board" });
+  D.stages.forEach(s => { const rows = D.pipeline.filter(p => p.stage === s); board.append(el("div", { class: "col" }, el("h3", {}, el("span", { text: D.labels[s] }), el("span", { text: rows.length })),
+    rows.map(p => el("div", { class: "deal" }, el("div", { class: "co", text: p.company }), el("div", { class: "ro", text: p.title }),
+      el("div", { class: "meta" }, el("span", { text: p.days === null ? "days in stage: missing" : `${p.days} d in stage` }), el("span", { text: p.warm ? `${p.warm} warm` : "no warm path" }), p.fit ? el("span", { text: `fit ${p.fit}` }) : ""),
+      p.next ? el("div", { class: "meta", text: `Next: ${p.next}${p.next_at ? " · " + p.next_at : ""}` }) : ""))));
+  });
+  const table = el("div", { class: "hidden card" }, el("table", {}, el("thead", {}, el("tr", {}, ["Company", "Role", "Stage", "Days", "Fit", "Warm", "Next"].map((h, i) => el("th", { class: [3, 4, 5].includes(i) ? "num" : "", text: h })))),
+    el("tbody", {}, D.pipeline.map(p => el("tr", {}, el("td", { text: p.company }), el("td", { text: p.title }), el("td", { text: D.labels[p.stage] }),
+      el("td", { class: "num", text: p.days ?? "missing" }), el("td", { class: "num", text: p.fit ?? "" }), el("td", { class: "num", text: p.warm }), el("td", { text: p.next || "" }))))));
+  tg.querySelectorAll("button").forEach((b, i) => b.onclick = () => { tg.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); board.classList.toggle("hidden", i === 1); table.classList.toggle("hidden", i === 0); });
+  wrap.append(head, board, table);
+  return wrap;
+}
+
+document.getElementById("home").append(home());
+document.getElementById("pipeline").append(pipeline());
+document.querySelectorAll("nav a[data-page]").forEach(a => a.onclick = () => {
+  document.querySelectorAll("nav a").forEach(x => x.classList.toggle("on", x === a));
+  ["home", "pipeline"].forEach(id => document.getElementById(id).classList.toggle("hidden", id !== a.dataset.page));
+  document.getElementById("title").textContent = a.textContent;
+});
+document.getElementById("theme").onclick = () => { const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; };
+const q = new URLSearchParams(location.search);
+if (q.get("page") === "pipeline") document.querySelector('nav a[data-page="pipeline"]').click();
+if (q.get("theme")) document.documentElement.dataset.theme = q.get("theme");
+</script>
+</body>
+</html>

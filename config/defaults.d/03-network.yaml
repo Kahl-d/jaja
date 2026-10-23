@@ -1,0 +1,2 @@
+identity:
+  schools: []          # schools to recognise in a contact's headline: [{name: "Example University", pattern: "regex"}]

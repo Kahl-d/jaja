@@ -1,0 +1,49 @@
+{
+ "_captured": "synthetic fixture shaped like the SmartRecruiters posting detail (company srco)",
+ "id": "100002",
+ "name": "AI Engineer, Agents",
+ "refNumber": "REF2101Q",
+ "company": {
+  "name": "Srco Inc",
+  "identifier": "srco"
+ },
+ "location": {
+  "city": "San Francisco",
+  "region": "CA",
+  "country": "us",
+  "remote": false,
+  "hybrid": true,
+  "fullLocation": "San Francisco, CA, United States"
+ },
+ "releasedDate": "2026-09-28T16:00:00.000Z",
+ "postingUrl": "https://jobs.smartrecruiters.com/srco/100002-ai-engineer-agents",
+ "applyUrl": "https://jobs.smartrecruiters.com/srco/100002-ai-engineer-agents?oga=true",
+ "jobAd": {
+  "sections": {
+   "companyDescription": {
+    "title": "Company Description",
+    "text": "<p>Srco builds hiring software for large employers. The company is distributed and product-led.</p>"
+   },
+   "jobDescription": {
+    "title": "Job Description",
+    "text": "<p>Build LLM agents and evals in Python. We sponsor visas.</p><p>Base pay $180,000 - $220,000 USD.</p>"
+   },
+   "qualifications": {
+    "title": "Qualifications",
+    "text": "<p><strong>Qualifications</strong></p><ul><li>2+ years of professional programming in Python</li><li>Experience with SQL and NoSQL databases</li><li>Experience building integrations between systems</li></ul>"
+   },
+   "additionalInformation": {
+    "title": "Additional Information",
+    "text": "<p>Srco is an equal opportunity employer.</p>"
+   }
+  }
+ },
+ "typeOfEmployment": {
+  "id": "permanent",
+  "label": "Full-time"
+ },
+ "experienceLevel": {
+  "id": "associate",
+  "label": "Associate"
+ }
+}

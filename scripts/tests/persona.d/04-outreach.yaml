@@ -1,0 +1,132 @@
+# Synthetic persona values for the batch-04 scripts (fictional: Alex Example, Acme Corp).
+identity:
+  vault_prefix: domains/career/projects/job-search
+style:
+  banned_phrases:
+  - hope (this|you)
+  - finds you well
+  - excited to
+  - thrilled
+  - delighted
+  - leverag
+  - synerg
+  - passionate
+  - cutting[- ]edge
+  - bleeding[- ]edge
+  - state[- ]of[- ]the[- ]art
+  - rockstar
+  - ninja
+  - guru
+  - world[- ]class
+  - best[- ]in[- ]class
+  - game[- ]chang
+  - revolutioni[sz]
+  - innovative
+  - seamless
+  - robust
+  - spearhead
+  - delve
+  - tapestry
+  - unlock
+  - empower
+  - dynamic
+  - fast[- ]paced
+  - results[- ]driven
+  - detail[- ]oriented
+  - team player
+  - thought leader
+  - deep dive
+  - circle back
+  - touch base
+  - pick your brain
+  - hop on a call
+  - wanted to reach out
+  - feel free to
+  - hesitate to
+  - just checking in
+  - just following up
+  - bumping this
+  - i am writing to
+  - great fit
+  - open to work
+  - opentowork
+  - actively looking
+  no_en_dash: true
+  ai_tell_words:
+  - significant(?:ly)?
+  - crucial(?:ly)?
+  - notably
+  - particularly
+  - comprehensive
+  - insights?
+  - foster\w*
+  - landscape
+  - nuanced
+  - multifaceted
+  - holistic
+  - streamlin\w*
+  - elevat\w*
+  - pivotal
+  - intricate
+  - navigat\w*
+  - ecosystem
+  - paradigm
+  - realm
+  - journey
+  - underscor\w*
+  - showcas\w*
+  - harness\w*
+  - meticulous\w*
+  - ultimately
+  - essentially
+  - fundamentally
+  - additionally
+  - furthermore
+  - moreover
+  pitch_phrases:
+  - (?:would )?love to (?:connect|chat|learn|hear|talk)
+  - connect and learn
+  - learn more about
+  - keen to connect
+  - (?:is|are|was) (?:very |really )?(?:close|similar) to (?:that|what i|mine|my)
+  - align(?:s|ed)? (?:closely )?with
+  - resonat\w*
+  - came across your
+  - reaching out
+  - i noticed (?:that )?you
+  - my background
+  - my experience (?:in|with)
+  - i(?:'ve| have)? built
+  - founding engineer
+  - i(?:'m| am) an? (?:ai|ml|software|founding)
+  - open to (?:a )?(?:chat|call)
+  - \d+[- ]min(?:ute)?s?\b
+policy:
+  outreach:
+    confidential_patterns:
+    - '#?open ?to ?work'
+    - \b(looking for|seeking) (a )?new (role|job|position|opportunit\w*)\b
+    - \bjob search\b
+    - \bleaving acme ?corp\b
+    - \bactively (looking|interviewing|searching)\b
+    - \bmy last day\b
+    job_ask_patterns:
+    - \bhire me\b
+    - \bopen to work\b
+    - '#opentowork'
+    - \bdm me\b
+    - \bi'?m looking\b
+    - \bi am looking\b
+    - \bplease refer\b
+    - \brefer me\b
+    - \bmy (?:resume|résumé|cv)\b
+  nda:
+    always_terms:
+    - Zephyr
+  focus:
+    draft_marker: draft for alex
+  dossier:
+    angle_section: why this company for alex
+  linkedin_batch:
+    live_ref: LIVE (capture)
+    items: []

@@ -1,0 +1,12 @@
+# Board fetching (scripts/fetch_ats.py): which titles count and what the generic readers search for.
+policy:
+  title_filter:
+    include: []               # regexes (case-insensitive) a title must match; empty = any engineering-style title
+    exclude: []               # regexes that drop a title; empty = the built-in list of non-engineering jobs
+    ai_first_include: []      # extra title regexes that count at a watch-list company that is not big-tech/enterprise/fallback
+  search:
+    role_searches: []         # searchText queries for large Workday, Oracle and Eightfold boards; empty = one query, "engineer"
+    amazon_queries: []        # [{q: "search words", loc: "place"}] for the amazon.jobs reader; empty = only a company's own search_queries
+    amazon_countries: ["USA"] # amazon.jobs country codes
+    country: "United States"  # the country Jibe career sites are searched in
+    sitemap_run_hours: [7, 10, 13, 16, 19, 22]   # local hours of the day's hunt runs (identity.timezone)

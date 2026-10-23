@@ -1,0 +1,189 @@
+filters:
+  and:
+    - file.inFolder("{{DATA_REL}}/prospects")
+    - file.ext == "md"
+    - file.basename != "README"
+formulas:
+  days_since_inbound: if(last_inbound_at, (today() - date(last_inbound_at)).days, "")
+properties:
+  file.name:
+    displayName: Person
+  note.name:
+    displayName: Name
+  note.company:
+    displayName: Company
+  note.company_type:
+    displayName: Type
+  note.role:
+    displayName: Role
+  note.role_hint:
+    displayName: Role they named
+  note.sponsorship_hint:
+    displayName: Sponsorship
+  note.fit_score:
+    displayName: Fit
+  formula.days_since_inbound:
+    displayName: Days since inbound
+  note.priority:
+    displayName: Priority
+  note.warmth:
+    displayName: Warmth
+  note.status:
+    displayName: Status
+  note.label:
+    displayName: Label
+  note.channels:
+    displayName: Channels
+  note.last_inbound_at:
+    displayName: Last inbound
+  note.last_outbound_at:
+    displayName: Last outbound
+  note.first_contact_at:
+    displayName: First contact
+  note.sources:
+    displayName: Sources
+  note.inbound_count:
+    displayName: In
+  note.outbound_count:
+    displayName: Out
+  note.applications:
+    displayName: Applications
+  note.sponsorship_evidence:
+    displayName: Sponsorship evidence
+  note.emails:
+    displayName: Emails
+  note.linkedin_url:
+    displayName: LinkedIn
+  note.possible_duplicates:
+    displayName: Possible duplicates
+  note.tags:
+    displayName: Tags
+  note.do_not_contact_reason:
+    displayName: Why not
+  note.updated:
+    displayName: Updated
+views:
+  - type: table
+    name: Reply queue
+    filters:
+      and:
+        - or:
+            - status == "new"
+            - status == "triaged"
+        - or:
+            - priority == "P0"
+            - priority == "P1"
+        - not:
+            - tags.contains("possible-duplicate")
+    order:
+      - file.name
+      - company
+      - role
+      - role_hint
+      - priority
+      - sponsorship_hint
+      - formula.days_since_inbound
+      - channels
+      - warmth
+      - fit_score
+      - company_type
+      - label
+      - last_inbound_at
+    sort:
+      - property: priority
+        direction: ASC
+      - property: warmth
+        direction: DESC
+      - property: fit_score
+        direction: DESC
+  - type: table
+    name: All prospects
+    order:
+      - name
+      - company
+      - role
+      - label
+      - status
+      - priority
+      - warmth
+      - fit_score
+      - sources
+      - first_contact_at
+      - last_inbound_at
+      - last_outbound_at
+      - inbound_count
+      - outbound_count
+    sort:
+      - property: priority
+        direction: ASC
+      - property: last_inbound_at
+        direction: DESC
+  - type: table
+    name: Live conversations
+    filters:
+      or:
+        - status == "in_conversation"
+        - status == "interviewing"
+    order:
+      - file.name
+      - name
+      - company
+      - role
+      - status
+      - role_hint
+      - sponsorship_hint
+      - last_inbound_at
+      - last_outbound_at
+      - applications
+    sort:
+      - property: last_inbound_at
+        direction: DESC
+  - type: table
+    name: By company type
+    groupBy:
+      property: company_type
+      direction: ASC
+    order:
+      - name
+      - company
+      - role
+      - priority
+      - status
+      - fit_score
+  - type: table
+    name: Sponsorship signals
+    filters:
+      or:
+        - sponsorship_hint == "yes"
+        - sponsorship_hint == "no"
+    order:
+      - name
+      - company
+      - sponsorship_hint
+      - sponsorship_evidence
+      - priority
+      - status
+  - type: table
+    name: Needs a look
+    filters:
+      or:
+        - tags.contains("possible-duplicate")
+        - tags.contains("needs-review")
+    order:
+      - name
+      - company
+      - emails
+      - linkedin_url
+      - possible_duplicates
+      - label
+      - tags
+  - type: table
+    name: Do not contact
+    filters:
+      and:
+        - status == "do_not_contact"
+    order:
+      - name
+      - company
+      - do_not_contact_reason
+      - updated
