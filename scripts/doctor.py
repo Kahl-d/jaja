@@ -3,8 +3,8 @@
 
     python3 scripts/doctor.py [--data PATH] [--json] [--fix-hints]
 
-  --data PATH    check this data folder instead of the configured one (JOB_AGENCY_DATA, then
-                 ~/.config/job-agency/config.yaml `data_root:`; JOB_AGENCY_DEMO=1 selects examples/demo-data)
+  --data PATH    check this data folder instead of the configured one (JAJA_DATA, then
+                 ~/.config/jaja/config.yaml `data_root:`; JAJA_DEMO=1 selects examples/demo-data)
   --json         print the checks and the summary as JSON
   --fix-hints    under every warn or fail, also print the command that fixes it
 
@@ -116,8 +116,8 @@ def check_uv() -> None:
 def resolve_data(args_data: str | None) -> tuple[Path, Path, dict[str, str]]:
     env = dict(os.environ)
     if args_data:
-        env["JOB_AGENCY_DATA"] = str(Path(args_data).expanduser().resolve())
-        os.environ["JOB_AGENCY_DATA"] = env["JOB_AGENCY_DATA"]
+        env["JAJA_DATA"] = str(Path(args_data).expanduser().resolve())
+        os.environ["JAJA_DATA"] = env["JAJA_DATA"]
     sys.path.insert(0, str(SCRIPTS))
     import agency_paths as ap
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -128,14 +128,14 @@ def check_data(data: Path, runtime: Path) -> bool:
     import agency_paths as ap
     if data == ap.NO_DATA or not data.exists():
         add("fail", "data-root", "no data folder configured" if data == ap.NO_DATA else f"{data} does not exist",
-            "set JOB_AGENCY_DATA or data_root: in the config file",
-            "python3 tools/init-data.py ~/job-agency-data --set-config   # or add --demo to try the demo data")
+            "set JAJA_DATA or data_root: in the config file",
+            "python3 tools/init-data.py ~/jaja-data --set-config   # or add --demo to try the demo data")
         return False
     demo = data == ap.DEMO_DATA or ap.DEMO_DATA in data.parents
     inside = data == CODE_ROOT or CODE_ROOT in data.parents
     if inside and not demo:
         add("warn", "data-root", f"{data} is inside the repo", "your records must stay out of the repo",
-            "python3 tools/init-data.py ~/job-agency-data --set-config")
+            "python3 tools/init-data.py ~/jaja-data --set-config")
     else:
         add("ok", "data-root", f"{data}" + ("  (demo data)" if demo else ""))
     missing = [d for d in REQUIRED_DATA_DIRS if not (data / d).is_dir()]
@@ -165,7 +165,7 @@ def check_config(data: Path) -> None:
         else:
             add("ok", "config-file", f"{cfg} ({', '.join(sorted(keys)) or 'no keys'})")
     else:
-        add("ok", "config-file", f"no {cfg} (JOB_AGENCY_DATA or the demo data is in use)")
+        add("ok", "config-file", f"no {cfg} (JAJA_DATA or the demo data is in use)")
     cdir = data / "config"
     problems = []
     n = 0
@@ -290,8 +290,9 @@ def check_hooks(env: dict[str, str]) -> None:
         return
     missing, failing = [], []
     with tempfile.TemporaryDirectory(prefix="doctor-hooks-") as tmp:
-        hook_env = dict(env, HOME=tmp, CLAUDE_PLUGIN_ROOT=str(CODE_ROOT), JOB_AGENCY_DATA=str(Path(tmp) / "data"),
-                        JOB_AGENCY_RUNTIME=str(Path(tmp) / "runtime"), JOB_AGENCY_CONFIG=str(Path(tmp) / "none.yaml"))
+        hook_env = dict(env, HOME=tmp, CLAUDE_PLUGIN_ROOT=str(CODE_ROOT), JAJA_DATA=str(Path(tmp) / "data"),
+                        JAJA_RUNTIME=str(Path(tmp) / "runtime"), JAJA_CONFIG=str(Path(tmp) / "none.yaml"))
+        hook_env.pop("JAJA_DEMO", None)
         hook_env.pop("JOB_AGENCY_DEMO", None)
         for event, cmd in cmds:
             line = cmd.replace("${CLAUDE_PLUGIN_ROOT}", str(CODE_ROOT))
@@ -396,7 +397,7 @@ def check_mcp(env: dict[str, str]) -> None:
 
 def check_connectors() -> None:
     import agency_paths as ap
-    cdir = Path(os.environ.get("JOB_AGENCY_CONFIG_DIR") or ap.config_file().parent).expanduser()
+    cdir = Path(ap.env("CONFIG_DIR") or ap.config_file().parent).expanduser()
     present = sorted(p.name for p in cdir.iterdir() if p.is_file()) if cdir.is_dir() else []
     tokens = [n for n in present if n not in NOT_TOKENS]
     if not tokens:
@@ -453,7 +454,8 @@ def check_leaks(env: dict[str, str]) -> None:
     r = run([sys.executable, "-B", str(tool), "--staged", "--no-gitleaks", "--root", str(CODE_ROOT)], env)
     summary = tail(r.stdout, 1)
     if r.returncode == 0:
-        deny = Path.home() / ".config" / "job-agency" / "denylist.txt"
+        import agency_paths as ap
+        deny = ap.config_dir() / "denylist.txt"
         add("ok", "leak-guard", (summary or "no findings") + ("" if deny.is_file() else "; pattern checks only (no deny-list)"))
     else:
         add("fail", "leak-guard", tail(r.stdout, 3), "something personal is staged", "python3 tools/leak_check.py --staged")

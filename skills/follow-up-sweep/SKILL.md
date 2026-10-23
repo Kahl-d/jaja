@@ -14,7 +14,7 @@ Voice and style: follow the user's style config (`<data>/config/style.yaml`, key
 Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. Sends reported since the last run: the lanes' send receipts (`playbooks/send-after-yes.md`), mail-triage's
    `Handoffs` (`O-id -> message id`), the owner's word, `/linkedin-assist` receipts.
 2. `python3 scripts/follow_ups.py --json`: the one due list (see the charter). Its `prospect` and `portal-thread` rows

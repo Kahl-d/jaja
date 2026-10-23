@@ -3,8 +3,8 @@
 repos:
   - repo: local
     hooks:
-      - id: job-agency-leak-check
-        name: job-agency leak check (staged files)
+      - id: jaja-leak-check
+        name: jaja leak check (staged files)
         entry: tools/pre-commit-leak.sh
         language: script
         pass_filenames: false

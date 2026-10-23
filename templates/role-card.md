@@ -22,7 +22,7 @@ updated: YYYY-MM-DD
 ---
 
 <!-- Template: templates/role-card.md · Contract: schemas/role.yaml.
-     Interview (/agency:new-role): which recurring ticket type or distinct tool/auth justifies a
+     Interview (/jaja:new-role): which recurring ticket type or distinct tool/auth justifies a
      role rather than a skill? Dependency test: if this role disappeared tomorrow, what breaks?
      Then: inputs, outputs, tool allowlist, tier, model, budget, KPIs, stop conditions,
      reports-to, 10–20 eval cases from real tickets. Body ≤ 80 lines. -->

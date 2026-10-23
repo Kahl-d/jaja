@@ -12,7 +12,7 @@ role is on probation every hold needs an approved file. Holds are tentative, on 
 anyone; accepting the employer's invite or booking through their link is the owner's own act. Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. The classified record: `calendar{start, end, summary, organizer}` when the invite had a calendar block, else the
    proposed times in the body (review mode reads those).
 2. The application slug (the card's match rule) and the prospect slug, if known.

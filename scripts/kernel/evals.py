@@ -394,7 +394,7 @@ def run_claude_cli(role: str, cdir: Path, timeout: int = 1800, model: str | None
                                                   "effort": effort or "default"}), encoding="utf-8")
     sandbox = cdir / "sandbox"
     (sandbox / ".no-config").mkdir(exist_ok=True)
-    env = {**os.environ, "JOB_AGENCY_CONFIG_DIR": str(sandbox / ".no-config"),
+    env = {**os.environ, "JAJA_CONFIG_DIR": str(sandbox / ".no-config"), "JOB_AGENCY_CONFIG_DIR": str(sandbox / ".no-config"),
            "GMAIL_CLIENT_SECRET": str(sandbox / ".no-config" / "no-client-secret.json")}
     proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, cwd=str(sandbox), env=env)
     out = proc.stdout + ("\n" + proc.stderr if proc.returncode else "")

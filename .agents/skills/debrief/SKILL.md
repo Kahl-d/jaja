@@ -11,7 +11,7 @@ what happened, what to change, and the next step, so the story bank, the questio
 Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`). In order:
+Work from the user's data folder (`$JAJA_DATA`). In order:
 1. The rulings the hook printed; `agents/prep-coach.md`.
 2. The owner's account of the round (the owner's message, or the five questions in step 1).
 3. `applications/SLUG/application.md` (stage, round, interviewers), the pack `prep/packs/SLUG/<round>.md` if one

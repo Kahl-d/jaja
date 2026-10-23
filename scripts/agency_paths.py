@@ -7,13 +7,14 @@ Two roots, never mixed:
                 (vault/) live. Defaults to <DATA_ROOT>/runtime; set it to point at an existing workspace.
 
 Resolution of DATA_ROOT (first hit wins):
-  1. env JOB_AGENCY_DATA
-  2. env JOB_SEARCH_ROOT (legacy name)
-  3. under pytest or JOB_AGENCY_DEMO=1: examples/demo-data (never a configured real folder)
-  4. ~/.config/job-agency/config.yaml  `data_root:` (the file can be moved with env JOB_AGENCY_CONFIG)
+  1. env JAJA_DATA (older names still accepted: JOB_AGENCY_DATA, then JOB_SEARCH_ROOT)
+  2. under pytest or JAJA_DEMO=1: examples/demo-data (never a configured real folder)
+  3. ~/.config/jaja/config.yaml  `data_root:` (the file can be moved with env JAJA_CONFIG)
   else: a path that does not exist, so the failure names the setting.
-RUNTIME_ROOT: env JOB_AGENCY_RUNTIME, then (demo/pytest) a temp folder, then config `runtime_root:`, then <DATA_ROOT>/runtime.
-An eval sandbox (a `.eval-sandbox` marker beside this scripts/ copy) is its own data and runtime root.
+RUNTIME_ROOT: env JAJA_RUNTIME, then (demo/pytest) a temp folder, then config `runtime_root:`, then <DATA_ROOT>/runtime.
+Every JAJA_<NAME> variable also answers to its earlier name JOB_AGENCY_<NAME>; the config folder ~/.config/jaja also
+falls back to ~/.config/job-agency when only that one exists. An eval sandbox (a `.eval-sandbox` marker beside this
+scripts/ copy) is its own data and runtime root.
 """
 from __future__ import annotations
 
@@ -26,13 +27,32 @@ SCRIPTS_DIR = CODE_ROOT / "scripts"
 KERNEL_DIR = SCRIPTS_DIR / "kernel"
 SCHEMAS_DIR = CODE_ROOT / "schemas"
 DEMO_DATA = CODE_ROOT / "examples" / "demo-data"
-NO_DATA = CODE_ROOT / "NO-DATA-FOLDER-CONFIGURED--set-JOB_AGENCY-DATA-or-see-docs-config.md"
+NO_DATA = CODE_ROOT / "NO-DATA-FOLDER-CONFIGURED--set-JAJA-DATA-or-see-docs-config.md"
 EVAL_MARK = CODE_ROOT / ".eval-sandbox"
 
 
+def env(name: str, default: str | None = None) -> str | None:
+    """JAJA_<name>, else the earlier JOB_AGENCY_<name>, else default (empty values count as unset)."""
+    for prefix in ("JAJA_", "JOB_AGENCY_"):
+        value = os.environ.get(prefix + name)
+        if value:
+            return value
+    return default
+
+
+def config_dir() -> Path:
+    """The folder for your config file, deny-list and connector tokens: JAJA_CONFIG_DIR, else ~/.config/jaja, else (only
+    when it exists and the new one does not) the earlier ~/.config/job-agency."""
+    explicit = env("CONFIG_DIR")
+    if explicit:
+        return Path(explicit).expanduser()
+    new, old = Path.home() / ".config" / "jaja", Path.home() / ".config" / "job-agency"
+    return old if (old.is_dir() and not new.exists()) else new
+
+
 def config_file() -> Path:
-    env = os.environ.get("JOB_AGENCY_CONFIG")
-    return Path(env).expanduser() if env else Path.home() / ".config" / "job-agency" / "config.yaml"
+    explicit = env("CONFIG")
+    return Path(explicit).expanduser() if explicit else config_dir() / "config.yaml"
 
 
 def read_config() -> dict[str, str]:
@@ -54,9 +74,9 @@ def read_config() -> dict[str, str]:
 def _resolve_data() -> Path:
     if EVAL_MARK.is_file():
         return CODE_ROOT
-    for var in ("JOB_AGENCY_DATA", "JOB_SEARCH_ROOT"):
-        if os.environ.get(var):
-            return Path(os.environ[var]).expanduser().resolve()
+    explicit = env("DATA") or os.environ.get("JOB_SEARCH_ROOT")
+    if explicit:
+        return Path(explicit).expanduser().resolve()
     if _demo_mode():
         return DEMO_DATA                      # tests and the demo never read a configured real data folder
     cfg = read_config().get("data_root")
@@ -66,20 +86,20 @@ def _resolve_data() -> Path:
 
 
 def _demo_mode() -> bool:
-    return os.environ.get("JOB_AGENCY_DEMO") == "1" or "pytest" in sys.modules
+    return env("DEMO") == "1" or "pytest" in sys.modules
 
 
 def _resolve_runtime(data: Path) -> Path:
     if EVAL_MARK.is_file():
         return CODE_ROOT
-    env = os.environ.get("JOB_AGENCY_RUNTIME")
-    if env:
-        return Path(env).expanduser().resolve()
+    explicit = env("RUNTIME")
+    if explicit:
+        return Path(explicit).expanduser().resolve()
     if _demo_mode() and data == DEMO_DATA:
         import tempfile
-        return Path(tempfile.gettempdir()) / "job-agency-demo-runtime"      # never write into the repo or a real runtime
-    env = read_config().get("runtime_root")
-    return Path(env).expanduser().resolve() if env else data / "runtime"
+        return Path(tempfile.gettempdir()) / "jaja-demo-runtime"      # never write into the repo or a real runtime
+    configured = read_config().get("runtime_root")
+    return Path(configured).expanduser().resolve() if configured else data / "runtime"
 
 
 DATA_ROOT = _resolve_data()
@@ -89,6 +109,6 @@ RUNTIME_ROOT = _resolve_runtime(DATA_ROOT)
 def require_data() -> Path:
     """DATA_ROOT, or exit with a message that says how to set it."""
     if not DATA_ROOT.exists():
-        sys.exit("job-agency: no data folder. Set JOB_AGENCY_DATA=<folder> (or data_root: in "
+        sys.exit("jaja: no data folder. Set JAJA_DATA=<folder> (or data_root: in "
                  f"{config_file()}); `python3 tools/init-data.py --demo <folder>` makes one.")
     return DATA_ROOT

@@ -19,7 +19,7 @@ a missing line refuses (missing is not empty). Each call appends one row to stat
 endpoint, host, url, credits, status; never page text): the receipt, and what the budget counts.
 
 The key: FIRECRAWL_API_KEY in the environment (cloud routines), else the macOS Keychain item named by
-policy.connectors.firecrawl_keychain_service (default `job-agency-firecrawl`). It is never printed or written; an API error that echoes it prints `[key]`.
+policy.connectors.firecrawl_keychain_service (default `jaja-firecrawl`). It is never printed or written; an API error that echoes it prints `[key]`.
 
   python3 scripts/web_snapshot.py scrape URL --out research/targets/evidence/<name>-<date>.md
                                   [--wait-for MS] [--max-age-hours H] [--dry-run]
@@ -55,9 +55,9 @@ import js_common as jc  # noqa: E402
 import profile_titles as pt  # noqa: E402
 
 API = "https://api.firecrawl.dev/v2"
-KEYCHAIN_SERVICE = str(cfg.get("policy.connectors.firecrawl_keychain_service", "job-agency-firecrawl"))
+KEYCHAIN_SERVICE = str(cfg.get("policy.connectors.firecrawl_keychain_service", "jaja-firecrawl"))
 ENV_KEY = "FIRECRAWL_API_KEY"
-USER_AGENT = "job-agency/1.0 (personal job search; robots.txt check)"
+USER_AGENT = "jaja/1.0 (personal job search; robots.txt check)"
 ROBOT_AGENTS = ("*", "FireCrawlAgent")
 LEDGER = Path("state") / "firecrawl" / "usage.jsonl"
 HOSTS = Path("state") / "firecrawl" / "hosts.json"
@@ -256,7 +256,7 @@ def robots_verdict(url: str) -> tuple[str, float | None]:
     if 400 <= status < 500:
         return f"has no rules (robots.txt HTTP {status})", None
     import fetch_ats                    # its Robots reads robots.txt the RFC 9309 way (longest match wins)
-    rules = {agent: fetch_ats.Robots(text, agent="job-agency" if agent == "*" else agent) for agent in ROBOT_AGENTS}
+    rules = {agent: fetch_ats.Robots(text, agent="jaja" if agent == "*" else agent) for agent in ROBOT_AGENTS}
     for agent, rp in rules.items():
         if not rp.allowed(url):
             raise Refused(f"refused: {robots_url} disallows this path for {agent}")

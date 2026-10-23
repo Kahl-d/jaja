@@ -11,7 +11,7 @@ edits it by hand. Mode: `daily`, or `weekly` (or pass the argument).
 Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`). In order:
+Work from the user's data folder (`$JAJA_DATA`). In order:
 1. The rulings the hook printed; `agents/tracker-ops.md`.
 2. `python3 scripts/tracker.py metrics` (the funnel); `applications/*/application.md` through the scripts.
 3. Weekly only: `state/seen.jsonl`, `prospects/*.md`, `touches/`, `legal/timers.md`, `clock.yaml`, and the week's

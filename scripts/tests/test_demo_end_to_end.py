@@ -22,9 +22,9 @@ def env(tmp_path):
     shutil.copytree(DEMO, data)
     home = tmp_path / "home"
     home.mkdir()
-    e = dict(os.environ, JOB_AGENCY_DEMO="1", JOB_AGENCY_DATA=str(data), JOB_AGENCY_RUNTIME=str(data / "runtime"),
+    e = dict(os.environ, JAJA_DEMO="1", JAJA_DATA=str(data), JAJA_RUNTIME=str(data / "runtime"),
              HOME=str(home), PYTHONDONTWRITEBYTECODE="1", PYTHONPATH=str(CODE / "mcp"))
-    e.pop("JOB_AGENCY_CONFIG", None)
+    e.pop("JAJA_CONFIG", None)
     e["_data"] = str(data)
     return e
 

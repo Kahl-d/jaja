@@ -1,16 +1,19 @@
 """Fixtures for the job-search MCP tests: a throwaway department tree and OS root, no network.
 
 Every test runs against tmp copies of the record folders. The real scripts (tracker.py, js_common,
-js_comms_util) are used as code; only the data roots are redirected through JOB_SEARCH_ROOT and
-JOB_AGENCY_RUNTIME.
+js_comms_util) are used as code; only the data roots are redirected through JAJA_DATA and
+JAJA_RUNTIME.
 """
 from __future__ import annotations
 
 import json
+import os
 import socket
 import textwrap
 import urllib.request
 from pathlib import Path
+
+os.environ["JAJA_PERSONA"] = "1"          # scripts the tests launch as subprocesses use the synthetic persona too
 
 import pytest
 
@@ -245,7 +248,8 @@ def tree(tmp_path, monkeypatch):
     (js / "outbox").mkdir(parents=True, exist_ok=True)
     (js / "state").mkdir(parents=True, exist_ok=True)
 
+    monkeypatch.setenv("JAJA_DATA", str(js))
     monkeypatch.setenv("JOB_SEARCH_ROOT", str(js))
-    monkeypatch.setenv("JOB_AGENCY_RUNTIME", str(os_root))
+    monkeypatch.setenv("JAJA_RUNTIME", str(os_root))
     monkeypatch.setenv("JOB_SEARCH_TODAY", TODAY)
     return {"js": js, "os": os_root}

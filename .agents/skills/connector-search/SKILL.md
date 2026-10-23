@@ -33,7 +33,7 @@ Hard lines:
   with reasons, per connector and query) · `Needs you` · `Next` (the pipeline line below).
 
 ## Procedure
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. For each connector that is on, record the tools it lists in the reply the first time (the registry entries ask
    for this). Use only its search and job-detail tools.
 2. For each query and location, call the search tool once (newest first, full-time, posted in the last 7 days when

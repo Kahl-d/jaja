@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
-# install.sh - set up job-agency on this machine. Safe to run again: nothing is overwritten.
+# install.sh - set up jaja on this machine. Safe to run again: nothing is overwritten.
 #
 #   ./install.sh [--demo] [--yes] [--data DIR] [--no-hook] [--skip-doctor]
 #
 #   --demo         use the synthetic demo data (Sam Rivera, Acme Corp, ...) instead of a blank folder
 #   --yes          do not ask before installing a missing Python module
-#   --data DIR     the folder for YOUR records (default ~/job-agency-data; with --demo ~/job-agency-demo)
+#   --data DIR     the folder for YOUR records (default ~/jaja-data; with --demo ~/jaja-demo)
 #   --no-hook      do not install the git pre-commit leak guard in this checkout
 #   --skip-doctor  stop after setup (doctor is the last step otherwise)
 #
 # What it does: checks python3 >= 3.11 (and notes whether uv is there), installs PyYAML with `pip --user` when it is
-# missing (asks first), creates the data folder with tools/init-data.py, writes ~/.config/job-agency/config.yaml
+# missing (asks first), creates the data folder with tools/init-data.py, writes ~/.config/jaja/config.yaml
 # (data_root only; other keys are kept), installs the pre-commit leak guard when this is a git checkout, prints the two
 # plugin commands to run, and finishes with scripts/doctor.py. Exit status is doctor's.
 # Bash 3.2 compatible (macOS default).
@@ -36,7 +36,7 @@ say() { printf '%s\n' "$*"; }
 step() { printf '\n== %s\n' "$*"; }
 
 if [ -z "$data" ]; then
-    if [ "$demo" = 1 ]; then data="$HOME/job-agency-demo"; else data="$HOME/job-agency-data"; fi
+    if [ "$demo" = 1 ]; then data="$HOME/jaja-demo"; else data="$HOME/jaja-data"; fi
 fi
 case "$data" in "~"/*) data="$HOME/${data#\~/}" ;; esac
 
@@ -48,7 +48,7 @@ if [ -z "$py" ]; then
     exit 1
 fi
 if ! "$py" -c 'import sys; sys.exit(0 if sys.version_info >= (3, 11) else 1)'; then
-    say "python3 is $("$py" -c 'import sys; print("%d.%d" % sys.version_info[:2])'); job-agency needs 3.11 or newer." >&2
+    say "python3 is $("$py" -c 'import sys; print("%d.%d" % sys.version_info[:2])'); jaja needs 3.11 or newer." >&2
     say "Install a newer Python (macOS: brew install python@3.12) and run this again." >&2
     exit 1
 fi
@@ -78,7 +78,7 @@ else
     if [ "$go" = 1 ]; then
         "$py" -m pip install --user pyyaml requests || {
             say "pip could not install PyYAML/requests (an externally managed Python?). Try: brew install pyyaml, or a venv:" >&2
-            say "  python3 -m venv ~/.venvs/job-agency && ~/.venvs/job-agency/bin/pip install pyyaml requests" >&2
+            say "  python3 -m venv ~/.venvs/jaja && ~/.venvs/jaja/bin/pip install pyyaml requests" >&2
             exit 1
         }
     else
@@ -99,7 +99,7 @@ if [ "$hook" = 0 ]; then
     say "skipped (--no-hook)"
 elif [ -d "$here/.git" ]; then
     hookfile="$here/.git/hooks/pre-commit"
-    marker="# job-agency leak guard"
+    marker="# jaja leak guard"
     if [ -e "$hookfile" ] && ! grep -q "$marker" "$hookfile" 2>/dev/null; then
         say "note: $hookfile already exists and is not ours; left alone."
         say "      Add this line to it:  \"$here/tools/pre-commit-leak.sh\""
@@ -116,8 +116,8 @@ fi
 # ---------------------------------------------------------------- plugin
 step "Plugin (run these two commands yourself)"
 say "  claude plugin marketplace add \"$here\""
-say "  claude plugin install job-agency@job-agency --scope user"
-say "Then start a session and try a skill, for example /agency:doctor."
+say "  claude plugin install jaja@jaja --scope user"
+say "Then start a session and try a skill, for example /jaja:doctor."
 
 # ---------------------------------------------------------------- doctor
 if [ "$run_doctor" = 1 ]; then

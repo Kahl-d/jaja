@@ -45,10 +45,10 @@ def write_plugin(root: Path, version: str = "0.1.0", market_version: str | None 
     (root / ".mcp.json").write_text(json.dumps({"mcpServers": {}}), encoding="utf-8")
     (root / ".claude" / "agents").mkdir(parents=True, exist_ok=True)
     (root / ".claude-plugin" / "plugin.json").write_text(json.dumps({
-        "name": "job-agency", "version": version, "skills": "./skills", "agents": agents,
+        "name": "jaja", "version": version, "skills": "./skills", "agents": agents,
         "hooks": "./hooks/hooks.json", "mcpServers": "./.mcp.json"}), encoding="utf-8")
     (root / ".claude-plugin" / "marketplace.json").write_text(json.dumps({
-        "name": "job-agency", "plugins": [{"name": "job-agency", "source": "./", "version": market_version or version}]}),
+        "name": "jaja", "plugins": [{"name": "jaja", "source": "./", "version": market_version or version}]}),
         encoding="utf-8")
 
 
@@ -256,10 +256,10 @@ def test_agents_pointing_at_the_source_cards_is_a_note_not_drift(repo: Path, cap
 
 
 def _install(tmp_path: Path, version: str) -> Path:
-    install = tmp_path / "cache" / "job-agency" / version
+    install = tmp_path / "cache" / "jaja" / version
     install.mkdir(parents=True)
     registry = tmp_path / "installed_plugins.json"
-    registry.write_text(json.dumps({"version": 2, "plugins": {"job-agency@job-agency": [
+    registry.write_text(json.dumps({"version": 2, "plugins": {"jaja@jaja": [
         {"scope": "user", "installPath": str(install), "version": version}]}}), encoding="utf-8")
     return registry
 
@@ -269,7 +269,7 @@ def test_installed_plugin_version_behind_the_repo_is_drift(repo: Path, tmp_path:
     sync.main(repo)
     assert sync.main(repo, check=True, registry=_install(tmp_path, "0.2.0")) == 0
     assert sync.main(repo, check=True, registry=_install(tmp_path, "0.1.0")) == 1
-    assert "installed job-agency@job-agency" in capsys.readouterr().out
+    assert "installed jaja@jaja" in capsys.readouterr().out
 
 
 def test_no_registry_or_no_installed_entry_is_not_drift(repo: Path, tmp_path: Path):

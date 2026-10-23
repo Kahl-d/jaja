@@ -10,7 +10,7 @@ Owner: resume-tailor (runs it); resume-editor and the Recruiter re-run it as gat
 script writes only its report files). Script: `scripts/ats_check.py`.
 
 ## Procedure
-1. Work from the user's data folder (`$JOB_AGENCY_DATA`); V = the resume folder;
+1. Work from the user's data folder (`$JAJA_DATA`); V = the resume folder;
    the PDF name comes from the renderer's `meta.yaml`:
    `python3 -c "import sys, yaml; print(yaml.safe_load(open(sys.argv[1]))['pdf'])" V/meta.yaml`.
 2. Run (variant; drop `--jd` for a base):

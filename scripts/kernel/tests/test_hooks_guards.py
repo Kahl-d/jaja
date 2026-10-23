@@ -1,6 +1,6 @@
 """The PreToolUse / SubagentStart / SessionStart hooks, each run as a subprocess with a synthetic JSON payload the way
 the harness runs them: generated-file guard, one-writer guard, role command deny, role rulings, and silence outside
-a programme. The data folder is a throwaway tmp dir (JOB_AGENCY_DATA); nothing of the real one is read."""
+a programme. The data folder is a throwaway tmp dir (JAJA_DATA); nothing of the real one is read."""
 import json
 import os
 import subprocess
@@ -24,7 +24,7 @@ def env(tmp_path: Path):
     scratch = tmp_path / "scratch"
     scratch.mkdir()
     base = {k: v for k, v in os.environ.items() if k not in {"OS_LANE", "CLAUDE_PROJECT_DIR", "CLAUDE_CODE_MESSAGING_SOCKET"}}
-    base.update(JOB_AGENCY_DATA=str(data), JOB_AGENCY_RUNTIME=str(tmp_path / "runtime"), PYTHONDONTWRITEBYTECODE="1",
+    base.update(JAJA_DATA=str(data), JAJA_RUNTIME=str(tmp_path / "runtime"), PYTHONDONTWRITEBYTECODE="1",
                 TMPDIR=str(scratch), CLAUDE_PROJECT_DIR=str(data))
     return {"data": data, "tmp": tmp_path, "env": base}
 
@@ -142,7 +142,7 @@ def test_a_denied_command_is_blocked_for_that_role(env):
     make_agent(env, "scout", ["gmail_send.py", "x_api.py execute"])
     r = bash(env, "python3 scripts/gmail_send.py execute --approval A-2026-0001", "scout")
     assert r.returncode == 2 and "may not run 'gmail_send.py'" in r.stderr
-    assert bash(env, "python3 scripts/x_api.py execute --id 1", "job-agency:scout").returncode == 2    # plugin-scoped name
+    assert bash(env, "python3 scripts/x_api.py execute --id 1", "jaja:scout").returncode == 2    # plugin-scoped name
 
 
 def test_an_allowed_command_and_other_agents_pass(env):
@@ -177,7 +177,7 @@ def test_role_rules_prints_the_roles_rulings_and_nothing_for_builtin_agents(env)
     r = run(env, "role_rules.py", payload)
     out = json.loads(r.stdout)["hookSpecificOutput"]
     assert r.returncode == 0 and out["hookEventName"] == "SubagentStart" and "R-1" in out["additionalContext"]
-    for builtin in ("general-purpose", "Explore", "job-agency:lane-hunt"):
+    for builtin in ("general-purpose", "Explore", "jaja:lane-hunt"):
         r = run(env, "role_rules.py", {**payload, "agent_type": builtin, "agent_id": "b-" + builtin})
         assert (r.returncode, r.stdout) == (0, ""), builtin
 
@@ -204,7 +204,7 @@ def test_lane_context_prints_nothing_without_a_programme(env):
 
 
 def test_session_hooks_print_nothing_for_a_plain_session_with_no_data_folder(env, tmp_path):
-    nowhere = {**env["env"], "JOB_AGENCY_DATA": str(tmp_path / "no-such-data-folder")}
+    nowhere = {**env["env"], "JAJA_DATA": str(tmp_path / "no-such-data-folder")}
     for script in ("lane_context.py", "lane_register.py", "lane_rules.py"):
         r = subprocess.run([sys.executable, str(HOOKS / script)], input=json.dumps(start(env)), capture_output=True, text=True,
                            env=nowhere, cwd=str(tmp_path), timeout=30)

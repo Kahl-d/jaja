@@ -26,8 +26,8 @@ def ws(tmp_path: Path):
 
 def run(ws, payload, ttl="90", cwd=None):
     env = {k: v for k, v in os.environ.items() if k != "OS_LANE"}
-    env.update(OS_BROWSER_LEASE_TTL=ttl, OS_BROWSER_LEASE_DIR=str(ws / "lease"), JOB_AGENCY_DATA=str(ws),
-               JOB_AGENCY_RUNTIME=str(ws / "runtime"), PYTHONDONTWRITEBYTECODE="1")
+    env.update(OS_BROWSER_LEASE_TTL=ttl, OS_BROWSER_LEASE_DIR=str(ws / "lease"), JAJA_DATA=str(ws),
+               JAJA_RUNTIME=str(ws / "runtime"), PYTHONDONTWRITEBYTECODE="1")
     r = subprocess.run([sys.executable, str(HOOKS / "browser_lease.py")], input=json.dumps(payload), capture_output=True,
                        text=True, env=env, timeout=30, cwd=str(cwd or ws))
     assert r.returncode == 0

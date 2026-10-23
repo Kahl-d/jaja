@@ -10,7 +10,7 @@
 # live one.
 #
 # The hooks look for the hub at <data folder>/hub/. --root is the folder the hub/ goes under: normally
-# your data folder (JOB_AGENCY_DATA).
+# your data folder (JAJA_DATA).
 #
 # Notes on the port from PowerShell are in skills/lane-orchestration/PORT-NOTES.md section 2.
 #
@@ -37,7 +37,7 @@ usage: new-programme.sh --programme <name> --root <dir> [--prefix <PFX>] [--tick
                         [--branch <shipping-branch>] [--base <ref>] [--author "<Name <email>>"] [--force]
 
   --programme  the programme's human name (required)                 e.g. "Example Apply Sprint"
-  --root       the project directory the hub/ goes under (required)  e.g. ~/job-agency-data
+  --root       the project directory the hub/ goes under (required)  e.g. ~/jaja-data
   --prefix     one UPPERCASE prefix per programme; derived from the name's initials if omitted
   --ticket     the ticket / id the shipping branch carries            e.g. EX-12   (default: empty)
   --branch     the shipping branch                                    (default: empty -- fill later)

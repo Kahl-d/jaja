@@ -29,7 +29,7 @@ import argparse, collections, json, re, subprocess, sys
 
 # ---------------------------------------------------------------- the tables
 GROUPS = [
-    # A worked example for a job-agency data folder (paths relative to the repo root being diffed).
+    # A worked example for a jaja data folder (paths relative to the repo root being diffed).
     ("RESUME", "role variants: resume, PDFs, ATS, review, cover, why-us", [r"^resumes/variants/"]),
     ("RESEARCH", "company dossiers, visa checks, per-target briefs and people maps",
      [r"^companies/", r"^legal/checks/", r"^research/targets/"]),

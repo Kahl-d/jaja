@@ -13,7 +13,7 @@ where the owner submits by hand, stop at the filled form. Runs by hand in any se
 Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. The SLUG of the row the lane claimed (`python3 scripts/day_queue.py claim --lane <address> --kind apply`);
    `applications/SLUG/application.md` and its `jobs/<id>.md`; the portal's playbook in `playbooks/portals/`. A mass
    row's page is the base (`python3 scripts/apply_batch.py --tier mass SLUG`); a focused row's page is its variant in

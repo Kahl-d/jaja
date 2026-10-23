@@ -1,5 +1,5 @@
 # Template: templates/automation.yaml · Contract: schemas/automation.yaml
-# Interview (/agency:new-automation): which event? (SessionEnd | SessionStart | PreToolUse |
+# Interview (/jaja:new-automation): which event? (SessionEnd | SessionStart | PreToolUse |
 # FileChanged(path) | inbox:new(type) | routine:done(name) | webhook) under what condition?
 # what runs, and is it deterministic? tier? Hook-backed automations are compiled into the
 # hooks file by sync; inbox- and routine-backed ones are evaluated by the sweep.

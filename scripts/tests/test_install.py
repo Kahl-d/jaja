@@ -19,8 +19,8 @@ pytestmark = pytest.mark.skipif(BASH is None, reason="bash is required for insta
 def env_for(home: Path, **extra):
     env = dict(os.environ, HOME=str(home), PYTHONDONTWRITEBYTECODE="1",
                PATH=str(Path(sys.executable).parent) + os.pathsep + os.environ.get("PATH", ""))
-    for k in ("JOB_AGENCY_DATA", "JOB_SEARCH_ROOT", "JOB_AGENCY_CONFIG", "JOB_AGENCY_DEMO", "JOB_AGENCY_CONFIG_DIR",
-              "JOB_AGENCY_RUNTIME"):
+    for k in ("JAJA_DATA", "JOB_SEARCH_ROOT", "JAJA_CONFIG", "JAJA_DEMO", "JAJA_CONFIG_DIR",
+              "JAJA_RUNTIME"):
         env.pop(k, None)
     env.update(extra)
     return env
@@ -41,20 +41,20 @@ def home(tmp_path):
 def test_demo_install_ends_with_doctor_green(home):
     r = install(CODE, "--demo", "--yes", "--no-hook", home=home)
     assert r.returncode == 0, r.stdout + r.stderr
-    data = home / "job-agency-demo"
+    data = home / "jaja-demo"
     assert (data / "jobs" / "acme-corp-100.md").is_file()
-    cfg = (home / ".config" / "job-agency" / "config.yaml").read_text(encoding="utf-8")
+    cfg = (home / ".config" / "jaja" / "config.yaml").read_text(encoding="utf-8")
     assert cfg.strip() == f"data_root: {data.resolve()}"
     out = r.stdout
     assert 'claude plugin marketplace add "' in out
-    assert "claude plugin install job-agency@job-agency --scope user" in out
+    assert "claude plugin install jaja@jaja --scope user" in out
     assert "== Doctor" in out and " 0 fail" in out
     assert "[FAIL]" not in out
 
 
 def test_rerun_is_idempotent(home):
     assert install(CODE, "--demo", "--yes", "--no-hook", "--skip-doctor", home=home).returncode == 0
-    data = home / "job-agency-demo"
+    data = home / "jaja-demo"
     note = data / "profile" / "VOICE.md"
     note.write_text("my own words\n", encoding="utf-8")
     r = install(CODE, "--demo", "--yes", "--no-hook", "--skip-doctor", home=home)
@@ -64,7 +64,7 @@ def test_rerun_is_idempotent(home):
 
 
 def test_blank_install_to_a_chosen_folder_keeps_other_config_keys(home, tmp_path):
-    cfg = home / ".config" / "job-agency" / "config.yaml"
+    cfg = home / ".config" / "jaja" / "config.yaml"
     cfg.parent.mkdir(parents=True)
     (tmp_path / "rt").mkdir()
     cfg.write_text("runtime_root: " + str(tmp_path / "rt") + "\n", encoding="utf-8")
@@ -107,7 +107,7 @@ def test_hook_is_installed_once_and_is_executable(mini_repo, home):
     assert r.returncode == 0, r.stdout + r.stderr
     hook = mini_repo / ".git" / "hooks" / "pre-commit"
     text = hook.read_text(encoding="utf-8")
-    assert "# job-agency leak guard" in text and "pre-commit-leak.sh" in text
+    assert "# jaja leak guard" in text and "pre-commit-leak.sh" in text
     assert hook.stat().st_mode & stat.S_IXUSR
     before = text
     install(mini_repo, "--demo", "--yes", "--skip-doctor", home=home)

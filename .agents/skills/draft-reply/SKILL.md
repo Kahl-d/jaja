@@ -14,7 +14,7 @@ Voice and style: follow the user's style config (`<data>/config/style.yaml`, key
 Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. The batch id (`B-<date>-<n>` from prospect-triage) or the slugs with new inbound (an `R-<date>-<n>` batch);
    `state/batches/<batch>.md`.
 2. Call windows: the brief's `WINDOWS:` line or `state/daily/<date>.md` (never invented).

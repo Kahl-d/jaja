@@ -12,7 +12,7 @@ or answers in the record interview, into dated, evidenced records every other ro
 Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`). In order:
+Work from the user's data folder (`$JAJA_DATA`). In order:
 1. The rulings the hook printed; `agents/corpus-keeper.md` (the contract: sources, numbers, dates, titles, discretion, ids).
 2. `profile/README.md` (corpus contract), `profile/_inbox/intake/README.md` (intake note format).
 3. `profile/facts.yaml` (`rules:`, `conflicts:`, timeline), `profile/PROFILE-HOLDS.md` (read only).

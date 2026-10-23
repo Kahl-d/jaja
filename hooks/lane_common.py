@@ -40,7 +40,7 @@ HUB_WALK_DEPTH = 5            # `<data>/hub/programme.json` is depth 1; a projec
 
 
 def strip_namespace(agent_type: object) -> str:
-    """`job-agency:lane-hunt` -> `lane-hunt`: a plugin's agents carry the plugin name before the colon."""
+    """`jaja:lane-hunt` -> `lane-hunt`: a plugin's agents carry the plugin name before the colon."""
     return str(agent_type or "").strip().split(":")[-1].strip()
 
 

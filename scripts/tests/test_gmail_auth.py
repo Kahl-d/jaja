@@ -35,7 +35,7 @@ def _mode(path):
 @pytest.fixture
 def cfg(tmp_path, monkeypatch):
     folder = tmp_path / "home" / ".config" / "workspace"
-    monkeypatch.setenv("JOB_AGENCY_CONFIG_DIR", str(folder))
+    monkeypatch.setenv("JAJA_CONFIG_DIR", str(folder))
     return folder
 
 
@@ -49,11 +49,11 @@ def test_read_and_compose_scopes_are_split_and_nothing_can_send():
 
 
 def test_default_token_paths_are_separate_files_under_config_outside_the_repo(monkeypatch):
-    monkeypatch.delenv("JOB_AGENCY_CONFIG_DIR", raising=False)
+    monkeypatch.delenv("JAJA_CONFIG_DIR", raising=False)
     read, compose = ga.token_path("read"), ga.token_path("compose")
     assert (read.name, compose.name) == ("gmail_token_read.json", "gmail_token_compose.json")
     assert ga.token_path("calendar").name == "calendar_token.json"
-    assert str(read.parent).endswith(os.path.join(".config", "job-agency"))
+    assert str(read.parent).endswith((os.path.join(".config", "jaja"), os.path.join(".config", "job-agency")))   # the new folder, or the earlier one while only it exists
     for p in (read, compose, ga.client_secret_path({})):
         assert jc.OS_ROOT.resolve() not in p.resolve().parents
 
@@ -309,7 +309,7 @@ def test_cli_login_send_flag(cfg, tmp_path, monkeypatch):
 
 
 def test_an_eval_sandbox_never_reaches_the_real_token_folder(tmp_path, monkeypatch):
-    """SETUP-H3 finding 2026-10-01: an eval run read the real calendar token because JOB_AGENCY_CONFIG_DIR was unset."""
+    """SETUP-H3 finding 2026-10-01: an eval run read the real calendar token because JAJA_CONFIG_DIR was unset."""
     import importlib.util
     import shutil
     sandbox = tmp_path / "sandbox"
@@ -317,7 +317,7 @@ def test_an_eval_sandbox_never_reaches_the_real_token_folder(tmp_path, monkeypat
     src = Path(__file__).resolve().parents[1] / "gmail_auth.py"
     shutil.copy2(src, sandbox / "scripts" / "gmail_auth.py")
     (sandbox / ".eval-sandbox").write_text("x", encoding="utf-8")
-    monkeypatch.delenv("JOB_AGENCY_CONFIG_DIR", raising=False)
+    monkeypatch.delenv("JAJA_CONFIG_DIR", raising=False)
     spec = importlib.util.spec_from_file_location("ga_sandbox", sandbox / "scripts" / "gmail_auth.py")
     mod = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(mod)

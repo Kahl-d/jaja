@@ -17,7 +17,7 @@ general base it started from (`resumes/bases/general/`), `applications/SLUG/jd.m
 `profile/evidence.yaml`, and the corpus files behind the cited ids.
 
 ## Procedure
-1. Work from the user's data folder (`$JOB_AGENCY_DATA`). Refuse if you wrote
+1. Work from the user's data folder (`$JAJA_DATA`). Refuse if you wrote
    or edited anything in V.
 2. Freeze: `shasum -a 256 V/resume.yaml` (the `variant_hash`).
 3. Deterministic pass; record each output in `## Passes`:

@@ -1,11 +1,11 @@
 {
-  "name": "job-agency",
+  "name": "jaja",
   "version": "0.1.0",
   "description": "A job-search agency for Claude Code: role agents, skills, guards, a records MCP server and a local dashboard. Your data stays in your own folder.",
   "skills": "./skills",
   "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json",
   "author": {
-    "name": "job-agency"
+    "name": "jaja"
   }
 }

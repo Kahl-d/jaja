@@ -78,10 +78,17 @@ def vendor_ok(root: Path) -> set[str]:
     return {ln.split("#", 1)[0].strip().lower() for ln in p.read_text(encoding="utf-8").splitlines() if ln.split("#", 1)[0].strip()}
 
 
+def _default_denylist() -> str:
+    """~/.config/jaja/denylist.txt, else the earlier ~/.config/job-agency/denylist.txt when only that one exists."""
+    new = Path.home() / ".config" / "jaja" / "denylist.txt"
+    old = Path.home() / ".config" / "job-agency" / "denylist.txt"
+    return str(old if (old.is_file() and not new.is_file()) else new)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", default=".")
-    ap.add_argument("--denylist", default=str(Path.home() / ".config" / "job-agency" / "denylist.txt"))
+    ap.add_argument("--denylist", default=_default_denylist())
     ap.add_argument("--staged", action="store_true")
     ap.add_argument("--no-denylist", action="store_true", help="pattern checks only (CI has no private deny-list); no warning")
     ap.add_argument("--soft", action="store_true", help="also list soft (company-name) hits")
@@ -159,6 +166,7 @@ def main() -> int:
             text = path.read_text(encoding="utf-8")
         except Exception:
             continue
+        in_author = False
         for i, line in enumerate(text.splitlines(), 1):
             line = line.replace("\\n", " ").replace("\\t", " ").replace("\\r", " ")      # "\nName" in a string literal
             for m in EMAIL.finditer(line):
@@ -174,8 +182,13 @@ def main() -> int:
             for name, rx in TOKENS:
                 if rx.search(line):
                     add(rel, i, name)
+            if rel == "README.md":                        # the author's own name and links are allowed in this one section
+                if line.startswith("## "):
+                    in_author = line.strip().lower() == "## about the author"
+            else:
+                in_author = False
             for rx in hard:
-                if rx.search(line):
+                if not in_author and rx.search(line):
                     add(rel, i, "denylist-hard")
             for rx in company:
                 if rx.search(line):

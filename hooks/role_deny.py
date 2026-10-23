@@ -5,7 +5,7 @@ role_deny.py - PreToolUse hook on Bash. A role never runs the shell commands its
 A role card (agents/<name>.md) lists `deny_commands:` (shell patterns such as `gmail_send.py` or `x_api.py execute`);
 sync renders them as `denyCommands:` in the generated agent file (.claude/agents/<name>.md). When a subagent of that
 role calls Bash, this hook reads the generated agent file (else the source card) named by the hook payload's
-`agent_type` (a plugin-scoped `job-agency:<name>` works too), and refuses (exit 2, reason on stderr) any command
+`agent_type` (a plugin-scoped `jaja:<name>` works too), and refuses (exit 2, reason on stderr) any command
 containing one of the patterns. The main session (no agent_type, or a lane agent) is not restricted here: lanes carry
 their own tools.
 

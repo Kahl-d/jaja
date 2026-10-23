@@ -100,7 +100,7 @@ def check_client_secret(config_dir: Path, env: Mapping[str, str], os_root: Path)
                        path=where, present=False)
     if _inside(path, jc.OS_ROOT) or _inside(path, os_root):
         return _record("gmail-client-secret", "local-oauth", "red", "client JSON sits inside the repo",
-                       "move it to ~/.config/job-agency/ and chmod 600 it", path=where, present=True)
+                       "move it to ~/.config/jaja/ and chmod 600 it", path=where, present=True)
     mode = _mode(path)
     try:
         client_type = next(iter(json.loads(path.read_text(encoding="utf-8")) or {}), None)

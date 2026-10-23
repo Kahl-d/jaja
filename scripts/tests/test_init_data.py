@@ -17,7 +17,7 @@ DEFAULTS = CODE / "config" / "defaults.d"
 
 def run_tool(*args, home, env_extra=None, check=True):
     env = dict(os.environ, HOME=str(home), PYTHONDONTWRITEBYTECODE="1")
-    env.pop("JOB_AGENCY_CONFIG", None)
+    env.pop("JAJA_CONFIG", None)
     env.update(env_extra or {})
     r = subprocess.run([sys.executable, str(TOOL), *map(str, args)], capture_output=True, text=True, env=env)
     if check:
@@ -26,9 +26,9 @@ def run_tool(*args, home, env_extra=None, check=True):
 
 
 def script(name, *args, data, home, runtime=None):
-    env = dict(os.environ, HOME=str(home), JOB_AGENCY_DATA=str(data), PYTHONDONTWRITEBYTECODE="1",
-               JOB_AGENCY_RUNTIME=str(runtime or Path(data) / "runtime"))
-    env.pop("JOB_AGENCY_DEMO", None)
+    env = dict(os.environ, HOME=str(home), JAJA_DATA=str(data), PYTHONDONTWRITEBYTECODE="1",
+               JAJA_RUNTIME=str(runtime or Path(data) / "runtime"))
+    env.pop("JAJA_DEMO", None)
     return subprocess.run([sys.executable, str(CODE / "scripts" / name), *map(str, args)], capture_output=True,
                           text=True, env=env, cwd=str(CODE))
 
@@ -143,7 +143,7 @@ def test_demo_fill_is_complete_and_valid(tmp_path, home):
 
 
 def test_set_config_writes_data_root_and_keeps_other_keys(tmp_path, home):
-    cfg = home / ".config" / "job-agency" / "config.yaml"
+    cfg = home / ".config" / "jaja" / "config.yaml"
     cfg.parent.mkdir(parents=True)
     cfg.write_text("runtime_root: /somewhere/else\n# a comment\ndata_root: /old/place\n", encoding="utf-8")
     data = tmp_path / "data"
@@ -157,12 +157,12 @@ def test_set_config_writes_data_root_and_keeps_other_keys(tmp_path, home):
 
 def test_config_untouched_without_the_flag(tmp_path, home):
     run_tool(tmp_path / "data", home=home)
-    assert not (home / ".config" / "job-agency" / "config.yaml").exists()
+    assert not (home / ".config" / "jaja" / "config.yaml").exists()
 
 
-def test_set_config_honours_job_agency_config(tmp_path, home):
+def test_set_config_honours_the_config_variable(tmp_path, home):
     cfg = tmp_path / "elsewhere.yaml"
-    run_tool(tmp_path / "data", "--set-config", home=home, env_extra={"JOB_AGENCY_CONFIG": str(cfg)})
+    run_tool(tmp_path / "data", "--set-config", home=home, env_extra={"JAJA_CONFIG": str(cfg)})
     assert cfg.read_text(encoding="utf-8").startswith("data_root: ")
 
 

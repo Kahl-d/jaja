@@ -103,8 +103,8 @@ def test_without_aliases_a_lane_gets_only_its_own_rulings():
 # ---------------------------------------------------------------- the plugin-scoped agent name
 def test_lane_type_from_agent_strips_the_plugin_name():
     assert rc.lane_type_from_agent("lane-resume") == "resume"
-    assert rc.lane_type_from_agent("job-agency:lane-resume") == "resume"
-    assert rc.lane_type_from_agent("job-agency:fit-scorer") is None and rc.lane_type_from_agent(None) is None
+    assert rc.lane_type_from_agent("jaja:lane-resume") == "resume"
+    assert rc.lane_type_from_agent("jaja:fit-scorer") is None and rc.lane_type_from_agent(None) is None
 
 
 # ---------------------------------------------------------------- registries and the CLI

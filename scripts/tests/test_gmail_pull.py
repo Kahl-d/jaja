@@ -426,7 +426,7 @@ def _approval(roots, status="pending"):
 def test_real_harvest_fails_closed_when_only_the_compose_token_exists(roots, tmp_path, monkeypatch, capsys):
     import gmail_auth as ga
     cfg = tmp_path / "cfg"
-    monkeypatch.setenv("JOB_AGENCY_CONFIG_DIR", str(cfg))
+    monkeypatch.setenv("JAJA_CONFIG_DIR", str(cfg))
     from google.oauth2.credentials import Credentials
     creds = Credentials(token="t", refresh_token="r", token_uri="https://oauth2.googleapis.com/token",
                         client_id="c", client_secret="s", scopes=list(ga.SCOPES_COMPOSE))
@@ -439,7 +439,7 @@ def test_real_harvest_fails_closed_when_only_the_compose_token_exists(roots, tmp
 
 def test_draft_refuses_an_unapproved_approval_before_loading_any_token(roots, tmp_path, monkeypatch, capsys):
     cfg = tmp_path / "cfg"
-    monkeypatch.setenv("JOB_AGENCY_CONFIG_DIR", str(cfg))
+    monkeypatch.setenv("JAJA_CONFIG_DIR", str(cfg))
     path = _approval(roots, status="pending")
     code = gp.main(["draft", "--approval", str(path), "--root", str(roots.js), "--os-root", str(roots.os),
                     "--today", "2026-09-24"])

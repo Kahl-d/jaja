@@ -12,7 +12,7 @@ def _roots(js_root: Path) -> list[str]:
     out = subprocess.run(
         [sys.executable, "-c", "import js_common as c; print(c.JS_ROOT); print(c.OS_ROOT)"],
         cwd=js_root / "scripts", capture_output=True, text=True, check=True,
-        env={**os.environ, "JOB_AGENCY_DATA": os.environ.get("JOB_AGENCY_DATA") or str(SCRIPTS.parent / "examples" / "demo-data")})
+        env={**os.environ, "JAJA_DATA": os.environ.get("JAJA_DATA") or str(SCRIPTS.parent / "examples" / "demo-data")})
     return out.stdout.split()
 
 

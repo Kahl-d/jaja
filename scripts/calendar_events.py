@@ -24,7 +24,7 @@ ticked, unexpired approval once (a receipt line, and for an invite a fixed event
 that emails anyone (sendUpdates=all: an invite, or a change or cancel of an event with guests) runs only through an
 approval; `--apply` works only for events without guests and never emails anyone.
 
-Only events this system created (extendedProperties.private.job_agency = job-search) can be changed or cancelled, and a change
+Only events this system created (extendedProperties.private.jaja = job-search) can be changed or cancelled, and a change
 or cancel is refused when the event was edited in Google since the action was built (its etag). Invites carry only
 the given title and description for the guests; the links to records sit in private extended properties. Holds
 without guests stay in calendar_hold.py.
@@ -52,7 +52,8 @@ import agency_config as cfg
 
 DEFAULT_TZ = str(cfg.get("identity.timezone", "UTC"))       # your own zone; UTC when not configured
 CALENDAR = "primary"
-MARK = {"job_agency": "job-search"}
+MARK = {"jaja": "job-search"}
+EARLIER_MARK_KEY = "job_agency"              # the key an earlier release wrote
 LEGACY_MARK_KEY = str(cfg.get("policy.calendar.legacy_marker_key", "") or "")   # an older marker key on events you already created
 EMAIL = re.compile(r"^[^@\s,;<>]+@[^@\s,;<>]+\.[^@\s,;<>]+$")
 VERBS = {"insert": "Invite", "patch": "Change", "delete": "Cancel", "rsvp": "Reply"}
@@ -103,7 +104,7 @@ def _iso(dt: datetime) -> str:
 # --------------------------------------------------------------------------- read
 def is_mine(ev: dict[str, Any]) -> bool:
     private = (ev.get("extendedProperties") or {}).get("private") or {}
-    return private.get("job_agency") == MARK["job_agency"] or bool(LEGACY_MARK_KEY and private.get(LEGACY_MARK_KEY) == MARK["job_agency"])
+    return any(private.get(k) == MARK["jaja"] for k in (("jaja", EARLIER_MARK_KEY) + ((LEGACY_MARK_KEY,) if LEGACY_MARK_KEY else ())))
 
 
 def guests_of(ev: dict[str, Any]) -> list[str]:

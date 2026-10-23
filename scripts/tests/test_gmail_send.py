@@ -139,7 +139,7 @@ def test_the_voice_gate_runs_on_the_body(pdf):
 def test_attachments_must_be_real_files_outside_the_credential_folders(tmp_path, monkeypatch, where):
     cfg = tmp_path / "cfg"
     cfg.mkdir()
-    monkeypatch.setenv("JOB_AGENCY_CONFIG_DIR", str(cfg))
+    monkeypatch.setenv("JAJA_CONFIG_DIR", str(cfg))
     path = {"missing": tmp_path / "gone.pdf", "folder": tmp_path, "secret": cfg / "gmail_token_send.json"}[where]
     if where == "secret":
         path.write_text("{}")

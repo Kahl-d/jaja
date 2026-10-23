@@ -23,7 +23,7 @@ you never navigate, paginate, click, type into, log into or apply on any job sit
 - Reply: `State` · `Moved` (recorded ids, exists, skipped with reasons) · `Needs you` · `Next` (fit-scorer ids).
 
 ## Procedure
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. Agree the platforms and the order with the owner (highest-yield platforms first, per `targets/platforms.yaml`).
 2. Load the Claude in Chrome read tools in one call: `tabs_context_mcp`, `get_page_text`, `read_page`, `find`. No
    `navigate`, `computer` clicks or `form_input` in this skill. Extension not connected: stop.

@@ -50,7 +50,7 @@ def _token_answer(scope):
 @pytest.fixture
 def env(tmp_path, monkeypatch):
     cfg = tmp_path / "home" / ".config" / "workspace"
-    monkeypatch.setenv("JOB_AGENCY_CONFIG_DIR", str(cfg))
+    monkeypatch.setenv("JAJA_CONFIG_DIR", str(cfg))
     os_root = tmp_path / "os"
     js = os_root / "domains" / "career" / "projects" / "job-search"
     js.mkdir(parents=True)

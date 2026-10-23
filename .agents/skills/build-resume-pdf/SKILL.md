@@ -15,7 +15,7 @@ with the general base's design: its copies `V/template-classic.yaml` (the resume
 base. Never hand-edit a PDF, `meta.yaml` or a template from here.
 
 ## Procedure
-1. Work from the user's data folder (`$JOB_AGENCY_DATA`); V = the resume folder.
+1. Work from the user's data folder (`$JAJA_DATA`); V = the resume folder.
 2. Lint first: `python3 scripts/render_resume.py lint --input V/resume.yaml T`.
    Fix by code: `missing-evidence` / `unknown-evidence` (add or correct the trailing
    `<!-- ev:... -->`, ids must exist in `profile/evidence.yaml`); `evidence-not-trailing` (move the

@@ -8,3 +8,6 @@ scripts/credential_check.py:denylist-company
 scripts/render_resume.py:denylist-company
 # An ordinary word in a regex of non-ask phrases.
 scripts/fit_gates.py:denylist-hard
+# Author attribution: the copyright holder named in the license and notice files.
+LICENSE:denylist-hard
+NOTICE:denylist-hard

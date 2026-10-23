@@ -25,7 +25,7 @@ Tier: T1; every outward item is a T3 approval. Today is !`date +%F`.
 - Reply: `State` · `Moved` · `Needs you` (read-list items, approvals to look at) · `Next`.
 
 ## Procedure
-Work from the user's data folder (`$JOB_AGENCY_DATA`). One heavy job at a time.
+Work from the user's data folder (`$JAJA_DATA`). One heavy job at a time.
 1. **Refresh the numbers when needed:** if jobs arrived since the last score,
    `python3 scripts/pipeline.py --stages triage` (or `python3 scripts/hunt_score.py`), then
    `python3 scripts/hunt_review.py`.

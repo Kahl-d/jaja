@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Move the connector tokens of an earlier install to ~/.config/job-agency/ and rename their bookkeeping keys.
+"""Move the connector tokens of an earlier install to ~/.config/jaja/ and rename their bookkeeping keys.
 
     python3 tools/migrate-config-dir.py --from ~/.config/<old-folder-name>            # dry run
     python3 tools/migrate-config-dir.py --from ~/.config/<old-folder-name> --old-prefix <old> --apply    # copy, chmod 600, rename keys
@@ -18,7 +18,7 @@ from pathlib import Path
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--from", dest="src", required=True)
-    ap.add_argument("--to", default=str(Path.home() / ".config" / "job-agency"))
+    ap.add_argument("--to", default=str(Path.home() / ".config" / "jaja"))
     ap.add_argument("--old-prefix", required=True, help="prefix of the old bookkeeping keys")
     ap.add_argument("--apply", action="store_true")
     a = ap.parse_args()

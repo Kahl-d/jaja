@@ -2,7 +2,7 @@
 """Build the private deny-list for the leak check from YOUR data folder.
 
 The list holds your own identifiers (names, emails, phone, profile URLs, private answers) and the people and
-companies in your records. It is written OUTSIDE the repo (default ~/.config/job-agency/denylist.txt, mode 600)
+companies in your records. It is written OUTSIDE the repo (default ~/.config/jaja/denylist.txt, mode 600)
 and is never committed. Each line is `hard<TAB>term` (a hit fails the leak check), `company<TAB>term` (an employer, school or
 company you targeted: a hit fails unless the term is in tools/leak_vendor_allow.txt) or `soft<TAB>term`
 (every other posting company: reported for review).
@@ -59,10 +59,17 @@ def frontmatter(path: Path) -> dict:
         return {}
 
 
+def _default_denylist() -> str:
+    """~/.config/jaja/denylist.txt, else the earlier ~/.config/job-agency/denylist.txt when only that one exists."""
+    new = Path.home() / ".config" / "jaja" / "denylist.txt"
+    old = Path.home() / ".config" / "job-agency" / "denylist.txt"
+    return str(old if (old.is_file() and not new.is_file()) else new)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", required=True)
-    ap.add_argument("--out", default=str(Path.home() / ".config" / "job-agency" / "denylist.txt"))
+    ap.add_argument("--out", default=_default_denylist())
     a = ap.parse_args()
     ordinary = Path(a.out).expanduser().with_name("denylist-ordinary.txt")      # your companies whose names are ordinary words
     keep_cs: set[str] = set()

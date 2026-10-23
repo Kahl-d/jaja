@@ -51,7 +51,7 @@ def test_context_budget_measures_root_lanes_and_a_subagent(tmp_path):
     data.mkdir()
     (data / "AGENTS.md").write_text("# rules\n" * 20, encoding="utf-8")
     r = subprocess.run([sys.executable, str(KERNEL / "context_budget.py"), "--json"], capture_output=True, text=True,
-                       env={**ENV, "JOB_AGENCY_DATA": str(data), "JOB_AGENCY_RUNTIME": str(tmp_path / "rt")})
+                       env={**ENV, "JAJA_DATA": str(data), "JAJA_RUNTIME": str(tmp_path / "rt")})
     assert r.returncode == 0, r.stderr
     rows = {x["session"]: x for x in json.loads(r.stdout)}
     assert "root" in rows and "subagent:resume-tailor" in rows

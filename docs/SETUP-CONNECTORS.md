@@ -19,7 +19,7 @@ permission line for approved executes; section 13 says why no desktop mail or ca
 X (Twitter); section 15 is how to add your own claude.ai connector ids and use two Claude accounts.
 
 **Where secrets live.** Never in the repo and never in the data folder's git history. Tokens are `chmod 600` files in
-`~/.config/job-agency/` (override the folder with the `JOB_AGENCY_CONFIG_DIR` environment variable), API keys are in
+`~/.config/jaja/` (override the folder with the `JAJA_CONFIG_DIR` environment variable), API keys are in
 the OS keychain (macOS Keychain, or your platform's secret store) or in environment variables, and routine secrets
 for cloud runs are set in the scheduler. The scripts refuse a credential path inside the repo, and the doctor goes
 red when a token file is not `chmod 600`. No script ever prints a token or key.
@@ -27,7 +27,7 @@ red when a token file is not `chmod 600`. No script ever prints a token or key.
 ## 1. Google Cloud project and OAuth client (once, about 10 minutes)
 
 1. At console.cloud.google.com, signed in as the Google account the job search uses, create a project (for
-   example `job-agency`).
+   example `jaja`).
 2. APIs and Services, Library: enable the **Gmail API** and the **Google Calendar API**.
 3. OAuth consent screen (Google Auth Platform): user type **External**, publishing status
    **Testing**, and add your own address as a test user. In Testing, Google expires refresh
@@ -37,15 +37,15 @@ red when a token file is not `chmod 600`. No script ever prints a token or key.
 5. Clients, Create client, type **Desktop app**. Download the JSON and store it outside the repo:
 
 ```bash
-mkdir -p ~/.config/job-agency && chmod 700 ~/.config/job-agency
-mv ~/Downloads/client_secret_*.json ~/.config/job-agency/gmail_client_secret.json
-chmod 600 ~/.config/job-agency/gmail_client_secret.json
+mkdir -p ~/.config/jaja && chmod 700 ~/.config/jaja
+mv ~/Downloads/client_secret_*.json ~/.config/jaja/gmail_client_secret.json
+chmod 600 ~/.config/jaja/gmail_client_secret.json
 pip3 install google-auth google-auth-oauthlib google-api-python-client
 ```
 
 ## 2. Google tokens (split on purpose)
 
-| File in `~/.config/job-agency/` (chmod 600) | Scopes | Create with | Used by | Keep it? |
+| File in `~/.config/jaja/` (chmod 600) | Scopes | Create with | Used by | Keep it? |
 |---|---|---|---|---|
 | `gmail_token_read.json` | gmail.readonly, gmail.labels | `python3 scripts/gmail_auth.py login` | harvest, mail-triage, routines | yes; log in again weekly |
 | `gmail_token_compose.json` | gmail.compose | `python3 scripts/gmail_auth.py login --compose` | only `gmail_pull.py draft --approval <file>` on an approved file | no: create just before, delete right after |
@@ -120,9 +120,9 @@ repo root; if the server shows as failed, that variable is the first suspect.
 |---|---|---|
 | X tokens | only when X revokes them (they refresh themselves every 2 hours) | `python3 scripts/x_api.py login` and `login --write` |
 | Read, send and calendar tokens | every 7 days (Testing mode) | `python3 scripts/gmail_auth.py login` (and `--send`, `--calendar`) |
-| Compose token | after every draft run | `rm ~/.config/job-agency/gmail_token_compose.json`; recreate for the next approved batch |
+| Compose token | after every draft run | `rm ~/.config/jaja/gmail_token_compose.json`; recreate for the next approved batch |
 | OAuth client secret | on any suspicion, otherwise yearly | Cloud console, the client, reset secret, download, replace the file, log in again for every token |
-| Everything Google | if the machine or a token may be exposed | remove the app at myaccount.google.com/permissions, delete `~/.config/job-agency/*token*.json`, redo step 2 |
+| Everything Google | if the machine or a token may be exposed | remove the app at myaccount.google.com/permissions, delete `~/.config/jaja/*token*.json`, redo step 2 |
 | Adzuna key | on any suspicion | regenerate in the Adzuna dashboard, update `~/.zshrc` and routine secrets |
 | Firecrawl key | on any suspicion | regenerate in the Firecrawl dashboard, then step 2 of section 10 again (`-U` replaces the old one) |
 | LinkedIn export | monthly | step 4; delete older zips once the new one is parsed |
@@ -212,7 +212,7 @@ out of the allowlists of lanes that do not need it.)
    shown; use your platform's secret store elsewhere, or the `FIRECRAWL_API_KEY` environment variable):
 
 ```bash
-security add-generic-password -U -a "$USER" -s job-agency-firecrawl -w
+security add-generic-password -U -a "$USER" -s jaja-firecrawl -w
 ```
 
 3. Check (prints where the key is and the credits used, never the key):
@@ -267,9 +267,9 @@ edit settings.
   "permissions": {
     "ask": [
       "Bash(python3 scripts/calendar_events.py execute *)",
-      "Bash(python3 /path/to/job-agency/scripts/calendar_events.py execute *)",
+      "Bash(python3 /path/to/jaja/scripts/calendar_events.py execute *)",
       "Bash(python3 scripts/gmail_send.py execute *)",
-      "Bash(python3 /path/to/job-agency/scripts/gmail_send.py execute *)"
+      "Bash(python3 /path/to/jaja/scripts/gmail_send.py execute *)"
     ]
   }
 }
@@ -301,12 +301,12 @@ You, signed in to your own X account (no agent types a password or a token):
 2. The App, User authentication settings: **OAuth 2.0**; type **Native App** (a public client: no secret);
    permissions **Read and write and Direct message**; callback URL exactly `http://127.0.0.1:8765/callback`;
    website URL any page of your own.
-3. Copy the **Client ID** into `~/.config/job-agency/x_client.json` as `{"client_id": "<the id>"}`, then
-   `chmod 600 ~/.config/job-agency/x_client.json`.
+3. Copy the **Client ID** into `~/.config/jaja/x_client.json` as `{"client_id": "<the id>"}`, then
+   `chmod 600 ~/.config/jaja/x_client.json`.
 4. Buy a small credit amount in the Developer Console: reads spend credits.
 5. From the repo root: `python3 scripts/x_api.py login` (the READ token: tweet.read, users.read, offline.access) and
    `python3 scripts/x_api.py login --write` (the WRITE token: adds tweet.write, follows.write, dm.read, dm.write).
-   Each opens X's consent page in your browser and saves a chmod 600 token in `~/.config/job-agency/`.
+   Each opens X's consent page in your browser and saves a chmod 600 token in `~/.config/jaja/`.
 6. Check: `python3 scripts/connectors_doctor.py --skip-mcp` shows `x-client`, `x-read-token` and `x-write-token` green;
    `python3 scripts/x_api.py post <any post URL>` prints the post and its reply count.
 
@@ -337,7 +337,7 @@ To use a connector id in a lane:
 4. Verify with `python3 scripts/connectors_doctor.py`: claude.ai connectors show as "verify in session", so ask
    Claude to run one read call (search one recent email, list today's events) and confirm it answers.
 
-If you use two Claude accounts on one machine, the local parts are shared (tokens in `~/.config/job-agency/`, the
+If you use two Claude accounts on one machine, the local parts are shared (tokens in `~/.config/jaja/`, the
 keychain entry, the MCP servers registered in the project) and the claude.ai connectors and the Claude in Chrome
 pairing are per account. Carry both accounts' tool-name sets in the lane allowlists, or keep one account's
 connectors authoritative and use the scripts (section 11) from the other.

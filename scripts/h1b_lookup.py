@@ -79,7 +79,7 @@ HUB_PAGE = "https://www.uscis.gov/tools/reports-and-studies/h-1b-employer-data-h
 ARCHIVE_CSV = "https://www.uscis.gov/sites/default/files/document/data/h1b_datahubexport-{fy}.csv"
 DOL_PAGE = "https://www.dol.gov/agencies/eta/foreign-labor/performance"
 DOL_LCA = "https://www.dol.gov/sites/dolgov/files/ETA/oflc/pdfs/LCA_Disclosure_Data_FY{fy}_Q{q}.xlsx"
-FETCH_USER_AGENT = ("job-agency h1b_lookup.py/1.1 (personal job search; public USCIS H-1B Employer Data Hub "
+FETCH_USER_AGENT = ("jaja h1b_lookup.py/1.1 (personal job search; public USCIS H-1B Employer Data Hub "
                     "and DOL LCA files; python-requests)")
 
 COMPACT_COLUMNS = ["fiscal_year", "employer", "tax_id", "city", "state", "zip", "naics", "approvals",

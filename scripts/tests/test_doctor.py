@@ -17,7 +17,7 @@ DEMO = CODE / "examples" / "demo-data"
 
 def run_doctor(*args, home, env_extra=None):
     env = dict(os.environ, HOME=str(home), PYTHONDONTWRITEBYTECODE="1")
-    for k in ("JOB_AGENCY_DATA", "JOB_SEARCH_ROOT", "JOB_AGENCY_CONFIG", "JOB_AGENCY_DEMO", "JOB_AGENCY_CONFIG_DIR"):
+    for k in ("JAJA_DATA", "JOB_SEARCH_ROOT", "JAJA_CONFIG", "JAJA_DEMO", "JAJA_CONFIG_DIR"):
         env.pop(k, None)
     env.update(env_extra or {})
     return subprocess.run([sys.executable, str(DOCTOR), *map(str, args)], capture_output=True, text=True, env=env,
@@ -97,7 +97,7 @@ def test_a_broken_config_file_fails(tmp_path):
 
 
 def test_connector_tokens_are_listed_by_name_only(tmp_path):
-    cdir = tmp_path / ".config" / "job-agency"
+    cdir = tmp_path / ".config" / "jaja"
     cdir.mkdir(parents=True)
     secret = "SECRET-TOKEN-VALUE-do-not-print"
     tok = cdir / "gmail_token_read.json"

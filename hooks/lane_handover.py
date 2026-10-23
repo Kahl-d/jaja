@@ -7,7 +7,7 @@ small live state file hub/lanes/<TYPE>-STATE.md (scripts/kernel/lane_state.py) s
 whole log. A lane that wants to say more (what moved, what needs whom) writes its own one-line post; a hand-written handoff still counts and suppresses
 the automatic one.
 
-Who: sessions whose payload `agent_type` is `lane-<type>` (plugin-scoped `job-agency:lane-<type>` too), and desktop-app
+Who: sessions whose payload `agent_type` is `lane-<type>` (plugin-scoped `jaja:lane-<type>` too), and desktop-app
 lanes, which run without --agent: OS_LANE, or the session id bound to a lane's `session_ids` in <data>/hub/programme.json,
 names the scope. Anything else: exit 0, no output.
 Scope: `scope:` of lanes/<type>/LANE.yaml in the code repo (globs relative to the data folder or the repo).

@@ -12,7 +12,7 @@ the owner, the Recruiter's morning sweep or a daily check starts them (see the c
 js-mail-intake). Two modes: `sweep` (scripts only) and `review` (the L3 queue, queued matches, prose invites, audit). Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. The mode (from the brief or the owner); `python3 scripts/gmail_pull.py status`.
 2. The Gmail read token on the Mac, or the Gmail connector's read tools in a cloud run.
 3. For matching: `applications/*/application.md` (thread_ids, titles), `jobs/*.md` (req ids, URLs),

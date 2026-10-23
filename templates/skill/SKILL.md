@@ -5,7 +5,7 @@ description: <When to use this skill, in one or two sentences. Max 300 character
 
 <!-- Template: templates/skill/SKILL.md · Agent Skills format: frontmatter is only
      `name`, `description`, optional `metadata`; add `disable-model-invocation: true` for skills
-     the owner must invoke by hand. Interview (/agency:new-skill): what recurring procedure does this
+     the owner must invoke by hand. Interview (/jaja:new-skill): what recurring procedure does this
      capture? which files does it read and write? what is the check that it worked? does it
      belong in the plugin (agency-wide) or a project's own `skills/`? -->
 

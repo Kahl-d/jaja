@@ -18,8 +18,8 @@
 
 Tokens are split like Gmail's: the READ token (tweet.read, users.read, offline.access) serves reads, search and the
 watch; the WRITE token adds tweet.write, follows.write, dm.read and dm.write and is loaded only by `execute` on an
-approved file. Both live in ~/.config/job-agency/ (x_token_read.json, x_token_write.json; chmod 600; refused inside the
-repo); the app's Client ID is ~/.config/job-agency/x_client.json (a Native App is a public client: no secret). Access
+approved file. Both live in ~/.config/jaja/ (x_token_read.json, x_token_write.json; chmod 600; refused inside the
+repo); the app's Client ID is ~/.config/jaja/x_client.json (a Native App is a public client: no secret). Access
 tokens last 2 hours and refresh themselves; X rotates the refresh token, which is saved each time.
 
 Every call is priced before it is made (docs.x.com pricing at the time of writing: a post read $0.005, a user $0.010, a post or DM
@@ -251,7 +251,7 @@ def _wait_for_code(state: str, timeout: int = 300) -> tuple[str, str]:
             self.send_response(200)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.end_headers()
-            self.wfile.write(b"job-agency: X authorization received. You can close this tab.")
+            self.wfile.write(b"jaja: X authorization received. You can close this tab.")
 
         def log_message(self, *a):  # quiet
             pass

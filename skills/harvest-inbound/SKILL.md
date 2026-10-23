@@ -11,7 +11,7 @@ outward). Turns inbound mail into one prospect per person, script-driven. Runs l
 read token for `scripts/gmail_pull.py` lives on the owner's machine. Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. Mode: `backlog` (first harvest ever, since a start date the owner names) or `weekly` (routine `js-backlog-harvest`, over the
    last 7 days of `state/harvest/gmail-*.classified.jsonl`).
 2. The Recruiter's brief or the owner's request; `state/harvest/HARVEST-LOG.md` (last run).

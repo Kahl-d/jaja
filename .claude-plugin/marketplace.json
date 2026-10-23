@@ -1,19 +1,19 @@
 {
-  "name": "job-agency",
+  "name": "jaja",
   "owner": {
-    "name": "job-agency"
+    "name": "jaja"
   },
   "metadata": {
-    "description": "Local marketplace for the job-agency plugin"
+    "description": "Local marketplace for the jaja plugin"
   },
   "plugins": [
     {
-      "name": "job-agency",
+      "name": "jaja",
       "source": "./",
       "description": "Job-search agency: agents, skills, hooks, MCP server",
       "version": "0.1.0",
       "author": {
-        "name": "job-agency"
+        "name": "jaja"
       }
     }
   ]

@@ -1,14 +1,14 @@
 # Demo data (synthetic)
 
-A complete, invented data folder for the job-agency plugin. Nothing here is real: the candidate
+A complete, invented data folder for the jaja plugin. Nothing here is real: the candidate
 "Sam Rivera", the employers (Acme Corp, Globex, Initech), the people, the emails (example.test) and the
 URLs (example.test) are all made up. Use it to try the scripts, the dashboard and the MCP server
 without any data of your own.
 
-    JOB_AGENCY_DEMO=1 python3 scripts/dashboard.py --dry-run
-    python3 tools/init-data.py ~/job-agency-demo --demo      # a private copy you can change
+    JAJA_DEMO=1 python3 scripts/dashboard.py --dry-run
+    python3 tools/init-data.py ~/jaja-demo --demo      # a private copy you can change
 
-Under pytest, or with `JOB_AGENCY_DEMO=1`, this folder is the data root when nothing else is set. Do not
+Under pytest, or with `JAJA_DEMO=1`, this folder is the data root when nothing else is set. Do not
 edit it by hand when a script can do it; tests copy it to a temporary folder before they write.
 
 What is in it: profile/ (facts, evidence ids, taxonomy), resumes/bases/general/resume.yaml, 7 jobs at

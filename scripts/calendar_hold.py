@@ -148,7 +148,7 @@ def build_payload(rec: dict[str, Any] | None = None, *, title: str | None = None
     if prep_path:
         lines.append(f"Prep pack: {prep_path}")
     lines.append(f"Times from: {source}. Confidential: keep this event private.")
-    private = {"job_agency": "job-search", "source_message_id": rec.get("id"), "application": application,
+    private = {"jaja": "job-search", "source_message_id": rec.get("id"), "application": application,
                "prospect": prospect}
     return {
         "summary": f"HOLD: {title or _title(rec, company, role)}",

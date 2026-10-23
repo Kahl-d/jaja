@@ -97,7 +97,7 @@ def test_prepare_builds_a_sandbox_that_is_its_own_code_data_and_runtime_root(tmp
     assert "scripts/<name>.py" in prompt and "# Researcher" in prompt and "do it" in prompt
     where = subprocess.run([sys.executable, "-I", "-c", "import sys; sys.path.insert(0, 'scripts'); import agency_paths as a; "
                             "print(a.CODE_ROOT, a.DATA_ROOT, a.RUNTIME_ROOT)"], cwd=sb, capture_output=True, text=True,
-                           env={"PATH": "/usr/bin:/bin", "JOB_AGENCY_DATA": "/nonexistent-real-data"})
+                           env={"PATH": "/usr/bin:/bin", "JAJA_DATA": "/nonexistent-real-data"})
     assert where.returncode == 0, where.stderr
     assert set(where.stdout.split()) == {str(sb.resolve())}                      # never the real data folder
     lint = subprocess.run([sys.executable, "scripts/kernel/lint.py"], cwd=sb, capture_output=True, text=True,

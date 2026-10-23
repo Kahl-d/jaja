@@ -17,7 +17,7 @@ in that session with a receipt and a tracker event. Doctrine: the
 before addressing any lane. Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. The owner's yes to the sprint, recorded as a ruling (`hub/rulings.yaml`, by the Recruiter).
 2. The queue: `grep -l "^status: queued" jobs/*.md` with fit scores and `posted_at`; queue priority per the queue rules in the charter.
 3. The base verifying: `(cd resumes/bases/general && shasum -a 256 -c SHA256.txt)`; every page starts from it, there is

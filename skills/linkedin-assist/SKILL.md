@@ -15,7 +15,7 @@ the lease), saving, and reading every field back; any "share this update" prompt
 need the owner's own yes. Never automated, never bulk, never while the owner is away. Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`).
+Work from the user's data folder (`$JAJA_DATA`).
 1. Approved outbox items (`outbox/O-*.md` after `python3 scripts/outbox.py apply-decisions`) from messenger,
    prospector or linkedin-editor, with their approval files in `work/approvals/`.
 2. For profile edits: `state/linkedin/LINKEDIN.md` and the section's `state/linkedin/approved/<section>.txt` (the one

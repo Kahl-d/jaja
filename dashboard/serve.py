@@ -43,7 +43,8 @@ STATIC = {"/": ("index.html", "text/html; charset=utf-8"), "/index.html": ("inde
           "/cockpit.js": ("cockpit.js", "text/javascript; charset=utf-8"),
           "/cockpit.css": ("cockpit.css", "text/css; charset=utf-8"),
           #: the Portals page
-          "/portals.js": ("portals.js", "text/javascript; charset=utf-8"), "/portals.css": ("portals.css", "text/css; charset=utf-8")}
+          "/portals.js": ("portals.js", "text/javascript; charset=utf-8"), "/portals.css": ("portals.css", "text/css; charset=utf-8"),
+          "/favicon.svg": ("favicon.svg", "image/svg+xml"), "/favicon.ico": ("favicon.ico", "image/x-icon")}
 REDIRECTS = {"/cockpit": "/#cockpit"}          # the old standalone route (S6 landed as the first tab)
 MAX_BODY = 16 * 1024
 WATCH = ("applications", "prospects", "pursuits", "hub/NEXT-UP.md", "clock.yaml", "state/dashboard-tags.yaml",
@@ -288,7 +289,7 @@ def main(argv: list[str] | None = None) -> int:
     token = secrets.token_urlsafe(24)
     server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(cache, token, args.port))
     url = f"http://127.0.0.1:{args.port}/"
-    print(f"job agency dashboard: {url} (root {js}; vault {os_root.name}); Ctrl+C stops it", flush=True)
+    print(f"jaja dashboard: {url} (root {js}; vault {os_root.name}); Ctrl+C stops it", flush=True)
     threading.Thread(target=cache.get, daemon=True).start()          # load postings in the background
     if not args.no_open:
         threading.Timer(0.5, lambda: webbrowser.open(url)).start()

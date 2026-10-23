@@ -52,8 +52,10 @@ def _dirs() -> list[Path]:
 
 
 def _under_pytest() -> bool:
+    """In a test process, or where a test suite asks for the synthetic persona with JAJA_PERSONA=1 (the MCP tests do,
+    because their scripts run as subprocesses)."""
     import sys
-    return "pytest" in sys.modules
+    return "pytest" in sys.modules or os.environ.get("JAJA_PERSONA") == "1"
 
 
 def load(force: bool = False) -> dict[str, Any]:

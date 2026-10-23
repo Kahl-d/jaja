@@ -1031,7 +1031,7 @@ def test_robots_rules_follow_rfc_9309_longest_match_not_file_order():
     assert r2.allowed("https://x.com/jobs/1/apply?x=1") and not r2.allowed("https://x.com/jobs/1/apply")
     assert r2.delay == 7.0
     assert fa.Robots("").allowed("https://x.com/anything") and fa.Robots(None).allowed("https://x.com/a")
-    ours = fa.Robots("User-agent: job-agency\nDisallow: /private\nUser-agent: *\nDisallow: /\n")
+    ours = fa.Robots("User-agent: jaja\nDisallow: /private\nUser-agent: *\nDisallow: /\n")
     assert ours.allowed("https://x.com/careers") and not ours.allowed("https://x.com/private/1")
 
 

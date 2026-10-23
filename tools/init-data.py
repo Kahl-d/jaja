@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Create a data folder for the job-agency plugin.
+"""Create a data folder for the jaja plugin.
 
     python3 tools/init-data.py PATH [--demo] [--set-config] [--vault-root DIR] [--quiet]
 
@@ -9,7 +9,7 @@ in the repo; this folder is never part of it.
 
   --demo         fill PATH with the synthetic demo data (examples/demo-data: "Sam Rivera", Acme Corp, Globex,
                  Initech) instead of a blank skeleton.
-  --set-config   write `data_root: PATH` into ~/.config/job-agency/config.yaml (JOB_AGENCY_CONFIG overrides the
+  --set-config   write `data_root: PATH` into ~/.config/jaja/config.yaml (JAJA_CONFIG overrides the
                  file) so every script finds the folder without an environment variable. Other keys in that
                  file are kept. Without this flag the config file is not touched.
   --vault-root   the Obsidian vault root the views/*.base files are written for (default: PATH itself).
@@ -39,8 +39,11 @@ DIRS = ["profile/corpus", "profile/answers", "resumes/bases", "resumes/variants"
 
 
 def config_file() -> Path:
-    env = os.environ.get("JOB_AGENCY_CONFIG")
-    return Path(env).expanduser() if env else Path.home() / ".config" / "job-agency" / "config.yaml"
+    env = os.environ.get("JAJA_CONFIG") or os.environ.get("JOB_AGENCY_CONFIG")
+    if env:
+        return Path(env).expanduser()
+    new, old = Path.home() / ".config" / "jaja", Path.home() / ".config" / "job-agency"
+    return (old if (old.is_dir() and not new.exists()) else new) / "config.yaml"
 
 
 class Writer:
@@ -116,9 +119,9 @@ def _today() -> str:
 def skeleton_files() -> dict[str, str]:
     today = _today()
     files: dict[str, str] = {}
-    files["README.md"] = f"""# Your job-agency data folder
+    files["README.md"] = f"""# Your jaja data folder
 
-Created {today} by `tools/init-data.py`. The code lives in the job-agency repo; **this folder is yours** and is never
+Created {today} by `tools/init-data.py`. The code lives in the jaja repo; **this folder is yours** and is never
 part of the repo. Keep it private (a private git repo, or a synced folder you trust).
 
 | Folder | What goes there |
@@ -145,7 +148,7 @@ part of the repo. Keep it private (a private git repo, or a synced folder you tr
 4. Fill `targets/roles.md` and `targets/fit-gates.yaml` with what you want and what you refuse.
 5. Run `python3 scripts/doctor.py` from the repo to check everything.
 
-Tokens for Gmail, Calendar and the rest live in `~/.config/job-agency/`, outside this folder (docs/SETUP-CONNECTORS.md).
+Tokens for Gmail, Calendar and the rest live in `~/.config/jaja/`, outside this folder (docs/SETUP-CONNECTORS.md).
 """
     files[".gitignore"] = ".cache/\n.DS_Store\nruntime/vault/*\n!runtime/vault/README.md\n"
     files["profile/facts.yaml"] = f"""# facts.yaml - the truth sheet: canonical identity, education, employment, projects, skills.
@@ -296,7 +299,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("path", help="the data folder to create")
     ap.add_argument("--demo", action="store_true", help="fill it with the synthetic demo data")
-    ap.add_argument("--set-config", action="store_true", help="write data_root into ~/.config/job-agency/config.yaml")
+    ap.add_argument("--set-config", action="store_true", help="write data_root into ~/.config/jaja/config.yaml")
     ap.add_argument("--vault-root", help="Obsidian vault root for views/*.base (default: the data folder)")
     ap.add_argument("--quiet", action="store_true")
     a = ap.parse_args(argv)

@@ -23,7 +23,7 @@ the story it keeps and how a variant is made: `resumes/bases/general/README.md`.
    be ruled first, or that line stays as it is.
 
 ## Procedure
-1. Work from the user's data folder (`$JOB_AGENCY_DATA`);
+1. Work from the user's data folder (`$JAJA_DATA`);
    `(cd resumes/bases/general && shasum -a 256 -c SHA256.txt)` passes before you start.
 2. **Discuss (RESUME-ENGINE step 2, live with the owner).** What changes and why, which lines move, what is
    added from `profile/` with evidence ids, and how the timeline arc still reads. No line before the owner's OK.

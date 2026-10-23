@@ -11,7 +11,7 @@ Every result is compact JSON-able data under MAX_BYTES; lists page with (limit, 
 that came from outside (JDs, email and LinkedIn messages, event evidence quoted from mail) is
 wrapped with js_common.wrap_untrusted so agents read it as data, never as instructions.
 
-Roots: JOB_AGENCY_DATA / JOB_SEARCH_ROOT (data folder) and JOB_AGENCY_RUNTIME (repo) override the defaults for tests.
+Roots: JAJA_DATA / JOB_SEARCH_ROOT (data folder) and JAJA_RUNTIME (repo) override the defaults for tests.
 The scripts themselves (js_common, js_comms_util, tracker.py) always come from this checkout.
 """
 from __future__ import annotations
@@ -36,11 +36,12 @@ SCRIPTS = CODE_ROOT / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
+import agency_paths as _ap  # noqa: E402
 import js_common as jc  # noqa: E402
 import js_comms_util as cu  # noqa: E402
 import profile_titles as pt  # noqa: E402
 
-DEFAULT_JS_ROOT = jc.JS_ROOT                         # the data folder (JOB_AGENCY_DATA)
+DEFAULT_JS_ROOT = jc.JS_ROOT                         # the data folder (JAJA_DATA)
 DEFAULT_OS_ROOT = jc.OS_ROOT
 SCHEMAS = CODE_ROOT / "schemas"
 
@@ -274,8 +275,8 @@ class Store:
 
     @classmethod
     def from_env(cls) -> "Store":
-        js = Path(os.environ.get("JOB_SEARCH_ROOT") or DEFAULT_JS_ROOT).expanduser().resolve()
-        os_root = Path(os.environ.get("JOB_AGENCY_RUNTIME") or DEFAULT_OS_ROOT).expanduser().resolve()
+        js = Path(_ap.env("DATA") or os.environ.get("JOB_SEARCH_ROOT") or DEFAULT_JS_ROOT).expanduser().resolve()
+        os_root = Path(_ap.env("RUNTIME") or DEFAULT_OS_ROOT).expanduser().resolve()
         override = jc.parse_date(os.environ.get("JOB_SEARCH_TODAY")) if os.environ.get("JOB_SEARCH_TODAY") else None
         return cls(js=js, os_root=os_root, today_override=override)
 

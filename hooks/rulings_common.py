@@ -272,7 +272,7 @@ def first_time(kind: str, key: str | None) -> bool:
 
 
 def lane_type_from_agent(agent_type: str | None) -> str | None:
-    """`lane-resume` (or the plugin-scoped `job-agency:lane-resume`) -> `resume`; anything else -> None."""
+    """`lane-resume` (or the plugin-scoped `jaja:lane-resume`) -> `resume`; anything else -> None."""
     if not agent_type:
         return None
     a = strip_namespace(agent_type).lower()

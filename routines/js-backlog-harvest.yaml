@@ -1,6 +1,6 @@
 # Routine spec (schema: schemas/routine.yaml). The one-time backlog harvest of older mail is run by hand with the owner
 # present (`harvest-inbound`, mode backlog). This spec is the weekly safety net.
-# Desktop because the Gmail tokens live in ~/.config/job-agency on the owner's machine and the LinkedIn export sits
+# Desktop because the Gmail tokens live in ~/.config/jaja on the owner's machine and the LinkedIn export sits
 # in profile/_inbox/linkedin-export/.
 # SAFETY: this routine uses only the read token (gmail.readonly + gmail.labels); gmail_pull.py harvest fails closed if only
 # a compose token exists. The compose token is created per approved batch with `gmail_auth.py login --compose` and deleted after.

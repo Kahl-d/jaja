@@ -17,8 +17,8 @@ its checks. The SEND token (gmail.send and nothing else: it cannot read, list or
 one script path that sends, one approved message at a time.
 
 Files (all chmod 600 in a 700 folder, refused inside the repo; folder overridable with
-$JOB_AGENCY_CONFIG_DIR): ~/.config/job-agency/gmail_token_read.json, gmail_token_compose.json,
-calendar_token.json, gmail_token_send.json; client secret $GMAIL_CLIENT_SECRET or ~/.config/job-agency/gmail_client_secret.json.
+$JAJA_CONFIG_DIR): ~/.config/jaja/gmail_token_read.json, gmail_token_compose.json,
+calendar_token.json, gmail_token_send.json; client secret $GMAIL_CLIENT_SECRET or ~/.config/jaja/gmail_client_secret.json.
 While the consent screen is in "Testing", Google expires refresh tokens 7 days after consent;
 each token records `agency_reauth_due`, and `status` says when to log in again.
 """
@@ -33,6 +33,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
+import agency_paths as _ap
 import js_common as jc
 import js_comms_util as cu
 
@@ -50,7 +51,7 @@ TOKEN_KINDS: dict[str, dict[str, Any]] = {
     "calendar": {"file": "calendar_token.json", "scopes": (SCOPE_CALENDAR,), "flag": " --calendar", "exclusive": False},
     "send": {"file": "gmail_token_send.json", "scopes": SCOPES_SEND, "flag": " --send", "exclusive": True},
 }
-CONFIG_DIR = Path.home() / ".config" / "job-agency"
+CONFIG_DIR = _ap.config_dir()
 TESTING_REFRESH_DAYS = 7
 SETUP_DOC = "docs/SETUP-CONNECTORS.md"   # the one setup page (steps 1-2)
 LEGACY_TOKEN_NAME = "gmail_token" + ".json"   # pre-split single token: only ever checked for existence, never read
@@ -63,8 +64,8 @@ class AuthError(RuntimeError):
 # --------------------------------------------------------------------------- paths / permissions
 def config_dir() -> Path:
     """The token folder. Inside an eval sandbox (a `.eval-sandbox` marker next to this scripts/ copy) the real folder is
-    never used, even when JOB_AGENCY_CONFIG_DIR is unset: the sandbox's empty `.no-config` is, so an eval run can never read a real token."""
-    env = os.environ.get("JOB_AGENCY_CONFIG_DIR")
+    never used, even when JAJA_CONFIG_DIR is unset: the sandbox's empty `.no-config` is, so an eval run can never read a real token."""
+    env = _ap.env("CONFIG_DIR")
     if env:
         return Path(env).expanduser()
     root = Path(__file__).resolve().parents[1]   # the code root (an eval sandbox is its own)
@@ -90,7 +91,7 @@ def _login_cmd(kind: str) -> str:
 def assert_outside_repo(path: Path, repo_root: Path = jc.OS_ROOT) -> None:
     p, repo = Path(path).expanduser().resolve(), Path(repo_root).resolve()
     if p == repo or repo in p.parents:
-        raise AuthError(f"credentials must live outside the repo ({repo}); use ~/.config/job-agency/, not {p}")
+        raise AuthError(f"credentials must live outside the repo ({repo}); use ~/.config/jaja/, not {p}")
 
 
 def ensure_private_dir(folder: Path) -> Path:
@@ -248,7 +249,7 @@ def run_consent_flow(client_secret: Path, scopes: tuple[str, ...] | list[str]):
     return flow.run_local_server(
         port=0, open_browser=True, prompt="consent", access_type="offline",
         authorization_prompt_message="Opening Google's consent screen in your browser. If it does not open, visit:\n{url}",
-        success_message="job-agency: authorization complete. You can close this tab.")
+        success_message="jaja: authorization complete. You can close this tab.")
 
 
 def authorize(kind: str, client_secret: Path, *, flow_runner: Callable[[Path, tuple[str, ...]], Any] = run_consent_flow,
@@ -292,7 +293,7 @@ def main(argv: list[str] | None = None) -> int:
     which.add_argument("--calendar", action="store_true", help="the calendar.events token (agenda, holds, invites)")
     which.add_argument("--send", action="store_true", help="the gmail.send token (gmail_send.py execute only)")
     ap.add_argument("--status", action="store_true", help="same as the `status` action")
-    ap.add_argument("--client-secret", help="OAuth client JSON (default: $GMAIL_CLIENT_SECRET or ~/.config/job-agency/)")
+    ap.add_argument("--client-secret", help="OAuth client JSON (default: $GMAIL_CLIENT_SECRET or ~/.config/jaja/)")
     args = ap.parse_args(argv)
     if args.status or args.action == "status":
         print(json.dumps(status_all(), indent=2))

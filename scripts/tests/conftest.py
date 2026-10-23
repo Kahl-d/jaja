@@ -68,7 +68,7 @@ def _optional_skips(items):
 
 def pytest_collection_modifyitems(config, items):
     _optional_skips(items)
-    """A `workspace` test needs the owner's vault as the runtime root (JOB_AGENCY_RUNTIME); anywhere else it is skipped."""
+    """A `workspace` test needs the owner's vault as the runtime root (JAJA_RUNTIME); anywhere else it is skipped."""
     import agency_paths
     if not (agency_paths.RUNTIME_ROOT / ".obsidian").is_dir():
         skip_ws = pytest.mark.skip(reason="workspace: the runtime root is not the owner's vault")

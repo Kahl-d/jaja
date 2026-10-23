@@ -1,7 +1,7 @@
 """Lane orchestration hooks, driven the way the harness drives them: JSON on stdin,
 exit code and files out.
 
-Each test points the real hooks at a throwaway data folder (JOB_AGENCY_DATA) with one
+Each test points the real hooks at a throwaway data folder (JAJA_DATA) with one
 programme hub at <data>/hub, on a git repo whose branch is the programme's shipping
 branch, `main`.
 """
@@ -51,7 +51,7 @@ def run(ws, script: str, payload: dict, env: dict | None = None) -> subprocess.C
              if k not in {"OS_LANE", "CLAUDE_CODE_MESSAGING_SOCKET", "CLAUDE_PROJECT_DIR"}}
     scratch = ws["tmp"] / "scratch"                   # the once-per-session markers live in the temp dir: keep them per test
     scratch.mkdir(exist_ok=True)
-    clean.update({"JOB_AGENCY_DATA": str(ws["root"]), "JOB_AGENCY_RUNTIME": str(ws["tmp"] / "runtime"),
+    clean.update({"JAJA_DATA": str(ws["root"]), "JAJA_RUNTIME": str(ws["tmp"] / "runtime"),
                   "PYTHONDONTWRITEBYTECODE": "1", "TMPDIR": str(scratch)})
     clean.update(env or {})
     return subprocess.run([sys.executable, str(ws["hooks"] / script)], input=json.dumps(payload),
@@ -221,7 +221,7 @@ def test_lane_context_with_no_programme_prints_nothing(ws):
 
 def test_a_plugin_scoped_lane_agent_is_a_lane(ws):
     payload = {"session_id": "e", "cwd": str(ws["root"]), "hook_event_name": "SessionStart",
-               "agent_type": "job-agency:lane-resume"}
+               "agent_type": "jaja:lane-resume"}
     (ws["hub"] / "rulings.yaml").write_text(
         "rulings:\n- {id: R-1, date: '%s', status: standing, reading: resume order, scope: {lanes: [resume]}}\n"
         % __import__("datetime").date.today().isoformat(), encoding="utf-8")

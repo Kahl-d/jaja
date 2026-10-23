@@ -1,7 +1,7 @@
 """lane_handover.py, the Stop hook: a lane turn that changed files in its scope ends with a handoff block in its lane
 file, written by the hook itself when the lane wrote none. Driven like the harness drives it: JSON on stdin, decision
 on stdout. The lane's scope globs come from the real lanes/resume/LANE.yaml; the data folder is a throwaway git repo
-(JOB_AGENCY_DATA). Fail-open everywhere else."""
+(JAJA_DATA). Fail-open everywhere else."""
 import json
 import os
 import subprocess
@@ -48,7 +48,7 @@ def stop(ws, agent="lane-resume", **extra):
     payload = {"session_id": SID, "agent_type": agent, "transcript_path": str(ws["transcript"]),
                "hook_event_name": "Stop", "stop_hook_active": False, **extra}
     env = {k: v for k, v in os.environ.items() if k not in {"CLAUDE_PROJECT_DIR", "OS_LANE"}}
-    env.update(TMPDIR=str(ws["tmp"]), JOB_AGENCY_DATA=str(ws["root"]), JOB_AGENCY_RUNTIME=str(ws["tmp"] / "runtime"),
+    env.update(TMPDIR=str(ws["tmp"]), JAJA_DATA=str(ws["root"]), JAJA_RUNTIME=str(ws["tmp"] / "runtime"),
                PYTHONDONTWRITEBYTECODE="1")
     r = subprocess.run([sys.executable, str(ws["hooks"] / "lane_handover.py")], input=json.dumps(payload),
                        capture_output=True, text=True, env=env, cwd=str(ws["root"]), timeout=30)
@@ -130,7 +130,7 @@ def test_fail_open_on_a_bad_payload_or_a_missing_lane_bundle(ws):
     start_session(ws)
     change(ws, "resumes/variants/acme/resume.yaml")
     assert stop(ws, agent="lane-nosuchlane") is None
-    env = dict(os.environ, TMPDIR=str(ws["tmp"]), JOB_AGENCY_DATA=str(ws["root"]))
+    env = dict(os.environ, TMPDIR=str(ws["tmp"]), JAJA_DATA=str(ws["root"]))
     r = subprocess.run([sys.executable, str(ws["hooks"] / "lane_handover.py")], input="not json",
                        capture_output=True, text=True, env=env, cwd=str(ws["root"]), timeout=30)
     assert r.returncode == 0 and r.stdout.strip() == ""
@@ -170,7 +170,7 @@ def test_an_unbound_session_without_an_agent_is_left_alone(ws):
 def test_a_plugin_scoped_lane_agent_name_is_a_lane(ws):
     start_session(ws)
     change(ws, "resumes/variants/acme/resume.yaml")
-    assert stop(ws, agent="job-agency:lane-resume") is None
+    assert stop(ws, agent="jaja:lane-resume") is None
     assert "HANDOFF (auto, lane_handover.py)" in lane_text(ws)
 
 

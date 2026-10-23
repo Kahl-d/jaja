@@ -133,7 +133,7 @@ def test_contact_comes_from_the_job_search_address_and_refuses_the_employer_one(
     addr, why = fs.resolve_contact(dept, "work.fixture@employer.test")
     assert addr is None and "not_for_applications" in why
     assert fs.resolve_contact(dept, "not-an-address")[0] is None
-    assert fs.user_agent(CONTACT) == "job-agency funding_signals.py jobs.fixture@example.test"
+    assert fs.user_agent(CONTACT) == "jaja funding_signals.py jobs.fixture@example.test"
 
 
 def test_no_contact_means_no_request(root, capsys):

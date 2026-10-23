@@ -1,5 +1,5 @@
 # Template: templates/routine.yaml · Contract: schemas/routine.yaml
-# Interview (/agency:new-routine): what must be true after each run? where must it run
+# Interview (/jaja:new-routine): what must be true after each run? where must it run
 # (cloud | actions | desktop) and why? which engine? schedule (local time cron)? which
 # skill/role/script does the work? which connectors does it truly need (readers only for
 # unattended runs)? what is the sentinel for "needs you"? budget? owner?

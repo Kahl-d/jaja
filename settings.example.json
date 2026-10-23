@@ -12,10 +12,10 @@
     ],
     "deny": [
       "Read(./.env)",
-      "Read(~/.config/job-agency/**)"
+      "Read(~/.config/jaja/**)"
     ]
   },
   "env": {
-    "JOB_AGENCY_DATA": "/path/to/your/data-folder"
+    "JAJA_DATA": "/path/to/your/data-folder"
   }
 }

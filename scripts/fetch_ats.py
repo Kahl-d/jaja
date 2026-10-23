@@ -80,7 +80,7 @@ from js_common import (JS_ROOT, fm, html_to_text, iter_records, short_hash, slug
 import agency_config as cfg  # noqa: E402
 
 JD_LIMIT = 30_000          # keep the whole JD: visa lines often sit at the very end
-USER_AGENT = "job-agency/1.0 (personal job search; python-requests)"
+USER_AGENT = "jaja/1.0 (personal job search; python-requests)"
 DEFAULT_COUNTRY = str(cfg.get("policy.search.country", "United States"))   # Jibe sites: the country searched
 SUPPORTED_VENDORS = ("greenhouse", "lever", "ashby", "workday", "jibe", "sitemap", "amazon", "workable", "smartrecruiters", "rippling", "gem", "pinpoint", "teamtailor", "recruitee", "oracle", "eightfold")
 
@@ -1309,7 +1309,7 @@ class Robots:
     `Disallow: /` then `Allow: /careers` would wrongly block careers pages); `*` and a trailing `$` are honoured;
     empty or absent text means no rules."""
 
-    AGENT = "job-agency"
+    AGENT = "jaja"
 
     def __init__(self, text: str | None, agent: str | None = None):
         self.agent = (agent or self.AGENT).lower()

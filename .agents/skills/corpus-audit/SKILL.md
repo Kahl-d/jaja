@@ -12,7 +12,7 @@ files). Serves the Recruiter: a clean record and the "For the owner" list for th
 Today is !`date +%F`.
 
 ## Inputs
-Work from the user's data folder (`$JOB_AGENCY_DATA`). In order:
+Work from the user's data folder (`$JAJA_DATA`). In order:
 1. The rulings the hook printed; `agents/corpus-keeper.md`.
 2. `profile/facts.yaml` (`conflicts:`, timeline), `profile/evidence.yaml`, `profile/projects-index.md`,
    `profile/CORPUS-STATUS.md`, `profile/corpus/*/README.md`.

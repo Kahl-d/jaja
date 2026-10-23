@@ -13,7 +13,7 @@ Endpoints (official SEC EDGAR, no login, no key):
                         skip with --no-details)
 SEC fair-access rules (https://www.sec.gov/os/accessing-edgar-data): a User-Agent that names the requester
 and a contact address, and at most 10 requests a second across all SEC hosts. Every request here carries
-`job-agency funding_signals.py <contact>` and waits MIN_INTERVAL (0.125 s, 8 a second) after the
+`jaja funding_signals.py <contact>` and waits MIN_INTERVAL (0.125 s, 8 a second) after the
 previous one on any SEC host. The contact is the department's job-search address: --contact, else the
 `contact:` of the `funding` entry in sources.yaml, else profile/facts.yaml
 identity.emails.job_search_primary.address. An address listed under not_for_applications there (the
@@ -118,7 +118,7 @@ def header(source: str = "SEC EDGAR") -> str:
 
 
 def user_agent(contact: str) -> str:
-    return f"job-agency funding_signals.py {contact}"
+    return f"jaja funding_signals.py {contact}"
 
 
 # ------------------------------------------------------------------------------ contact

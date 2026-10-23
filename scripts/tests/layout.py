@@ -1,7 +1,7 @@
 """The project layout as the tests see it: one object, `JS`, whose children are found in the right root.
 
 The department used to be one folder (code and records side by side). In the repo the code lives in the repo
-(CODE_ROOT) and the records in the data folder (DATA_ROOT, JOB_AGENCY_DATA). `JS / "profile"` therefore resolves in
+(CODE_ROOT) and the records in the data folder (DATA_ROOT, JAJA_DATA). `JS / "profile"` therefore resolves in
 the data folder and `JS / "scripts"` in the repo, so a test says what it means and does not care where each part lives.
 `JS` itself is the data folder (what `--root` takes). Old folder names map to their new homes (roles -> agents,
 .agents/skills -> skills, AGENCY-CHARTER.md -> docs/).

@@ -1,7 +1,11 @@
-job-agency
-Copyright (c) 2026. All rights reserved. See LICENSE.
+jaja
+Copyright (c) 2026 Khalid Mehtab Khan. Released under the MIT License (see LICENSE).
 
-Third-party software this project uses or talks to keeps its own license and terms: Python and PyYAML, the Model
-Context Protocol SDK, Claude Code, and the services named in docs/SETUP-CONNECTORS.md. Platform names (Google,
-LinkedIn, Greenhouse, Lever, Ashby, Workday and others) belong to their owners and appear only to describe how the
-agency reads or works with them.
+Third-party software this project uses or talks to keeps its own license and terms: Python, PyYAML, requests, the
+Model Context Protocol SDK, Claude Code, and the services named in docs/SETUP-CONNECTORS.md. Platform and company
+names (Google, LinkedIn, Greenhouse, Lever, Ashby, Workday and others) belong to their owners and appear only to
+describe how the agency reads or works with them. This project is not affiliated with or endorsed by Anthropic or any
+of those companies.
+
+You are responsible for everything you approve, send, post or submit, and for complying with the terms of every
+service you connect.

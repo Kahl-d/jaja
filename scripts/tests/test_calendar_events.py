@@ -175,7 +175,7 @@ def test_invite_names_the_timezone_guests_and_a_meet_link_and_keeps_record_links
     assert req["conferenceSolutionKey"] == {"type": "hangoutsMeet"} and req["requestId"]
     assert ev["description"] == "Quick intro after the conference."                           # guests see only this text
     assert "job-search" not in json.dumps({k: v for k, v in ev.items() if k != "extendedProperties"})
-    assert ev["extendedProperties"]["private"] == {"job_agency": "job-search", "kind": "invite",
+    assert ev["extendedProperties"]["private"] == {"jaja": "job-search", "kind": "invite",
                                                    "prospect": "sam-guest"}
     assert ev["id"] == _sam(description="Quick intro after the conference.")["id"]          # stable: a retry cannot duplicate
     assert set(ev["id"]) <= set("abcdefghijklmnopqrstuv0123456789") and len(ev["id"]) >= 5

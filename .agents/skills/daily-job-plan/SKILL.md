@@ -28,7 +28,7 @@ flashcards (step 4). Today is !`date +%F`.
   (`js-morning-brief/<date>.md` or `js-evening-review/<date>.md`): time, commands, counts, sentinel.
 
 ## Procedure: morning
-1. Work from the user's data folder (`$JOB_AGENCY_DATA`). Run `interviews.py`, `clock.py status`,
+1. Work from the user's data folder (`$JAJA_DATA`). Run `interviews.py`, `clock.py status`,
    `strategy_review.py` and `dashboard.py --status`; every number in the plan comes from them or a command below.
 2. **Sweep** (charter day steps 1 and 2): `python3 scripts/mail_intake.py` (the mail pass), then, when no
    `state/recruiter/sweep-<date>.md` exists yet, `python3 scripts/recruiter_sweep.py --since last --write`: every new

@@ -4,7 +4,7 @@
     data      your data folder: profile/, applications/, prospects/, jobs/, hub/, state/, config/ ...
     runtime   the approval queue (work/approvals), run receipts (logs/runs), the registries and the secret pointers
 
-`roots(None)` reads them from scripts/agency_paths.py (environment, then ~/.config/job-agency/config.yaml).
+`roots(None)` reads them from scripts/agency_paths.py (environment, then ~/.config/jaja/config.yaml).
 `roots(some_path)` is the single-tree form every script's `--root` flag and every test uses: one folder that holds
 all three, laid out like the repo (agents/, schemas/, applications/, work/approvals/, logs/runs/ ...).
 """
@@ -47,8 +47,8 @@ def add_root_args(ap) -> None:
     """The common flags: --root (one folder for all three), or --code / --data / --runtime one by one."""
     ap.add_argument("--root", help="one folder holding code, data and runtime (default: the configured roots)")
     ap.add_argument("--code", help="the code root (default: this repo)")
-    ap.add_argument("--data", help="the data folder (default: JOB_AGENCY_DATA / config data_root)")
-    ap.add_argument("--runtime", help="the runtime root (default: JOB_AGENCY_RUNTIME / <data>/runtime)")
+    ap.add_argument("--data", help="the data folder (default: JAJA_DATA / config data_root)")
+    ap.add_argument("--runtime", help="the runtime root (default: JAJA_RUNTIME / <data>/runtime)")
 
 
 def from_args(args) -> Roots:
