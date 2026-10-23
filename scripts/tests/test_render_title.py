@@ -114,6 +114,7 @@ def test_rendercv_writes_the_facts_title_and_meta_records_it(tmp_path):
     assert title_of(pdf) == pdfinfo_title(pdf) == meta["pdf_title"] == "Riley Moreno, Resume"
 
 
+@pytest.mark.needs_jinja2
 @needs_latex
 def test_latex_writes_the_same_title(tmp_path):
     rc, pdf, meta = render(tmp_path, "latex")

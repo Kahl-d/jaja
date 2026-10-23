@@ -91,6 +91,16 @@ def check_python() -> None:
     else:
         add("warn", "python-dev-modules", "pytest is missing (only needed to run the tests)",
             "optional", "python3 -m pip install --user pytest")
+    if importlib.util.find_spec("requests") is not None:
+        add("ok", "python-requests", "requests present")
+    else:
+        add("fail", "python-requests", "requests is missing", "the fetch and API scripts use it", "python3 -m pip install --user requests")
+    extras = {"gmail/calendar": "googleapiclient", "resume rendering": "rendercv", "latex templates": "jinja2",
+              "pdf checks": "pypdf", "docx check": "docx", "phone lint": "phonenumbers"}
+    have = [k for k, m in extras.items() if importlib.util.find_spec(m) is not None]
+    missing = [k for k in extras if k not in have]
+    add("ok", "optional-extras", "present: " + (", ".join(have) or "none") + ("; not installed: " + ", ".join(missing) if missing else ""),
+        "" if not missing else "optional; see requirements-optional.txt")
 
 
 def check_uv() -> None:

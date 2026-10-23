@@ -63,26 +63,26 @@ fi
 
 # ---------------------------------------------------------------- modules
 step "Python modules"
-if "$py" -c 'import yaml' >/dev/null 2>&1; then
-    say "ok: PyYAML is installed"
+if "$py" -c 'import yaml, requests' >/dev/null 2>&1; then
+    say "ok: PyYAML and requests are installed"
 else
-    say "PyYAML is missing (the scripts read YAML)."
+    say "PyYAML or requests is missing (the scripts read YAML and fetch job boards)."
     go=0
     if [ "$yes" = 1 ]; then
         go=1
     elif [ -t 0 ]; then
-        printf 'Install it now with: %s -m pip install --user pyyaml ? [y/N] ' "$py"
+        printf 'Install it now with: %s -m pip install --user pyyaml requests ? [y/N] ' "$py"
         read -r reply || reply=""
         case "$reply" in y|Y|yes|YES) go=1 ;; esac
     fi
     if [ "$go" = 1 ]; then
-        "$py" -m pip install --user pyyaml || {
-            say "pip could not install PyYAML (an externally managed Python?). Try: brew install pyyaml, or a venv:" >&2
-            say "  python3 -m venv ~/.venvs/job-agency && ~/.venvs/job-agency/bin/pip install pyyaml" >&2
+        "$py" -m pip install --user pyyaml requests || {
+            say "pip could not install PyYAML/requests (an externally managed Python?). Try: brew install pyyaml, or a venv:" >&2
+            say "  python3 -m venv ~/.venvs/job-agency && ~/.venvs/job-agency/bin/pip install pyyaml requests" >&2
             exit 1
         }
     else
-        say "Not installed. Run: $py -m pip install --user pyyaml    (or re-run with --yes)" >&2
+        say "Not installed. Run: $py -m pip install --user pyyaml requests    (or re-run with --yes)" >&2
         exit 1
     fi
 fi

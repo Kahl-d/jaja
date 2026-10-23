@@ -64,6 +64,7 @@ def test_client_secret_path_honours_the_env_variable(tmp_path):
 
 
 # --------------------------------------------------------------------------- writing tokens
+@pytest.mark.needs_google
 def test_write_token_is_0600_in_a_0700_directory_and_records_the_auth_date(cfg):
     path = cfg / "gmail_token_read.json"
     ga.write_token(path, _creds(ga.SCOPES_READ).to_json(), authorized_at=datetime(2026, 9, 20, 17, 0, tzinfo=timezone.utc))
@@ -73,6 +74,7 @@ def test_write_token_is_0600_in_a_0700_directory_and_records_the_auth_date(cfg):
     assert data["agency_reauth_due"] == "2026-09-27T17:00:00Z"
 
 
+@pytest.mark.needs_google
 def test_write_token_refuses_a_path_inside_the_repo(tmp_path):
     repo = tmp_path / "repo"
     inside = repo / "domains" / "gmail_token_read.json"
@@ -81,6 +83,7 @@ def test_write_token_refuses_a_path_inside_the_repo(tmp_path):
     assert not inside.exists()
 
 
+@pytest.mark.needs_google
 def test_check_permissions_repairs_a_readable_token(cfg):
     path = cfg / "gmail_token_read.json"
     ga.write_token(path, _creds(ga.SCOPES_READ).to_json())
@@ -93,18 +96,21 @@ def test_check_permissions_repairs_a_readable_token(cfg):
 
 
 # --------------------------------------------------------------------------- loading: fail closed
+@pytest.mark.needs_google
 def test_read_path_refuses_when_only_the_compose_token_exists(cfg):
     ga.write_token(ga.token_path("compose"), _creds(ga.SCOPES_COMPOSE).to_json())
     with pytest.raises(ga.AuthError, match="compose"):
         ga.load_credentials("read")
 
 
+@pytest.mark.needs_google
 def test_read_path_refuses_a_token_that_carries_a_write_scope(cfg):
     ga.write_token(ga.token_path("read"), _creds(ga.SCOPES_READ + ga.SCOPES_COMPOSE).to_json())
     with pytest.raises(ga.AuthError, match="gmail.compose"):
         ga.load_credentials("read")
 
 
+@pytest.mark.needs_google
 def test_compose_path_needs_its_own_token(cfg):
     ga.write_token(ga.token_path("read"), _creds(ga.SCOPES_READ).to_json())
     with pytest.raises(ga.AuthError, match="login --compose"):
@@ -116,6 +122,7 @@ def test_missing_token_explains_how_to_log_in(cfg):
         ga.load_credentials("read")
 
 
+@pytest.mark.needs_google
 def test_expired_access_token_is_refreshed_and_rewritten_privately(cfg, monkeypatch):
     from google.oauth2.credentials import Credentials
     path = ga.token_path("read")
@@ -140,6 +147,7 @@ def _flow(record):
     return run
 
 
+@pytest.mark.needs_google
 def test_login_read_saves_only_the_read_token(cfg, tmp_path):
     secret = tmp_path / "cs.json"
     secret.write_text(json.dumps({"installed": {"client_id": "x"}}))
@@ -150,6 +158,7 @@ def test_login_read_saves_only_the_read_token(cfg, tmp_path):
     assert status["kind"] == "read" and status["scopes"] == list(ga.SCOPES_READ)
 
 
+@pytest.mark.needs_google
 def test_login_compose_writes_a_separate_token(cfg, tmp_path):
     secret = tmp_path / "cs.json"
     secret.write_text("{}")
@@ -160,6 +169,7 @@ def test_login_compose_writes_a_separate_token(cfg, tmp_path):
     assert _mode(ga.token_path("compose")) == 0o600
 
 
+@pytest.mark.needs_google
 def test_login_read_refuses_to_save_extra_granted_write_scopes(cfg, tmp_path):
     secret = tmp_path / "cs.json"
     secret.write_text("{}")
@@ -169,6 +179,7 @@ def test_login_read_refuses_to_save_extra_granted_write_scopes(cfg, tmp_path):
     assert not ga.token_path("read").exists()
 
 
+@pytest.mark.needs_google
 def test_token_status_reports_the_weekly_reauth_without_secrets(cfg):
     path = ga.token_path("read")
     ga.write_token(path, _creds(ga.SCOPES_READ).to_json(), authorized_at=datetime(2026, 9, 20, 17, 0, tzinfo=timezone.utc))
@@ -181,6 +192,7 @@ def test_token_status_reports_the_weekly_reauth_without_secrets(cfg):
     assert not any(s in json.dumps([fresh, stale, missing]) for s in SECRETS)
 
 
+@pytest.mark.needs_google
 def test_status_cli_lists_every_token_and_never_prints_secrets(cfg, capsys):
     ga.write_token(ga.token_path("read"), _creds(ga.SCOPES_READ).to_json())
     ga.write_token(ga.token_path("compose"), _creds(ga.SCOPES_COMPOSE).to_json())
@@ -259,6 +271,7 @@ def test_the_send_token_is_its_own_file_with_gmail_send_only(cfg):
     assert "send" in ga.status_all()
 
 
+@pytest.mark.needs_google
 def test_login_send_writes_a_separate_send_only_token_and_refuses_extra_scopes(cfg, tmp_path):
     secret = tmp_path / "cs.json"
     secret.write_text("{}")
@@ -273,12 +286,14 @@ def test_login_send_writes_a_separate_send_only_token_and_refuses_extra_scopes(c
     assert not ga.token_path("send").exists()
 
 
+@pytest.mark.needs_google
 def test_a_send_token_carrying_any_other_scope_is_refused_at_load(cfg):
     ga.write_token(ga.token_path("send"), _creds((SEND, READ)).to_json())
     with pytest.raises(ga.AuthError, match="extra scopes"):
         ga.load_credentials("send", refresh=False)
 
 
+@pytest.mark.needs_google
 def test_the_read_path_never_falls_back_to_the_send_token(cfg):
     ga.write_token(ga.token_path("send"), _creds((SEND,)).to_json())
     with pytest.raises(ga.AuthError, match="no read token"):

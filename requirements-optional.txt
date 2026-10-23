@@ -1,0 +1,21 @@
+# Optional extras. The core (scripts, hooks, MCP data layer, the demo, the default test run) needs only:
+#   pyyaml  requests  (and pytest for the tests)
+# Install an extra only when you use the feature; tests that need an extra are skipped, not failed, when it is absent.
+
+# Gmail and Google Calendar (scripts/gmail_auth.py, gmail_pull.py, gmail_send.py, calendar_events.py)
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
+
+# Resume rendering (scripts/render_resume.py): RenderCV with the Typst engine, LaTeX fallback templates
+rendercv[full]
+jinja2
+
+# PDF and Word checks (scripts/ats_check.py, page_layout_check.py, render lints)
+pypdf
+pdfminer.six
+python-docx
+
+# Phone number checks in the resume lint
+phonenumbers

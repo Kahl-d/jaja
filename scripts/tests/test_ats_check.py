@@ -291,6 +291,7 @@ def test_without_pdfkit_the_check_still_runs(renders, tmp_path):
     assert "unavailable" in (tmp_path / "ats-report.md").read_text(encoding="utf-8")
 
 
+@pytest.mark.needs_jinja2
 def test_latex_fallback_pdf_passes_and_warns_for_icims(tmp_path):
     if rr.find_pdflatex() is None:
         pytest.skip("pdflatex not installed")

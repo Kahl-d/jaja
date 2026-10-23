@@ -422,6 +422,7 @@ def _approval(roots, status="pending"):
     return path
 
 
+@pytest.mark.needs_google
 def test_real_harvest_fails_closed_when_only_the_compose_token_exists(roots, tmp_path, monkeypatch, capsys):
     import gmail_auth as ga
     cfg = tmp_path / "cfg"

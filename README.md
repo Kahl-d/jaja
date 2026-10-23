@@ -10,7 +10,7 @@ This repository is the **system only**. Your profile, resumes, contacts, jobs, a
 live in a separate data folder that you own and that never enters this repo.
 
 - 30 role agents, 52 skills, 8 lane definitions, 16 routines (all switched off until you turn one on)
-- ~140 plain Python scripts (stdlib plus PyYAML), a records MCP server, a local dashboard
+- ~140 plain Python scripts (stdlib plus PyYAML and requests), a records MCP server, a local dashboard
 - guards that stop generated-file edits, double writers, unapproved sends and denied commands
 - a leak guard so your records can never be committed here by accident
 - a synthetic demo profile so you can see it work before you put in anything real
@@ -25,12 +25,13 @@ live in a separate data folder that you own and that never enters this repo.
 6. [A day with the agency](#a-day-with-the-agency)
 7. [The nuances (read these)](#the-nuances-read-these)
 8. [Agents, skills, lanes, routines](#agents-skills-lanes-routines)
-9. [Connectors](#connectors)
-10. [Checks: doctor, tests, lint, sync, leak guard](#checks-doctor-tests-lint-sync-leak-guard)
-11. [Repository layout](#repository-layout)
-12. [Codex and other engines](#codex-and-other-engines)
-13. [Maintaining and contributing](#maintaining-and-contributing)
-14. [License](#license)
+9. [Optional extras](#optional-extras)
+10. [Connectors](#connectors)
+11. [Checks: doctor, tests, lint, sync, leak guard](#checks-doctor-tests-lint-sync-leak-guard)
+12. [Repository layout](#repository-layout)
+13. [Codex and other engines](#codex-and-other-engines)
+14. [Maintaining and contributing](#maintaining-and-contributing)
+15. [License](#license)
 
 ## How it works
 
@@ -77,7 +78,7 @@ The code never contains a person: your name, voice and policy are read from your
 | a synthetic demo (`examples/demo-data`) | your style config, policy values, voice guide |
 | the leak guard and its pattern rules | the deny-list built from your own records |
 
-`tools/leak_check.py` runs before every commit (pre-commit hook and CI). It fails the commit if a name, email, phone
+`tools/leak_check.py` runs before every commit (pre-commit hook). It fails the commit if a name, email, phone
 number, company or person from *your* records, a connector id, a token, a home path or a ruling id shows up in a
 tracked file. The deny-list lives in `~/.config/job-agency/denylist.txt` (mode 600), never in the repo.
 
@@ -340,6 +341,21 @@ agent is `job-agency:lane-<type>`).
 | `js-sota-watch` | `0 7 2 * *` | Monthly, research what changed last month in agentic engineering (Claude Code, Agent SDK, Codex, MCP, Agent Sk |
 | `js-weekly-metrics` | `0 16 * * 0` | On Sundays regenerate the dashboard and write the weekly funnel report |
 
+## Optional extras
+
+The core needs only Python 3.11+, PyYAML and `requests` (plus `pytest` for the tests). Everything else is opt-in; install
+what you use with `pip install -r requirements-optional.txt` (or pick lines from it):
+
+| Feature | Packages |
+|---|---|
+| Gmail and Google Calendar scripts | `google-auth`, `google-auth-oauthlib`, `google-auth-httplib2`, `google-api-python-client` |
+| Resume rendering (RenderCV + Typst, LaTeX fallback) | `rendercv[full]`, `jinja2`; a LaTeX engine for the fallback |
+| PDF and Word checks | `pypdf`, `pdfminer.six`, `python-docx` |
+| Phone number lint | `phonenumbers` |
+
+Tests that exercise an extra are marked (`needs_google`, `needs_rendercv`, `needs_jinja2`) and are skipped, never failed,
+when the package is missing. `python3 scripts/doctor.py` reports which extras are present.
+
 ## Connectors
 
 None are required. `docs/SETUP-CONNECTORS.md` walks through each: Google OAuth (Gmail read, compose, send and
@@ -400,8 +416,8 @@ Claude Code is the supported engine. The files are engine-neutral (cards, skills
   an address, a company, a number that is one person's choice, or a voice rule.
 - Tests use synthetic data only (`scripts/tests/persona.d`, `examples/demo-data`). Never paste a real posting, email
   or name into a fixture.
-- Install the guard in your checkout: `./install.sh` does it, or `pre-commit install`. CI runs the pattern checks,
-  gitleaks and the suite on the demo.
+- Install the guard in your checkout: `./install.sh` does it, or `pre-commit install`. Before you push, run the
+  leak check and the suite on the demo yourself.
 - See `CONTRIBUTING.md`.
 
 ## License

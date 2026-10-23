@@ -60,6 +60,7 @@ def page_count(pdf: Path) -> int:
 
 
 # --------------------------------------------------------------------------- the template
+@pytest.mark.needs_rendercv
 def test_template_validates_against_rendercv_models():
     from rendercv.schema.models.design.built_in_design import built_in_design_adapter
     from rendercv.schema.models.locale.locale import locale_adapter
@@ -383,6 +384,7 @@ def test_latex_template_files_keep_the_hardening_flags():
     assert (LATEX_DIR / "faangpath" / "resume.cls").is_file()
 
 
+@pytest.mark.needs_jinja2
 @needs_latex
 def test_render_latex_engine_one_page_and_hardened(tmp_path):
     rc = main(["render", "--input", str(GOOD), "--out", str(tmp_path), "--engine", "latex",
@@ -486,6 +488,7 @@ def test_rendercv_renders_a_year_only_range_that_passes_the_ats_date_rule(tmp_pa
     assert ac.check_dates(text).status == "pass"
 
 
+@pytest.mark.needs_jinja2
 @needs_latex
 def test_latex_renders_a_year_only_range_that_passes_the_ats_date_rule(tmp_path):
     import ats_check as ac
@@ -535,6 +538,7 @@ def test_the_one_page_density_changes_only_size_spacing_and_margins():
     assert rr.estimate_chars_per_line(dense) > rr.estimate_chars_per_line(house)
 
 
+@pytest.mark.needs_rendercv
 def test_the_dense_design_validates_against_rendercv_models():
     from rendercv.schema.models.design.built_in_design import built_in_design_adapter
     design = rr.apply_density(rr.load_template(), "one-page")["design"]

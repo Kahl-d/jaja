@@ -41,9 +41,33 @@ def pytest_configure(config):
     #   python3 -m pytest scripts/tests -m "not real_records"
     config.addinivalue_line("markers", "workspace: reads the owner's workspace (an Obsidian vault with brain/ and .gitignore) as the runtime root; skipped elsewhere")
     config.addinivalue_line("markers", "real_records: reads the real profile records; deselect in a fixture sandbox")
+    for name, mods in OPTIONAL_STACKS.items():
+        config.addinivalue_line("markers", f"{name}: needs the optional package(s) {', '.join(mods)} (see requirements-optional.txt); skipped when absent")
+
+
+# optional extras: a test that exercises one of these marks itself; without the package it is skipped, never failed
+OPTIONAL_STACKS = {"needs_google": ("google.oauth2", "googleapiclient"), "needs_rendercv": ("rendercv",), "needs_jinja2": ("jinja2",)}
+
+
+def _optional_skips(items):
+    import importlib.util
+
+    def present(mod: str) -> bool:
+        try:
+            return importlib.util.find_spec(mod) is not None
+        except (ImportError, ValueError):
+            return False
+    for name, mods in OPTIONAL_STACKS.items():
+        if all(present(m) for m in mods):
+            continue
+        skip = pytest.mark.skip(reason=f"{name}: optional package(s) {', '.join(mods)} not installed")
+        for item in items:
+            if name in item.keywords:
+                item.add_marker(skip)
 
 
 def pytest_collection_modifyitems(config, items):
+    _optional_skips(items)
     """A `workspace` test needs the owner's vault as the runtime root (JOB_AGENCY_RUNTIME); anywhere else it is skipped."""
     import agency_paths
     if not (agency_paths.RUNTIME_ROOT / ".obsidian").is_dir():
